@@ -1,7 +1,13 @@
 package co.edu.unbosque.model;
 
-public class ApostadorDTO {
+import java.io.Serializable;
 
+public class ApostadorDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1982978799011136339L;
 	private String nombre;
 	private long cedula;
 	private String sedeJuego;
