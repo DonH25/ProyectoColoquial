@@ -4,10 +4,12 @@ import co.edu.unbosque.view.Console;
 
 public class Controller {
 	private Console con;
-public Controller() {
-	con=new Console();
+
+	public Controller() {
+		con = new Console();
 	}
-public void run() {
-	con.printWithNewLine("");
-}
+
+	public void run() {
+		con.printWithNewLine("");
+	}
 }
