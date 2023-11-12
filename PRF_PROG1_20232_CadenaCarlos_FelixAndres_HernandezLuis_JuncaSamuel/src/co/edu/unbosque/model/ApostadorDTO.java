@@ -1,6 +1,8 @@
 package co.edu.unbosque.model;
 
-public class ApostadorDTO {
+import java.io.Serializable;
+
+public class ApostadorDTO implements Serializable {
 
 	private String nombre;
 	private long cedula;

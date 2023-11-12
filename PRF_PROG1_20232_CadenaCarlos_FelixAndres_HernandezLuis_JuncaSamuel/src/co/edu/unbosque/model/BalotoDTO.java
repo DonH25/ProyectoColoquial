@@ -1,6 +1,8 @@
 package co.edu.unbosque.model;
 
-public class BalotoDTO {
+import java.io.Serializable;
+
+public class BalotoDTO extends JuegoDTO implements Serializable {
 private int digito1;
 private int digito2;
 private int digito3;
