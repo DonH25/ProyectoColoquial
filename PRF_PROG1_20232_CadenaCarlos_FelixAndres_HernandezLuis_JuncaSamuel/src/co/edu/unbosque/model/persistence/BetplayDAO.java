@@ -2,57 +2,49 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
-import co.edu.unbosque.model.ChanceDTO;
+import co.edu.unbosque.model.BetplayDTO;
 
-/**
- * Clase que representa un DAO (Data Access Object) para gestionar la
- * persistencia de datos de sedes de casas de apuestas. Implementa la interfaz
- * CRUDOperation para realizar operaciones de creación, lectura, actualización y
- * eliminación de datos de sedes de casas de apuestas.
- * 
- * @see CRUDOperation
- */
-public class ChanceDAO implements CRUDOperation {
-	ArrayList<ChanceDTO> listOfChances;
-	final String SERIAL_FILENAME = "apuestas-chance.dat";
+public class BetplayDAO implements CRUDOperation {
+	ArrayList<BetplayDTO> listOfBetplays;
+	final String SERIAL_FILENAME = "apuestas-betplay.dat";
 	int index = 0;
 
 	/**
-	 * Constructor de ChanceDAO que inicializa la lista de sedes de casas de
+	 * Constructor de BetplayDAO que inicializa la lista de sedes de casas de
 	 * apuestas.
 	 */
-	public ChanceDAO() {
-		listOfChances = new ArrayList<ChanceDTO>();
+	public BetplayDAO() {
+		listOfBetplays = new ArrayList<BetplayDTO>();
 
 		if (FileHandler.serializableOpenAndReadFile(SERIAL_FILENAME) != null) {
 			Object temp = FileHandler.serializableOpenAndReadFile(SERIAL_FILENAME);
 
 			if (temp instanceof ArrayList<?>) {
-				ArrayList<ChanceDTO> temp2 = (ArrayList<ChanceDTO>) temp;
-				listOfChances = temp2;
+				ArrayList<BetplayDTO> temp2 = (ArrayList<BetplayDTO>) temp;
+				listOfBetplays = temp2;
 			} else {
-				System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de chances.");
+				System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de los betplays.");
 			}
 		} else {
-			listOfChances = new ArrayList<>();
+			listOfBetplays = new ArrayList<>();
 		}
 	}
 
 	@Override
 	public void create(String... args) {
-		ChanceDTO site = new ChanceDTO();
-		site.setDigito1(Integer.parseInt(args[0]));
-		site.setDigito2(Integer.parseInt(args[1]));
-		site.setDigito3(Integer.parseInt(args[2]));
-		site.setDigito4(Integer.parseInt(args[3]));
+		BetplayDTO site = new BetplayDTO();
+		site.setEquipoLocal(args[0]);
+		site.setMarcadorLocal(Integer.parseInt(args[2]));
+		site.setEquipoVisitante(args[3]);
+		site.setMarcadorVisitante(Integer.parseInt(args[4]));
 
-		listOfChances.add(site);
+		listOfBetplays.add(site);
 		writeDataSerializable();
 	}
 
 	@Override
 	public void create(Object o) {
-		listOfChances.add((ChanceDTO) o);
+		listOfBetplays.add((BetplayDTO) o);
 		writeDataSerializable();
 	}
 
@@ -60,7 +52,7 @@ public class ChanceDAO implements CRUDOperation {
 	public String read() {
 		index = 0;
 		StringBuilder Sb = new StringBuilder();
-		listOfChances.forEach(site -> {
+		listOfBetplays.forEach(site -> {
 			Sb.append(index + "->" + (site.toString() + "\n"));
 			index++;
 		});
@@ -69,20 +61,20 @@ public class ChanceDAO implements CRUDOperation {
 
 	@Override
 	public boolean update(int index, String... args) {
-		if (index < 0 || index >= listOfChances.size()) {
+		if (index < 0 || index >= listOfBetplays.size()) {
 			return false;
 		} else {
 			if (!args[0].isBlank() || !args[0].isEmpty() || args[0] != null) {
-				listOfChances.get(index).setDigito1(Integer.parseInt(args[0]));
+				listOfBetplays.get(index).setEquipoLocal(args[0]);
 			}
 			if (!args[1].isBlank() || !args[1].isEmpty() || args[1] != null) {
-				listOfChances.get(index).setDigito2(Integer.parseInt(args[1]));
+				listOfBetplays.get(index).setMarcadorLocal(Integer.parseInt(args[1]));
 			}
 			if (!args[2].isBlank() || !args[2].isEmpty() || args[2] != null) {
-				listOfChances.get(index).setDigito3(Integer.parseInt(args[2]));
+				listOfBetplays.get(index).setEquipoVisitante(args[2]);
 			}
 			if (!args[3].isBlank() || !args[3].isEmpty() || args[3] != null) {
-				listOfChances.get(index).setDigito4(Integer.parseInt(args[3]));
+				listOfBetplays.get(index).setMarcadorVisitante(Integer.parseInt(args[3]));
 			}
 		}
 		writeDataSerializable();
@@ -91,10 +83,10 @@ public class ChanceDAO implements CRUDOperation {
 
 	@Override
 	public boolean delete(int index) {
-		if (index < 0 || index >= listOfChances.size()) {
+		if (index < 0 || index >= listOfBetplays.size()) {
 			return false;
 		} else {
-			listOfChances.remove(index);
+			listOfBetplays.remove(index);
 			writeDataSerializable();
 			return true;
 		}
@@ -102,9 +94,9 @@ public class ChanceDAO implements CRUDOperation {
 
 	@Override
 	public boolean delete(Object o) {
-		ChanceDTO toDelete = (ChanceDTO) o;
-		if (listOfChances.contains(toDelete)) {
-			listOfChances.remove(toDelete);
+		BetplayDTO toDelete = (BetplayDTO) o;
+		if (listOfBetplays.contains(toDelete)) {
+			listOfBetplays.remove(toDelete);
 			writeDataSerializable();
 			return true;
 		} else {
@@ -117,7 +109,7 @@ public class ChanceDAO implements CRUDOperation {
 	 * serializado.
 	 */
 	public void writeDataSerializable() {
-		FileHandler.serializableOpenAndWriteFile(SERIAL_FILENAME, listOfChances);
+		FileHandler.serializableOpenAndWriteFile(SERIAL_FILENAME, listOfBetplays);
 	}
 
 	/**
@@ -125,8 +117,8 @@ public class ChanceDAO implements CRUDOperation {
 	 *
 	 * @return Lista de sedes de casas de apuestas.
 	 */
-	public ArrayList<ChanceDTO> getListOfLocations() {
-		return listOfChances;
+	public ArrayList<BetplayDTO> getListOfLocations() {
+		return listOfBetplays;
 	}
 
 	/**
@@ -134,8 +126,8 @@ public class ChanceDAO implements CRUDOperation {
 	 *
 	 * @param listOfLocations Lista de sedes de casas de apuestas.
 	 */
-	public void setListOfLocations(ArrayList<ChanceDTO> listOfBalotos) {
-		this.listOfChances = listOfBalotos;
+	public void setListOfLocations(ArrayList<BetplayDTO> listOfBalotos) {
+		this.listOfBetplays = listOfBalotos;
 	}
 
 	/**

@@ -19,7 +19,7 @@ public class JuegoDAO implements CRUDOperation{
 	int index = 0;
 
 	/**
-		 * Constructor de SedeCasaDeApuestasDAO que inicializa la lista de sedes de
+		 * Constructor de JuegoDTO que inicializa la lista de sedes de
 		 * casas de apuestas.
 		 */
 		public JuegoDAO() {

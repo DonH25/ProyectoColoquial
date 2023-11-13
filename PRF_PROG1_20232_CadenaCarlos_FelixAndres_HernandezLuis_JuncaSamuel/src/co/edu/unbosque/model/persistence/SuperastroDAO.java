@@ -16,7 +16,7 @@ import co.edu.unbosque.model.SuperastroDTO;
  */
 public class SuperastroDAO implements CRUDOperation {
 	ArrayList<SuperastroDTO> listOfSuperastro;
-	final String SERIAL_FILENAME = "superastro.dat";
+	final String SERIAL_FILENAME = "apuestas-superastro.dat";
 	int index = 0;
 
 	/**

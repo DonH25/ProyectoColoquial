@@ -14,11 +14,11 @@ public class LoteriaDAO implements CRUDOperation {
 	 * @see CRUDOperation
 	 */
 		ArrayList<LoteriaDTO> listOfLoteria;
-		final String SERIAL_FILENAME = "casadeapuestas.dat";
+		final String SERIAL_FILENAME = "apuestas-loteria.dat";
 		int index = 0;
 
 		/**
-		 * Constructor de SedeCasaDeApuestasDAO que inicializa la lista de sedes de
+		 * Constructor de LoteriaDTO que inicializa la lista de sedes de
 		 * casas de apuestas.
 		 */
 		public LoteriaDAO() {
@@ -31,7 +31,7 @@ public class LoteriaDAO implements CRUDOperation {
 					ArrayList<LoteriaDTO> temp2 = (ArrayList<LoteriaDTO>) temp;
 					listOfLoteria = temp2;
 				} else {
-					System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de balotos.");
+					System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de loterias.");
 				}
 			} else {
 				listOfLoteria = new ArrayList<>();
