@@ -10,6 +10,24 @@ public class Controller {
 	}
 
 	public void run() {
-		con.printWithNewLine("Proyecto boceto");
+		while (true) {
+			con.printWithNewLine("Seleccione la opcion que quiere realizar ");
+			con.printWithNewLine("1: Modulo 1");
+			con.printWithNewLine("2: Modulo 2");
+			con.printWithNewLine("3: Modulo 3");
+			con.printWithNewLine("4: Modulo 4");
+			con.printWithNewLine("5: Modulo 5");
+			con.printWithNewLine("6: Salir");
+			int dec = con.readInt();
+			switch (dec) {
+			case 1: {
+
+				break;
+			}
+			default:
+				con.printWithNewLine("Noks");
+				;
+			}
+		}
 	}
 }
