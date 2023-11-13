@@ -2,7 +2,9 @@ package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
 
-import co.edu.unbosque.model.BalotoDTO;
+import co.edu.unbosque.model.SuperastroDTO;
+
+import co.edu.unbosque.model.SuperastroDTO;
 
 /**
  * Clase que representa un DAO (Data Access Object) para gestionar la
@@ -12,49 +14,48 @@ import co.edu.unbosque.model.BalotoDTO;
  * 
  * @see CRUDOperation
  */
-public class BalotoDAO implements CRUDOperation {
-	ArrayList<BalotoDTO> listOfBalotos;
-	final String SERIAL_FILENAME = "apuestas-baloto.dat";
+public class SuperastroDAO implements CRUDOperation {
+	ArrayList<SuperastroDTO> listOfSuperastro;
+	final String SERIAL_FILENAME = "superastro.dat";
 	int index = 0;
 
 	/**
-	 * Constructor de BalotoDAO que inicializa la lista de sedes de
+	 * Constructor de SuperastroDAO que inicializa la lista de los superastros de
 	 * casas de apuestas.
 	 */
-	public BalotoDAO() {
-		listOfBalotos = new ArrayList<BalotoDTO>();
+	public SuperastroDAO() {
+		listOfSuperastro = new ArrayList<SuperastroDTO>();
 
 		if (FileHandler.serializableOpenAndReadFile(SERIAL_FILENAME) != null) {
 			Object temp = FileHandler.serializableOpenAndReadFile(SERIAL_FILENAME);
 
 			if (temp instanceof ArrayList<?>) {
-				ArrayList<BalotoDTO> temp2 = (ArrayList<BalotoDTO>) temp;
-				listOfBalotos = temp2;
+				ArrayList<SuperastroDTO> temp2 = (ArrayList<SuperastroDTO>) temp;
+				listOfSuperastro = temp2;
 			} else {
-				System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de balotos.");
+				System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de superastros.");
 			}
 		} else {
-			listOfBalotos = new ArrayList<>();
+			listOfSuperastro = new ArrayList<>();
 		}
 	}
 
 	@Override
 	public void create(String... args) {
-		BalotoDTO site = new BalotoDTO();
+		SuperastroDTO site = new SuperastroDTO();
 		site.setDigito1(Integer.parseInt(args[0]));
 		site.setDigito2(Integer.parseInt(args[1]));
 		site.setDigito3(Integer.parseInt(args[2]));
 		site.setDigito4(Integer.parseInt(args[3]));
-		site.setDigito5(Integer.parseInt(args[4]));
-		site.setDigito6(Integer.parseInt(args[5]));
+		site.setZodiacoSigno(args[4]);
 
-		listOfBalotos.add(site);
+		listOfSuperastro.add(site);
 		writeDataSerializable();
 	}
 
 	@Override
 	public void create(Object o) {
-		listOfBalotos.add((BalotoDTO) o);
+		listOfSuperastro.add((SuperastroDTO) o);
 		writeDataSerializable();
 	}
 
@@ -62,7 +63,7 @@ public class BalotoDAO implements CRUDOperation {
 	public String read() {
 		index = 0;
 		StringBuilder Sb = new StringBuilder();
-		listOfBalotos.forEach(site -> {
+		listOfSuperastro.forEach(site -> {
 			Sb.append(index + "->" + (site.toString() + "\n"));
 			index++;
 		});
@@ -71,27 +72,23 @@ public class BalotoDAO implements CRUDOperation {
 
 	@Override
 	public boolean update(int index, String... args) {
-		if (index < 0 || index >= listOfBalotos.size()) {
+		if (index < 0 || index >= listOfSuperastro.size()) {
 			return false;
 		} else {
 			if (!args[0].isBlank() || !args[0].isEmpty() || args[0] != null) {
-				listOfBalotos.get(index).setDigito1(Integer.parseInt(args[0]));
+				listOfSuperastro.get(index).setDigito1(Integer.parseInt(args[0]));
 			}
 			if (!args[1].isBlank() || !args[1].isEmpty() || args[1] != null) {
-				listOfBalotos.get(index).setDigito2(Integer.parseInt(args[1]));
+				listOfSuperastro.get(index).setDigito2(Integer.parseInt(args[1]));
 			}
 			if (!args[2].isBlank() || !args[2].isEmpty() || args[2] != null) {
-				listOfBalotos.get(index).setDigito3(Integer.parseInt(args[2]));
+				listOfSuperastro.get(index).setDigito3(Integer.parseInt(args[2]));
 			}
 			if (!args[3].isBlank() || !args[3].isEmpty() || args[3] != null) {
-				listOfBalotos.get(index).setDigito4(Integer.parseInt(args[3]));
+				listOfSuperastro.get(index).setDigito4(Integer.parseInt(args[3]));
 			}
 			if (!args[4].isBlank() || !args[4].isEmpty() || args[4] != null) {
-				listOfBalotos.get(index).setDigito5(Integer.parseInt(args[4]));
-
-			}
-			if (!args[5].isBlank() || !args[5].isEmpty() || args[5] != null) {
-				listOfBalotos.get(index).setDigito6(Integer.parseInt(args[5]));
+				listOfSuperastro.get(index).setZodiacoSigno(args[4]);
 			}
 		}
 		writeDataSerializable();
@@ -100,10 +97,10 @@ public class BalotoDAO implements CRUDOperation {
 
 	@Override
 	public boolean delete(int index) {
-		if (index < 0 || index >= listOfBalotos.size()) {
+		if (index < 0 || index >= listOfSuperastro.size()) {
 			return false;
 		} else {
-			listOfBalotos.remove(index);
+			listOfSuperastro.remove(index);
 			writeDataSerializable();
 			return true;
 		}
@@ -111,9 +108,9 @@ public class BalotoDAO implements CRUDOperation {
 
 	@Override
 	public boolean delete(Object o) {
-		BalotoDTO toDelete = (BalotoDTO) o;
-		if (listOfBalotos.contains(toDelete)) {
-			listOfBalotos.remove(toDelete);
+		SuperastroDTO toDelete = (SuperastroDTO) o;
+		if (listOfSuperastro.contains(toDelete)) {
+			listOfSuperastro.remove(toDelete);
 			writeDataSerializable();
 			return true;
 		} else {
@@ -126,7 +123,7 @@ public class BalotoDAO implements CRUDOperation {
 	 * serializado.
 	 */
 	public void writeDataSerializable() {
-		FileHandler.serializableOpenAndWriteFile(SERIAL_FILENAME, listOfBalotos);
+		FileHandler.serializableOpenAndWriteFile(SERIAL_FILENAME, listOfSuperastro);
 	}
 
 	/**
@@ -134,8 +131,8 @@ public class BalotoDAO implements CRUDOperation {
 	 *
 	 * @return Lista de sedes de casas de apuestas.
 	 */
-	public ArrayList<BalotoDTO> getListOfLocations() {
-		return listOfBalotos;
+	public ArrayList<SuperastroDTO> getListOfLocations() {
+		return listOfSuperastro;
 	}
 
 	/**
@@ -143,8 +140,8 @@ public class BalotoDAO implements CRUDOperation {
 	 *
 	 * @param listOfLocations Lista de sedes de casas de apuestas.
 	 */
-	public void setListOfLocations(ArrayList<BalotoDTO> listOfBalotos) {
-		this.listOfBalotos = listOfBalotos;
+	public void setListOfLocations(ArrayList<SuperastroDTO> listOfBalotos) {
+		this.listOfSuperastro = listOfBalotos;
 	}
 
 	/**

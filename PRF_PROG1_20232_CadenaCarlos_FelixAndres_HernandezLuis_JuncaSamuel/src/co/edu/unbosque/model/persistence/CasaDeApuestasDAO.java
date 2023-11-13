@@ -3,7 +3,6 @@ package co.edu.unbosque.model.persistence;
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.CasaDeApuestasDTO;
-import co.edu.unbosque.model.CasaDeApuestasDTO;
 
 /**
  * Clase que representa un DAO (Data Access Object) para gestionar la
