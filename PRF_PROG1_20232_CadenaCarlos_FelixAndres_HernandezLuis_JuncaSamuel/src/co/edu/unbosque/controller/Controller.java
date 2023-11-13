@@ -45,16 +45,31 @@ public class Controller {
 						break;
 
 					}
+					case 2:
+
+						con.printWithNewLine("Insertar nuevo nombre de la casa de apuestas");
+						String Newnombre = con.readWholeLine();
+						con.printWithNewLine("Insertar el nuevo numero de sedes de la casa de apuestas ");
+						String Newsedes = con.readWholeLine();
+						con.printWithNewLine("Insertar el nuevo presupuesto total de la casa de apuestas ");
+						String NewpreTotal = con.readWholeLine();
+						caDao.create(Newnombre, Newsedes, NewpreTotal);
+
+						break;
+
+					case 3:
+						break cicloModulo1;
 
 					default:
 						con.printWithNewLine("noks");
 					}
-					break;
+
 				}
 			}
-			default:
-				con.printWithNewLine("Noks");
-				;
+				break;
+
+			case 2:
+				con.printWithNewLine("case 2 de prueba");
 			}
 		}
 	}

@@ -35,7 +35,7 @@ public class GestionApuestaDAO implements CRUDOperation {
 				ArrayList<GestionApuestaDTO> temp2 = (ArrayList<GestionApuestaDTO>) temp;
 				listOfGestionApuesta = temp2;
 			} else {
-				System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de superastros.");
+				System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de la Gestion de apuesta.");
 			}
 		} else {
 			listOfGestionApuesta = new ArrayList<>();
