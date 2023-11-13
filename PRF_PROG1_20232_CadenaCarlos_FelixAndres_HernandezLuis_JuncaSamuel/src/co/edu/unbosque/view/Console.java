@@ -64,4 +64,8 @@ public class Console {
 		return sc.nextBigDecimal();
 	}
 
+	public void quemarLinea() {
+		sc.nextLine();
+	}
+
 }
