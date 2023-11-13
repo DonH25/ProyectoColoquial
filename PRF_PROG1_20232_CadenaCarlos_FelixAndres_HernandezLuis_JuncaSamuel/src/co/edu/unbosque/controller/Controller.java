@@ -10,6 +10,6 @@ public class Controller {
 	}
 
 	public void run() {
-		con.printWithNewLine("");
+		con.printWithNewLine("Proyecto boceto");
 	}
 }
