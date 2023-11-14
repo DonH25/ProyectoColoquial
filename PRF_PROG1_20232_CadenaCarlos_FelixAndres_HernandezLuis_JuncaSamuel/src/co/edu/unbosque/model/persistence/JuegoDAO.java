@@ -72,7 +72,7 @@ public class JuegoDAO implements CRUDOperation {
 		if (index < 0 || index >= listOfJuego.size()) {
 			return false;
 		} else {
-			listOfJuego.get(index).setPresupuestoDelJuego(Double.parseDouble(args[2]));
+			listOfJuego.get(index).setPresupuestoDelJuego(Double.parseDouble(args[0]));
 			writeDataSerializable();
 			return true;
 		}
