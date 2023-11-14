@@ -18,8 +18,7 @@ public class SedeDAO implements CRUDOperation {
 	int index = 0;
 
 	/**
-	 * Constructor de SedeDAO que inicializa la lista de sedes de
-	 * casas de apuestas.
+	 * Constructor de SedeDAO que inicializa la lista de sedes de casas de apuestas.
 	 */
 	public SedeDAO() {
 		listOfSedes = new ArrayList<SedeDTO>();
@@ -41,10 +40,9 @@ public class SedeDAO implements CRUDOperation {
 	@Override
 	public void create(String... args) {
 		SedeDTO site = new SedeDTO();
-		site.setDireccion(args[0]);
-		site.setBarrio(args[1]);
-		site.setLocalidad(args[2]);
-		site.setNumEmpleados(Long.parseLong(args[3]));
+
+		site.setLocalidad(args[0]);
+		site.setNumEmpleados(Long.parseLong(args[1]));
 
 		listOfSedes.add(site);
 		writeDataSerializable();
@@ -72,17 +70,12 @@ public class SedeDAO implements CRUDOperation {
 		if (index < 0 || index >= listOfSedes.size()) {
 			return false;
 		} else {
+
 			if (!args[0].isBlank() || !args[0].isEmpty() || args[0] != null) {
-				listOfSedes.get(index).setDireccion(args[0]);
+				listOfSedes.get(index).setLocalidad(args[0]);
 			}
 			if (!args[1].isBlank() || !args[1].isEmpty() || args[1] != null) {
-				listOfSedes.get(index).setBarrio(args[1]);
-			}
-			if (!args[2].isBlank() || !args[2].isEmpty() || args[2] != null) {
-				listOfSedes.get(index).setLocalidad(args[2]);
-			}
-			if (!args[3].isBlank() || !args[3].isEmpty() || args[3] != null) {
-				listOfSedes.get(index).setNumEmpleados(Long.parseLong(args[3]));
+				listOfSedes.get(index).setNumEmpleados(Long.parseLong(args[1]));
 			}
 		}
 		writeDataSerializable();
