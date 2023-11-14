@@ -108,6 +108,16 @@ public class CasaDeApuestasDAO implements CRUDOperation {
 		}
 	}
 
+	public boolean casaExiste() {
+		if (!listOfCasa.isEmpty()) {
+
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
 	/**
 	 * Escribe los datos de la lista de sedes de casas de apuestas en un archivo
 	 * serializado.

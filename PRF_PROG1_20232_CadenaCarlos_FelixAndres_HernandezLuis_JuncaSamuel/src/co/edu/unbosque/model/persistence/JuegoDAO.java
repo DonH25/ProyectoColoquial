@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model.JuegoDTO;
 
-public class JuegoDAO implements CRUDOperation{
+public class JuegoDAO implements CRUDOperation {
 
 	/**
 	 * Clase que representa un DAO (Data Access Object) para gestionar la
@@ -15,29 +15,29 @@ public class JuegoDAO implements CRUDOperation{
 	 * @see CRUDOperation
 	 */
 	ArrayList<JuegoDTO> listOfJuego;
-	final String SERIAL_FILENAME = "casadeapuestas.dat";
+	final String SERIAL_FILENAME = "juegos.dat";
 	int index = 0;
 
 	/**
-		 * Constructor de JuegoDTO que inicializa la lista de sedes de
-		 * casas de apuestas.
-		 */
-		public JuegoDAO() {
-			listOfJuego = new ArrayList<JuegoDTO>();
+	 * Constructor de JuegoDTO que inicializa la lista de sedes de casas de
+	 * apuestas.
+	 */
+	public JuegoDAO() {
+		listOfJuego = new ArrayList<JuegoDTO>();
 
-			if (FileHandler.serializableOpenAndReadFile(SERIAL_FILENAME) != null) {
-				Object temp = FileHandler.serializableOpenAndReadFile(SERIAL_FILENAME);
+		if (FileHandler.serializableOpenAndReadFile(SERIAL_FILENAME) != null) {
+			Object temp = FileHandler.serializableOpenAndReadFile(SERIAL_FILENAME);
 
-				if (temp instanceof ArrayList<?>) {
-					ArrayList<JuegoDTO> temp2 = (ArrayList<JuegoDTO>) temp;
-					listOfJuego = temp2;
-				} else {
-					System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de juegos.");
-				}
+			if (temp instanceof ArrayList<?>) {
+				ArrayList<JuegoDTO> temp2 = (ArrayList<JuegoDTO>) temp;
+				listOfJuego = temp2;
 			} else {
-				listOfJuego = new ArrayList<>();
+				System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de juegos.");
 			}
+		} else {
+			listOfJuego = new ArrayList<>();
 		}
+	}
 
 	@Override
 	public void create(String... args) {

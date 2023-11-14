@@ -14,7 +14,7 @@ import co.edu.unbosque.model.SedeDTO;
  */
 public class SedeDAO implements CRUDOperation {
 	ArrayList<SedeDTO> listOfSedes;
-	final String SERIAL_FILENAME = "sede.dat";
+	final String SERIAL_FILENAME = "sedes.dat";
 	int index = 0;
 
 	/**
