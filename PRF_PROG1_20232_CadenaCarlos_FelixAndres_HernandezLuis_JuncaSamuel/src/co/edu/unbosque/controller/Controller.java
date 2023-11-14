@@ -34,6 +34,7 @@ public class Controller {
 					con.printWithNewLine("2: Modificar los datos de la casa de apuestas ");
 					con.printWithNewLine("3: Modificar los datos de los presupuestos de la casa de apuestas ");
 					con.printWithNewLine("4: Salir ");
+					con.printWithNewLine("5: Leer (prueba)");
 					int option = con.readInt();
 					con.quemarLinea();
 					switch (option) {
@@ -55,28 +56,31 @@ public class Controller {
 							String juego1tipo = "Loteria";
 							con.printWithNewLine("Inserte el presupuesto del juego");
 							String presu1 = con.readWholeLine();
+							jueDao.create(juego1name, juego1tipo, presu1);
 							con.printWithNewLine("Juego#2 Loteria");
 							String juego2name = "Loteria";
 							String juego2tipo = "Loteria";
 							con.printWithNewLine("Inserte el presupuesto del juego");
 							String presu2 = con.readWholeLine();
+							jueDao.create(juego2name, juego2tipo, presu2);
 							con.printWithNewLine("Juego#3 Chance");
 							String juego3name = "Chance";
 							String juego3tipo = "Chance";
 							con.printWithNewLine("Inserte el presupuesto del juego");
 							String presu3 = con.readWholeLine();
+							jueDao.create(juego3name, juego3tipo, presu3);
 							con.printWithNewLine("Juego#4 Superastro");
 							String juego4name = "Superastro";
 							String juego4tipo = "Loteria";
 							con.printWithNewLine("Inserte el presupuesto del juego");
 							String presu4 = con.readWholeLine();
+							jueDao.create(juego4name, juego4tipo, presu4);
 							con.printWithNewLine("Juego#5 Betplay");
 							String juego5name = "Betplay";
 							String juego5tipo = "Deportivo";
 							con.printWithNewLine("Inserte el presupuesto del juego");
 							String presu5 = con.readWholeLine();
-							jueDao.create(juego1name, juego1tipo, presu1, juego2name, juego2tipo, presu2, juego3name,
-									juego3tipo, presu3, juego4name, juego4tipo, presu4, juego5name, juego5tipo, presu5);
+							jueDao.create(juego5name, juego5tipo, presu5);
 							break;
 						}
 
@@ -93,7 +97,13 @@ public class Controller {
 						break;
 					}
 					case 3: {
-
+						con.printWithNewLine(
+								"Inserte la posicion del juego a actualizar (0 = baloto,1:loteria2:chance3:superastro4: betplay");
+						int pos = con.readInt();
+						con.quemarLinea();
+						con.printWithNewLine("Inserte el presupuesto actualizado");
+						String pres = con.readWholeLine();
+						jueDao.update(pos, pres);
 						break;
 					}
 					case 4: {
@@ -103,7 +113,6 @@ public class Controller {
 					case 5: {
 						con.printWithNewLine(caDao.read());
 						con.printWithNewLine(jueDao.read());
-						break;
 					}
 					default:
 						con.printWithNewLine("noks");
