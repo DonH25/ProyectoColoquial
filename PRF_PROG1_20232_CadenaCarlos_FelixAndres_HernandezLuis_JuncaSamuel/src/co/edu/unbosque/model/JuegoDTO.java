@@ -94,7 +94,7 @@ public class JuegoDTO extends SedeDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "JuegoDTO [nombreJuego=" + nombreJuego + ", tipoDejuego=" + tipoDejuego + ", presupuestoDelJuego="
-				+ presupuestoDelJuego + "]";
+				+ presupuestoDelJuego + "\n";
 	}
 
 }

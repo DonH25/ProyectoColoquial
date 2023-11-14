@@ -72,12 +72,6 @@ public class JuegoDAO implements CRUDOperation {
 		if (index < 0 || index >= listOfJuego.size()) {
 			return false;
 		} else {
-			if (!args[0].isBlank() || !args[0].isEmpty() || args[0] != null) {
-				listOfJuego.get(index).setNombreJuego(args[0]);
-			}
-			if (!args[1].isBlank() || !args[1].isEmpty() || args[1] != null) {
-				listOfJuego.get(index).setTipoDejuego(args[1]);
-			}
 			if (!args[2].isBlank() || !args[2].isEmpty() || args[2] != null) {
 				listOfJuego.get(index).setPresupuestoDelJuego(Double.parseDouble(args[2]));
 			}
