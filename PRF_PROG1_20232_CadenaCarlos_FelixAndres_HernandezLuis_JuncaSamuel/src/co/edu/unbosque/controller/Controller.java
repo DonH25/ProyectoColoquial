@@ -1,5 +1,6 @@
 package co.edu.unbosque.controller;
 
+import co.edu.unbosque.model.persistence.ApostadorDAO;
 import co.edu.unbosque.model.persistence.CasaDeApuestasDAO;
 import co.edu.unbosque.model.persistence.JuegoDAO;
 import co.edu.unbosque.view.Console;
@@ -8,11 +9,13 @@ public class Controller {
 	private Console con;
 	CasaDeApuestasDAO caDao;
 	JuegoDAO jueDao;
+	ApostadorDAO apostDao;
 
 	public Controller() {
 		con = new Console();
 		caDao = new CasaDeApuestasDAO();
 		jueDao = new JuegoDAO();
+
 	}
 
 	public void run() {
@@ -124,6 +127,99 @@ public class Controller {
 
 			case 2:
 				con.printWithNewLine("case 2 de prueba");
+				break;
+
+			case 3:
+				cicloModulo3: while (true) {
+
+					con.printWithNewLine("Bienvenido al modulo de gestion de los apostadores");
+
+					con.printWithNewLine("1: crear perfil de apostador");
+
+					con.printWithNewLine("2: leer los datos de los apostadores");
+
+					con.printWithNewLine("3: actualizar los datos del apostador");
+
+					con.printWithNewLine("4: borrar al apostador");
+
+					con.printWithNewLine("5: salir");
+					int option = con.readInt();
+					con.quemarLinea();
+					switch (option) {
+					case 1: {
+						con.printWithNewLine("ingrese su nombre de apostador");
+						String nombreApost = con.readWholeLine();
+						con.printWithNewLine("ingrese su cedula (solo seran admitidos mayores de edad)");
+						String numCedula = con.readWholeLine();
+						con.printWithNewLine("ingrese la cede en la cual se encuentra jugando");
+						String numCede = con.readWholeLine();
+						con.printWithNewLine("digite la dirreccion en la que recide");
+						String direccion = con.readWholeLine();
+						con.printWithNewLine("digite su numero de telefono");
+						String numCelular = con.readWholeLine();
+						con.printWithNewLine("5: Leer (prueba)");
+						apostDao.create(nombreApost, numCedula, numCede, direccion, numCelular);
+						con.printWithNewLine("perfil de apostador creado");
+						con.quemarLinea();
+
+						break;
+
+					}
+
+					case 2: {
+
+						con.printWithNewLine(apostDao.read());
+
+					}
+
+					case 3: {
+
+						con.printWithNewLine(
+								" Inserte la posicion del perfil de apostador a acualizar (empezando desde 0)");
+						int index = Integer.parseInt(con.readWholeLine());
+						con.printWithNewLine("ingrese su nuevo nombre de apostador");
+						String newNombreApost = con.readWholeLine();
+						con.printWithNewLine("ingrese su nueva cedula (solo seran admitidos mayores de edad)");
+						String newnNumCedula = con.readWholeLine();
+						con.printWithNewLine("ingrese la nueva cede en la cual se encuentra jugando");
+						String newNumCede = con.readWholeLine();
+						con.printWithNewLine("digite la nueva dirreccion en la que recide");
+						String newDireccion = con.readWholeLine();
+						con.printWithNewLine("digite su nuevo numero de telefono");
+						String newNumCelular = con.readWholeLine();
+						boolean doneUpdate = apostDao.update(index, newNombreApost, newnNumCedula, newNumCede,
+								newDireccion, newNumCelular);
+						if (doneUpdate) {
+							con.printWithNewLine("perfil de apostador actualizado");
+						} else {
+							con.printWithNewLine("Error al actualizar");
+						}
+						break;
+
+					}
+					case 4:
+
+						con.printWithNewLine(
+								"digite la posicion del perfil de apostador a eliminar (empezando desde 0):");
+						int index = Integer.parseInt(con.readWholeLine());
+
+						if (apostDao.delete(index)) {
+							con.printWithNewLine("perfil de apostador borrado");
+						} else {
+							con.printWithNewLine("Error al borrar el perfil de apostador");
+						}
+
+						break;
+
+					case 5: {
+						break cicloModulo3;
+
+					}
+					default:
+						con.printWithNewLine("noks mamahuevaaaaaaaa aaaaaaaaa sisssaaassss");
+
+					}
+				}
 			}
 		}
 	}
