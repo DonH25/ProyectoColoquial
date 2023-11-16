@@ -116,6 +116,7 @@ public class Controller {
 					case 5: {
 						con.printWithNewLine(caDao.read());
 						con.printWithNewLine(jueDao.read());
+						break;
 					}
 					default:
 						con.printWithNewLine("noks");
@@ -146,29 +147,40 @@ public class Controller {
 					int option = con.readInt();
 					con.quemarLinea();
 					switch (option) {
-					case 1: {
+					case 1: { 
 						con.printWithNewLine("ingrese su nombre de apostador");
 						String nombreApost = con.readWholeLine();
 						con.printWithNewLine("ingrese su cedula (solo seran admitidos mayores de edad)");
 						String numCedula = con.readWholeLine();
-						con.printWithNewLine("ingrese la cede en la cual se encuentra jugando");
-						String numCede = con.readWholeLine();
-						con.printWithNewLine("digite la dirreccion en la que recide");
+						con.printWithNewLine("ingrese la sede en la cual se encuentra jugando");
+						String numSede = con.readWholeLine();
+						con.printWithNewLine("digite la direccion en la que reside");
 						String direccion = con.readWholeLine();
 						con.printWithNewLine("digite su numero de telefono");
 						String numCelular = con.readWholeLine();
-						con.printWithNewLine("5: Leer (prueba)");
-						apostDao.create(nombreApost, numCedula, numCede, direccion, numCelular);
-						con.printWithNewLine("perfil de apostador creado");
-						con.quemarLinea();
+						con.printWithNewLine("Inserte el año en el que usted (o el apostador) nacio");
+						int anioNaci = con.readInt();
+						if (anioNaci > 2005) {
+							con.printWithNewLine(
+									"Usted es menor de edad , no puede apostar segun la ley 643 del 2001 expedida por coljuegos");
+							break;
+						} else if (anioNaci < 1900) {
+							con.printWithNewLine("Es imposible,la persona mas longeva actualmente vive 122 años");
+							break;
+						} else {
+							String anio = Integer.toString(anioNaci);
+							apostDao.create(nombreApost, numCedula, numSede, direccion, numCelular, anio);
+							con.printWithNewLine("perfil de apostador creado");
+							con.quemarLinea();
 
-						break;
-
+							break;
+						}
 					}
 
 					case 2: {
 
 						con.printWithNewLine(apostDao.read());
+						break;
 
 					}
 
@@ -187,15 +199,26 @@ public class Controller {
 						String newDireccion = con.readWholeLine();
 						con.printWithNewLine("digite su nuevo numero de telefono");
 						String newNumCelular = con.readWholeLine();
-						boolean doneUpdate = apostDao.update(index, newNombreApost, newnNumCedula, newNumCede,
-								newDireccion, newNumCelular);
-						if (doneUpdate) {
-							con.printWithNewLine("perfil de apostador actualizado");
+						con.printWithNewLine("Inserte el nuevo año en el que usted (o el apostador) nacio");
+						int anioNaci = con.readInt();
+						if (anioNaci > 2005) {
+							con.printWithNewLine(
+									"Usted es menor de edad , no puede apostar segun la ley 643 del 2001 expedida por coljuegos");
+							break;
+						} else if (anioNaci < 1900) {
+							con.printWithNewLine("Es imposible,la persona mas longeva actualmente  vive 122 años");
+							break;
 						} else {
-							con.printWithNewLine("Error al actualizar");
-						}
-						break;
+							boolean doneUpdate = apostDao.update(index, newNombreApost, newnNumCedula, newNumCede,
+									newDireccion, newNumCelular);
+							if (doneUpdate) {
+								con.printWithNewLine("perfil de apostador actualizado");
+							} else {
+								con.printWithNewLine("Error al actualizar");
+							}
+							break;
 
+						}
 					}
 					case 4:
 
@@ -216,7 +239,7 @@ public class Controller {
 
 					}
 					default:
-						con.printWithNewLine("noks mamahuevaaaaaaaa aaaaaaaaa sisssaaassss");
+						con.printWithNewLine("noks ");
 
 					}
 				}

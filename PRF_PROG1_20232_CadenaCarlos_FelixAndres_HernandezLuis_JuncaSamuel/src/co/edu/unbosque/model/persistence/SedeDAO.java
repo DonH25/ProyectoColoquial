@@ -4,22 +4,11 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model.SedeDTO;
 
-/**
- * Clase que representa un DAO (Data Access Object) para gestionar la
- * persistencia de datos de sedes de casas de apuestas. Implementa la interfaz
- * CRUDOperation para realizar operaciones de creación, lectura, actualización y
- * eliminación de datos de sedes de casas de apuestas.
- * 
- * @see CRUDOperation
- */
 public class SedeDAO implements CRUDOperation {
 	ArrayList<SedeDTO> listOfSedes;
 	final String SERIAL_FILENAME = "sedes.dat";
 	int index = 0;
 
-	/**
-	 * Constructor de SedeDAO que inicializa la lista de sedes de casas de apuestas.
-	 */
 	public SedeDAO() {
 		listOfSedes = new ArrayList<SedeDTO>();
 
@@ -105,55 +94,26 @@ public class SedeDAO implements CRUDOperation {
 		}
 	}
 
-	/**
-	 * Escribe los datos de la lista de sedes de casas de apuestas en un archivo
-	 * serializado.
-	 */
 	public void writeDataSerializable() {
 		FileHandler.serializableOpenAndWriteFile(SERIAL_FILENAME, listOfSedes);
 	}
 
-	/**
-	 * Obtiene la lista de sedes de casas de apuestas.
-	 *
-	 * @return Lista de sedes de casas de apuestas.
-	 */
-	public ArrayList<SedeDTO> getListOfLocations() {
+	public ArrayList<SedeDTO> getListOfSedes() {
 		return listOfSedes;
 	}
 
-	/**
-	 * Establece la lista de sedes de casas de apuestas.
-	 *
-	 * @param listOfLocations Lista de sedes de casas de apuestas.
-	 */
-	public void setListOfLocations(ArrayList<SedeDTO> listOfBalotos) {
+	public void setListOfSedes(ArrayList<SedeDTO> listOfBalotos) {
 		this.listOfSedes = listOfBalotos;
 	}
 
-	/**
-	 * Obtiene el índice actual.
-	 *
-	 * @return Índice actual.
-	 */
 	public int getIndex() {
 		return index;
 	}
 
-	/**
-	 * Establece el índice actual.
-	 *
-	 * @param index Índice actual.
-	 */
 	public void setIndex(int index) {
 		this.index = index;
 	}
 
-	/**
-	 * Obtiene el nombre del archivo serializado.
-	 *
-	 * @return Nombre del archivo serializado.
-	 */
 	public String getSERIAL_FILENAME() {
 		return SERIAL_FILENAME;
 	}
