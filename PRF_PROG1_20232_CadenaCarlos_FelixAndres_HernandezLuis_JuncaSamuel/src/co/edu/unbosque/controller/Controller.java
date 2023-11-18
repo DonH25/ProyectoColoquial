@@ -19,6 +19,9 @@ import co.edu.unbosque.model.persistence.JuegoDAO;
 import co.edu.unbosque.model.persistence.LoteriaDAO;
 import co.edu.unbosque.model.persistence.SedeDAO;
 import co.edu.unbosque.model.persistence.SuperastroDAO;
+import co.edu.unbosque.util.ExcepcionNumeroLoteria;
+import co.edu.unbosque.util.ExcepcionNumeroSuperastro;
+import co.edu.unbosque.util.ExepcionNumeroBaloto;
 import co.edu.unbosque.view.Console;
 import co.edu.unbosque.view.VentanaPrincipal;
 
@@ -311,19 +314,54 @@ public class Controller implements ActionListener {
 
 							case 1:
 								con.printWithNewLine("bienvenido al baloto");
-
 								con.printWithNewLine("ingrese el primer digito");
 								String digitoBaloto1 = con.readWholeLine();
+								try {
+									revisarNumeroBaoloto(digitoBaloto1);
+								} catch (ExepcionNumeroBaloto e) {
+									con.printWithNewLine(
+											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
+								}
 								con.printWithNewLine("ingrese el segundo digito");
 								String digitoBaloto2 = con.readWholeLine();
+								try {
+									revisarNumeroBaoloto(digitoBaloto2);
+								} catch (ExepcionNumeroBaloto e) {
+									con.printWithNewLine(
+											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
+								}
 								con.printWithNewLine("ingrese el tercer digito");
 								String digitoBaloto3 = con.readWholeLine();
+								try {
+									revisarNumeroBaoloto(digitoBaloto3);
+								} catch (ExepcionNumeroBaloto e) {
+									con.printWithNewLine(
+											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
+								}
 								con.printWithNewLine("digite el cuarto digito");
 								String digitoBaloto4 = con.readWholeLine();
+								try {
+									revisarNumeroBaoloto(digitoBaloto4);
+								} catch (ExepcionNumeroBaloto e) {
+									con.printWithNewLine(
+											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
+								}
 								con.printWithNewLine("digite el quinto digito ");
 								String digitoBaloto5 = con.readWholeLine();
+								try {
+									revisarNumeroBaoloto(digitoBaloto5);
+								} catch (ExepcionNumeroBaloto e) {
+									con.printWithNewLine(
+											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
+								}
 								con.printWithNewLine("digite el sexto digito");
 								String digitoBaloto6 = con.readWholeLine();
+								try {
+									revisarNumeroBaoloto(digitoBaloto6);
+								} catch (ExepcionNumeroBaloto e) {
+									con.printWithNewLine(
+											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
+								}
 								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
 								String valorDeLaApuestaBaloto = con.readWholeLine();
 								balotDao.create(digitoBaloto1, digitoBaloto2, digitoBaloto3, digitoBaloto4,
@@ -346,12 +384,32 @@ public class Controller implements ActionListener {
 // crear exception de que los digitos sean no mayores que 9 y no menores que 1
 								con.printWithNewLine("ingrese el primer digito");
 								String digitoSuper1 = con.readWholeLine();
+								try {
+									revisarNumeroSuperastro(digitoSuper1);
+								} catch (ExcepcionNumeroSuperastro e) {
+									con.printWithNewLine("El numero ingresado no se encuentra entre 1 y 9");
+								}
 								con.printWithNewLine("ingrese el segundo digito");
 								String digitoSuper2 = con.readWholeLine();
+								try {
+									revisarNumeroSuperastro(digitoSuper2);
+								} catch (ExcepcionNumeroSuperastro e) {
+									con.printWithNewLine("El numero ingresado no se encuentra entre 1 y 9");
+								}
 								con.printWithNewLine("ingrese el tercer digito");
 								String digitoSuper3 = con.readWholeLine();
+								try {
+									revisarNumeroSuperastro(digitoSuper3);
+								} catch (ExcepcionNumeroSuperastro e) {
+									con.printWithNewLine("El numero ingresado no se encuentra entre 1 y 9");
+								}
 								con.printWithNewLine("digite el cuarto digito");
 								String digitoSuper4 = con.readWholeLine();
+								try {
+									revisarNumeroSuperastro(digitoSuper4);
+								} catch (ExcepcionNumeroSuperastro e) {
+									con.printWithNewLine("El numero ingresado no se encuentra entre 1 y 9");
+								}
 								con.printWithNewLine("digite algun signo del sodiaco"); // crear una exception que sepa
 								// cuales son los unicos signos
 								// del
@@ -376,18 +434,53 @@ public class Controller implements ActionListener {
 								// crear exception de que se digite solamente un numero por linea
 								con.printWithNewLine("ingrese el primer digito");
 								String digitoLoteria1 = con.readWholeLine();
+								try {
+									revisarUnSoloNumero(digitoLoteria1);
+								} catch (ExcepcionNumeroLoteria e) {
+									con.printWithNewLine("Se ha ingresado mas de un numero");
+								}
 								con.printWithNewLine("ingrese el segundo digito");
 								String digitoLoteria2 = con.readWholeLine();
+								try {
+									revisarUnSoloNumero(digitoLoteria2);
+								} catch (ExcepcionNumeroLoteria e) {
+									con.printWithNewLine("Se ha ingresado mas de un numero");
+								}
 								con.printWithNewLine("ingrese el tercer digito");
 								String digitoLoteria3 = con.readWholeLine();
+								try {
+									revisarUnSoloNumero(digitoLoteria3);
+								} catch (ExcepcionNumeroLoteria e) {
+									con.printWithNewLine("Se ha ingresado mas de un numero");
+								}
 								con.printWithNewLine("digite el cuarto digito");
 								String digitoLoteria4 = con.readWholeLine();
+								try {
+									revisarUnSoloNumero(digitoLoteria4);
+								} catch (ExcepcionNumeroLoteria e) {
+									con.printWithNewLine("Se ha ingresado mas de un numero");
+								}
 								con.printWithNewLine("digite el primer numero de serie");
 								String serieDig1 = con.readWholeLine();
+								try {
+									revisarUnSoloNumero(serieDig1);
+								} catch (ExcepcionNumeroLoteria e) {
+									con.printWithNewLine("Se ha ingresado mas de un numero");
+								}
 								con.printWithNewLine("sigite el segundo digito de serie");
 								String serieDig2 = con.readWholeLine();
+								try {
+									revisarUnSoloNumero(serieDig2);
+								} catch (ExcepcionNumeroLoteria e) {
+									con.printWithNewLine("Se ha ingresado mas de un numero");
+								}
 								con.printWithNewLine("sigite el tercer digito de serie");
 								String serieDig3 = con.readWholeLine();
+								try {
+									revisarUnSoloNumero(serieDig3);
+								} catch (ExcepcionNumeroLoteria e) {
+									con.printWithNewLine("Se ha ingresado mas de un numero");
+								}
 								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
 								String valorDeLaApuestaLoteria = con.readWholeLine();
 								loteDao.create(digitoLoteria1, digitoLoteria2, digitoLoteria3, digitoLoteria4,
@@ -556,4 +649,22 @@ public class Controller implements ActionListener {
 
 	}
 
+	public void revisarNumeroBaoloto(String numero) throws ExepcionNumeroBaloto {
+		if (Integer.parseInt(numero) < 1
+				|| Integer.parseInt(numero) > 45 && Integer.parseInt(numero) == Integer.parseInt(numero)) {
+			throw new ExepcionNumeroBaloto();
+		}
+	}
+
+	public void revisarNumeroSuperastro(String num) throws ExcepcionNumeroSuperastro {
+		if (Integer.parseInt(num) < 1 || Integer.parseInt(num) > 9) {
+			throw new ExcepcionNumeroSuperastro();
+		}
+	}
+
+	public void revisarUnSoloNumero(String num) throws ExcepcionNumeroLoteria {
+		if (num.length() != 1 || !Character.isDigit(num.charAt(0))) {
+			throw new ExcepcionNumeroLoteria();
+		}
+	}
 }
