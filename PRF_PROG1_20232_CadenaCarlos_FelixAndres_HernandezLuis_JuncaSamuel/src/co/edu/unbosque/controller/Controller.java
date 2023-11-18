@@ -6,11 +6,19 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import co.edu.unbosque.model.persistence.ApostadorDAO;
+import co.edu.unbosque.model.persistence.BalotoDAO;
+import co.edu.unbosque.model.persistence.BetplayDAO;
 import co.edu.unbosque.model.persistence.CasaDeApuestasDAO;
+<<<<<<< Updated upstream
 import co.edu.unbosque.model.persistence.CasaDeApuestasProperties;
+=======
+import co.edu.unbosque.model.persistence.ChanceDAO;
+>>>>>>> Stashed changes
 import co.edu.unbosque.model.persistence.GestionApuestaDAO;
 import co.edu.unbosque.model.persistence.JuegoDAO;
+import co.edu.unbosque.model.persistence.LoteriaDAO;
 import co.edu.unbosque.model.persistence.SedeDAO;
+import co.edu.unbosque.model.persistence.SuperastroDAO;
 import co.edu.unbosque.view.Console;
 import co.edu.unbosque.view.VentanaPrincipal;
 
@@ -21,8 +29,16 @@ public class Controller implements ActionListener {
 	ApostadorDAO apostDao;
 	SedeDAO sedeDao;
 	GestionApuestaDAO gestApuDao;
+<<<<<<< Updated upstream
 	CasaDeApuestasProperties prop;
 	VentanaPrincipal vp;
+=======
+	BalotoDAO balotDao;
+	SuperastroDAO superDao;
+	ChanceDAO chanDao;
+	LoteriaDAO loteDao;
+	BetplayDAO betDao;
+>>>>>>> Stashed changes
 
 	public Controller() {
 		con = new Console();
@@ -214,7 +230,7 @@ public class Controller implements ActionListener {
 						con.printWithNewLine("ingrese su nuevo nombre de apostador");
 						String newNombreApost = con.readWholeLine();
 						con.printWithNewLine("ingrese su nueva cedula (solo seran admitidos mayores de edad)");
-						String newnNumCedula = con.readWholeLine();
+						String newNumCedula = con.readWholeLine();
 						con.printWithNewLine("ingrese la nueva cede en la cual se encuentra jugando");
 						String newNumCede = con.readWholeLine();
 						con.printWithNewLine("digite la nueva dirreccion en la que recide");
@@ -231,7 +247,7 @@ public class Controller implements ActionListener {
 							con.printWithNewLine("Es imposible,la persona mas longeva actualmente  vive 122 años");
 							break;
 						} else {
-							boolean doneUpdate = apostDao.update(index, newNombreApost, newnNumCedula, newNumCede,
+							boolean doneUpdate = apostDao.update(index, newNombreApost, newNumCedula, newNumCede,
 									newDireccion, newNumCelular);
 							if (doneUpdate) {
 								con.printWithNewLine("perfil de apostador actualizado");
@@ -266,9 +282,190 @@ public class Controller implements ActionListener {
 					}
 				}
 			case 4:
-				System.out.println("case 4 de prueba gg");
 
-				break;
+				cicloModulo4: while (true) {
+
+					con.printWithNewLine("Bienvenido al modulo de la gestion de apuestas porfavor elija una opcion");
+
+					con.printWithNewLine("1: para crear una apuesta");
+					con.printWithNewLine("2: para leer las apuestas");
+					con.printWithNewLine("3: para  actualizar los datos de las apuestas");
+					con.printWithNewLine("3: para  borrar alguna apuesta");
+
+					int option = con.readInt();
+					con.quemarLinea();
+					switch (option) {
+
+					case 1:
+						menuJuegos: while (true) {
+							con.printWithNewLine(
+									"Por que clase de juego le gustara apostar, porfavor elija una opcion");
+
+							con.printWithNewLine("1: baloto");
+							con.printWithNewLine("2: superastro");
+							con.printWithNewLine("3: loteria");
+							con.printWithNewLine("4: betplay ");
+							con.printWithNewLine("5: chance ");
+							int option2 = con.readInt();
+							con.quemarLinea();
+							switch (option2) {
+
+							case 1:
+								con.printWithNewLine("bienvenido al baloto");
+
+								con.printWithNewLine("ingrese el primer digito");
+								String digitoBaloto1 = con.readWholeLine();
+								con.printWithNewLine("ingrese el segundo digito");
+								String digitoBaloto2 = con.readWholeLine();
+								con.printWithNewLine("ingrese el tercer digito");
+								String digitoBaloto3 = con.readWholeLine();
+								con.printWithNewLine("digite el cuarto digito");
+								String digitoBaloto4 = con.readWholeLine();
+								con.printWithNewLine("digite el quinto digito ");
+								String digitoBaloto5 = con.readWholeLine();
+								con.printWithNewLine("digite el sexto digito");
+								String digitoBaloto6 = con.readWholeLine();
+								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
+								String valorDeLaApuestaBaloto = con.readWholeLine();
+								balotDao.create(digitoBaloto1, digitoBaloto2, digitoBaloto3, digitoBaloto4,
+										digitoBaloto5, digitoBaloto6, valorDeLaApuestaBaloto);
+
+								// error revisar UwUn't
+
+								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
+								String option3 = con.readWholeLine();
+								if (option3.equalsIgnoreCase("si")) {
+									con.quemarLinea();
+									break menuJuegos;
+								} else {
+									con.printWithNewLine("Juego/s creado con éxito");
+								}
+								break;
+							case 2:
+								con.printWithNewLine("bienveido al superastro");
+
+								con.printWithNewLine("ingrese el primer digito");
+								String digitoSuper1 = con.readWholeLine();
+								con.printWithNewLine("ingrese el segundo digito");
+								String digitoSuper2 = con.readWholeLine();
+								con.printWithNewLine("ingrese el tercer digito");
+								String digitoSuper3 = con.readWholeLine();
+								con.printWithNewLine("digite el cuarto digito");
+								String digitoSuper4 = con.readWholeLine();
+								con.printWithNewLine("digite algun signo del sodiaco"); // crear una exception que sepa
+								// cuales son los unicos signos
+								// del
+								// sobaco
+								String zodiacoSigno = con.readWholeLine();
+								con.printWithNewLine("Inserte el año en el que usted (o el apostador) nacio");
+								String valorDeLaApuestaSuper = con.readWholeLine();
+								superDao.create(digitoSuper1, digitoSuper2, digitoSuper3, digitoSuper4, zodiacoSigno,
+										valorDeLaApuestaSuper);
+								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
+								String option4 = con.readWholeLine();
+								if (option4.equalsIgnoreCase("si")) {
+									con.quemarLinea();
+									break menuJuegos;
+								} else {
+									con.printWithNewLine("Juego/s creado con éxito");
+								}
+								break;
+
+							case 3:
+								con.printWithNewLine("bienveido a la loteria");
+
+								con.printWithNewLine("ingrese el primer digito");
+								String digitoLoteria1 = con.readWholeLine();
+								con.printWithNewLine("ingrese el segundo digito");
+								String digitoLoteria2 = con.readWholeLine();
+								con.printWithNewLine("ingrese el tercer digito");
+								String digitoLoteria3 = con.readWholeLine();
+								con.printWithNewLine("digite el cuarto digito");
+								String digitoLoteria4 = con.readWholeLine();
+								con.printWithNewLine("digite el primer numero de serie");
+								String serieDig1 = con.readWholeLine();
+								con.printWithNewLine("sigite el segundo digito de serie");
+								String serieDig2 = con.readWholeLine();
+								con.printWithNewLine("sigite el tercer digito de serie");
+								String serieDig3 = con.readWholeLine();
+								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
+								String valorDeLaApuestaLoteria = con.readWholeLine();
+								loteDao.create(digitoLoteria1, digitoLoteria2, digitoLoteria3, digitoLoteria4,
+										serieDig1, serieDig2, serieDig3, valorDeLaApuestaLoteria);
+
+								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
+								String option5 = con.readWholeLine();
+
+								if (option5.equalsIgnoreCase("si")) {
+									con.quemarLinea();
+									break menuJuegos;
+								} else {
+									con.printWithNewLine("Juego/s creado con éxito");
+								}
+								break;
+
+							case 4:
+								con.printWithNewLine("bievenido a betplay");
+
+								con.printWithNewLine("ingrese el nombre del equipo local ");
+								String nombreEquipoLocal = con.readWholeLine();
+								con.printWithNewLine("digite el marcador del equipo local");
+								String marcadorLocal = con.readWholeLine();
+								con.printWithNewLine("ingrese el nombre del equipo visitante");
+								String nombreEquipoVisitante = con.readWholeLine();
+								con.printWithNewLine("digite el marcador del equipo visitante");
+								String marcadorVisitante = con.readWholeLine();
+								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
+								String valorDeLaApuestabetplay = con.readWholeLine();
+
+								betDao.create(nombreEquipoLocal, marcadorLocal, nombreEquipoVisitante,
+										marcadorVisitante, valorDeLaApuestabetplay);
+
+								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
+								String option6 = con.readWholeLine();
+
+								if (option6.equalsIgnoreCase("si")) {
+									con.quemarLinea();
+									break menuJuegos;
+								} else {
+									con.printWithNewLine("Juego/s creado con éxito");
+								}
+								break;
+
+							case 5:
+
+								con.printWithNewLine("bievenido a chance ");
+
+								con.printWithNewLine("ingrese el primer digito");
+								String digito1Chance = con.readWholeLine();
+								con.printWithNewLine("ingrese el segundo digito");
+								String digito2Chance = con.readWholeLine();
+								con.printWithNewLine("digite el tercer digito");
+								String digito3Chance = con.readWholeLine();
+								con.printWithNewLine("digite el cuarto digito ");
+								String digito4Chance = con.readWholeLine();
+								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
+								String valorDeLaApuestaChance = con.readWholeLine();
+
+								chanDao.create(digito1Chance, digito2Chance, digito3Chance, digito4Chance,
+										valorDeLaApuestaChance);
+
+								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
+								String option7 = con.readWholeLine();
+
+								if (option7.equalsIgnoreCase("si")) {
+									con.quemarLinea();
+									break menuJuegos;
+								} else {
+									con.printWithNewLine("Juego/s creado con éxito");
+								}
+
+							}
+							break cicloModulo4;
+
+						}
+					}
+				}
 
 			case 5:
 
@@ -315,6 +512,12 @@ public class Controller implements ActionListener {
 						con.printWithNewLine(sedeDao.read());
 
 						break;
+
+					case 6:
+
+						con.printWithNewLine(jueDao.read());
+
+						break cicloModulo5;
 
 					}
 				}

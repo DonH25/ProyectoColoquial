@@ -20,6 +20,7 @@ import co.edu.unbosque.model.GestionApuestaDTO;
 public class GestionApuestaDAO implements CRUDOperation {
 	private ArrayList<GestionApuestaDTO> listOfGestionApuesta;
 	final String SERIAL_FILENAME = "apuesta.dat";
+
 	int index = 0;
 
 	/**
