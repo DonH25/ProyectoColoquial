@@ -96,13 +96,13 @@ public class JuegoDAO implements CRUDOperation {
 	}
 
 	
-	public ArrayList<JuegoDTO> getListOfLocations() {
+	public ArrayList<JuegoDTO> getListOfJuego() {
 		return listOfJuego;
 	}
 
 	
-	public void setListOfLocations(ArrayList<JuegoDTO> listOfBalotos) {
-		this.listOfJuego = listOfBalotos;
+	public void setListOfJuego(ArrayList<JuegoDTO> listOfJuego) {
+		this.listOfJuego = listOfJuego;
 	}
 
 	

@@ -110,12 +110,12 @@ public class CasaDeApuestasDAO implements CRUDOperation {
 		FileHandler.serializableOpenAndWriteFile(SERIAL_FILENAME, listOfCasa);
 	}
 
-	public ArrayList<CasaDeApuestasDTO> getListOfLocations() {
+	public ArrayList<CasaDeApuestasDTO> getListOfCasa() {
 		return listOfCasa;
 	}
 
-	public void setListOfLocations(ArrayList<CasaDeApuestasDTO> listOfBalotos) {
-		this.listOfCasa = listOfBalotos;
+	public void setListOfCasa(ArrayList<CasaDeApuestasDTO> listOfCasa) {
+		this.listOfCasa = listOfCasa;
 	}
 
 	public int getIndex() {

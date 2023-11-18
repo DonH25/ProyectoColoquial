@@ -35,7 +35,8 @@ public class GestionApuestaDAO implements CRUDOperation {
 				ArrayList<GestionApuestaDTO> temp2 = (ArrayList<GestionApuestaDTO>) temp;
 				listOfGestionApuesta = temp2;
 			} else {
-				System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de la Gestion de apuesta.");
+				System.out
+						.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de la Gestion de apuesta.");
 			}
 		} else {
 			listOfGestionApuesta = new ArrayList<>();
@@ -161,7 +162,7 @@ public class GestionApuestaDAO implements CRUDOperation {
 	 *
 	 * @param listOfBets Lista de apuestas.
 	 */
-	public void setListOfBets(ArrayList<GestionApuestaDTO> listOfGestionApuesta) {
+	public void setListOfGestionApuesta(ArrayList<GestionApuestaDTO> listOfGestionApuesta) {
 		this.listOfGestionApuesta = listOfGestionApuesta;
 	}
 

@@ -125,7 +125,7 @@ public class ChanceDAO implements CRUDOperation {
 	 *
 	 * @return Lista de sedes de casas de apuestas.
 	 */
-	public ArrayList<ChanceDTO> getListOfLocations() {
+	public ArrayList<ChanceDTO> getListOfChances() {
 		return listOfChances;
 	}
 
@@ -134,8 +134,8 @@ public class ChanceDAO implements CRUDOperation {
 	 *
 	 * @param listOfLocations Lista de sedes de casas de apuestas.
 	 */
-	public void setListOfLocations(ArrayList<ChanceDTO> listOfBalotos) {
-		this.listOfChances = listOfBalotos;
+	public void setListOfChances(ArrayList<ChanceDTO> listOfChances) {
+		this.listOfChances = listOfChances;
 	}
 
 	/**

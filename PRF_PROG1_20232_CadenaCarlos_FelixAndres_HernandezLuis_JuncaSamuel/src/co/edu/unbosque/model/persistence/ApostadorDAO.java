@@ -134,7 +134,7 @@ public class ApostadorDAO implements CRUDOperation {
 	 *
 	 * @return Lista de sedes de casas de apuestas.
 	 */
-	public ArrayList<ApostadorDTO> getListOfLocations() {
+	public ArrayList<ApostadorDTO> getListOfApostadores() {
 		return listOfApostadores;
 	}
 
@@ -143,8 +143,8 @@ public class ApostadorDAO implements CRUDOperation {
 	 *
 	 * @param listOfLocations Lista de sedes de casas de apuestas.
 	 */
-	public void setListOfLocations(ArrayList<ApostadorDTO> listOfLocations) {
-		this.listOfApostadores = listOfLocations;
+	public void setListOfApostadores(ArrayList<ApostadorDTO> listOfApostadores) {
+		this.listOfApostadores = listOfApostadores;
 	}
 
 	/**
