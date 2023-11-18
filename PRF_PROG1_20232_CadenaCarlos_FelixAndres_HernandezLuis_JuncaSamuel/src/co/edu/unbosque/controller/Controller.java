@@ -1,28 +1,39 @@
 package co.edu.unbosque.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
+
 import co.edu.unbosque.model.persistence.ApostadorDAO;
 import co.edu.unbosque.model.persistence.CasaDeApuestasDAO;
+import co.edu.unbosque.model.persistence.CasaDeApuestasProperties;
 import co.edu.unbosque.model.persistence.GestionApuestaDAO;
 import co.edu.unbosque.model.persistence.JuegoDAO;
 import co.edu.unbosque.model.persistence.SedeDAO;
 import co.edu.unbosque.view.Console;
+import co.edu.unbosque.view.VentanaPrincipal;
 
-public class Controller {
+public class Controller implements ActionListener {
 	private Console con;
 	CasaDeApuestasDAO caDao;
 	JuegoDAO jueDao;
 	ApostadorDAO apostDao;
 	SedeDAO sedeDao;
 	GestionApuestaDAO gestApuDao;
+	CasaDeApuestasProperties prop;
+	VentanaPrincipal vp;
 
 	public Controller() {
 		con = new Console();
 		caDao = new CasaDeApuestasDAO();
 		jueDao = new JuegoDAO();
-
+		prop = new CasaDeApuestasProperties();
+		vp = new VentanaPrincipal();
+		agregarLectores();
 	}
 
-	public void run() {
+	public void runPruebaPorConsola() {
 		while (true) {
 			con.printWithNewLine("Seleccione la opcion que quiere realizar ");
 			con.printWithNewLine("1: Modulo 1");
@@ -57,40 +68,47 @@ public class Controller {
 							con.printWithNewLine("Insertar el presupuesto total de la casa de apuestas ");
 							String preTotal = con.readWholeLine();
 							caDao.create(nombre, sedes, preTotal);
-							con.printWithNewLine("Ahora se van a crear los juegos de la casa de apuestas");
-							con.printWithNewLine("Juego#1 Baloto");
-							String juego1name = "Baloto";
-							String juego1tipo = "Loteria";
-							con.printWithNewLine("Inserte el presupuesto del juego");
-							String presu1 = con.readWholeLine();
-							jueDao.create(juego1name, juego1tipo, presu1);
-							con.printWithNewLine("Juego#2 Loteria");
-							String juego2name = "Loteria";
-							String juego2tipo = "Loteria";
-							con.printWithNewLine("Inserte el presupuesto del juego");
-							String presu2 = con.readWholeLine();
-							jueDao.create(juego2name, juego2tipo, presu2);
-							con.printWithNewLine("Juego#3 Chance");
-							String juego3name = "Chance";
-							String juego3tipo = "Chance";
-							con.printWithNewLine("Inserte el presupuesto del juego");
-							String presu3 = con.readWholeLine();
-							jueDao.create(juego3name, juego3tipo, presu3);
-							con.printWithNewLine("Juego#4 Superastro");
-							String juego4name = "Superastro";
-							String juego4tipo = "Loteria";
-							con.printWithNewLine("Inserte el presupuesto del juego");
-							String presu4 = con.readWholeLine();
-							jueDao.create(juego4name, juego4tipo, presu4);
-							con.printWithNewLine("Juego#5 Betplay");
-							String juego5name = "Betplay";
-							String juego5tipo = "Deportivo";
-							con.printWithNewLine("Inserte el presupuesto del juego");
-							String presu5 = con.readWholeLine();
-							jueDao.create(juego5name, juego5tipo, presu5);
-							break;
-						}
+							if (jueDao.juegoExiste()) {
+								con.printWithNewLine("Los Juegos ya estan configurados ");
+								break;
+							} else {
+								
+								con.printWithNewLine("Ahora se van a crear los juegos de la casa de apuestas");
+								con.printWithNewLine("Juego#1 Baloto");
+								String juego1name = "Baloto";
+								String juego1tipo = "Loteria";
+								con.printWithNewLine("Inserte el presupuesto del juego");
+								String presu1 = con.readWholeLine();
+								jueDao.create(juego1name, juego1tipo, presu1);
+								con.printWithNewLine("Juego#2 Loteria");
+								String juego2name = "Loteria";
+								String juego2tipo = "Loteria";
+								con.printWithNewLine("Inserte el presupuesto del juego");
+								String presu2 = con.readWholeLine();
+								jueDao.create(juego2name, juego2tipo, presu2);
+								con.printWithNewLine("Juego#3 Chance");
+								String juego3name = "Chance";
+								String juego3tipo = "Chance";
+								con.printWithNewLine("Inserte el presupuesto del juego");
+								String presu3 = con.readWholeLine();
+								jueDao.create(juego3name, juego3tipo, presu3);
+								con.printWithNewLine("Juego#4 Superastro");
+								String juego4name = "Superastro";
+								String juego4tipo = "Loteria";
+								con.printWithNewLine("Inserte el presupuesto del juego");
+								String presu4 = con.readWholeLine();
+								jueDao.create(juego4name, juego4tipo, presu4);
+								con.printWithNewLine("Juego#5 Betplay");
+								String juego5name = "Betplay";
+								String juego5tipo = "Deportivo";
+								con.printWithNewLine("Inserte el presupuesto del juego");
+								String presu5 = con.readWholeLine();
+								jueDao.create(juego5name, juego5tipo, presu5);
+								prop.inicializarProperties();
+								break;
+							}
 
+						}
 					}
 					case 2: {
 						int pos = 0;
@@ -284,18 +302,18 @@ public class Controller {
 						break;
 
 					case 3:
-						
+
 						break;
-						
+
 					case 4:
-						
+
 						con.printWithNewLine(apostDao.read());
 						break;
-						
+
 					case 5:
-						
+
 						con.printWithNewLine(sedeDao.read());
-						
+
 						break;
 
 					}
@@ -303,6 +321,34 @@ public class Controller {
 			}
 		}
 	}
+
+	public void run() {
+		vp.setVisible(true);
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		switch (e.getActionCommand()) {
+		case "ing": {
+			
+			break;
+		}
+		case "sal": {
+			JOptionPane.showMessageDialog(vp, "Gracias Por usar el programa");
+			vp.dispose();
+			break;
+		}
+		}
+
+	}
+
+	public void agregarLectores() {
+		vp.getPanel().getBotonIng().addActionListener(this);
+		vp.getPanel().getBotonIng().setActionCommand("ing");
+		vp.getPanel().getBotonSalir().addActionListener(this);
+		vp.getPanel().getBotonSalir().setActionCommand("sal");
+
+	}
+
 }
-
-

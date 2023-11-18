@@ -12,19 +12,19 @@ public class CasaDeApuestasProperties {
 	private String sedes;
 	private String presupuestoTotal;
 	private String file;
-	private Properties properties;
+	private Properties prop;
 
 	public CasaDeApuestasProperties() {
-		properties = new Properties();
+		prop = new Properties();
 		file = "src/co/edu/unbosque/model/persistence/config.properties";
 	}
 
 	public int escribirProperties(String nombre, String sedes, String presupuestoTotal) {
 		try {
-			properties.setProperty("Nombre Casa De Apuestas: ", nombre);
-			properties.setProperty("Cantidad de sedes de la Casa: ", sedes);
-			properties.setProperty("presupuesto Total de la Casa: ", presupuestoTotal);
-			properties.store(new FileOutputStream(file), null);
+			prop.setProperty("NombreCasaDeApuestas:", nombre);
+			prop.setProperty("CantidadDeSedesDeLaCasa:", sedes);
+			prop.setProperty("presupuestoTotalCasa:", presupuestoTotal);
+			prop.store(new FileOutputStream(file), null);
 		} catch (IOException ex) {
 			return -1;
 		}
@@ -33,11 +33,11 @@ public class CasaDeApuestasProperties {
 
 	public int modificarProperties(String nombre, String sedes, String presupuestoTotal) {
 		try {
-			properties.load(new FileInputStream(file));
-			properties.setProperty("Nombre Casa De Apuestas: ", nombre);
-			properties.setProperty("Cantidad de sedes de la Casa: ", sedes);
-			properties.setProperty("presupuesto Total de la Casa: ", presupuestoTotal);
-			properties.store(new FileOutputStream(file), null);
+			prop.load(new FileInputStream(file));
+			prop.setProperty("NombreCasaDeApuestas: ", nombre);
+			prop.setProperty("CantidadDeSedesDeLaCasa: ", sedes);
+			prop.setProperty("presupuestoTotalCasa: ", presupuestoTotal);
+			prop.store(new FileOutputStream(file), null);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return -1;
@@ -50,10 +50,10 @@ public class CasaDeApuestasProperties {
 
 	public int inicializarProperties() {
 		try {
-			properties.load(new FileInputStream(file));
-			properties.setProperty("Nombre Casa De Apuestas: ", nombre);
-			properties.setProperty("Cantidad de sedes de la Casa: ", sedes);
-			properties.setProperty("presupuesto Total de la Casa: ", presupuestoTotal);
+			prop.load(new FileInputStream(file));
+			prop.setProperty("NombreCasaDeApuestas: ", nombre);
+			prop.setProperty("CantidadDeSedesDeLaCasa: ", sedes);
+			prop.setProperty("presupuestoTotalCasa: ", presupuestoTotal);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return -1;

@@ -38,4 +38,28 @@ public class VentanaPrincipal extends JFrame {
 
 	}
 
+	public LogoRoyal getLogo() {
+		return logo;
+	}
+
+	public void setLogo(LogoRoyal logo) {
+		this.logo = logo;
+	}
+
+	public Fondo getFondo() {
+		return fondo;
+	}
+
+	public void setFondo(Fondo fondo) {
+		this.fondo = fondo;
+	}
+
+	public PanelPrincipal getPanel() {
+		return panel;
+	}
+
+	public void setPanel(PanelPrincipal panel) {
+		this.panel = panel;
+	}
+
 }
