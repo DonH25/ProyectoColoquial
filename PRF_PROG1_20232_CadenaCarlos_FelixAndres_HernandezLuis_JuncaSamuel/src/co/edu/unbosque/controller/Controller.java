@@ -9,8 +9,11 @@ import co.edu.unbosque.model.persistence.ApostadorDAO;
 import co.edu.unbosque.model.persistence.BalotoDAO;
 import co.edu.unbosque.model.persistence.BetplayDAO;
 import co.edu.unbosque.model.persistence.CasaDeApuestasDAO;
+
 import co.edu.unbosque.model.persistence.CasaDeApuestasProperties;
+
 import co.edu.unbosque.model.persistence.ChanceDAO;
+
 import co.edu.unbosque.model.persistence.GestionApuestaDAO;
 import co.edu.unbosque.model.persistence.JuegoDAO;
 import co.edu.unbosque.model.persistence.LoteriaDAO;
@@ -26,6 +29,7 @@ public class Controller implements ActionListener {
 	ApostadorDAO apostDao;
 	SedeDAO sedeDao;
 	GestionApuestaDAO gestApuDao;
+
 	CasaDeApuestasProperties prop;
 	VentanaPrincipal vp;
 
@@ -285,7 +289,7 @@ public class Controller implements ActionListener {
 					con.printWithNewLine("1: para crear una apuesta");
 					con.printWithNewLine("2: para leer las apuestas");
 					con.printWithNewLine("3: para  actualizar los datos de las apuestas");
-					con.printWithNewLine("4: para  borrar alguna apuesta");
+					con.printWithNewLine("3: para  borrar alguna apuesta");
 
 					int option = con.readInt();
 					con.quemarLinea();
