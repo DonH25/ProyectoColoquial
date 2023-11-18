@@ -4,23 +4,11 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model.CasaDeApuestasDTO;
 
-/**
- * Clase que representa un DAO (Data Access Object) para gestionar la
- * persistencia de datos de sedes de casas de apuestas. Implementa la interfaz
- * CRUDOperation para realizar operaciones de creación, lectura, actualización y
- * eliminación de datos de sedes de casas de apuestas.
- * 
- * @see CRUDOperation
- */
 public class CasaDeApuestasDAO implements CRUDOperation {
 	ArrayList<CasaDeApuestasDTO> listOfCasa;
 	final String SERIAL_FILENAME = "casadeapuestas.dat";
 	int index = 0;
 
-	/**
-	 * Constructor de SedeCasaDeApuestasDAO que inicializa la lista de sedes de
-	 * casas de apuestas.
-	 */
 	public CasaDeApuestasDAO() {
 		listOfCasa = new ArrayList<CasaDeApuestasDTO>();
 
@@ -40,12 +28,12 @@ public class CasaDeApuestasDAO implements CRUDOperation {
 
 	@Override
 	public void create(String... args) {
-		CasaDeApuestasDTO site = new CasaDeApuestasDTO();
-		site.setNombre(args[0]);
-		site.setNumeroDeSedes(Integer.parseInt(args[1]));
-		site.setPresupuestoTotal(Double.parseDouble(args[2]));
+		CasaDeApuestasDTO casas = new CasaDeApuestasDTO();
+		casas.setNombre(args[0]);
+		casas.setNumeroDeSedes(Integer.parseInt(args[1]));
+		casas.setPresupuestoTotal(Double.parseDouble(args[2]));
 
-		listOfCasa.add(site);
+		listOfCasa.add(casas);
 		writeDataSerializable();
 	}
 
@@ -118,55 +106,26 @@ public class CasaDeApuestasDAO implements CRUDOperation {
 
 	}
 
-	/**
-	 * Escribe los datos de la lista de sedes de casas de apuestas en un archivo
-	 * serializado.
-	 */
 	public void writeDataSerializable() {
 		FileHandler.serializableOpenAndWriteFile(SERIAL_FILENAME, listOfCasa);
 	}
 
-	/**
-	 * Obtiene la lista de sedes de casas de apuestas.
-	 *
-	 * @return Lista de sedes de casas de apuestas.
-	 */
 	public ArrayList<CasaDeApuestasDTO> getListOfLocations() {
 		return listOfCasa;
 	}
 
-	/**
-	 * Establece la lista de sedes de casas de apuestas.
-	 *
-	 * @param listOfLocations Lista de sedes de casas de apuestas.
-	 */
 	public void setListOfLocations(ArrayList<CasaDeApuestasDTO> listOfBalotos) {
 		this.listOfCasa = listOfBalotos;
 	}
 
-	/**
-	 * Obtiene el índice actual.
-	 *
-	 * @return Índice actual.
-	 */
 	public int getIndex() {
 		return index;
 	}
 
-	/**
-	 * Establece el índice actual.
-	 *
-	 * @param index Índice actual.
-	 */
 	public void setIndex(int index) {
 		this.index = index;
 	}
 
-	/**
-	 * Obtiene el nombre del archivo serializado.
-	 *
-	 * @return Nombre del archivo serializado.
-	 */
 	public String getSERIAL_FILENAME() {
 		return SERIAL_FILENAME;
 	}

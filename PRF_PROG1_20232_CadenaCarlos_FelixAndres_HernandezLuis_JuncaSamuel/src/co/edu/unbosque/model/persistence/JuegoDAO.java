@@ -6,22 +6,11 @@ import co.edu.unbosque.model.JuegoDTO;
 
 public class JuegoDAO implements CRUDOperation {
 
-	/**
-	 * Clase que representa un DAO (Data Access Object) para gestionar la
-	 * persistencia de datos de sedes de casas de apuestas. Implementa la interfaz
-	 * CRUDOperation para realizar operaciones de creación, lectura, actualización y
-	 * eliminación de datos de sedes de casas de apuestas.
-	 * 
-	 * @see CRUDOperation
-	 */
 	ArrayList<JuegoDTO> listOfJuego;
 	final String SERIAL_FILENAME = "juegos.dat";
 	int index = 0;
 
-	/**
-	 * Constructor de JuegoDTO que inicializa la lista de sedes de casas de
-	 * apuestas.
-	 */
+	
 	public JuegoDAO() {
 		listOfJuego = new ArrayList<JuegoDTO>();
 
@@ -101,55 +90,31 @@ public class JuegoDAO implements CRUDOperation {
 		}
 	}
 
-	/**
-	 * Escribe los datos de la lista de sedes de casas de apuestas en un archivo
-	 * serializado.
-	 */
+	
 	public void writeDataSerializable() {
 		FileHandler.serializableOpenAndWriteFile(SERIAL_FILENAME, listOfJuego);
 	}
 
-	/**
-	 * Obtiene la lista de sedes de casas de apuestas.
-	 *
-	 * @return Lista de sedes de casas de apuestas.
-	 */
+	
 	public ArrayList<JuegoDTO> getListOfLocations() {
 		return listOfJuego;
 	}
 
-	/**
-	 * Establece la lista de sedes de casas de apuestas.
-	 *
-	 * @param listOfLocations Lista de sedes de casas de apuestas.
-	 */
+	
 	public void setListOfLocations(ArrayList<JuegoDTO> listOfBalotos) {
 		this.listOfJuego = listOfBalotos;
 	}
 
-	/**
-	 * Obtiene el índice actual.
-	 *
-	 * @return Índice actual.
-	 */
+	
 	public int getIndex() {
 		return index;
 	}
 
-	/**
-	 * Establece el índice actual.
-	 *
-	 * @param index Índice actual.
-	 */
+	
 	public void setIndex(int index) {
 		this.index = index;
 	}
 
-	/**
-	 * Obtiene el nombre del archivo serializado.
-	 *
-	 * @return Nombre del archivo serializado.
-	 */
 	public String getSERIAL_FILENAME() {
 		return SERIAL_FILENAME;
 	}
