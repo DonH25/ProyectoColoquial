@@ -9,11 +9,8 @@ import co.edu.unbosque.model.persistence.ApostadorDAO;
 import co.edu.unbosque.model.persistence.BalotoDAO;
 import co.edu.unbosque.model.persistence.BetplayDAO;
 import co.edu.unbosque.model.persistence.CasaDeApuestasDAO;
-<<<<<<< Updated upstream
 import co.edu.unbosque.model.persistence.CasaDeApuestasProperties;
-=======
 import co.edu.unbosque.model.persistence.ChanceDAO;
->>>>>>> Stashed changes
 import co.edu.unbosque.model.persistence.GestionApuestaDAO;
 import co.edu.unbosque.model.persistence.JuegoDAO;
 import co.edu.unbosque.model.persistence.LoteriaDAO;
@@ -29,16 +26,14 @@ public class Controller implements ActionListener {
 	ApostadorDAO apostDao;
 	SedeDAO sedeDao;
 	GestionApuestaDAO gestApuDao;
-<<<<<<< Updated upstream
 	CasaDeApuestasProperties prop;
 	VentanaPrincipal vp;
-=======
+
 	BalotoDAO balotDao;
 	SuperastroDAO superDao;
 	ChanceDAO chanDao;
 	LoteriaDAO loteDao;
 	BetplayDAO betDao;
->>>>>>> Stashed changes
 
 	public Controller() {
 		con = new Console();
@@ -88,7 +83,7 @@ public class Controller implements ActionListener {
 								con.printWithNewLine("Los Juegos ya estan configurados ");
 								break;
 							} else {
-								
+
 								con.printWithNewLine("Ahora se van a crear los juegos de la casa de apuestas");
 								con.printWithNewLine("Juego#1 Baloto");
 								String juego1name = "Baloto";
@@ -290,7 +285,7 @@ public class Controller implements ActionListener {
 					con.printWithNewLine("1: para crear una apuesta");
 					con.printWithNewLine("2: para leer las apuestas");
 					con.printWithNewLine("3: para  actualizar los datos de las apuestas");
-					con.printWithNewLine("3: para  borrar alguna apuesta");
+					con.printWithNewLine("4: para  borrar alguna apuesta");
 
 					int option = con.readInt();
 					con.quemarLinea();
@@ -534,7 +529,7 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "ing": {
-			
+
 			break;
 		}
 		case "sal": {
