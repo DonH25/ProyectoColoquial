@@ -141,7 +141,7 @@ public class LoteriaDAO implements CRUDOperation {
 		 *
 		 * @return Lista de sedes de casas de apuestas.
 		 */
-		public ArrayList<LoteriaDTO> getListOfLocations() {
+		public ArrayList<LoteriaDTO> getListOfLoteria() {
 			return listOfLoteria;
 		}
 
@@ -150,8 +150,8 @@ public class LoteriaDAO implements CRUDOperation {
 		 *
 		 * @param listOfLocations Lista de sedes de casas de apuestas.
 		 */
-		public void setListOfLocations(ArrayList<LoteriaDTO> listOfBalotos) {
-			this.listOfLoteria = listOfBalotos;
+		public void setListOfLoteria(ArrayList<LoteriaDTO> listOfLoteria) {
+			this.listOfLoteria = listOfLoteria;
 		}
 
 		/**

@@ -102,8 +102,8 @@ public class SedeDAO implements CRUDOperation {
 		return listOfSedes;
 	}
 
-	public void setListOfSedes(ArrayList<SedeDTO> listOfBalotos) {
-		this.listOfSedes = listOfBalotos;
+	public void setListOfSedes(ArrayList<SedeDTO> listOfSedes) {
+		this.listOfSedes = listOfSedes;
 	}
 
 	public int getIndex() {

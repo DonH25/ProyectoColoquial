@@ -18,8 +18,8 @@ public class BalotoDAO implements CRUDOperation {
 	int index = 0;
 
 	/**
-	 * Constructor de BalotoDAO que inicializa la lista de sedes de
-	 * casas de apuestas.
+	 * Constructor de BalotoDAO que inicializa la lista de sedes de casas de
+	 * apuestas.
 	 */
 	public BalotoDAO() {
 		listOfBalotos = new ArrayList<BalotoDTO>();
@@ -134,7 +134,7 @@ public class BalotoDAO implements CRUDOperation {
 	 *
 	 * @return Lista de sedes de casas de apuestas.
 	 */
-	public ArrayList<BalotoDTO> getListOfLocations() {
+	public ArrayList<BalotoDTO> getListOfBalotos() {
 		return listOfBalotos;
 	}
 
@@ -143,7 +143,7 @@ public class BalotoDAO implements CRUDOperation {
 	 *
 	 * @param listOfLocations Lista de sedes de casas de apuestas.
 	 */
-	public void setListOfLocations(ArrayList<BalotoDTO> listOfBalotos) {
+	public void setListOfBalotos(ArrayList<BalotoDTO> listOfBalotos) {
 		this.listOfBalotos = listOfBalotos;
 	}
 

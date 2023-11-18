@@ -117,7 +117,7 @@ public class BetplayDAO implements CRUDOperation {
 	 *
 	 * @return Lista de sedes de casas de apuestas.
 	 */
-	public ArrayList<BetplayDTO> getListOfLocations() {
+	public ArrayList<BetplayDTO> getListOfBetplays() {
 		return listOfBetplays;
 	}
 
@@ -126,8 +126,8 @@ public class BetplayDAO implements CRUDOperation {
 	 *
 	 * @param listOfLocations Lista de sedes de casas de apuestas.
 	 */
-	public void setListOfLocations(ArrayList<BetplayDTO> listOfBalotos) {
-		this.listOfBetplays = listOfBalotos;
+	public void setListOfBetplays(ArrayList<BetplayDTO> listOfBetplays) {
+		this.listOfBetplays = listOfBetplays;
 	}
 
 	/**

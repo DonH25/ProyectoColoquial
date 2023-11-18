@@ -131,7 +131,7 @@ public class SuperastroDAO implements CRUDOperation {
 	 *
 	 * @return Lista de sedes de casas de apuestas.
 	 */
-	public ArrayList<SuperastroDTO> getListOfLocations() {
+	public ArrayList<SuperastroDTO> getListOfSuperastro() {
 		return listOfSuperastro;
 	}
 
@@ -140,8 +140,8 @@ public class SuperastroDAO implements CRUDOperation {
 	 *
 	 * @param listOfLocations Lista de sedes de casas de apuestas.
 	 */
-	public void setListOfLocations(ArrayList<SuperastroDTO> listOfBalotos) {
-		this.listOfSuperastro = listOfBalotos;
+	public void setListOfSuperastro(ArrayList<SuperastroDTO> listOfSuperastro) {
+		this.listOfSuperastro = listOfSuperastro;
 	}
 
 	/**
