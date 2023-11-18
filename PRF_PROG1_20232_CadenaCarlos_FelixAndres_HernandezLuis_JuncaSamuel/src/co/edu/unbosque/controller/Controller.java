@@ -2,7 +2,9 @@ package co.edu.unbosque.controller;
 
 import co.edu.unbosque.model.persistence.ApostadorDAO;
 import co.edu.unbosque.model.persistence.CasaDeApuestasDAO;
+import co.edu.unbosque.model.persistence.GestionApuestaDAO;
 import co.edu.unbosque.model.persistence.JuegoDAO;
+import co.edu.unbosque.model.persistence.SedeDAO;
 import co.edu.unbosque.view.Console;
 
 public class Controller {
@@ -10,6 +12,8 @@ public class Controller {
 	CasaDeApuestasDAO caDao;
 	JuegoDAO jueDao;
 	ApostadorDAO apostDao;
+	SedeDAO sedeDao;
+	GestionApuestaDAO gestApuDao;
 
 	public Controller() {
 		con = new Console();
@@ -147,7 +151,7 @@ public class Controller {
 					int option = con.readInt();
 					con.quemarLinea();
 					switch (option) {
-					case 1: { 
+					case 1: {
 						con.printWithNewLine("ingrese su nombre de apostador");
 						String nombreApost = con.readWholeLine();
 						con.printWithNewLine("ingrese su cedula (solo seran admitidos mayores de edad)");
@@ -240,6 +244,59 @@ public class Controller {
 					}
 					default:
 						con.printWithNewLine("noks ");
+						break;
+					}
+				}
+			case 4:
+				System.out.println("case 4 de prueba gg");
+
+				break;
+
+			case 5:
+
+				cicloModulo5: while (true) {
+
+					con.printWithNewLine("Bienvenido al modulo de consultas porfavor elija una opcion");
+
+					con.printWithNewLine("1: listado de clietes por las sedes sede");
+
+					con.printWithNewLine("2: ver el valor total de apuestas reaizadas por los clientes");
+
+					con.printWithNewLine("3: mostrar los detalles de las apuestas realizadas por cliente");
+
+					con.printWithNewLine("4: mostrar los detalles de las apuestas realizadas por sede");
+
+					con.printWithNewLine("5: mostrar el total de las inversiones hechas por sede ");
+
+					con.printWithNewLine("6: mostrar el total de las inversiones hechas por juego ");
+					int option = con.readInt();
+					con.quemarLinea();
+					switch (option) {
+
+					case 1:
+
+						con.printWithNewLine(sedeDao.read());
+						break;
+
+					case 2:
+
+						con.printWithNewLine(gestApuDao.read());
+						break;
+
+					case 3:
+						
+						break;
+						
+					case 4:
+						
+						con.printWithNewLine(apostDao.read());
+						break;
+						
+					case 5:
+						
+						con.printWithNewLine(sedeDao.read());
+						
+						break;
 
 					}
 				}
@@ -247,3 +304,5 @@ public class Controller {
 		}
 	}
 }
+
+

@@ -12,73 +12,83 @@ public class ChanceDTO extends JuegoDTO implements Serializable {
 	private int digito2;
 	private int digito3;
 	private int digito4;
+	private double valorDeLaApuesta;
+	
 	public ChanceDTO() {
 		// TODO Auto-generated constructor stub
 	}
-	public ChanceDTO(int digito1, int digito2, int digito3, int digito4) {
+	public ChanceDTO(int digito1, int digito2, int digito3, int digito4, double valorDeLaApuesta) {
 		super();
 		this.digito1 = digito1;
 		this.digito2 = digito2;
 		this.digito3 = digito3;
 		this.digito4 = digito4;
+		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 	public ChanceDTO(String nombreJuego, String tipoDejuego, double presupuestoDelJuego, int digito1, int digito2,
-			int digito3, int digito4) {
+			int digito3, int digito4, double valorDeLaApuesta) {
 		super(nombreJuego, tipoDejuego, presupuestoDelJuego);
 		this.digito1 = digito1;
 		this.digito2 = digito2;
 		this.digito3 = digito3;
 		this.digito4 = digito4;
+		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 	public ChanceDTO(String direccion, String barrio, String localidad, long numEmpleados, String nombreJuego,
-			String tipoDejuego, double presupuestoDelJuego, int digito1, int digito2, int digito3, int digito4) {
+			String tipoDejuego, double presupuestoDelJuego, int digito1, int digito2, int digito3, int digito4, double valorDeLaApuesta) {
 		super(direccion, barrio, localidad, numEmpleados, nombreJuego, tipoDejuego, presupuestoDelJuego);
 		this.digito1 = digito1;
 		this.digito2 = digito2;
 		this.digito3 = digito3;
 		this.digito4 = digito4;
+		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 	public ChanceDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
 			String localidad, long numEmpleados, String nombreJuego, String tipoDejuego, double presupuestoDelJuego,
-			int digito1, int digito2, int digito3, int digito4) {
+			int digito1, int digito2, int digito3, int digito4, double valorDeLaApuesta) {
 		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados, nombreJuego,
 				tipoDejuego, presupuestoDelJuego);
 		this.digito1 = digito1;
 		this.digito2 = digito2;
 		this.digito3 = digito3;
 		this.digito4 = digito4;
+		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 	public ChanceDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String nombreJuego, String tipoDejuego,
-			double presupuestoDelJuego, int digito1, int digito2, int digito3, int digito4) {
+			double presupuestoDelJuego, int digito1, int digito2, int digito3, int digito4, double valorDeLaApuesta) {
 		super(nombre, numeroDeSedes, presupuestoTotal, nombreJuego, tipoDejuego, presupuestoDelJuego);
 		this.digito1 = digito1;
 		this.digito2 = digito2;
 		this.digito3 = digito3;
 		this.digito4 = digito4;
+		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 	public ChanceDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, int digito1, int digito2, int digito3, int digito4) {
+			String localidad, long numEmpleados, int digito1, int digito2, int digito3, int digito4, double valorDeLaApuesta) {
 		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados);
 		this.digito1 = digito1;
 		this.digito2 = digito2;
 		this.digito3 = digito3;
 		this.digito4 = digito4;
+		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 	public ChanceDTO(String nombre, int numeroDeSedes, double presupuestoTotal, int digito1, int digito2, int digito3,
-			int digito4) {
+			int digito4, double valorDeLaApuesta) {
 		super(nombre, numeroDeSedes, presupuestoTotal);
 		this.digito1 = digito1;
 		this.digito2 = digito2;
 		this.digito3 = digito3;
 		this.digito4 = digito4;
+		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 	public ChanceDTO(String direccion, String barrio, String localidad, long numEmpleados, int digito1, int digito2,
-			int digito3, int digito4) {
+			int digito3, int digito4, double valorDeLaApuesta) {
 		super(direccion, barrio, localidad, numEmpleados);
 		this.digito1 = digito1;
 		this.digito2 = digito2;
 		this.digito3 = digito3;
 		this.digito4 = digito4;
+		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 	public ChanceDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String nombreJuego, String tipoDejuego,
 			double presupuestoDelJuego) {
