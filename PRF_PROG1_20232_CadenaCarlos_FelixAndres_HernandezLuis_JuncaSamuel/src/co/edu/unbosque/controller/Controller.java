@@ -19,8 +19,11 @@ import co.edu.unbosque.model.persistence.JuegoDAO;
 import co.edu.unbosque.model.persistence.LoteriaDAO;
 import co.edu.unbosque.model.persistence.SedeDAO;
 import co.edu.unbosque.model.persistence.SuperastroDAO;
+import co.edu.unbosque.util.ExcepcionMayoriaEdad;
 import co.edu.unbosque.util.ExcepcionNumeroLoteria;
+import co.edu.unbosque.util.ExcepcionNumeroSede;
 import co.edu.unbosque.util.ExcepcionNumeroSuperastro;
+import co.edu.unbosque.util.ExcepcionPresupuestoTotal;
 import co.edu.unbosque.util.ExepcionNumeroBaloto;
 import co.edu.unbosque.view.Console;
 import co.edu.unbosque.view.VentanaPrincipal;
@@ -83,12 +86,22 @@ public class Controller implements ActionListener {
 							String nombre = con.readWholeLine();
 							con.printWithNewLine("Insertar el numero de sedes de la casa de apuestas ");
 							String sedes = con.readWholeLine();
+							try {
+								revisarNumeroSede(sedes);
+							} catch (ExcepcionNumeroSede e) {
+								con.printWithNewLine("El numero ingresado no esta entre 1 y 10 o no es entero");
+							}
 							// haceruna excepcion de un maximo de 10 sedes por la casa de apuestas
 							// exception de que el numero no sea negativo
-							// exception deque sean numeros enteros 
+							// exception deque sean numeros enteros
 							con.printWithNewLine("Insertar el presupuesto total de la casa de apuestas ");
-							// exception de que el presupuesto no sea negativo 
+							// exception de que el presupuesto no sea negativo
 							String preTotal = con.readWholeLine();
+							try {
+								revisarNumeroNegativo(preTotal);
+							} catch (ExcepcionPresupuestoTotal e) {
+								con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
+							}
 							caDao.create(nombre, sedes, preTotal);
 							if (jueDao.juegoExiste()) {
 								con.printWithNewLine("Los Juegos ya estan configurados ");
@@ -101,7 +114,12 @@ public class Controller implements ActionListener {
 								String juego1tipo = "Loteria";
 								con.printWithNewLine("Inserte el presupuesto del juego");
 								String presu1 = con.readWholeLine();
-								// exception de que el presupuesto no sea negativo 
+								// exception de que el presupuesto no sea negativo
+								try {
+									revisarNumeroNegativo(presu1);
+								} catch (ExcepcionPresupuestoTotal e) {
+									con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
+								}
 								jueDao.create(juego1name, juego1tipo, presu1);
 								con.printWithNewLine("Juego#2 Loteria");
 								String juego2name = "Loteria";
@@ -109,6 +127,11 @@ public class Controller implements ActionListener {
 								con.printWithNewLine("Inserte el presupuesto del juego");
 								String presu2 = con.readWholeLine();
 								// exception de que el presupuesto no sea negativo
+								try {
+									revisarNumeroNegativo(presu2);
+								} catch (ExcepcionPresupuestoTotal e) {
+									con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
+								}
 								jueDao.create(juego2name, juego2tipo, presu2);
 								con.printWithNewLine("Juego#3 Chance");
 								String juego3name = "Chance";
@@ -116,6 +139,11 @@ public class Controller implements ActionListener {
 								con.printWithNewLine("Inserte el presupuesto del juego");
 								String presu3 = con.readWholeLine();
 								// exception de que el presupuesto no sea negativo
+								try {
+									revisarNumeroNegativo(presu3);
+								} catch (ExcepcionPresupuestoTotal e) {
+									con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
+								}
 								jueDao.create(juego3name, juego3tipo, presu3);
 								con.printWithNewLine("Juego#4 Superastro");
 								String juego4name = "Superastro";
@@ -123,6 +151,11 @@ public class Controller implements ActionListener {
 								con.printWithNewLine("Inserte el presupuesto del juego");
 								String presu4 = con.readWholeLine();
 								// exception de que el presupuesto no sea negativo
+								try {
+									revisarNumeroNegativo(presu4);
+								} catch (ExcepcionPresupuestoTotal e) {
+									con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
+								}
 								jueDao.create(juego4name, juego4tipo, presu4);
 								con.printWithNewLine("Juego#5 Betplay");
 								String juego5name = "Betplay";
@@ -130,6 +163,11 @@ public class Controller implements ActionListener {
 								con.printWithNewLine("Inserte el presupuesto del juego");
 								String presu5 = con.readWholeLine();
 								// exception de que el presupuesto no sea negativo
+								try {
+									revisarNumeroNegativo(presu5);
+								} catch (ExcepcionPresupuestoTotal e) {
+									con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
+								}
 								jueDao.create(juego5name, juego5tipo, presu5);
 								prop.inicializarProperties();
 								break;
@@ -143,11 +181,21 @@ public class Controller implements ActionListener {
 						String Newnombre = con.readWholeLine();
 						con.printWithNewLine("Insertar el nuevo numero de sedes de la casa de apuestas ");
 						String Newsedes = con.readWholeLine();
+						try {
+							revisarNumeroSede(Newsedes);
+						} catch (ExcepcionNumeroSede e) {
+							con.printWithNewLine("El numero de sedes ingresado no esta entre 1 y 10 o no es un numero entero");
+						}
 						// exception de que no sea mayor que 10 sedes
 						// exception de que el numero no sea negativo
-						// exception deque sean numeros enteros 
+						// exception deque sean numeros enteros
 						con.printWithNewLine("Insertar el nuevo presupuesto total de la casa de apuestas ");
 						String NewpreTotal = con.readWholeLine();
+						try {
+							revisarNumeroNegativo(NewpreTotal);
+						} catch (ExcepcionPresupuestoTotal e) {
+							con.printWithNewLine("El presupuesto total no puede ser un numero negativo");
+						}
 						// exception de que el presupuesto no sea negativo
 						caDao.update(pos, Newnombre, Newsedes, NewpreTotal);
 						break;
@@ -159,6 +207,11 @@ public class Controller implements ActionListener {
 						con.quemarLinea();
 						con.printWithNewLine("Inserte el presupuesto actualizado");
 						String pres = con.readWholeLine();
+						try {
+							revisarNumeroNegativo(pres);
+						} catch (ExcepcionPresupuestoTotal e) {
+							con.printWithNewLine("El presupuesto no puede ser negativo");
+						}
 						// exception de que el presupuesto no sea negativo
 						jueDao.update(pos, pres);
 						break;
@@ -212,23 +265,20 @@ public class Controller implements ActionListener {
 						String direccion = con.readWholeLine();
 						con.printWithNewLine("digite su numero de telefono");
 						String numCelular = con.readWholeLine();
-						con.printWithNewLine("Inserte el año en el que usted (o el apostador) nacio");
-						int anioNaci = con.readInt();
-						if (anioNaci > 2005) {
-							con.printWithNewLine(
-									"Usted es menor de edad , no puede apostar segun la ley 643 del 2001 expedida por coljuegos");
-							break;
-						} else if (anioNaci < 1900) {
-							con.printWithNewLine("Es imposible,la persona mas longeva actualmente vive 122 años");
-							break;
-						} else {
-							String anio = Integer.toString(anioNaci);
-							apostDao.create(nombreApost, numCedula, numSede, direccion, numCelular, anio);
-							con.printWithNewLine("perfil de apostador creado");
-							con.quemarLinea();
-// configurar la exception de la mayoria de edad en donde debe estar (util) 
-							break;
+						try {
+							revisarNumeroNegativo(numCelular);
+						} catch (ExcepcionPresupuestoTotal e) {
+							con.printWithNewLine("el numero de celular no pued ser negativo");
 						}
+						con.printWithNewLine("Inserte el año en el que usted (o el apostador) nacio");
+						String anioNaci = con.readWholeLine();
+						try {
+							revisarEdad(anioNaci);
+						} catch (ExcepcionMayoriaEdad e) {
+							con.printWithNewLine("Usted no es mayor de edad");
+						}
+						
+						break;
 					}
 
 					case 2: {
@@ -253,26 +303,18 @@ public class Controller implements ActionListener {
 						String newDireccion = con.readWholeLine();
 						con.printWithNewLine("digite su nuevo numero de telefono");
 						String newNumCelular = con.readWholeLine();
+						try {
+							revisarNumeroNegativo(newNumCelular);
+						} catch (ExcepcionPresupuestoTotal e) {
+							con.printWithNewLine("el numero de celular no pued ser negativo");
+						}
 						// exception de que el numero no sea negativo
 						con.printWithNewLine("Inserte el nuevo año en el que usted (o el apostador) nacio");
-						int anioNaci = con.readInt();
-						if (anioNaci > 2005) {
-							con.printWithNewLine(
-									"Usted es menor de edad , no puede apostar segun la ley 643 del 2001 expedida por coljuegos");
-							break;
-						} else if (anioNaci < 1900) {
-							con.printWithNewLine("Es imposible,la persona mas longeva actualmente  vive 122 años");
-							break;
-						} else {
-							boolean doneUpdate = apostDao.update(index, newNombreApost, newNumCedula, newNumCede,
-									newDireccion, newNumCelular);
-							if (doneUpdate) {
-								con.printWithNewLine("perfil de apostador actualizado");
-							} else {
-								con.printWithNewLine("Error al actualizar");
-							}
-							break;
-
+						String anioNaci = con.readWholeLine();
+						try {
+							revisarEdad(anioNaci);
+						} catch (ExcepcionMayoriaEdad e) {
+							con.printWithNewLine("usted no es mayor de edad");
 						}
 					}
 					case 4:
@@ -381,9 +423,8 @@ public class Controller implements ActionListener {
 								String valorDeLaApuestaBaloto = con.readWholeLine();
 								balotDao.create(digitoBaloto1, digitoBaloto2, digitoBaloto3, digitoBaloto4,
 										digitoBaloto5, digitoBaloto6, valorDeLaApuestaBaloto);
-								// excepcion de que el valor de la apuesta sea un minimo de 20000 
+								// excepcion de que el valor de la apuesta sea un minimo de 20000
 
-						
 								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
 								String option3 = con.readWholeLine();
 								if (option3.equalsIgnoreCase("si")) {
@@ -431,7 +472,7 @@ public class Controller implements ActionListener {
 								String zodiacoSigno = con.readWholeLine();
 								con.printWithNewLine("Inserte el año en el que usted (o el apostador) nacio");
 								String valorDeLaApuestaSuper = con.readWholeLine();
-								// excepcion de que el valor de la apuesta sea un minimo de 20000 
+								// excepcion de que el valor de la apuesta sea un minimo de 20000
 								superDao.create(digitoSuper1, digitoSuper2, digitoSuper3, digitoSuper4, zodiacoSigno,
 										valorDeLaApuestaSuper);
 								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
@@ -446,7 +487,7 @@ public class Controller implements ActionListener {
 
 							case 3:
 								con.printWithNewLine("bienveido a la loteria");
-							
+
 								con.printWithNewLine("ingrese el primer digito");
 								String digitoLoteria1 = con.readWholeLine();
 								try {
@@ -498,7 +539,7 @@ public class Controller implements ActionListener {
 								}
 								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
 								String valorDeLaApuestaLoteria = con.readWholeLine();
-								// excepcion de que el valor de la apuesta sea un minimo de 20000 
+								// excepcion de que el valor de la apuesta sea un minimo de 20000
 								loteDao.create(digitoLoteria1, digitoLoteria2, digitoLoteria3, digitoLoteria4,
 										serieDig1, serieDig2, serieDig3, valorDeLaApuestaLoteria);
 
@@ -526,7 +567,7 @@ public class Controller implements ActionListener {
 								String marcadorVisitante = con.readWholeLine();
 								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
 								String valorDeLaApuestabetplay = con.readWholeLine();
-								// excepcion de que el valor de la apuesta sea un minimo de 20000 
+								// excepcion de que el valor de la apuesta sea un minimo de 20000
 
 								betDao.create(nombreEquipoLocal, marcadorLocal, nombreEquipoVisitante,
 										marcadorVisitante, valorDeLaApuestabetplay);
@@ -556,7 +597,7 @@ public class Controller implements ActionListener {
 								String digito4Chance = con.readWholeLine();
 								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
 								String valorDeLaApuestaChance = con.readWholeLine();
-								// excepcion de que el valor de la apuesta sea un minimo de 20000 
+								// excepcion de que el valor de la apuesta sea un minimo de 20000
 
 								chanDao.create(digito1Chance, digito2Chance, digito3Chance, digito4Chance,
 										valorDeLaApuestaChance);
@@ -683,6 +724,24 @@ public class Controller implements ActionListener {
 	public void revisarUnSoloNumero(String num) throws ExcepcionNumeroLoteria {
 		if (num.length() != 1 || !Character.isDigit(num.charAt(0))) {
 			throw new ExcepcionNumeroLoteria();
+		}
+	}
+
+	public void revisarNumeroSede(String numero) throws ExcepcionNumeroSede {
+		if (Integer.parseInt(numero) < 0 || Integer.parseInt(numero) > 10) {
+			throw new ExcepcionNumeroSede();
+		}
+	}
+	
+	public void revisarNumeroNegativo(String nunero) throws ExcepcionPresupuestoTotal{
+		if (Integer.parseInt(nunero) < 0 ) {
+			throw new ExcepcionPresupuestoTotal();
+		}
+	}
+	
+	public void revisarEdad(String numero) throws ExcepcionMayoriaEdad{
+		if (Integer.parseInt(numero) > 2005 || Integer.parseInt(numero) < 1900) {
+			throw new ExcepcionMayoriaEdad();
 		}
 	}
 }
