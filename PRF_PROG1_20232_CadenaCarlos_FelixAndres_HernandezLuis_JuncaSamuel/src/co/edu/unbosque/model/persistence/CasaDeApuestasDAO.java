@@ -6,24 +6,12 @@ import co.edu.unbosque.model.CasaDeApuestasDTO;
 
 public class CasaDeApuestasDAO implements CRUDOperation {
 	ArrayList<CasaDeApuestasDTO> listOfCasa;
-	final String SERIAL_FILENAME = "casadeapuestas.dat";
 	int index = 0;
+	CasaDeApuestasProperties prop;
 
 	public CasaDeApuestasDAO() {
+		prop = new CasaDeApuestasProperties();
 		listOfCasa = new ArrayList<CasaDeApuestasDTO>();
-
-		if (FileHandler.serializableOpenAndReadFile(SERIAL_FILENAME) != null) {
-			Object temp = FileHandler.serializableOpenAndReadFile(SERIAL_FILENAME);
-
-			if (temp instanceof ArrayList<?>) {
-				ArrayList<CasaDeApuestasDTO> temp2 = (ArrayList<CasaDeApuestasDTO>) temp;
-				listOfCasa = temp2;
-			} else {
-				System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de balotos.");
-			}
-		} else {
-			listOfCasa = new ArrayList<>();
-		}
 	}
 
 	@Override
@@ -32,15 +20,13 @@ public class CasaDeApuestasDAO implements CRUDOperation {
 		casas.setNombre(args[0]);
 		casas.setNumeroDeSedes(Integer.parseInt(args[1]));
 		casas.setPresupuestoTotal(Double.parseDouble(args[2]));
-
 		listOfCasa.add(casas);
-		writeDataSerializable();
+		prop.escribirProperties(args[0], args[1], args[2]);
 	}
 
 	@Override
 	public void create(Object o) {
 		listOfCasa.add((CasaDeApuestasDTO) o);
-		writeDataSerializable();
 	}
 
 	@Override
@@ -69,31 +55,8 @@ public class CasaDeApuestasDAO implements CRUDOperation {
 				listOfCasa.get(index).setPresupuestoTotal(Double.parseDouble(args[2]));
 			}
 		}
-		writeDataSerializable();
+		prop.modificarProperties(args[0], args[1], args[2]);
 		return true;
-	}
-
-	@Override
-	public boolean delete(int index) {
-		if (index < 0 || index >= listOfCasa.size()) {
-			return false;
-		} else {
-			listOfCasa.remove(index);
-			writeDataSerializable();
-			return true;
-		}
-	}
-
-	@Override
-	public boolean delete(Object o) {
-		CasaDeApuestasDTO toDelete = (CasaDeApuestasDTO) o;
-		if (listOfCasa.contains(toDelete)) {
-			listOfCasa.remove(toDelete);
-			writeDataSerializable();
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public boolean casaExiste() {
@@ -104,10 +67,6 @@ public class CasaDeApuestasDAO implements CRUDOperation {
 			return false;
 		}
 
-	}
-
-	public void writeDataSerializable() {
-		FileHandler.serializableOpenAndWriteFile(SERIAL_FILENAME, listOfCasa);
 	}
 
 	public ArrayList<CasaDeApuestasDTO> getListOfCasa() {
@@ -126,8 +85,15 @@ public class CasaDeApuestasDAO implements CRUDOperation {
 		this.index = index;
 	}
 
-	public String getSERIAL_FILENAME() {
-		return SERIAL_FILENAME;
+	@Override
+	public boolean delete(int index) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
+	@Override
+	public boolean delete(Object o) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

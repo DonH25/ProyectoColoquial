@@ -118,5 +118,14 @@ public class JuegoDAO implements CRUDOperation {
 	public String getSERIAL_FILENAME() {
 		return SERIAL_FILENAME;
 	}
+	public boolean juegoExiste() {
+		if (!listOfJuego.isEmpty()) {
+
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 
 }
