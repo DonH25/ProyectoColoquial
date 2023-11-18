@@ -329,7 +329,8 @@ public class Controller implements ActionListener {
 								balotDao.create(digitoBaloto1, digitoBaloto2, digitoBaloto3, digitoBaloto4,
 										digitoBaloto5, digitoBaloto6, valorDeLaApuestaBaloto);
 
-								// error revisar UwUn't
+								// excepciones de no dejar digitos mayores de 45 y menores de 1
+								// y que no deje espacios en blanco
 
 								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
 								String option3 = con.readWholeLine();
@@ -342,7 +343,7 @@ public class Controller implements ActionListener {
 								break;
 							case 2:
 								con.printWithNewLine("bienveido al superastro");
-
+// crear exception de que los digitos sean no mayores que 9 y no menores que 1
 								con.printWithNewLine("ingrese el primer digito");
 								String digitoSuper1 = con.readWholeLine();
 								con.printWithNewLine("ingrese el segundo digito");
@@ -372,7 +373,7 @@ public class Controller implements ActionListener {
 
 							case 3:
 								con.printWithNewLine("bienveido a la loteria");
-
+								// crear exception de que se digite solamente un numero por linea
 								con.printWithNewLine("ingrese el primer digito");
 								String digitoLoteria1 = con.readWholeLine();
 								con.printWithNewLine("ingrese el segundo digito");
@@ -405,7 +406,7 @@ public class Controller implements ActionListener {
 
 							case 4:
 								con.printWithNewLine("bievenido a betplay");
-
+// revisar la logica del betplay 
 								con.printWithNewLine("ingrese el nombre del equipo local ");
 								String nombreEquipoLocal = con.readWholeLine();
 								con.printWithNewLine("digite el marcador del equipo local");
@@ -461,8 +462,10 @@ public class Controller implements ActionListener {
 
 							}
 							break cicloModulo4;
-
 						}
+					default:
+						con.printWithNewLine("noks ");
+						break;
 					}
 				}
 
