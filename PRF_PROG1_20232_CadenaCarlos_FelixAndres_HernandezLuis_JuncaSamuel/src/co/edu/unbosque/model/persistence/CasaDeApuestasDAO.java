@@ -69,6 +69,15 @@ public class CasaDeApuestasDAO implements CRUDOperation {
 
 	}
 
+	public void cargarPropertiesDeLaCasa() {
+		prop.inicializarProperties();
+		CasaDeApuestasDTO casa = new CasaDeApuestasDTO();
+		casa.setNombre(prop.getNombre());
+		casa.setNumeroDeSedes(Integer.parseInt(prop.getSedes()));
+		casa.setPresupuestoTotal(Integer.parseInt(prop.getPresupuestoTotal()));
+
+	}
+
 	public ArrayList<CasaDeApuestasDTO> getListOfCasa() {
 		return listOfCasa;
 	}

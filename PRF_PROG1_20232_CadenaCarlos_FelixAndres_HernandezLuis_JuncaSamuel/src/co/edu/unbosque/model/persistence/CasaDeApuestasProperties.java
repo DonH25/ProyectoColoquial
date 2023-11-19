@@ -18,6 +18,57 @@ public class CasaDeApuestasProperties {
 		prop = new Properties();
 		file = "src/co/edu/unbosque/model/persistence/config.properties";
 	}
+	
+	public CasaDeApuestasProperties(String nombre, String sedes, String presupuestoTotal, String file,
+			Properties prop) {
+		super();
+		this.nombre = nombre;
+		this.sedes = sedes;
+		this.presupuestoTotal = presupuestoTotal;
+		this.file = file;
+		this.prop = prop;
+	}
+	
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getSedes() {
+		return sedes;
+	}
+
+	public void setSedes(String sedes) {
+		this.sedes = sedes;
+	}
+
+	public String getPresupuestoTotal() {
+		return presupuestoTotal;
+	}
+
+	public void setPresupuestoTotal(String presupuestoTotal) {
+		this.presupuestoTotal = presupuestoTotal;
+	}
+
+	public String getFile() {
+		return file;
+	}
+
+	public void setFile(String file) {
+		this.file = file;
+	}
+
+	public Properties getProp() {
+		return prop;
+	}
+
+	public void setProp(Properties prop) {
+		this.prop = prop;
+	}
 
 	public int escribirProperties(String nombre, String sedes, String presupuestoTotal) {
 		try {

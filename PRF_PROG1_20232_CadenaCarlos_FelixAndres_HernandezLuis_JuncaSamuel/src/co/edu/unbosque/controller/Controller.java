@@ -23,6 +23,7 @@ import co.edu.unbosque.util.ExcepcionNumeroSede;
 import co.edu.unbosque.util.ExcepcionPresupuestoTotal;
 import co.edu.unbosque.view.Console;
 import co.edu.unbosque.view.VentanaCrearCasaApuestas;
+import co.edu.unbosque.view.VentanaPresupuesto;
 import co.edu.unbosque.view.VentanaPrincipal;
 
 public class Controller implements ActionListener {
@@ -36,6 +37,7 @@ public class Controller implements ActionListener {
 	CasaDeApuestasProperties prop;
 	VentanaPrincipal vp;
 	VentanaCrearCasaApuestas vcca;
+	VentanaPresupuesto vpre;
 	BalotoDAO balotDao;
 	SuperastroDAO superDao;
 	ChanceDAO chanDao;
@@ -49,6 +51,7 @@ public class Controller implements ActionListener {
 		prop = new CasaDeApuestasProperties();
 		vp = new VentanaPrincipal();
 		vcca = new VentanaCrearCasaApuestas();
+		vpre = new VentanaPresupuesto();
 		agregarLectores();
 	}
 
@@ -76,39 +79,7 @@ public class Controller implements ActionListener {
 					con.quemarLinea();
 					switch (option) {
 					case 1: {
-
-						con.printWithNewLine("Ahora se van a crear los juegos de la casa de apuestas");
-						con.printWithNewLine("Juego#1 Baloto");
-						String juego1name = "Baloto";
-						String juego1tipo = "Loteria";
-						con.printWithNewLine("Inserte el presupuesto del juego");
-						String presu1 = con.readWholeLine();
-						jueDao.create(juego1name, juego1tipo, presu1);
-						con.printWithNewLine("Juego#2 Loteria");
-						String juego2name = "Loteria";
-						String juego2tipo = "Loteria";
-						con.printWithNewLine("Inserte el presupuesto del juego");
-						String presu2 = con.readWholeLine();
-						jueDao.create(juego2name, juego2tipo, presu2);
-						con.printWithNewLine("Juego#3 Chance");
-						String juego3name = "Chance";
-						String juego3tipo = "Chance";
-						con.printWithNewLine("Inserte el presupuesto del juego");
-						String presu3 = con.readWholeLine();
-						jueDao.create(juego3name, juego3tipo, presu3);
-						con.printWithNewLine("Juego#4 Superastro");
-						String juego4name = "Superastro";
-						String juego4tipo = "Loteria";
-						con.printWithNewLine("Inserte el presupuesto del juego");
-						String presu4 = con.readWholeLine();
-						jueDao.create(juego4name, juego4tipo, presu4);
-						con.printWithNewLine("Juego#5 Betplay");
-						String juego5name = "Betplay";
-						String juego5tipo = "Deportivo";
-						con.printWithNewLine("Inserte el presupuesto del juego");
-						String presu5 = con.readWholeLine();
-						jueDao.create(juego5name, juego5tipo, presu5);
-						prop.inicializarProperties();
+						con.printWithNewLine("Modulo 1 Terminado :D");
 						break;
 					}
 
@@ -519,16 +490,21 @@ public class Controller implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
+		// Sección para el caso "Ingresar al programa"
 		case "ing": {
 			vp.setVisible(false);
 			vcca.setVisible(true);
 			break;
 		}
+
+		// Sección para El salir del programa
 		case "sal": {
 			JOptionPane.showMessageDialog(vp, "Gracias Por usar el programa");
 			vp.dispose();
 			break;
 		}
+
+		// Sección para el Boton de registro de Casa de apuestas
 		case "btnnRegist": {
 			String nombre = vcca.getNombreCasaDeApuestas().getText();
 			String cantidadSedes = vcca.getSedesCasaDeApuestas().getText();
@@ -564,10 +540,15 @@ public class Controller implements ActionListener {
 								prop.inicializarProperties();
 								JOptionPane.showMessageDialog(vcca, "Datos ingresados exitosamente");
 								vcca.setVisible(false);
+								vpre.setVisible(true);
 							} catch (Exception e1) {
 								e1.printStackTrace();
 								JOptionPane.showMessageDialog(vcca, "Error al procesar los datos");
 							}
+						} else {
+							vcca.getNombreCasaDeApuestas().setText("");
+							vcca.getSedesCasaDeApuestas().setText("");
+							vcca.getPresupuestoCasaDeApuestas().setText("");
 						}
 					}
 
@@ -583,6 +564,83 @@ public class Controller implements ActionListener {
 				e1.printStackTrace();
 				JOptionPane.showMessageDialog(vcca, "Error inesperado: " + e1.getMessage());
 			}
+			break;
+		}
+
+		// Sección para el Boton de registro de presupuestos
+		case "btnRegistPresup": {
+			if (vpre.getBalotoPresupuesto().getText().equals("") && vpre.getBetplayPresupuesto().getText().equals("")
+					&& vpre.getSuperastroPresupuesto().getText().equals("")
+					&& vpre.getChancePresupuesto().getText().equals("")
+					&& vpre.getLoteriaPresupuesto().getText().equals("")) {
+				JOptionPane.showMessageDialog(vpre, "Complete todos los campos");
+			} else {
+				double m = 0;
+				boolean temp1 = true;
+
+				String[] juegos = { vpre.getBalotoPresupuesto().getText(), vpre.getBetplayPresupuesto().getText(),
+						vpre.getSuperastroPresupuesto().getText(), vpre.getChancePresupuesto().getText(),
+						vpre.getLoteriaPresupuesto().getText() };
+
+				for (String presupuesto : juegos) {
+					try {
+						Double.parseDouble(presupuesto);
+
+						// Verificar si el texto está vacío y actualizar temp1
+						if (presupuesto.equals("")) {
+							temp1 = false;
+							JOptionPane.showMessageDialog(vpre, "Debe ingresar valores válidos.");
+							break; // Terminar el bucle si encuentra un valor no válido
+						}
+					} catch (NumberFormatException ex) {
+						ex.printStackTrace();
+						temp1 = false;
+						JOptionPane.showMessageDialog(vpre, "Debe ingresar valores válidos.");
+						break; // Terminar el bucle si encuentra un valor no válido
+					}
+				}
+				if (temp1 == true) {
+					caDao.cargarPropertiesDeLaCasa();
+
+					double tmp1 = Double.parseDouble(vpre.getLoteriaPresupuesto().getText());
+					double tmp2 = Double.parseDouble(vpre.getBalotoPresupuesto().getText());
+					double tmp3 = Double.parseDouble(vpre.getBetplayPresupuesto().getText());
+					double tmp4 = Double.parseDouble(vpre.getChancePresupuesto().getText());
+					double tmp5 = Double.parseDouble(vpre.getSuperastroPresupuesto().getText());
+
+					double sumPresupuesto = tmp1 + tmp2 + tmp3 + tmp4 + tmp5;
+
+					if (sumPresupuesto <= Double.parseDouble(vcca.getPresupuestoCasaDeApuestas().getText())) {
+						jueDao.create("Baloto", "Loteria", vpre.getBalotoPresupuesto().getText());
+						jueDao.create("Chance", "Chance", vpre.getChancePresupuesto().getText());
+						jueDao.create("Betplay", "Deportivo", vpre.getBetplayPresupuesto().getText());
+						jueDao.create("Loteria", "Loteria", vpre.getLoteriaPresupuesto().getText());
+						jueDao.create("Superastro", "Loteria", vpre.getSuperastroPresupuesto().getText());
+
+						int option = JOptionPane.showConfirmDialog(vpre, "¿Los datos ingresados son correctos?",
+								"Confirmación", JOptionPane.YES_NO_OPTION);
+
+						if (option == JOptionPane.YES_OPTION) {
+							JOptionPane.showMessageDialog(vpre, "Datos ingresados");
+							vpre.setVisible(false);
+						} else {
+							// Si el usuario presiona "No", borrar los cuadros de texto
+							vpre.getLoteriaPresupuesto().setText("");
+							vpre.getBalotoPresupuesto().setText("");
+							vpre.getBetplayPresupuesto().setText("");
+							vpre.getChancePresupuesto().setText("");
+							vpre.getSuperastroPresupuesto().setText("");
+						}
+					} else {
+						JOptionPane.showMessageDialog(vpre,
+								"La suma de los presupuestos excede su presupuesto total, realice de nuevo la distribución del presupuesto");
+					}
+
+				}
+
+			}
+
+			break;
 		}
 		}
 	}
@@ -608,7 +666,8 @@ public class Controller implements ActionListener {
 		vp.getPanel().getBotonSalir().setActionCommand("sal");
 		vcca.getBotonRegistrarCasa().addActionListener(this);
 		vcca.getBotonRegistrarCasa().setActionCommand("btnnRegist");
-
+		vpre.getBotonRegistrarPresupuesto().addActionListener(this);
+		vpre.getBotonRegistrarPresupuesto().setActionCommand("btnRegistPresup");
 	}
 
 }
