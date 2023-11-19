@@ -7,9 +7,12 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.ViewportLayout;
 
 public class PanelPrincipal extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8972730769329944908L;
 	private BotonIngresar botonIng;
 	private BotonSalirProgama botonSalir;
 

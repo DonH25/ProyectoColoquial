@@ -2,7 +2,6 @@ package co.edu.unbosque.view;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.TextField;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,6 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class VentanaPresupuesto extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6845707884091523016L;
 	private JButton botonRegistrarPresupuesto;
 	private JTextField balotoPresupuesto, betplayPresupuesto, superastroPresupuesto, chancePresupuesto,
 			loteriaPresupuesto;
@@ -26,8 +29,8 @@ public class VentanaPresupuesto extends JFrame {
 		balotoPresupuesto.setBounds(40, 130, 350, 30);
 
 		indicacionesBaloto = new JLabel();
-		indicacionesBaloto.setBounds(40, 110, 300, 25);
-		indicacionesBaloto.setText("Ingresar en el espacio de abajo el presupuesto del aloto. ");
+		indicacionesBaloto.setBounds(40, 110, 400, 25);
+		indicacionesBaloto.setText("Ingresar en el espacio de abajo el presupuesto del Baloto. ");
 		indicacionesBaloto.setForeground(Color.WHITE);
 
 		indicacionesChance = new JLabel();

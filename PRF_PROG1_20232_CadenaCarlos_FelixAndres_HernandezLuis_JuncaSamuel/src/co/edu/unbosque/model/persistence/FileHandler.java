@@ -21,9 +21,6 @@ public class FileHandler {
 	private static FileOutputStream fos;
 	private static ObjectOutputStream oos;
 
-	// Archivo de propiedades
-	private static Properties propFile;
-
 	/**
 	 * Constructor predeterminado para la clase FileHandler.
 	 */
@@ -92,71 +89,4 @@ public class FileHandler {
 		}
 	}
 
-	/**
-	 * Escribe una lista de objetos CasaDeApuestasDTO en un archivo de propiedades.
-	 *
-	 * @param fileName El nombre del archivo de propiedades.
-	 * @param casas    La lista de objetos CasaDeApuestasDTO que se escribirán en el
-	 *                 archivo.
-	 */
-	public static void propertiesOpenAndWriteFile(String fileName, List<CasaDeApuestasDTO> casas) {
-		FileOutputStream fos = null;
-		Properties propFile = new Properties();
-
-		try {
-			fos = new FileOutputStream(new File("src/co/edu/unbosque/model/persistence/" + fileName));
-
-			for (CasaDeApuestasDTO casa : casas) {
-				propFile.setProperty("NombreDeCasaDeAouestas", casa.getNombre());
-				propFile.setProperty("NumeroDeSedes", String.valueOf(casa.getNumeroDeSedes()));
-				propFile.setProperty("PresupuestoTotal", String.valueOf(casa.getPresupuestoTotal()));
-			}
-
-			propFile.store(fos, "Archivo de propiedades");
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("Problemas al crear o buscar el archivo config.properties (escritura).");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if (fos != null) {
-					fos.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 * Lee un archivo de propiedades y devuelve su contenido como un objeto
-	 * Properties.
-	 *
-	 * @param fileName El nombre del archivo de propiedades.
-	 * @return El objeto Properties leído desde el archivo.
-	 */
-	public static Properties propertiesOpenAndReadFile(String fileName) {
-		Properties properties = new Properties();
-		FileInputStream fis = null;
-
-		try {
-			fis = new FileInputStream("src/co/edu/unbosque/model/persistence/" + fileName);
-			properties.load(fis);
-		} catch (IOException e) {
-			e.printStackTrace();
-			System.out.println("Problemas al leer el archivo " + fileName);
-		} finally {
-			try {
-				if (fis != null) {
-					fis.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return properties;
-	}
 }

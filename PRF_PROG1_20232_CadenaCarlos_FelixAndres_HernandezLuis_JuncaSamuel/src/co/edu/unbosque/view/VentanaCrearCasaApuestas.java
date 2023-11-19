@@ -2,7 +2,6 @@ package co.edu.unbosque.view;
 
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.TextField;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,6 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class VentanaCrearCasaApuestas extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -97942622027646067L;
 	private JButton botonRegistrarCasa;
 	private JTextField nombreCasaDeApuestas, sedesCasaDeApuestas, presupuestoCasaDeApuestas;
 	private JLabel indicacionesCasaApuestas, indicacionesSedes, indicacionesPresupuesto, textoIndicaciones1,

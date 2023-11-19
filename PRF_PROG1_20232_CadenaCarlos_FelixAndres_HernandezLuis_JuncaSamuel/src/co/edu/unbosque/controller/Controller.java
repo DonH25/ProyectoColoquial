@@ -2,9 +2,11 @@ package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 import javax.swing.JOptionPane;
 
+import co.edu.unbosque.model.CasaDeApuestasDTO;
 import co.edu.unbosque.model.persistence.ApostadorDAO;
 import co.edu.unbosque.model.persistence.BalotoDAO;
 import co.edu.unbosque.model.persistence.BetplayDAO;
@@ -23,6 +25,7 @@ import co.edu.unbosque.util.ExcepcionNumeroSede;
 import co.edu.unbosque.util.ExcepcionPresupuestoTotal;
 import co.edu.unbosque.view.Console;
 import co.edu.unbosque.view.VentanaCrearCasaApuestas;
+import co.edu.unbosque.view.VentanaCrearSedes;
 import co.edu.unbosque.view.VentanaPresupuesto;
 import co.edu.unbosque.view.VentanaPrincipal;
 
@@ -43,15 +46,22 @@ public class Controller implements ActionListener {
 	ChanceDAO chanDao;
 	LoteriaDAO loteDao;
 	BetplayDAO betDao;
+	VentanaCrearSedes vsed;
+	private File ruta1, ruta2, ruta3;
 
 	public Controller() {
 		con = new Console();
 		caDao = new CasaDeApuestasDAO();
 		jueDao = new JuegoDAO();
+		sedeDao = new SedeDAO();
 		prop = new CasaDeApuestasProperties();
 		vp = new VentanaPrincipal();
 		vcca = new VentanaCrearCasaApuestas();
 		vpre = new VentanaPresupuesto();
+		vsed = new VentanaCrearSedes();
+		ruta1 = new File("src/co/edu/unbosque/model/persistence/config.properties");
+		ruta2 = new File("src/co/edu/unbosque/model/persistence/juegos.dat");
+		ruta3 = new File("src/co/edu/unbosque/model/persistence/sedes.dat");
 		agregarLectores();
 	}
 
@@ -483,6 +493,9 @@ public class Controller implements ActionListener {
 	}
 
 	public void run() {
+if(ruta1.exists()&&ruta2.exists()&&ruta3.exists()) {
+	System.out.println("prueba");
+}
 		vp.setVisible(true);
 
 	}
@@ -490,30 +503,30 @@ public class Controller implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
-		// Sección para el caso "Ingresar al programa"
+		// Seccion para Ingresar al programa
 		case "ing": {
 			vp.setVisible(false);
 			vcca.setVisible(true);
 			break;
 		}
 
-		// Sección para El salir del programa
+		// Seccion para salir del programa
 		case "sal": {
 			JOptionPane.showMessageDialog(vp, "Gracias Por usar el programa");
 			vp.dispose();
 			break;
 		}
 
-		// Sección para el Boton de registro de Casa de apuestas
+		// Seccion para el Boton de registro de Casa de apuestas
 		case "btnnRegist": {
 			String nombre = vcca.getNombreCasaDeApuestas().getText();
 			String cantidadSedes = vcca.getSedesCasaDeApuestas().getText();
 			String presupuestoTotal = vcca.getPresupuestoCasaDeApuestas().getText();
 
 			try {
-				// Validar que los campos no estén vacíos
+				// Validar que los campos no esten vacios
 				if (!nombre.equals("") && !cantidadSedes.equals("") && !presupuestoTotal.equals("")) {
-					boolean temp1 = true;
+					boolean temporal = true;
 
 					try {
 						// Validar que la cantidad de sedes sea un número válido
@@ -525,11 +538,11 @@ public class Controller implements ActionListener {
 						revisarNumeroNegativo(preTotal);
 					} catch (NumberFormatException ex) {
 						ex.printStackTrace();
-						temp1 = false;
+						temporal = false;
 						JOptionPane.showMessageDialog(vcca, "Ingrese valores válidos por favor...");
 					}
 
-					if (temp1) {
+					if (temporal) {
 						int optionResult = JOptionPane.showConfirmDialog(vcca,
 								"¿Está seguro de los datos ingresados? Luego no se podrán cambiar.", "Confirmación",
 								JOptionPane.YES_NO_OPTION);
@@ -575,7 +588,6 @@ public class Controller implements ActionListener {
 					&& vpre.getLoteriaPresupuesto().getText().equals("")) {
 				JOptionPane.showMessageDialog(vpre, "Complete todos los campos");
 			} else {
-				double m = 0;
 				boolean temp1 = true;
 
 				String[] juegos = { vpre.getBalotoPresupuesto().getText(), vpre.getBetplayPresupuesto().getText(),
@@ -623,6 +635,7 @@ public class Controller implements ActionListener {
 						if (option == JOptionPane.YES_OPTION) {
 							JOptionPane.showMessageDialog(vpre, "Datos ingresados");
 							vpre.setVisible(false);
+							vsed.setVisible(true);
 						} else {
 							// Si el usuario presiona "No", borrar los cuadros de texto
 							vpre.getLoteriaPresupuesto().setText("");
@@ -642,6 +655,49 @@ public class Controller implements ActionListener {
 
 			break;
 		}
+		case "btnRegistSed": {
+			String localidad = vsed.getLocalidadSede().getText();
+			String empleados = vsed.getNumEmpleados().getText();
+
+			// Verificar si ambos campos están vacíos
+			if (localidad.equals("") && empleados.equals("")) {
+				JOptionPane.showMessageDialog(vpre, "Por favor, completar los cuadros ");
+			} else {
+				try {
+					// Intentar convertir la cantidad de empleados a un número entero
+					int numEmpleados = Integer.parseInt(empleados);
+
+					// Verificar si la cantidad de empleados es negativa
+					revisarNumeroNegativo(numEmpleados);
+
+					// Mostrar confirmación antes de crear la sede
+					int opcion = JOptionPane.showConfirmDialog(vpre, "¿Desea crear la sede?", "Confirmar",
+							JOptionPane.YES_NO_OPTION);
+
+					if (opcion == JOptionPane.YES_OPTION) {
+						// Crear la sede si se selecciona 'Si'
+						sedeDao.create(localidad, empleados);
+						JOptionPane.showMessageDialog(vsed, "Sede creada exitosamente");
+					} else {
+						// Vaciar los campos si se selecciona 'No'
+						vsed.getLocalidadSede().setText("");
+						vsed.getNumEmpleados().setText("");
+					}
+				} catch (ExcepcionPresupuestoTotal e2) {
+					e2.printStackTrace();
+					JOptionPane.showMessageDialog(vpre,
+							"Por favor, no existen números negativos posibles en esta elección ");
+				}
+			}
+			if (sedeDao.getListOfSedes().size() == Integer.parseInt(prop.getSedes())) {
+				vsed.setVisible(false);
+
+			} else {
+				JOptionPane.showMessageDialog(vpre, "Las sedes estan incompletas, por favor creala nuevamente");
+			}
+			break;
+		}
+
 		}
 	}
 
@@ -668,6 +724,8 @@ public class Controller implements ActionListener {
 		vcca.getBotonRegistrarCasa().setActionCommand("btnnRegist");
 		vpre.getBotonRegistrarPresupuesto().addActionListener(this);
 		vpre.getBotonRegistrarPresupuesto().setActionCommand("btnRegistPresup");
+		vsed.getRegistrarSede().addActionListener(this);
+		vsed.getRegistrarSede().setActionCommand("btnRegistSed");
 	}
 
 }

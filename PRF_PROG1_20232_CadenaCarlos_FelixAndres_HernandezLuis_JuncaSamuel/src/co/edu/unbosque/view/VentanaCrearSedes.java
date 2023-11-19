@@ -1,0 +1,112 @@
+package co.edu.unbosque.view;
+
+import java.awt.Color;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class VentanaCrearSedes extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2958406166755371604L;
+	private JTextField numEmpleados, localidadSede;
+	private JLabel indicacionesEmpleados, indicacionesLocalidad, fondo;
+	private JButton registrarSede;
+
+	public VentanaCrearSedes() {
+
+		setBounds(150, 0, 1280, 720);
+		setLayout(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		indicacionesLocalidad = new JLabel();
+		indicacionesLocalidad.setBounds(100, 110, 500, 25);
+		indicacionesLocalidad.setText("Ingresar en el espacio de abajo La Localidad de esta sede   ");
+		indicacionesLocalidad.setForeground(Color.WHITE);
+
+		localidadSede = new JTextField();
+		localidadSede.setBounds(100, 130, 350, 30);
+
+		indicacionesEmpleados = new JLabel();
+		indicacionesEmpleados.setBounds(600, 130, 500, 25);
+		indicacionesEmpleados.setText("Ingresar en el espacio de abajo el numero de empleados de esta sede; ");
+		indicacionesEmpleados.setForeground(Color.WHITE);
+
+		numEmpleados = new JTextField();
+		numEmpleados.setBounds(440, 160, 350, 25);
+
+		registrarSede = new JButton();
+		registrarSede.setBounds(1000, 450, 200, 200);
+		Image temp1;
+		temp1 = new ImageIcon("src/imagenes/registrarSedes.png").getImage();
+		ImageIcon imagen1;
+		imagen1 = new ImageIcon(temp1.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+		registrarSede.setIcon(imagen1);
+
+		fondo = new JLabel();
+		fondo.setBounds(0, 0, 1280, 720);
+		Image temp;
+		temp = new ImageIcon("src/imagenes/fondo.JPG").getImage();
+		ImageIcon imagen;
+		imagen = new ImageIcon(temp.getScaledInstance(1280, 720, Image.SCALE_SMOOTH));
+		fondo.setIcon(imagen);
+
+		add(indicacionesLocalidad);
+		add(indicacionesEmpleados);
+		add(localidadSede);
+		add(numEmpleados);
+		add(registrarSede);
+		add(fondo);
+
+	}
+
+	public JTextField getNumEmpleados() {
+		return numEmpleados;
+	}
+
+	public void setNumEmpleados(JTextField numEmpleados) {
+		this.numEmpleados = numEmpleados;
+	}
+
+	public JTextField getLocalidadSede() {
+		return localidadSede;
+	}
+
+	public void setLocalidadSede(JTextField localidadSede) {
+		this.localidadSede = localidadSede;
+	}
+
+	public JLabel getIndicacionesEmpleados() {
+		return indicacionesEmpleados;
+	}
+
+	public void setIndicacionesEmpleados(JLabel indicacionesEmpleados) {
+		this.indicacionesEmpleados = indicacionesEmpleados;
+	}
+
+	public JLabel getIndicacionesLocalidad() {
+		return indicacionesLocalidad;
+	}
+
+	public void setIndicacionesLocalidad(JLabel indicacionesLocalidad) {
+		this.indicacionesLocalidad = indicacionesLocalidad;
+	}
+
+	public JButton getRegistrarSede() {
+		return registrarSede;
+	}
+
+	public void setRegistrarSede(JButton registrarSede) {
+		this.registrarSede = registrarSede;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+}

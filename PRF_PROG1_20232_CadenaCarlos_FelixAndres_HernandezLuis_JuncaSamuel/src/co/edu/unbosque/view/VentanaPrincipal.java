@@ -1,6 +1,6 @@
 package co.edu.unbosque.view;
 
-import java.awt.Font;
+
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class VentanaPrincipal extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7464437200510907013L;
 	private JLabel logo;
 	private Fondo fondo;
 	private PanelPrincipal panel;
