@@ -81,7 +81,7 @@ public class VentanaCrearCasaApuestas extends JFrame {
 		botonRegistrarCasa = new JButton();
 		botonRegistrarCasa.setBounds(1000, 450, 200, 200);
 		Image temp1;
-		temp1 = new ImageIcon("src/imagenes/registrarLogo.png").getImage();
+		temp1 = new ImageIcon("src/imagenes/registrarBoton.png").getImage();
 		ImageIcon imagen1;
 		imagen1 = new ImageIcon(temp1.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		botonRegistrarCasa.setIcon(imagen1);

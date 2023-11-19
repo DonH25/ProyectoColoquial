@@ -19,6 +19,8 @@ import co.edu.unbosque.model.persistence.JuegoDAO;
 import co.edu.unbosque.model.persistence.LoteriaDAO;
 import co.edu.unbosque.model.persistence.SedeDAO;
 import co.edu.unbosque.model.persistence.SuperastroDAO;
+import co.edu.unbosque.util.ExcepcionNumeroSede;
+import co.edu.unbosque.util.ExcepcionPresupuestoTotal;
 import co.edu.unbosque.view.Console;
 import co.edu.unbosque.view.VentanaCrearCasaApuestas;
 import co.edu.unbosque.view.VentanaPrincipal;
@@ -532,41 +534,71 @@ public class Controller implements ActionListener {
 			String cantidadSedes = vcca.getSedesCasaDeApuestas().getText();
 			String presupuestoTotal = vcca.getPresupuestoCasaDeApuestas().getText();
 
-			if (!nombre.equals("") && !cantidadSedes.equals("") && !presupuestoTotal.equals("")) {
-			    boolean temp1 = true;
+			try {
+				// Validar que los campos no estén vacíos
+				if (!nombre.equals("") && !cantidadSedes.equals("") && !presupuestoTotal.equals("")) {
+					boolean temp1 = true;
 
-			    try {
-			        Integer.parseInt(cantidadSedes);
-			        Double.parseDouble(presupuestoTotal);
-			    } catch (NumberFormatException ex) {
-			        ex.printStackTrace();
-			        temp1 = false;
-			        JOptionPane.showMessageDialog(vcca, "Ingrese valores válidos por favor...");
-			    }
+					try {
+						// Validar que la cantidad de sedes sea un número válido
+						int sedes = Integer.parseInt(cantidadSedes);
+						revisarNumeroSede(sedes);
 
-			    if (temp1) {
-			        int optionResult = JOptionPane.showConfirmDialog(vcca, "¿Está seguro de los datos ingresados? Luego no se podrán cambiar.", "Confirmación", JOptionPane.YES_NO_OPTION);
+						// Validar que el presupuesto total sea un número válido y no sea negativo
+						double preTotal = Double.parseDouble(presupuestoTotal);
+						revisarNumeroNegativo(preTotal);
+					} catch (NumberFormatException ex) {
+						ex.printStackTrace();
+						temp1 = false;
+						JOptionPane.showMessageDialog(vcca, "Ingrese valores válidos por favor...");
+					}
 
-			        if (optionResult == JOptionPane.YES_OPTION) {
-			            try {
-			                caDao.create(nombre, cantidadSedes, presupuestoTotal);
-			                prop.inicializarProperties();
-			                JOptionPane.showMessageDialog(vcca, "Datos ingresados exitosamente");
-			                vcca.setVisible(false);
-			            } catch (Exception e1) {
-			                e1.printStackTrace();
-			                JOptionPane.showMessageDialog(vcca, "Error al procesar los datos");
-			            }
-			        }
-			    }
+					if (temp1) {
+						int optionResult = JOptionPane.showConfirmDialog(vcca,
+								"¿Está seguro de los datos ingresados? Luego no se podrán cambiar.", "Confirmación",
+								JOptionPane.YES_NO_OPTION);
 
-			} else {
-			    JOptionPane.showMessageDialog(vcca, "Debe llenar todos los datos para crear la casa de apuestas");
+						if (optionResult == JOptionPane.YES_OPTION) {
+							try {
+								caDao.create(nombre, cantidadSedes, presupuestoTotal);
+								prop.inicializarProperties();
+								JOptionPane.showMessageDialog(vcca, "Datos ingresados exitosamente");
+								vcca.setVisible(false);
+							} catch (Exception e1) {
+								e1.printStackTrace();
+								JOptionPane.showMessageDialog(vcca, "Error al procesar los datos");
+							}
+						}
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(vcca, "Debe llenar todos los datos para crear la casa de apuestas");
+				}
+			} catch (ExcepcionNumeroSede e1) {
+				JOptionPane.showMessageDialog(vcca, "El número de sedes debe estar entre 1 y 10 y ser un entero.");
+			} catch (ExcepcionPresupuestoTotal e1) {
+				JOptionPane.showMessageDialog(vcca,
+						"El número ingresado es negativo para sedes o presupuesto, intente nuevamente.");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				JOptionPane.showMessageDialog(vcca, "Error inesperado: " + e1.getMessage());
 			}
-
 		}
 		}
+	}
 
+	// Método para revisar que el número de sedes esté entre 1 y 10
+	private void revisarNumeroSede(int sedes) throws ExcepcionNumeroSede {
+		if (sedes < 1 || sedes > 10) {
+			throw new ExcepcionNumeroSede();
+		}
+	}
+
+	// Método para revisar que el número no sea negativo
+	private void revisarNumeroNegativo(double numero) throws ExcepcionPresupuestoTotal {
+		if (numero < 0) {
+			throw new ExcepcionPresupuestoTotal();
+		}
 	}
 
 	public void agregarLectores() {

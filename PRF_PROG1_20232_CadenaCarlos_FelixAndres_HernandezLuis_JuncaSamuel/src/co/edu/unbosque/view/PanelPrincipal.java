@@ -17,7 +17,7 @@ public class PanelPrincipal extends JPanel {
 		botonSalir = new BotonSalirProgama();
 		botonIng = new BotonIngresar();
 		
-		setBounds(0, 300, 1280, 720);
+		setBounds(0, 450, 1280, 720);
 		setBackground(Color.white);
 		setLayout(new FlowLayout());
 
