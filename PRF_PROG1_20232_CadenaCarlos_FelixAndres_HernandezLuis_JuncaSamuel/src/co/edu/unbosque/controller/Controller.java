@@ -24,6 +24,7 @@ import co.edu.unbosque.util.ExcepcionNumeroLoteria;
 import co.edu.unbosque.util.ExcepcionNumeroSede;
 import co.edu.unbosque.util.ExcepcionNumeroSuperastro;
 import co.edu.unbosque.util.ExcepcionPresupuestoTotal;
+import co.edu.unbosque.util.ExcepcionValorMinimoApuesta;
 import co.edu.unbosque.util.ExepcionNumeroBaloto;
 import co.edu.unbosque.view.Console;
 import co.edu.unbosque.view.VentanaPrincipal;
@@ -184,7 +185,8 @@ public class Controller implements ActionListener {
 						try {
 							revisarNumeroSede(Newsedes);
 						} catch (ExcepcionNumeroSede e) {
-							con.printWithNewLine("El numero de sedes ingresado no esta entre 1 y 10 o no es un numero entero");
+							con.printWithNewLine(
+									"El numero de sedes ingresado no esta entre 1 y 10 o no es un numero entero");
 						}
 						// exception de que no sea mayor que 10 sedes
 						// exception de que el numero no sea negativo
@@ -277,7 +279,7 @@ public class Controller implements ActionListener {
 						} catch (ExcepcionMayoriaEdad e) {
 							con.printWithNewLine("Usted no es mayor de edad");
 						}
-						
+
 						break;
 					}
 
@@ -421,6 +423,11 @@ public class Controller implements ActionListener {
 								}
 								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
 								String valorDeLaApuestaBaloto = con.readWholeLine();
+								try {
+									revisarValorMinimoApuesta(valorDeLaApuestaBaloto);
+								} catch (ExcepcionValorMinimoApuesta e) {
+									con.printWithNewLine("El valor minimo de la apuesta es 20.000");
+								}
 								balotDao.create(digitoBaloto1, digitoBaloto2, digitoBaloto3, digitoBaloto4,
 										digitoBaloto5, digitoBaloto6, valorDeLaApuestaBaloto);
 								// excepcion de que el valor de la apuesta sea un minimo de 20000
@@ -472,6 +479,11 @@ public class Controller implements ActionListener {
 								String zodiacoSigno = con.readWholeLine();
 								con.printWithNewLine("Inserte el año en el que usted (o el apostador) nacio");
 								String valorDeLaApuestaSuper = con.readWholeLine();
+								try {
+									revisarValorMinimoApuesta(valorDeLaApuestaSuper);
+								} catch (ExcepcionValorMinimoApuesta e) {
+									con.printWithNewLine("El valor minimo de la apuesta es 20.000");
+								}
 								// excepcion de que el valor de la apuesta sea un minimo de 20000
 								superDao.create(digitoSuper1, digitoSuper2, digitoSuper3, digitoSuper4, zodiacoSigno,
 										valorDeLaApuestaSuper);
@@ -539,6 +551,11 @@ public class Controller implements ActionListener {
 								}
 								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
 								String valorDeLaApuestaLoteria = con.readWholeLine();
+								try {
+									revisarValorMinimoApuesta(valorDeLaApuestaLoteria);
+								} catch (ExcepcionValorMinimoApuesta e) {
+									con.printWithNewLine("El valor minimo de la apuesta es 20.000");
+								}
 								// excepcion de que el valor de la apuesta sea un minimo de 20000
 								loteDao.create(digitoLoteria1, digitoLoteria2, digitoLoteria3, digitoLoteria4,
 										serieDig1, serieDig2, serieDig3, valorDeLaApuestaLoteria);
@@ -567,6 +584,11 @@ public class Controller implements ActionListener {
 								String marcadorVisitante = con.readWholeLine();
 								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
 								String valorDeLaApuestabetplay = con.readWholeLine();
+								try {
+									revisarValorMinimoApuesta(valorDeLaApuestabetplay);
+								} catch (ExcepcionValorMinimoApuesta e) {
+									con.printWithNewLine("El valor minimo de la apuesta es 20.000");
+								}
 								// excepcion de que el valor de la apuesta sea un minimo de 20000
 
 								betDao.create(nombreEquipoLocal, marcadorLocal, nombreEquipoVisitante,
@@ -597,6 +619,11 @@ public class Controller implements ActionListener {
 								String digito4Chance = con.readWholeLine();
 								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
 								String valorDeLaApuestaChance = con.readWholeLine();
+								try {
+									revisarValorMinimoApuesta(valorDeLaApuestaChance);
+								} catch (ExcepcionValorMinimoApuesta e) {
+									con.printWithNewLine("El valor minimo de la apuesta es 20.000");
+								}
 								// excepcion de que el valor de la apuesta sea un minimo de 20000
 
 								chanDao.create(digito1Chance, digito2Chance, digito3Chance, digito4Chance,
@@ -732,16 +759,22 @@ public class Controller implements ActionListener {
 			throw new ExcepcionNumeroSede();
 		}
 	}
-	
-	public void revisarNumeroNegativo(String nunero) throws ExcepcionPresupuestoTotal{
-		if (Integer.parseInt(nunero) < 0 ) {
+
+	public void revisarNumeroNegativo(String nunero) throws ExcepcionPresupuestoTotal {
+		if (Integer.parseInt(nunero) < 0) {
 			throw new ExcepcionPresupuestoTotal();
 		}
 	}
-	
-	public void revisarEdad(String numero) throws ExcepcionMayoriaEdad{
+
+	public void revisarEdad(String numero) throws ExcepcionMayoriaEdad {
 		if (Integer.parseInt(numero) > 2005 || Integer.parseInt(numero) < 1900) {
 			throw new ExcepcionMayoriaEdad();
+		}
+	}
+
+	public void revisarValorMinimoApuesta(String numero) throws ExcepcionValorMinimoApuesta {
+		if (Integer.parseInt(numero) < 20000) {
+			throw new ExcepcionValorMinimoApuesta();
 		}
 	}
 }
