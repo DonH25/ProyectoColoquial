@@ -18,8 +18,8 @@ public class ApostadorDAO implements CRUDOperation {
 	int index = 0;
 
 	/**
-	 * Constructor de ApostadorDAO que inicializa la lista de sedes de
-	 * casas de apuestas.
+	 * Constructor de ApostadorDAO que inicializa la lista de sedes de casas de
+	 * apuestas.
 	 */
 	public ApostadorDAO() {
 		listOfApostadores = new ArrayList<ApostadorDTO>();
