@@ -19,13 +19,8 @@ import co.edu.unbosque.model.persistence.JuegoDAO;
 import co.edu.unbosque.model.persistence.LoteriaDAO;
 import co.edu.unbosque.model.persistence.SedeDAO;
 import co.edu.unbosque.model.persistence.SuperastroDAO;
-import co.edu.unbosque.util.ExcepcionMayoriaEdad;
-import co.edu.unbosque.util.ExcepcionNumeroLoteria;
-import co.edu.unbosque.util.ExcepcionNumeroSede;
-import co.edu.unbosque.util.ExcepcionNumeroSuperastro;
-import co.edu.unbosque.util.ExcepcionPresupuestoTotal;
-import co.edu.unbosque.util.ExepcionNumeroBaloto;
 import co.edu.unbosque.view.Console;
+import co.edu.unbosque.view.VentanaCrearCasaApuestas;
 import co.edu.unbosque.view.VentanaPrincipal;
 
 public class Controller implements ActionListener {
@@ -38,7 +33,7 @@ public class Controller implements ActionListener {
 
 	CasaDeApuestasProperties prop;
 	VentanaPrincipal vp;
-
+	VentanaCrearCasaApuestas vcca;
 	BalotoDAO balotDao;
 	SuperastroDAO superDao;
 	ChanceDAO chanDao;
@@ -51,6 +46,7 @@ public class Controller implements ActionListener {
 		jueDao = new JuegoDAO();
 		prop = new CasaDeApuestasProperties();
 		vp = new VentanaPrincipal();
+		vcca = new VentanaCrearCasaApuestas();
 		agregarLectores();
 	}
 
@@ -78,122 +74,50 @@ public class Controller implements ActionListener {
 					con.quemarLinea();
 					switch (option) {
 					case 1: {
-						if (caDao.casaExiste()) {
-							con.printWithNewLine("La casa de apuestas ya existe , no es necesario crearla");
-							break;
-						} else {
-							con.printWithNewLine("Insertar nombre de la casa de apuestas");
-							String nombre = con.readWholeLine();
-							con.printWithNewLine("Insertar el numero de sedes de la casa de apuestas ");
-							String sedes = con.readWholeLine();
-							try {
-								revisarNumeroSede(sedes);
-							} catch (ExcepcionNumeroSede e) {
-								con.printWithNewLine("El numero ingresado no esta entre 1 y 10 o no es entero");
-							}
 
-							con.printWithNewLine("Insertar el presupuesto total de la casa de apuestas ");
-
-							String preTotal = con.readWholeLine();
-							try {
-								revisarNumeroNegativo(preTotal);
-							} catch (ExcepcionPresupuestoTotal e) {
-								con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
-							}
-							caDao.create(nombre, sedes, preTotal);
-							if (jueDao.juegoExiste()) {
-								con.printWithNewLine("Los Juegos ya estan configurados ");
-								break;
-							} else {
-
-								con.printWithNewLine("Ahora se van a crear los juegos de la casa de apuestas");
-								con.printWithNewLine("Juego#1 Baloto");
-								String juego1name = "Baloto";
-								String juego1tipo = "Loteria";
-								con.printWithNewLine("Inserte el presupuesto del juego");
-								String presu1 = con.readWholeLine();
-
-								try {
-									revisarNumeroNegativo(presu1);
-								} catch (ExcepcionPresupuestoTotal e) {
-									con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
-								}
-								jueDao.create(juego1name, juego1tipo, presu1);
-								con.printWithNewLine("Juego#2 Loteria");
-								String juego2name = "Loteria";
-								String juego2tipo = "Loteria";
-								con.printWithNewLine("Inserte el presupuesto del juego");
-								String presu2 = con.readWholeLine();
-
-								try {
-									revisarNumeroNegativo(presu2);
-								} catch (ExcepcionPresupuestoTotal e) {
-									con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
-								}
-								jueDao.create(juego2name, juego2tipo, presu2);
-								con.printWithNewLine("Juego#3 Chance");
-								String juego3name = "Chance";
-								String juego3tipo = "Chance";
-								con.printWithNewLine("Inserte el presupuesto del juego");
-								String presu3 = con.readWholeLine();
-
-								try {
-									revisarNumeroNegativo(presu3);
-								} catch (ExcepcionPresupuestoTotal e) {
-									con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
-								}
-								jueDao.create(juego3name, juego3tipo, presu3);
-								con.printWithNewLine("Juego#4 Superastro");
-								String juego4name = "Superastro";
-								String juego4tipo = "Loteria";
-								con.printWithNewLine("Inserte el presupuesto del juego");
-								String presu4 = con.readWholeLine();
-
-								try {
-									revisarNumeroNegativo(presu4);
-								} catch (ExcepcionPresupuestoTotal e) {
-									con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
-								}
-								jueDao.create(juego4name, juego4tipo, presu4);
-								con.printWithNewLine("Juego#5 Betplay");
-								String juego5name = "Betplay";
-								String juego5tipo = "Deportivo";
-								con.printWithNewLine("Inserte el presupuesto del juego");
-								String presu5 = con.readWholeLine();
-
-								try {
-									revisarNumeroNegativo(presu5);
-								} catch (ExcepcionPresupuestoTotal e) {
-									con.printWithNewLine("El numero ingresado es negativo, intente nuevamente");
-								}
-								jueDao.create(juego5name, juego5tipo, presu5);
-								prop.inicializarProperties();
-								break;
-							}
-
-						}
+						con.printWithNewLine("Ahora se van a crear los juegos de la casa de apuestas");
+						con.printWithNewLine("Juego#1 Baloto");
+						String juego1name = "Baloto";
+						String juego1tipo = "Loteria";
+						con.printWithNewLine("Inserte el presupuesto del juego");
+						String presu1 = con.readWholeLine();
+						jueDao.create(juego1name, juego1tipo, presu1);
+						con.printWithNewLine("Juego#2 Loteria");
+						String juego2name = "Loteria";
+						String juego2tipo = "Loteria";
+						con.printWithNewLine("Inserte el presupuesto del juego");
+						String presu2 = con.readWholeLine();
+						jueDao.create(juego2name, juego2tipo, presu2);
+						con.printWithNewLine("Juego#3 Chance");
+						String juego3name = "Chance";
+						String juego3tipo = "Chance";
+						con.printWithNewLine("Inserte el presupuesto del juego");
+						String presu3 = con.readWholeLine();
+						jueDao.create(juego3name, juego3tipo, presu3);
+						con.printWithNewLine("Juego#4 Superastro");
+						String juego4name = "Superastro";
+						String juego4tipo = "Loteria";
+						con.printWithNewLine("Inserte el presupuesto del juego");
+						String presu4 = con.readWholeLine();
+						jueDao.create(juego4name, juego4tipo, presu4);
+						con.printWithNewLine("Juego#5 Betplay");
+						String juego5name = "Betplay";
+						String juego5tipo = "Deportivo";
+						con.printWithNewLine("Inserte el presupuesto del juego");
+						String presu5 = con.readWholeLine();
+						jueDao.create(juego5name, juego5tipo, presu5);
+						prop.inicializarProperties();
+						break;
 					}
+
 					case 2: {
 						int pos = 0;
 						con.printWithNewLine("Insertar nuevo nombre de la casa de apuestas");
 						String Newnombre = con.readWholeLine();
 						con.printWithNewLine("Insertar el nuevo numero de sedes de la casa de apuestas ");
 						String Newsedes = con.readWholeLine();
-						try {
-							revisarNumeroSede(Newsedes);
-						} catch (ExcepcionNumeroSede e) {
-							con.printWithNewLine(
-									"El numero de sedes ingresado no esta entre 1 y 10 o no es un numero entero");
-						}
-
 						con.printWithNewLine("Insertar el nuevo presupuesto total de la casa de apuestas ");
 						String NewpreTotal = con.readWholeLine();
-						try {
-							revisarNumeroNegativo(NewpreTotal);
-						} catch (ExcepcionPresupuestoTotal e) {
-							con.printWithNewLine("El presupuesto total no puede ser un numero negativo");
-						}
-
 						caDao.update(pos, Newnombre, Newsedes, NewpreTotal);
 						break;
 					}
@@ -204,12 +128,6 @@ public class Controller implements ActionListener {
 						con.quemarLinea();
 						con.printWithNewLine("Inserte el presupuesto actualizado");
 						String pres = con.readWholeLine();
-						try {
-							revisarNumeroNegativo(pres);
-						} catch (ExcepcionPresupuestoTotal e) {
-							con.printWithNewLine("El presupuesto no puede ser negativo");
-						}
-
 						jueDao.update(pos, pres);
 						break;
 					}
@@ -262,23 +180,23 @@ public class Controller implements ActionListener {
 						String direccion = con.readWholeLine();
 						con.printWithNewLine("digite su numero de telefono");
 						String numCelular = con.readWholeLine();
-						con.printWithNewLine("digite su numero de telefono");
-						String anoN = con.readWholeLine();
-						apostDao.create(nombreApost, numCedula, numSede, direccion, numCelular, anoN);
-						try {
-							revisarNumeroNegativo(numCelular);
-						} catch (ExcepcionPresupuestoTotal e) {
-							con.printWithNewLine("el numero de celular no pued ser negativo");
-						}
 						con.printWithNewLine("Inserte el año en el que usted (o el apostador) nacio");
-						String anioNaci = con.readWholeLine();
-						try {
-							revisarEdad(anioNaci);
-						} catch (ExcepcionMayoriaEdad e) {
-							con.printWithNewLine("Usted no es mayor de edad");
-						}
+						int anioNaci = con.readInt();
+						if (anioNaci > 2005) {
+							con.printWithNewLine(
+									"Usted es menor de edad , no puede apostar segun la ley 643 del 2001 expedida por coljuegos");
+							break;
+						} else if (anioNaci < 1900) {
+							con.printWithNewLine("Es imposible,la persona mas longeva actualmente vive 122 años");
+							break;
+						} else {
+							String anio = Integer.toString(anioNaci);
+							apostDao.create(nombreApost, numCedula, numSede, direccion, numCelular, anio);
+							con.printWithNewLine("perfil de apostador creado");
+							con.quemarLinea();
 
-						break;
+							break;
+						}
 					}
 
 					case 2: {
@@ -303,22 +221,25 @@ public class Controller implements ActionListener {
 						String newDireccion = con.readWholeLine();
 						con.printWithNewLine("digite su nuevo numero de telefono");
 						String newNumCelular = con.readWholeLine();
-						con.printWithNewLine("digite su nuevo numero de telefono");
-						String newAnoN = con.readWholeLine();
-						apostDao.update(index, newNombreApost, newNumCedula, newNumCede, newDireccion, newNumCelular,
-								newAnoN);
-						try {
-							revisarNumeroNegativo(newNumCelular);
-						} catch (ExcepcionPresupuestoTotal e) {
-							con.printWithNewLine("el numero de celular no pued ser negativo");
-						}
-
 						con.printWithNewLine("Inserte el nuevo año en el que usted (o el apostador) nacio");
-						String anioNaci = con.readWholeLine();
-						try {
-							revisarEdad(anioNaci);
-						} catch (ExcepcionMayoriaEdad e) {
-							con.printWithNewLine("usted no es mayor de edad");
+						int anioNaci = con.readInt();
+						if (anioNaci > 2005) {
+							con.printWithNewLine(
+									"Usted es menor de edad , no puede apostar segun la ley 643 del 2001 expedida por coljuegos");
+							break;
+						} else if (anioNaci < 1900) {
+							con.printWithNewLine("Es imposible,la persona mas longeva actualmente  vive 122 años");
+							break;
+						} else {
+							boolean doneUpdate = apostDao.update(index, newNombreApost, newNumCedula, newNumCede,
+									newDireccion, newNumCelular);
+							if (doneUpdate) {
+								con.printWithNewLine("perfil de apostador actualizado");
+							} else {
+								con.printWithNewLine("Error al actualizar");
+							}
+							break;
+
 						}
 					}
 					case 4:
@@ -375,58 +296,25 @@ public class Controller implements ActionListener {
 
 							case 1:
 								con.printWithNewLine("bienvenido al baloto");
+
 								con.printWithNewLine("ingrese el primer digito");
 								String digitoBaloto1 = con.readWholeLine();
-								try {
-									revisarNumeroBaoloto(digitoBaloto1);
-								} catch (ExepcionNumeroBaloto e) {
-									con.printWithNewLine(
-											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
-								}
 								con.printWithNewLine("ingrese el segundo digito");
 								String digitoBaloto2 = con.readWholeLine();
-								try {
-									revisarNumeroBaoloto(digitoBaloto2);
-								} catch (ExepcionNumeroBaloto e) {
-									con.printWithNewLine(
-											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
-								}
 								con.printWithNewLine("ingrese el tercer digito");
 								String digitoBaloto3 = con.readWholeLine();
-								try {
-									revisarNumeroBaoloto(digitoBaloto3);
-								} catch (ExepcionNumeroBaloto e) {
-									con.printWithNewLine(
-											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
-								}
 								con.printWithNewLine("digite el cuarto digito");
 								String digitoBaloto4 = con.readWholeLine();
-								try {
-									revisarNumeroBaoloto(digitoBaloto4);
-								} catch (ExepcionNumeroBaloto e) {
-									con.printWithNewLine(
-											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
-								}
 								con.printWithNewLine("digite el quinto digito ");
 								String digitoBaloto5 = con.readWholeLine();
-								try {
-									revisarNumeroBaoloto(digitoBaloto5);
-								} catch (ExepcionNumeroBaloto e) {
-									con.printWithNewLine(
-											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
-								}
 								con.printWithNewLine("digite el sexto digito");
 								String digitoBaloto6 = con.readWholeLine();
-								try {
-									revisarNumeroBaoloto(digitoBaloto6);
-								} catch (ExepcionNumeroBaloto e) {
-									con.printWithNewLine(
-											"el numero que ha ingresado no esta entre 1 y 45 o algun dijito esta repetido");
-								}
 								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
 								String valorDeLaApuestaBaloto = con.readWholeLine();
 								balotDao.create(digitoBaloto1, digitoBaloto2, digitoBaloto3, digitoBaloto4,
 										digitoBaloto5, digitoBaloto6, valorDeLaApuestaBaloto);
+
+								// error revisar UwUn't
 
 								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
 								String option3 = con.readWholeLine();
@@ -442,32 +330,12 @@ public class Controller implements ActionListener {
 
 								con.printWithNewLine("ingrese el primer digito");
 								String digitoSuper1 = con.readWholeLine();
-								try {
-									revisarNumeroSuperastro(digitoSuper1);
-								} catch (ExcepcionNumeroSuperastro e) {
-									con.printWithNewLine("El numero ingresado no se encuentra entre 1 y 9");
-								}
 								con.printWithNewLine("ingrese el segundo digito");
 								String digitoSuper2 = con.readWholeLine();
-								try {
-									revisarNumeroSuperastro(digitoSuper2);
-								} catch (ExcepcionNumeroSuperastro e) {
-									con.printWithNewLine("El numero ingresado no se encuentra entre 1 y 9");
-								}
 								con.printWithNewLine("ingrese el tercer digito");
 								String digitoSuper3 = con.readWholeLine();
-								try {
-									revisarNumeroSuperastro(digitoSuper3);
-								} catch (ExcepcionNumeroSuperastro e) {
-									con.printWithNewLine("El numero ingresado no se encuentra entre 1 y 9");
-								}
 								con.printWithNewLine("digite el cuarto digito");
 								String digitoSuper4 = con.readWholeLine();
-								try {
-									revisarNumeroSuperastro(digitoSuper4);
-								} catch (ExcepcionNumeroSuperastro e) {
-									con.printWithNewLine("El numero ingresado no se encuentra entre 1 y 9");
-								}
 								con.printWithNewLine("digite algun signo del sodiaco"); // crear una exception que sepa
 								// cuales son los unicos signos
 								// del
@@ -475,7 +343,6 @@ public class Controller implements ActionListener {
 								String zodiacoSigno = con.readWholeLine();
 								con.printWithNewLine("Inserte el año en el que usted (o el apostador) nacio");
 								String valorDeLaApuestaSuper = con.readWholeLine();
-
 								superDao.create(digitoSuper1, digitoSuper2, digitoSuper3, digitoSuper4, zodiacoSigno,
 										valorDeLaApuestaSuper);
 								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
@@ -493,56 +360,20 @@ public class Controller implements ActionListener {
 
 								con.printWithNewLine("ingrese el primer digito");
 								String digitoLoteria1 = con.readWholeLine();
-								try {
-									revisarUnSoloNumero(digitoLoteria1);
-								} catch (ExcepcionNumeroLoteria e) {
-									con.printWithNewLine("Se ha ingresado mas de un numero");
-								}
 								con.printWithNewLine("ingrese el segundo digito");
 								String digitoLoteria2 = con.readWholeLine();
-								try {
-									revisarUnSoloNumero(digitoLoteria2);
-								} catch (ExcepcionNumeroLoteria e) {
-									con.printWithNewLine("Se ha ingresado mas de un numero");
-								}
 								con.printWithNewLine("ingrese el tercer digito");
 								String digitoLoteria3 = con.readWholeLine();
-								try {
-									revisarUnSoloNumero(digitoLoteria3);
-								} catch (ExcepcionNumeroLoteria e) {
-									con.printWithNewLine("Se ha ingresado mas de un numero");
-								}
 								con.printWithNewLine("digite el cuarto digito");
 								String digitoLoteria4 = con.readWholeLine();
-								try {
-									revisarUnSoloNumero(digitoLoteria4);
-								} catch (ExcepcionNumeroLoteria e) {
-									con.printWithNewLine("Se ha ingresado mas de un numero");
-								}
 								con.printWithNewLine("digite el primer numero de serie");
 								String serieDig1 = con.readWholeLine();
-								try {
-									revisarUnSoloNumero(serieDig1);
-								} catch (ExcepcionNumeroLoteria e) {
-									con.printWithNewLine("Se ha ingresado mas de un numero");
-								}
 								con.printWithNewLine("sigite el segundo digito de serie");
 								String serieDig2 = con.readWholeLine();
-								try {
-									revisarUnSoloNumero(serieDig2);
-								} catch (ExcepcionNumeroLoteria e) {
-									con.printWithNewLine("Se ha ingresado mas de un numero");
-								}
 								con.printWithNewLine("sigite el tercer digito de serie");
 								String serieDig3 = con.readWholeLine();
-								try {
-									revisarUnSoloNumero(serieDig3);
-								} catch (ExcepcionNumeroLoteria e) {
-									con.printWithNewLine("Se ha ingresado mas de un numero");
-								}
 								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
 								String valorDeLaApuestaLoteria = con.readWholeLine();
-
 								loteDao.create(digitoLoteria1, digitoLoteria2, digitoLoteria3, digitoLoteria4,
 										serieDig1, serieDig2, serieDig3, valorDeLaApuestaLoteria);
 
@@ -615,10 +446,8 @@ public class Controller implements ActionListener {
 
 							}
 							break cicloModulo4;
+
 						}
-					default:
-						con.printWithNewLine("noks ");
-						break;
 					}
 				}
 
@@ -689,13 +518,52 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "ing": {
-
+			vp.setVisible(false);
+			vcca.setVisible(true);
 			break;
 		}
 		case "sal": {
 			JOptionPane.showMessageDialog(vp, "Gracias Por usar el programa");
 			vp.dispose();
 			break;
+		}
+		case "btnnRegist": {
+			String nombre = vcca.getNombreCasaDeApuestas().getText();
+			String cantidadSedes = vcca.getSedesCasaDeApuestas().getText();
+			String presupuestoTotal = vcca.getPresupuestoCasaDeApuestas().getText();
+
+			if (!nombre.equals("") && !cantidadSedes.equals("") && !presupuestoTotal.equals("")) {
+			    boolean temp1 = true;
+
+			    try {
+			        Integer.parseInt(cantidadSedes);
+			        Double.parseDouble(presupuestoTotal);
+			    } catch (NumberFormatException ex) {
+			        ex.printStackTrace();
+			        temp1 = false;
+			        JOptionPane.showMessageDialog(vcca, "Ingrese valores válidos por favor...");
+			    }
+
+			    if (temp1) {
+			        int optionResult = JOptionPane.showConfirmDialog(vcca, "¿Está seguro de los datos ingresados? Luego no se podrán cambiar.", "Confirmación", JOptionPane.YES_NO_OPTION);
+
+			        if (optionResult == JOptionPane.YES_OPTION) {
+			            try {
+			                caDao.create(nombre, cantidadSedes, presupuestoTotal);
+			                prop.inicializarProperties();
+			                JOptionPane.showMessageDialog(vcca, "Datos ingresados exitosamente");
+			                vcca.setVisible(false);
+			            } catch (Exception e1) {
+			                e1.printStackTrace();
+			                JOptionPane.showMessageDialog(vcca, "Error al procesar los datos");
+			            }
+			        }
+			    }
+
+			} else {
+			    JOptionPane.showMessageDialog(vcca, "Debe llenar todos los datos para crear la casa de apuestas");
+			}
+
 		}
 		}
 
@@ -706,43 +574,9 @@ public class Controller implements ActionListener {
 		vp.getPanel().getBotonIng().setActionCommand("ing");
 		vp.getPanel().getBotonSalir().addActionListener(this);
 		vp.getPanel().getBotonSalir().setActionCommand("sal");
+		vcca.getBotonRegistrarCasa().addActionListener(this);
+		vcca.getBotonRegistrarCasa().setActionCommand("btnnRegist");
 
 	}
 
-	public void revisarNumeroBaoloto(String numero) throws ExepcionNumeroBaloto {
-		if (Integer.parseInt(numero) < 1
-				|| Integer.parseInt(numero) > 45 && Integer.parseInt(numero) == Integer.parseInt(numero)) {
-			throw new ExepcionNumeroBaloto();
-		}
-	}
-
-	public void revisarNumeroSuperastro(String num) throws ExcepcionNumeroSuperastro {
-		if (Integer.parseInt(num) < 1 || Integer.parseInt(num) > 9) {
-			throw new ExcepcionNumeroSuperastro();
-		}
-	}
-
-	public void revisarUnSoloNumero(String num) throws ExcepcionNumeroLoteria {
-		if (num.length() != 1 || !Character.isDigit(num.charAt(0))) {
-			throw new ExcepcionNumeroLoteria();
-		}
-	}
-
-	public void revisarNumeroSede(String numero) throws ExcepcionNumeroSede {
-		if (Integer.parseInt(numero) < 0 || Integer.parseInt(numero) > 10) {
-			throw new ExcepcionNumeroSede();
-		}
-	}
-
-	public void revisarNumeroNegativo(String nunero) throws ExcepcionPresupuestoTotal {
-		if (Integer.parseInt(nunero) < 0) {
-			throw new ExcepcionPresupuestoTotal();
-		}
-	}
-
-	public void revisarEdad(String numero) throws ExcepcionMayoriaEdad {
-		if (Integer.parseInt(numero) > 2005 || Integer.parseInt(numero) < 1900) {
-			throw new ExcepcionMayoriaEdad();
-		}
-	}
 }

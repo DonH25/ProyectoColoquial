@@ -21,11 +21,12 @@ public class CasaDeApuestasProperties {
 
 	public int escribirProperties(String nombre, String sedes, String presupuestoTotal) {
 		try {
-			prop.setProperty("NombreCasaDeApuestas:", nombre);
-			prop.setProperty("CantidadDeSedesDeLaCasa:", sedes);
-			prop.setProperty("presupuestoTotalCasa:", presupuestoTotal);
+			prop.setProperty("NombreCasaDeApuestas", nombre);
+			prop.setProperty("CantidadDeSedesDeLaCasa", sedes);
+			prop.setProperty("presupuestoTotalCasa", presupuestoTotal);
 			prop.store(new FileOutputStream(file), null);
 		} catch (IOException ex) {
+			ex.printStackTrace();
 			return -1;
 		}
 		return 0;
@@ -34,9 +35,9 @@ public class CasaDeApuestasProperties {
 	public int modificarProperties(String nombre, String sedes, String presupuestoTotal) {
 		try {
 			prop.load(new FileInputStream(file));
-			prop.setProperty("NombreCasaDeApuestas: ", nombre);
-			prop.setProperty("CantidadDeSedesDeLaCasa: ", sedes);
-			prop.setProperty("presupuestoTotalCasa: ", presupuestoTotal);
+			prop.setProperty("NombreCasaDeApuestas", nombre);
+			prop.setProperty("CantidadDeSedesDeLaCasa", sedes);
+			prop.setProperty("presupuestoTotalCasa", presupuestoTotal);
 			prop.store(new FileOutputStream(file), null);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -51,9 +52,9 @@ public class CasaDeApuestasProperties {
 	public int inicializarProperties() {
 		try {
 			prop.load(new FileInputStream(file));
-			prop.setProperty("NombreCasaDeApuestas: ", nombre);
-			prop.setProperty("CantidadDeSedesDeLaCasa: ", sedes);
-			prop.setProperty("presupuestoTotalCasa: ", presupuestoTotal);
+			nombre = prop.getProperty("NombreCasaDeApuestas", "");
+			sedes = prop.getProperty("CantidadDeSedesDeLaCasa", "");
+			presupuestoTotal = prop.getProperty("presupuestoTotalCasa", "");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return -1;
