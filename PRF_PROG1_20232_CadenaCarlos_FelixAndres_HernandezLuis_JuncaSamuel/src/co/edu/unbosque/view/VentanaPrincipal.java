@@ -1,6 +1,5 @@
 package co.edu.unbosque.view;
 
-
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -50,6 +49,7 @@ public class VentanaPrincipal extends JFrame {
 		texto.setIcon(imagen3);
 
 		add(logo);
+		add(panel);
 		add(fondo);
 		add(panel);
 		add(texto);

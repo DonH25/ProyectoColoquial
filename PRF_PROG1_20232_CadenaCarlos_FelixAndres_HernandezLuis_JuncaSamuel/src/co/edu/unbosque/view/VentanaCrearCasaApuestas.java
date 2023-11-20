@@ -14,7 +14,7 @@ public class VentanaCrearCasaApuestas extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = -97942622027646067L;
-	private JButton botonRegistrarCasa;
+	private JButton botonRegistrarCasa, botonModificarCasa;
 	private JTextField nombreCasaDeApuestas, sedesCasaDeApuestas, presupuestoCasaDeApuestas;
 	private JLabel indicacionesCasaApuestas, indicacionesSedes, indicacionesPresupuesto, textoIndicaciones1,
 			textoIndicaciones2, textoIndicaciones3, textoIndicaciones4, fondo;
@@ -57,8 +57,7 @@ public class VentanaCrearCasaApuestas extends JFrame {
 
 		textoIndicaciones2 = new JLabel();
 		textoIndicaciones2.setBounds(0, 500, 900, 25);
-		textoIndicaciones2.setText(
-				"1 : Asegurese de revisar todas las especificaciones de su casa de apuestas , ya que despues de esto los cambios no se pueden sobreescribir ");
+		textoIndicaciones2.setText("1 : Asegurese de revisar todas las especificaciones de su casa de apuestas ");
 		textoIndicaciones2.setForeground(Color.WHITE);
 
 		textoIndicaciones3 = new JLabel();
@@ -199,5 +198,5 @@ public class VentanaCrearCasaApuestas extends JFrame {
 	public void setFondo(JLabel fondo) {
 		this.fondo = fondo;
 	}
-	
+
 }

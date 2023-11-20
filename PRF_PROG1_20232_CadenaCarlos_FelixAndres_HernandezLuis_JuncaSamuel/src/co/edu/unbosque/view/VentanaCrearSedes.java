@@ -16,7 +16,7 @@ public class VentanaCrearSedes extends JFrame {
 	private static final long serialVersionUID = 2958406166755371604L;
 	private JTextField numEmpleados, localidadSede;
 	private JLabel indicacionesEmpleados, indicacionesLocalidad, fondo;
-	private JButton registrarSede;
+	private JButton registrarSede, modificarSede;
 
 	public VentanaCrearSedes() {
 
@@ -33,12 +33,12 @@ public class VentanaCrearSedes extends JFrame {
 		localidadSede.setBounds(100, 130, 350, 30);
 
 		indicacionesEmpleados = new JLabel();
-		indicacionesEmpleados.setBounds(600, 130, 500, 25);
+		indicacionesEmpleados.setBounds(600, 110, 500, 25);
 		indicacionesEmpleados.setText("Ingresar en el espacio de abajo el numero de empleados de esta sede; ");
 		indicacionesEmpleados.setForeground(Color.WHITE);
 
 		numEmpleados = new JTextField();
-		numEmpleados.setBounds(440, 160, 350, 25);
+		numEmpleados.setBounds(600, 130, 350, 25);
 
 		registrarSede = new JButton();
 		registrarSede.setBounds(1000, 450, 200, 200);
@@ -47,6 +47,15 @@ public class VentanaCrearSedes extends JFrame {
 		ImageIcon imagen1;
 		imagen1 = new ImageIcon(temp1.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		registrarSede.setIcon(imagen1);
+
+		modificarSede = new JButton();
+		modificarSede.setBounds(800, 450, 200, 200);
+		Image temp11;
+		temp11 = new ImageIcon("src/imagenes/registrarSedes.png").getImage();
+		ImageIcon imagen11;
+		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+		modificarSede.setIcon(imagen11);
+		modificarSede.setVisible(false);
 
 		fondo = new JLabel();
 		fondo.setBounds(0, 0, 1280, 720);
@@ -62,6 +71,7 @@ public class VentanaCrearSedes extends JFrame {
 		add(numEmpleados);
 		add(registrarSede);
 		add(fondo);
+		add(modificarSede);
 
 	}
 
@@ -108,5 +118,14 @@ public class VentanaCrearSedes extends JFrame {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public JButton getModificarSede() {
+		return modificarSede;
+	}
+
+	public void setModificarSede(JButton modificarSede) {
+		this.modificarSede = modificarSede;
+	}
+	
 
 }

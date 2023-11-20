@@ -26,6 +26,7 @@ import co.edu.unbosque.util.ExcepcionPresupuestoTotal;
 import co.edu.unbosque.view.Console;
 import co.edu.unbosque.view.VentanaCrearCasaApuestas;
 import co.edu.unbosque.view.VentanaCrearSedes;
+import co.edu.unbosque.view.VentanaMenuSeleccion;
 import co.edu.unbosque.view.VentanaPresupuesto;
 import co.edu.unbosque.view.VentanaPrincipal;
 
@@ -48,6 +49,7 @@ public class Controller implements ActionListener {
 	BetplayDAO betDao;
 	VentanaCrearSedes vsed;
 	private File ruta1, ruta2, ruta3;
+	VentanaMenuSeleccion vms;
 
 	public Controller() {
 		con = new Console();
@@ -59,6 +61,7 @@ public class Controller implements ActionListener {
 		vcca = new VentanaCrearCasaApuestas();
 		vpre = new VentanaPresupuesto();
 		vsed = new VentanaCrearSedes();
+		vms = new VentanaMenuSeleccion();
 		ruta1 = new File("src/co/edu/unbosque/model/persistence/config.properties");
 		ruta2 = new File("src/co/edu/unbosque/model/persistence/juegos.dat");
 		ruta3 = new File("src/co/edu/unbosque/model/persistence/sedes.dat");
@@ -132,7 +135,7 @@ public class Controller implements ActionListener {
 				break;
 
 			case 2:
-				con.printWithNewLine("case 2 de prueba");
+				con.printWithNewLine(sedeDao.read());
 				break;
 
 			case 3:
@@ -493,10 +496,12 @@ public class Controller implements ActionListener {
 	}
 
 	public void run() {
-if(ruta1.exists()&&ruta2.exists()&&ruta3.exists()) {
-	System.out.println("prueba");
-}
-		vp.setVisible(true);
+		if (ruta1.exists() && ruta2.exists() && ruta3.exists()) {
+			vms.setVisible(true);
+		} else {
+			vp.setVisible(true);
+
+		}
 
 	}
 
@@ -697,6 +702,74 @@ if(ruta1.exists()&&ruta2.exists()&&ruta3.exists()) {
 			}
 			break;
 		}
+		case "btnPara": {
+			int opcion = JOptionPane.showConfirmDialog(vpre, "¿Desea modificar la casa de apuestas?", "Confirmación",
+					JOptionPane.YES_NO_OPTION);
+			if (opcion == JOptionPane.YES_OPTION) {
+				vms.setVisible(false);
+				vcca.setVisible(true);
+
+			} else {
+				int opcion1 = JOptionPane.showConfirmDialog(vpre, "¿Desea modificar los presupuestos de los juegos?",
+						"Confirmación", JOptionPane.YES_NO_OPTION);
+				if (opcion1 == JOptionPane.YES_OPTION) {
+					vpre.setVisible(true);
+					vms.setVisible(false);
+				} else {
+					int opcion12 = JOptionPane.showConfirmDialog(vpre, "¿Desea modificar Las sedes?", "Confirmación",
+							JOptionPane.YES_NO_OPTION);
+					if (opcion12 == JOptionPane.YES_OPTION) {
+						vms.setVisible(false);
+						vsed.setVisible(true);
+						vsed.getModificarSede().setVisible(true);
+						vsed.getRegistrarSede().setVisible(false);
+					} else {
+						JOptionPane.showMessageDialog(vms, "No se Modifico absolutamente nada");
+					}
+				}
+			}
+			break;
+		}
+		case "btnModifSed": {
+			String localidad = vsed.getLocalidadSede().getText();
+			String empleados = vsed.getNumEmpleados().getText();
+
+			// Verificar si ambos campos están vacíos
+			if (localidad.equals("") && empleados.equals("")) {
+				JOptionPane.showMessageDialog(vpre, "Por favor, completar los cuadros ");
+			} else {
+				try {
+					// Intentar convertir la cantidad de empleados a un número entero
+					int numEmpleados = Integer.parseInt(empleados);
+
+					// Verificar si la cantidad de empleados es negativa
+					revisarNumeroNegativo(numEmpleados);
+
+					// Mostrar confirmación antes de crear la sede
+					int opcion111 = JOptionPane.showConfirmDialog(vpre, "¿Desea Modificar la sede?", "Confirmar",
+							JOptionPane.YES_NO_OPTION);
+
+					if (opcion111 == JOptionPane.YES_OPTION) {
+						JOptionPane.showMessageDialog(vsed, "Sede creada exitosamente");
+					} else {
+						// Vaciar los campos si se selecciona 'No'
+						vsed.getLocalidadSede().setText("");
+						vsed.getNumEmpleados().setText("");
+					}
+				} catch (ExcepcionPresupuestoTotal e2) {
+					e2.printStackTrace();
+					JOptionPane.showMessageDialog(vpre,
+							"Por favor, no existen números negativos posibles en esta elección ");
+				}
+			}
+			if (sedeDao.getListOfSedes().size() == Integer.parseInt(prop.getSedes())) {
+				vsed.setVisible(false);
+
+			} else {
+				JOptionPane.showMessageDialog(vpre, "Las sedes estan incompletas, por favor creala nuevamente");
+			}
+
+		}
 
 		}
 	}
@@ -726,6 +799,11 @@ if(ruta1.exists()&&ruta2.exists()&&ruta3.exists()) {
 		vpre.getBotonRegistrarPresupuesto().setActionCommand("btnRegistPresup");
 		vsed.getRegistrarSede().addActionListener(this);
 		vsed.getRegistrarSede().setActionCommand("btnRegistSed");
+		vsed.getModificarSede().addActionListener(this);
+		vsed.getModificarSede().setActionCommand("btnModifSed");
+		vms.getBotonParametros().addActionListener(this);
+		vms.getBotonParametros().setActionCommand("btnPara");
+
 	}
 
 }
