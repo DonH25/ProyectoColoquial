@@ -51,7 +51,7 @@ public class VentanaCrearSedes extends JFrame {
 		modificarSede = new JButton();
 		modificarSede.setBounds(800, 450, 200, 200);
 		Image temp11;
-		temp11 = new ImageIcon("src/imagenes/registrarSedes.png").getImage();
+		temp11 = new ImageIcon("src/imagenes/modificarSedes.png").getImage();
 		ImageIcon imagen11;
 		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		modificarSede.setIcon(imagen11);

@@ -696,6 +696,7 @@ public class Controller implements ActionListener {
 			}
 			if (sedeDao.getListOfSedes().size() == Integer.parseInt(prop.getSedes())) {
 				vsed.setVisible(false);
+				vms.setVisible(true);
 
 			} else {
 				JOptionPane.showMessageDialog(vpre, "Las sedes estan incompletas, por favor creala nuevamente");
@@ -723,6 +724,8 @@ public class Controller implements ActionListener {
 						vsed.setVisible(true);
 						vsed.getModificarSede().setVisible(true);
 						vsed.getRegistrarSede().setVisible(false);
+						JOptionPane.showMessageDialog(vsed,
+								"Para modificar las sedes , se modificara en orden que se puso , si no quiere actualizar nada deje los espacios en blanco");
 					} else {
 						JOptionPane.showMessageDialog(vms, "No se Modifico absolutamente nada");
 					}
@@ -733,26 +736,23 @@ public class Controller implements ActionListener {
 		case "btnModifSed": {
 			String localidad = vsed.getLocalidadSede().getText();
 			String empleados = vsed.getNumEmpleados().getText();
-
-			// Verificar si ambos campos están vacíos
+			int posicion = 0;
 			if (localidad.equals("") && empleados.equals("")) {
 				JOptionPane.showMessageDialog(vpre, "Por favor, completar los cuadros ");
 			} else {
 				try {
-					// Intentar convertir la cantidad de empleados a un número entero
 					int numEmpleados = Integer.parseInt(empleados);
 
-					// Verificar si la cantidad de empleados es negativa
 					revisarNumeroNegativo(numEmpleados);
 
-					// Mostrar confirmación antes de crear la sede
 					int opcion111 = JOptionPane.showConfirmDialog(vpre, "¿Desea Modificar la sede?", "Confirmar",
 							JOptionPane.YES_NO_OPTION);
 
 					if (opcion111 == JOptionPane.YES_OPTION) {
+						sedeDao.update(posicion, localidad, empleados);
+						posicion++;
 						JOptionPane.showMessageDialog(vsed, "Sede creada exitosamente");
 					} else {
-						// Vaciar los campos si se selecciona 'No'
 						vsed.getLocalidadSede().setText("");
 						vsed.getNumEmpleados().setText("");
 					}
@@ -761,17 +761,21 @@ public class Controller implements ActionListener {
 					JOptionPane.showMessageDialog(vpre,
 							"Por favor, no existen números negativos posibles en esta elección ");
 				}
-			}
-			if (sedeDao.getListOfSedes().size() == Integer.parseInt(prop.getSedes())) {
-				vsed.setVisible(false);
+				if (sedeDao.getListOfSedes().size() < posicion) {
+					vsed.setVisible(false);
+					vms.setVisible(true);
 
-			} else {
-				JOptionPane.showMessageDialog(vpre, "Las sedes estan incompletas, por favor creala nuevamente");
+				} else {
+					JOptionPane.showMessageDialog(vpre, "Las sedes estan incompletas, por favor creala nuevamente");
+				}
+
+				break;
+
 			}
 
 		}
-
 		}
+
 	}
 
 	// Método para revisar que el número de sedes esté entre 1 y 10
