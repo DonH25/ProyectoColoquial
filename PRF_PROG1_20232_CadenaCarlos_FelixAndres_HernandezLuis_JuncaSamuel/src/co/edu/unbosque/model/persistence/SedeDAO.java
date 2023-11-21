@@ -56,19 +56,32 @@ public class SedeDAO implements CRUDOperation {
 
 	@Override
 	public boolean update(int index, String... args) {
-		if (index < 0 || index >= listOfSedes.size()) {
+		if (args[0] == null || args[0].isBlank()) {
 			return false;
-		} else {
+		}
 
-			if (!args[0].isBlank() || !args[0].isEmpty() || args[0] != null) {
-				listOfSedes.get(index).setLocalidad(args[0]);
-			}
-			if (!args[1].isBlank() || !args[1].isEmpty() || args[1] != null) {
-				listOfSedes.get(index).setNumEmpleados(Long.parseLong(args[1]));
+		for (SedeDTO sede : listOfSedes) {
+			if (sede.getLocalidad().equals(args[0])) {
+				if (args.length > 0 && !args[0].isBlank() && !args[0].isEmpty()) {
+					sede.setLocalidad(args[0]);
+				}
+
+				if (args.length > 1 && !args[1].isBlank() && !args[1].isEmpty()) {
+					try {
+						long numEmpleados = Long.parseLong(args[1]);
+						sede.setNumEmpleados(numEmpleados);
+					} catch (NumberFormatException e) {
+						// Manejar la excepción si la conversión a Long falla
+						e.printStackTrace();
+					}
+				}
+
+				writeDataSerializable();
+				return true;
 			}
 		}
-		writeDataSerializable();
-		return true;
+
+		return false; // No se encontró la sede con la localidad especificada
 	}
 
 	@Override
@@ -91,6 +104,29 @@ public class SedeDAO implements CRUDOperation {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	public boolean updateByLocalidad(String... args) {
+		if (args == null || args.length < 2 || args[0] == null || args[0].isBlank()) {
+			return false;
+		} else {
+			for (SedeDTO sede : listOfSedes) {
+				if (sede.getLocalidad().equals(args[0])) {
+					if (!args[0].isBlank() && !args[0].isEmpty()) {
+						sede.setLocalidad(args[0]);
+					}
+
+					if (!args[1].isBlank() && !args[1].isEmpty()) {
+						sede.setLocalidad(args[1]);
+					}
+					if (!args[2].isBlank() && !args[2].isEmpty()) {
+						sede.setNumEmpleados(Integer.parseInt(args[2]));
+					}
+				}
+			}
+			writeDataSerializable();
+			return true;
 		}
 	}
 

@@ -548,9 +548,8 @@ public class Controller implements ActionListener {
 					}
 
 					if (temporal) {
-						int optionResult = JOptionPane.showConfirmDialog(vcca,
-								"¿Está seguro de los datos ingresados? Luego no se podrán cambiar.", "Confirmación",
-								JOptionPane.YES_NO_OPTION);
+						int optionResult = JOptionPane.showConfirmDialog(vcca, "¿Está seguro de los datos ingresados? ",
+								"Confirmación", JOptionPane.YES_NO_OPTION);
 
 						if (optionResult == JOptionPane.YES_OPTION) {
 							try {
@@ -694,6 +693,7 @@ public class Controller implements ActionListener {
 							"Por favor, no existen números negativos posibles en esta elección ");
 				}
 			}
+			prop.inicializarProperties();
 			if (sedeDao.getListOfSedes().size() == Integer.parseInt(prop.getSedes())) {
 				vsed.setVisible(false);
 				vms.setVisible(true);
@@ -709,13 +709,18 @@ public class Controller implements ActionListener {
 			if (opcion == JOptionPane.YES_OPTION) {
 				vms.setVisible(false);
 				vcca.setVisible(true);
+				vcca.getBotonModificarCasa().setVisible(true);
+				vcca.getBotonRegistrarCasa().setVisible(false);
 
 			} else {
 				int opcion1 = JOptionPane.showConfirmDialog(vpre, "¿Desea modificar los presupuestos de los juegos?",
 						"Confirmación", JOptionPane.YES_NO_OPTION);
 				if (opcion1 == JOptionPane.YES_OPTION) {
+
 					vpre.setVisible(true);
 					vms.setVisible(false);
+					vpre.getBotonRegistrarPresupuesto().setVisible(false);
+					vpre.getBotonModificarPresupuesto().setVisible(true);
 				} else {
 					int opcion12 = JOptionPane.showConfirmDialog(vpre, "¿Desea modificar Las sedes?", "Confirmación",
 							JOptionPane.YES_NO_OPTION);
@@ -724,8 +729,12 @@ public class Controller implements ActionListener {
 						vsed.setVisible(true);
 						vsed.getModificarSede().setVisible(true);
 						vsed.getRegistrarSede().setVisible(false);
+						vsed.getIndicacionesLocalidadModificar().setVisible(true);
+						vsed.getLocalidadModificar().setVisible(true);
+						vsed.getRegresar().setVisible(true);
+						;
 						JOptionPane.showMessageDialog(vsed,
-								"Para modificar las sedes , se modificara en orden que se puso , si no quiere actualizar nada deje los espacios en blanco");
+								"Para modificar las sedes , se modificara en cuestion de la localidad de la sede");
 					} else {
 						JOptionPane.showMessageDialog(vms, "No se Modifico absolutamente nada");
 					}
@@ -734,24 +743,26 @@ public class Controller implements ActionListener {
 			break;
 		}
 		case "btnModifSed": {
-			String localidad = vsed.getLocalidadSede().getText();
-			String empleados = vsed.getNumEmpleados().getText();
-			int posicion = 0;
-			if (localidad.equals("") && empleados.equals("")) {
-				JOptionPane.showMessageDialog(vpre, "Por favor, completar los cuadros ");
+			String localidadAModificar = vsed.getLocalidadModificar().getText();
+			String nuevaLocalidad = vsed.getLocalidadSede().getText();
+			String nuevosEmpleados = vsed.getNumEmpleados().getText();
+
+			if (localidadAModificar.isEmpty() || nuevaLocalidad.isEmpty() || nuevosEmpleados.isEmpty()) {
+				JOptionPane.showMessageDialog(vsed, "Por favor, completar los cuadros");
 			} else {
 				try {
-					int numEmpleados = Integer.parseInt(empleados);
-
+					int numEmpleados = Integer.parseInt(nuevosEmpleados);
 					revisarNumeroNegativo(numEmpleados);
 
 					int opcion111 = JOptionPane.showConfirmDialog(vpre, "¿Desea Modificar la sede?", "Confirmar",
 							JOptionPane.YES_NO_OPTION);
 
 					if (opcion111 == JOptionPane.YES_OPTION) {
-						sedeDao.update(posicion, localidad, empleados);
-						posicion++;
-						JOptionPane.showMessageDialog(vsed, "Sede creada exitosamente");
+						if (sedeDao.updateByLocalidad(localidadAModificar, nuevaLocalidad, nuevosEmpleados)) {
+							JOptionPane.showMessageDialog(vsed, "Sede modificada exitosamente");
+						} else {
+							JOptionPane.showMessageDialog(vsed, "No se encontró la sede con la localidad especificada");
+						}
 					} else {
 						vsed.getLocalidadSede().setText("");
 						vsed.getNumEmpleados().setText("");
@@ -759,21 +770,144 @@ public class Controller implements ActionListener {
 				} catch (ExcepcionPresupuestoTotal e2) {
 					e2.printStackTrace();
 					JOptionPane.showMessageDialog(vpre,
-							"Por favor, no existen números negativos posibles en esta elección ");
+							"Por favor, no existen números negativos posibles en esta elección");
 				}
-				if (sedeDao.getListOfSedes().size() < posicion) {
-					vsed.setVisible(false);
-					vms.setVisible(true);
+			}
+			break;
+		}
+		case "btnModifPresupuesto": {
+			if (vpre.getBalotoPresupuesto().getText().isBlank() && vpre.getBetplayPresupuesto().getText().isBlank()
+					&& vpre.getSuperastroPresupuesto().getText().isBlank()
+					&& vpre.getChancePresupuesto().getText().isBlank()
+					&& vpre.getLoteriaPresupuesto().getText().isBlank()) {
+				JOptionPane.showMessageDialog(vpre, "Complete todos los campos");
+			} else {
+				boolean temp1 = true;
 
-				} else {
-					JOptionPane.showMessageDialog(vpre, "Las sedes estan incompletas, por favor creala nuevamente");
+				String[] juegos = { vpre.getBalotoPresupuesto().getText(), vpre.getBetplayPresupuesto().getText(),
+						vpre.getSuperastroPresupuesto().getText(), vpre.getChancePresupuesto().getText(),
+						vpre.getLoteriaPresupuesto().getText() };
+
+				for (String presupuesto : juegos) {
+					if (presupuesto == null || presupuesto.isBlank()) {
+						temp1 = false;
+						JOptionPane.showMessageDialog(vpre, "Debe ingresar valores válidos.");
+						break; // Terminar el bucle si encuentra un valor no válido
+					}
+
+					try {
+						Double.parseDouble(presupuesto);
+					} catch (NumberFormatException ex) {
+						ex.printStackTrace();
+						temp1 = false;
+						JOptionPane.showMessageDialog(vpre, "Debe ingresar valores válidos.");
+						break; // Terminar el bucle si encuentra un valor no válido
+					}
 				}
 
-				break;
+				if (temp1) {
+					caDao.cargarPropertiesDeLaCasa();
 
+					double tmp1 = Double.parseDouble(vpre.getLoteriaPresupuesto().getText());
+					double tmp2 = Double.parseDouble(vpre.getBalotoPresupuesto().getText());
+					double tmp3 = Double.parseDouble(vpre.getBetplayPresupuesto().getText());
+					double tmp4 = Double.parseDouble(vpre.getChancePresupuesto().getText());
+					double tmp5 = Double.parseDouble(vpre.getSuperastroPresupuesto().getText());
+
+					double sumPresupuesto = tmp1 + tmp2 + tmp3 + tmp4 + tmp5;
+					prop.inicializarProperties();
+					if (sumPresupuesto <= Double.parseDouble(prop.getPresupuestoTotal())) {
+						jueDao.update(0, vpre.getBalotoPresupuesto().getText());
+						jueDao.update(1, vpre.getChancePresupuesto().getText());
+						jueDao.update(2, vpre.getBetplayPresupuesto().getText());
+						jueDao.update(3, vpre.getLoteriaPresupuesto().getText());
+						jueDao.update(4, vpre.getSuperastroPresupuesto().getText());
+
+						int option = JOptionPane.showConfirmDialog(vpre, "¿Los datos ingresados son correctos?",
+								"Confirmación", JOptionPane.YES_NO_OPTION);
+
+						if (option == JOptionPane.YES_OPTION) {
+							JOptionPane.showMessageDialog(vpre, "Datos ingresados");
+							vpre.setVisible(false);
+							vms.setVisible(true);
+						} else {
+							// Si el usuario presiona "No", borrar los cuadros de texto
+							vpre.getLoteriaPresupuesto().setText("");
+							vpre.getBalotoPresupuesto().setText("");
+							vpre.getBetplayPresupuesto().setText("");
+							vpre.getChancePresupuesto().setText("");
+							vpre.getSuperastroPresupuesto().setText("");
+						}
+					} else {
+						JOptionPane.showMessageDialog(vpre,
+								"La suma de los presupuestos excede su presupuesto total, realice de nuevo la distribución del presupuesto");
+					}
+				}
 			}
 
+			break;
 		}
+		case "btnnModifCasa": {
+			String nombre = vcca.getNombreCasaDeApuestas().getText();
+			String cantidadSedes = vcca.getSedesCasaDeApuestas().getText();
+			String presupuestoTotal = vcca.getPresupuestoCasaDeApuestas().getText();
+
+			try {
+				// Validar que los campos no esten vacios
+				if (!nombre.equals("") && !cantidadSedes.equals("") && !presupuestoTotal.equals("")) {
+					boolean temporal = true;
+
+					try {
+						// Validar que la cantidad de sedes sea un número válido
+						int sedes = Integer.parseInt(cantidadSedes);
+						revisarNumeroSede(sedes);
+
+						// Validar que el presupuesto total sea un número válido y no sea negativo
+						double preTotal = Double.parseDouble(presupuestoTotal);
+						revisarNumeroNegativo(preTotal);
+					} catch (NumberFormatException ex) {
+						ex.printStackTrace();
+						temporal = false;
+						JOptionPane.showMessageDialog(vcca, "Ingrese valores válidos por favor...");
+					}
+
+					if (temporal) {
+						int optionResult = JOptionPane.showConfirmDialog(vcca, "¿Está seguro de los datos ingresados? ",
+								"Confirmación", JOptionPane.YES_NO_OPTION);
+
+						if (optionResult == JOptionPane.YES_OPTION) {
+							try {
+								caDao.update(0, nombre, cantidadSedes, presupuestoTotal);
+								prop.inicializarProperties();
+								JOptionPane.showMessageDialog(vcca, "Datos ingresados exitosamente");
+								vcca.setVisible(false);
+								vpre.setVisible(true);
+							} catch (Exception e1) {
+								e1.printStackTrace();
+								JOptionPane.showMessageDialog(vcca, "Error al procesar los datos");
+							}
+						} else {
+							vcca.getNombreCasaDeApuestas().setText("");
+							vcca.getSedesCasaDeApuestas().setText("");
+							vcca.getPresupuestoCasaDeApuestas().setText("");
+						}
+					}
+
+				} else {
+					JOptionPane.showMessageDialog(vcca, "Debe llenar todos los datos para crear la casa de apuestas");
+				}
+			} catch (ExcepcionNumeroSede e1) {
+				JOptionPane.showMessageDialog(vcca, "El número de sedes debe estar entre 1 y 10 y ser un entero.");
+			} catch (ExcepcionPresupuestoTotal e1) {
+				JOptionPane.showMessageDialog(vcca,
+						"El número ingresado es negativo para sedes o presupuesto, intente nuevamente.");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				JOptionPane.showMessageDialog(vcca, "Error inesperado: " + e1.getMessage());
+			}
+			break;
+		}
+
 		}
 
 	}
@@ -799,8 +933,12 @@ public class Controller implements ActionListener {
 		vp.getPanel().getBotonSalir().setActionCommand("sal");
 		vcca.getBotonRegistrarCasa().addActionListener(this);
 		vcca.getBotonRegistrarCasa().setActionCommand("btnnRegist");
+		vcca.getBotonModificarCasa().addActionListener(this);
+		vcca.getBotonModificarCasa().setActionCommand("btnnModifCasa");
 		vpre.getBotonRegistrarPresupuesto().addActionListener(this);
 		vpre.getBotonRegistrarPresupuesto().setActionCommand("btnRegistPresup");
+		vpre.getBotonModificarPresupuesto().addActionListener(this);
+		vpre.getBotonModificarPresupuesto().setActionCommand("btnModifPresupuesto");
 		vsed.getRegistrarSede().addActionListener(this);
 		vsed.getRegistrarSede().setActionCommand("btnRegistSed");
 		vsed.getModificarSede().addActionListener(this);

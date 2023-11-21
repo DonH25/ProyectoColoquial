@@ -10,7 +10,6 @@ public class JuegoDAO implements CRUDOperation {
 	final String SERIAL_FILENAME = "juegos.dat";
 	int index = 0;
 
-	
 	public JuegoDAO() {
 		listOfJuego = new ArrayList<JuegoDTO>();
 
@@ -90,27 +89,22 @@ public class JuegoDAO implements CRUDOperation {
 		}
 	}
 
-	
 	public void writeDataSerializable() {
 		FileHandler.serializableOpenAndWriteFile(SERIAL_FILENAME, listOfJuego);
 	}
 
-	
 	public ArrayList<JuegoDTO> getListOfJuego() {
 		return listOfJuego;
 	}
 
-	
 	public void setListOfJuego(ArrayList<JuegoDTO> listOfJuego) {
 		this.listOfJuego = listOfJuego;
 	}
 
-	
 	public int getIndex() {
 		return index;
 	}
 
-	
 	public void setIndex(int index) {
 		this.index = index;
 	}
@@ -118,6 +112,7 @@ public class JuegoDAO implements CRUDOperation {
 	public String getSERIAL_FILENAME() {
 		return SERIAL_FILENAME;
 	}
+
 	public boolean juegoExiste() {
 		if (!listOfJuego.isEmpty()) {
 

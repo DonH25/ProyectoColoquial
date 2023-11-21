@@ -14,7 +14,7 @@ public class VentanaPresupuesto extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 6845707884091523016L;
-	private JButton botonRegistrarPresupuesto;
+	private JButton botonRegistrarPresupuesto, botonModificarPresupuesto;
 	private JTextField balotoPresupuesto, betplayPresupuesto, superastroPresupuesto, chancePresupuesto,
 			loteriaPresupuesto;
 	private JLabel indicacionesBaloto, indicacionesBetplay, indicacionesSuperastro, indicacionesChance,
@@ -104,6 +104,15 @@ public class VentanaPresupuesto extends JFrame {
 		imagen1 = new ImageIcon(temp1.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		botonRegistrarPresupuesto.setIcon(imagen1);
 
+		botonModificarPresupuesto = new JButton();
+		botonModificarPresupuesto.setBounds(1000, 480, 200, 200);
+		Image temp11;
+		temp11 = new ImageIcon("src/imagenes/modificarPresupuesto.png").getImage();
+		ImageIcon imagen11;
+		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+		botonModificarPresupuesto.setIcon(imagen11);
+		botonModificarPresupuesto.setVisible(false);
+
 		add(indicacionesBaloto);
 		add(balotoPresupuesto);
 
@@ -120,6 +129,7 @@ public class VentanaPresupuesto extends JFrame {
 		add(superastroPresupuesto);
 
 		add(botonRegistrarPresupuesto);
+		add(botonModificarPresupuesto);
 		add(textoIndicaciones1);
 		add(textoIndicaciones2);
 		add(textoIndicaciones3);
@@ -254,6 +264,18 @@ public class VentanaPresupuesto extends JFrame {
 
 	public void setFondo(JLabel fondo) {
 		this.fondo = fondo;
+	}
+
+	public JButton getBotonModificarPresupuesto() {
+		return botonModificarPresupuesto;
+	}
+
+	public void setBotonModificarPresupuesto(JButton botonModificarPresupuesto) {
+		this.botonModificarPresupuesto = botonModificarPresupuesto;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

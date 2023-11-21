@@ -14,9 +14,9 @@ public class VentanaCrearSedes extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 2958406166755371604L;
-	private JTextField numEmpleados, localidadSede;
-	private JLabel indicacionesEmpleados, indicacionesLocalidad, fondo;
-	private JButton registrarSede, modificarSede;
+	private JTextField numEmpleados, localidadSede, localidadModificar;
+	private JLabel indicacionesEmpleados, indicacionesLocalidad, indicacionesLocalidadModificar, fondo;
+	private JButton registrarSede, modificarSede, regresar;
 
 	public VentanaCrearSedes() {
 
@@ -31,6 +31,16 @@ public class VentanaCrearSedes extends JFrame {
 
 		localidadSede = new JTextField();
 		localidadSede.setBounds(100, 130, 350, 30);
+
+		indicacionesLocalidadModificar = new JLabel();
+		indicacionesLocalidadModificar.setBounds(100, 300, 500, 25);
+		indicacionesLocalidadModificar.setText("Ingresar en el espacio de abajo La Localidad que desea modificar   ");
+		indicacionesLocalidadModificar.setForeground(Color.WHITE);
+		indicacionesLocalidadModificar.setVisible(false);
+
+		localidadModificar = new JTextField();
+		localidadModificar.setBounds(100, 330, 350, 30);
+		localidadModificar.setVisible(false);
 
 		indicacionesEmpleados = new JLabel();
 		indicacionesEmpleados.setBounds(600, 110, 500, 25);
@@ -65,13 +75,24 @@ public class VentanaCrearSedes extends JFrame {
 		imagen = new ImageIcon(temp.getScaledInstance(1280, 720, Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen);
 
+		regresar = new JButton();
+		regresar.setBounds(0, 0, 50, 50);
+		Image tempo;
+		tempo = new ImageIcon("src/imagenes/regre.JPG").getImage();
+		ImageIcon imageno;
+		imageno = new ImageIcon(tempo.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+		regresar.setVisible(false);
+		regresar.setIcon(imageno);
 		add(indicacionesLocalidad);
 		add(indicacionesEmpleados);
 		add(localidadSede);
 		add(numEmpleados);
 		add(registrarSede);
-		add(fondo);
 		add(modificarSede);
+		add(indicacionesLocalidadModificar);
+		add(localidadModificar);
+		add(regresar);
+		add(fondo);
 
 	}
 
@@ -126,6 +147,37 @@ public class VentanaCrearSedes extends JFrame {
 	public void setModificarSede(JButton modificarSede) {
 		this.modificarSede = modificarSede;
 	}
-	
+
+	public JTextField getLocalidadModificar() {
+		return localidadModificar;
+	}
+
+	public void setLocalidadModificar(JTextField localidadModificar) {
+		this.localidadModificar = localidadModificar;
+	}
+
+	public JLabel getIndicacionesLocalidadModificar() {
+		return indicacionesLocalidadModificar;
+	}
+
+	public void setIndicacionesLocalidadModificar(JLabel indicacionesLocalidadModificar) {
+		this.indicacionesLocalidadModificar = indicacionesLocalidadModificar;
+	}
+
+	public JLabel getFondo() {
+		return fondo;
+	}
+
+	public void setFondo(JLabel fondo) {
+		this.fondo = fondo;
+	}
+
+	public JButton getRegresar() {
+		return regresar;
+	}
+
+	public void setRegresar(JButton regresar) {
+		this.regresar = regresar;
+	}
 
 }

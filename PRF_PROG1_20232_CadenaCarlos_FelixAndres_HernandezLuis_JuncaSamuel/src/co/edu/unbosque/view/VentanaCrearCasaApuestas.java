@@ -88,6 +88,15 @@ public class VentanaCrearCasaApuestas extends JFrame {
 		imagen1 = new ImageIcon(temp1.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		botonRegistrarCasa.setIcon(imagen1);
 
+		botonModificarCasa = new JButton();
+		botonModificarCasa.setBounds(1000, 480, 200, 200);
+		Image temp11;
+		temp11 = new ImageIcon("src/imagenes/modificarCasa.png").getImage();
+		ImageIcon imagen11;
+		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+		botonModificarCasa.setIcon(imagen11);
+		botonModificarCasa.setVisible(false);
+
 		add(indicacionesCasaApuestas);
 		add(nombreCasaDeApuestas);
 		add(indicacionesSedes);
@@ -99,6 +108,7 @@ public class VentanaCrearCasaApuestas extends JFrame {
 		add(textoIndicaciones2);
 		add(textoIndicaciones3);
 		add(textoIndicaciones4);
+		add(botonModificarCasa);
 
 		add(fondo);
 	}
@@ -197,6 +207,14 @@ public class VentanaCrearCasaApuestas extends JFrame {
 
 	public void setFondo(JLabel fondo) {
 		this.fondo = fondo;
+	}
+
+	public JButton getBotonModificarCasa() {
+		return botonModificarCasa;
+	}
+
+	public void setBotonModificarCasa(JButton botonModificarCasa) {
+		this.botonModificarCasa = botonModificarCasa;
 	}
 
 }
