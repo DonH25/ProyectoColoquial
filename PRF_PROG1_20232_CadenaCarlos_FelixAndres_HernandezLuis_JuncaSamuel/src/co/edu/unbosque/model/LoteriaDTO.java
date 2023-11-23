@@ -2,7 +2,7 @@ package co.edu.unbosque.model;
 
 import java.io.Serializable;
 
-public class LoteriaDTO extends JuegoDTO implements Serializable {
+public class LoteriaDTO extends GestionApuestaDTO implements Serializable {
 	/**
 		 * 
 		 */
@@ -35,87 +35,10 @@ public class LoteriaDTO extends JuegoDTO implements Serializable {
 		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 
-	public LoteriaDTO(String nombreJuego, String tipoDejuego, double presupuestoDelJuego, String nombreLoteria,
-			int digito1, int digito2, int digito3, int digito4, int serieDig1, int serieDig2, int serieDig3,
-			double valorDeLaApuesta) {
-		super(nombreJuego, tipoDejuego, presupuestoDelJuego);
-		this.nombreLoteria = nombreLoteria;
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.serieDig1 = serieDig1;
-		this.serieDig2 = serieDig2;
-		this.serieDig3 = serieDig3;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public LoteriaDTO(String direccion, String barrio, String localidad, long numEmpleados, String nombreJuego,
-			String tipoDejuego, double presupuestoDelJuego, String nombreLoteria, int digito1, int digito2, int digito3,
-			int digito4, int serieDig1, int serieDig2, int serieDig3, double valorDeLaApuesta) {
-		super(direccion, barrio, localidad, numEmpleados, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		this.nombreLoteria = nombreLoteria;
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.serieDig1 = serieDig1;
-		this.serieDig2 = serieDig2;
-		this.serieDig3 = serieDig3;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public LoteriaDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, String nombreJuego, String tipoDejuego, double presupuestoDelJuego,
-			String nombreLoteria, int digito1, int digito2, int digito3, int digito4, int serieDig1, int serieDig2,
-			int serieDig3, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados, nombreJuego,
-				tipoDejuego, presupuestoDelJuego);
-		this.nombreLoteria = nombreLoteria;
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.serieDig1 = serieDig1;
-		this.serieDig2 = serieDig2;
-		this.serieDig3 = serieDig3;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public LoteriaDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String nombreJuego, String tipoDejuego,
-			double presupuestoDelJuego, String nombreLoteria, int digito1, int digito2, int digito3, int digito4,
-			int serieDig1, int serieDig2, int serieDig3, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		this.nombreLoteria = nombreLoteria;
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.serieDig1 = serieDig1;
-		this.serieDig2 = serieDig2;
-		this.serieDig3 = serieDig3;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public LoteriaDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, String nombreLoteria, int digito1, int digito2, int digito3,
-			int digito4, int serieDig1, int serieDig2, int serieDig3, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados);
-		this.nombreLoteria = nombreLoteria;
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.serieDig1 = serieDig1;
-		this.serieDig2 = serieDig2;
-		this.serieDig3 = serieDig3;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public LoteriaDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String nombreLoteria, int digito1,
+	public LoteriaDTO(String nameSede, long numDeCedula, String diaDeLaApuesta, String nombreLoteria, int digito1,
 			int digito2, int digito3, int digito4, int serieDig1, int serieDig2, int serieDig3,
 			double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal);
+		super(nameSede, numDeCedula, diaDeLaApuesta);
 		this.nombreLoteria = nombreLoteria;
 		this.digito1 = digito1;
 		this.digito2 = digito2;
@@ -127,58 +50,8 @@ public class LoteriaDTO extends JuegoDTO implements Serializable {
 		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 
-	public LoteriaDTO(String direccion, String barrio, String localidad, long numEmpleados, String nombreLoteria,
-			int digito1, int digito2, int digito3, int digito4, int serieDig1, int serieDig2, int serieDig3,
-			double valorDeLaApuesta) {
-		super(direccion, barrio, localidad, numEmpleados);
-		this.nombreLoteria = nombreLoteria;
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.serieDig1 = serieDig1;
-		this.serieDig2 = serieDig2;
-		this.serieDig3 = serieDig3;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public LoteriaDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String nombreJuego, String tipoDejuego,
-			double presupuestoDelJuego) {
-		super(nombre, numeroDeSedes, presupuestoTotal, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public LoteriaDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, String nombreJuego, String tipoDejuego, double presupuestoDelJuego) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados, nombreJuego,
-				tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public LoteriaDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados);
-		// TODO Auto-generated constructor stub
-	}
-
-	public LoteriaDTO(String nombre, int numeroDeSedes, double presupuestoTotal) {
-		super(nombre, numeroDeSedes, presupuestoTotal);
-		// TODO Auto-generated constructor stub
-	}
-
-	public LoteriaDTO(String nombreJuego, String tipoDejuego, double presupuestoDelJuego) {
-		super(nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public LoteriaDTO(String direccion, String barrio, String localidad, long numEmpleados, String nombreJuego,
-			String tipoDejuego, double presupuestoDelJuego) {
-		super(direccion, barrio, localidad, numEmpleados, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public LoteriaDTO(String direccion, String barrio, String localidad, long numEmpleados) {
-		super(direccion, barrio, localidad, numEmpleados);
+	public LoteriaDTO(String nameSede, long numDeCedula, String diaDeLaApuesta) {
+		super(nameSede, numDeCedula, diaDeLaApuesta);
 		// TODO Auto-generated constructor stub
 	}
 

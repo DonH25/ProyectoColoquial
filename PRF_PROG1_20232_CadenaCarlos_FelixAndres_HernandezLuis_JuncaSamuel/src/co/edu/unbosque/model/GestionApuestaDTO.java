@@ -11,18 +11,16 @@ public class GestionApuestaDTO implements Serializable {
 	private String nameSede;
 	private long numDeCedula;
 	private String diaDeLaApuesta; // toca colocar una exepcion para los dias que no sean de la semana
-	private int valorDeLaApuesta;
 
 	public GestionApuestaDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GestionApuestaDTO(String nameSede, long numDeCedula, String diaDeLaApuesta, int valorDeLaApuesta) {
+	public GestionApuestaDTO(String nameSede, long numDeCedula, String diaDeLaApuesta) {
 		super();
 		this.nameSede = nameSede;
 		this.numDeCedula = numDeCedula;
 		this.diaDeLaApuesta = diaDeLaApuesta;
-		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 
 	public String getNameSede() {
@@ -49,14 +47,6 @@ public class GestionApuestaDTO implements Serializable {
 		this.diaDeLaApuesta = diaDeLaApuesta;
 	}
 
-	public int getValorDeLaApuesta() {
-		return valorDeLaApuesta;
-	}
-
-	public void setValorDeLaApuesta(int valorDeLaApuesta) {
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -64,8 +54,7 @@ public class GestionApuestaDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "GestionApuestaDTO [nameSede=" + nameSede + ", numDeCedula=" + numDeCedula + ", diaDeLaApuesta="
-				+ diaDeLaApuesta + ", valorDeLaApuesta=" + valorDeLaApuesta + "]";
+				+ diaDeLaApuesta + "]";
 	}
-	
 
 }

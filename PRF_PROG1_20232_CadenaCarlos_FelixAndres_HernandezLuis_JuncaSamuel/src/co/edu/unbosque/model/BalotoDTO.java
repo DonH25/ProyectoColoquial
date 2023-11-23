@@ -2,7 +2,7 @@ package co.edu.unbosque.model;
 
 import java.io.Serializable;
 
-public class BalotoDTO extends JuegoDTO implements Serializable {
+public class BalotoDTO extends GestionApuestaDTO implements Serializable {
 	/**
 		 * 
 		 */
@@ -30,133 +30,10 @@ public class BalotoDTO extends JuegoDTO implements Serializable {
 		this.digito6 = digito6;
 		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
+	
 
-	public BalotoDTO(String nombreJuego, String tipoDejuego, double presupuestoDelJuego, int digito1, int digito2,
-			int digito3, int digito4, int digito5, int digito6, double valorDeLaApuesta) {
-		super(nombreJuego, tipoDejuego, presupuestoDelJuego);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.digito5 = digito5;
-		this.digito6 = digito6;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BalotoDTO(String direccion, String barrio, String localidad, long numEmpleados, String nombreJuego,
-			String tipoDejuego, double presupuestoDelJuego, int digito1, int digito2, int digito3, int digito4,
-			int digito5, int digito6, double valorDeLaApuesta) {
-		super(direccion, barrio, localidad, numEmpleados, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.digito5 = digito5;
-		this.digito6 = digito6;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BalotoDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, String nombreJuego, String tipoDejuego, double presupuestoDelJuego,
-			int digito1, int digito2, int digito3, int digito4, int digito5, int digito6, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados, nombreJuego,
-				tipoDejuego, presupuestoDelJuego);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.digito5 = digito5;
-		this.digito6 = digito6;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BalotoDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String nombreJuego, String tipoDejuego,
-			double presupuestoDelJuego, int digito1, int digito2, int digito3, int digito4, int digito5, int digito6,
-			double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.digito5 = digito5;
-		this.digito6 = digito6;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BalotoDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, int digito1, int digito2, int digito3, int digito4, int digito5,
-			int digito6, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.digito5 = digito5;
-		this.digito6 = digito6;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BalotoDTO(String nombre, int numeroDeSedes, double presupuestoTotal, int digito1, int digito2, int digito3,
-			int digito4, int digito5, int digito6, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.digito5 = digito5;
-		this.digito6 = digito6;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BalotoDTO(String direccion, String barrio, String localidad, long numEmpleados, int digito1, int digito2,
-			int digito3, int digito4, int digito5, int digito6, double valorDeLaApuesta) {
-		super(direccion, barrio, localidad, numEmpleados);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.digito5 = digito5;
-		this.digito6 = digito6;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BalotoDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String nombreJuego, String tipoDejuego,
-			double presupuestoDelJuego) {
-		super(nombre, numeroDeSedes, presupuestoTotal, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BalotoDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, String nombreJuego, String tipoDejuego, double presupuestoDelJuego) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados, nombreJuego,
-				tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BalotoDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BalotoDTO(String nombre, int numeroDeSedes, double presupuestoTotal) {
-		super(nombre, numeroDeSedes, presupuestoTotal);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BalotoDTO(String nombreJuego, String tipoDejuego, double presupuestoDelJuego) {
-		super(nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BalotoDTO(String direccion, String barrio, String localidad, long numEmpleados, String nombreJuego,
-			String tipoDejuego, double presupuestoDelJuego) {
-		super(direccion, barrio, localidad, numEmpleados, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BalotoDTO(String direccion, String barrio, String localidad, long numEmpleados) {
-		super(direccion, barrio, localidad, numEmpleados);
+	public BalotoDTO(String nameSede, long numDeCedula, String diaDeLaApuesta) {
+		super(nameSede, numDeCedula, diaDeLaApuesta);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -223,7 +100,7 @@ public class BalotoDTO extends JuegoDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "BalotoDTO [digito1=" + digito1 + ", digito2=" + digito2 + ", digito3=" + digito3 + ", digito4="
-				+ digito4 + ", digito5=" + digito5 + ", digito6=" + digito6 + "]";
+				+ digito4 + ", digito5=" + digito5 + ", digito6=" + digito6 + valorDeLaApuesta + "]";
 	}
 
 }

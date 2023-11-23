@@ -2,7 +2,7 @@ package co.edu.unbosque.model;
 
 import java.io.Serializable;
 
-public class SuperastroDTO extends JuegoDTO implements Serializable {
+public class SuperastroDTO extends GestionApuestaDTO implements Serializable {
 
 	/**
 	 * 
@@ -30,69 +30,9 @@ public class SuperastroDTO extends JuegoDTO implements Serializable {
 		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 
-	public SuperastroDTO(String nombreJuego, String tipoDejuego, double presupuestoDelJuego, int digito1, int digito2,
-			int digito3, int digito4, String zodiacoSigno) {
-		super(nombreJuego, tipoDejuego, presupuestoDelJuego);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.zodiacoSigno = zodiacoSigno;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public SuperastroDTO(String direccion, String barrio, String localidad, long numEmpleados, String nombreJuego,
-			String tipoDejuego, double presupuestoDelJuego, int digito1, int digito2, int digito3, int digito4,
-			String zodiacoSigno, double valorDeLaApuesta) {
-		super(direccion, barrio, localidad, numEmpleados, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.zodiacoSigno = zodiacoSigno;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public SuperastroDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, String nombreJuego, String tipoDejuego, double presupuestoDelJuego,
-			int digito1, int digito2, int digito3, int digito4, String zodiacoSigno, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados, nombreJuego,
-				tipoDejuego, presupuestoDelJuego);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.zodiacoSigno = zodiacoSigno;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public SuperastroDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String nombreJuego,
-			String tipoDejuego, double presupuestoDelJuego, int digito1, int digito2, int digito3, int digito4,
-			String zodiacoSigno, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.zodiacoSigno = zodiacoSigno;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public SuperastroDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, int digito1, int digito2, int digito3, int digito4,
-			String zodiacoSigno, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.zodiacoSigno = zodiacoSigno;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public SuperastroDTO(String nombre, int numeroDeSedes, double presupuestoTotal, int digito1, int digito2,
+	public SuperastroDTO(String nameSede, long numDeCedula, String diaDeLaApuesta, int digito1, int digito2,
 			int digito3, int digito4, String zodiacoSigno, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal);
+		super(nameSede, numDeCedula, diaDeLaApuesta);
 		this.digito1 = digito1;
 		this.digito2 = digito2;
 		this.digito3 = digito3;
@@ -101,54 +41,8 @@ public class SuperastroDTO extends JuegoDTO implements Serializable {
 		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 
-	public SuperastroDTO(String direccion, String barrio, String localidad, long numEmpleados, int digito1, int digito2,
-			int digito3, int digito4, String zodiacoSigno, double valorDeLaApuesta) {
-		super(direccion, barrio, localidad, numEmpleados);
-		this.digito1 = digito1;
-		this.digito2 = digito2;
-		this.digito3 = digito3;
-		this.digito4 = digito4;
-		this.zodiacoSigno = zodiacoSigno;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public SuperastroDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String nombreJuego,
-			String tipoDejuego, double presupuestoDelJuego) {
-		super(nombre, numeroDeSedes, presupuestoTotal, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public SuperastroDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, String nombreJuego, String tipoDejuego, double presupuestoDelJuego) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados, nombreJuego,
-				tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public SuperastroDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados);
-		// TODO Auto-generated constructor stub
-	}
-
-	public SuperastroDTO(String nombre, int numeroDeSedes, double presupuestoTotal) {
-		super(nombre, numeroDeSedes, presupuestoTotal);
-		// TODO Auto-generated constructor stub
-	}
-
-	public SuperastroDTO(String nombreJuego, String tipoDejuego, double presupuestoDelJuego) {
-		super(nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public SuperastroDTO(String direccion, String barrio, String localidad, long numEmpleados, String nombreJuego,
-			String tipoDejuego, double presupuestoDelJuego) {
-		super(direccion, barrio, localidad, numEmpleados, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public SuperastroDTO(String direccion, String barrio, String localidad, long numEmpleados) {
-		super(direccion, barrio, localidad, numEmpleados);
+	public SuperastroDTO(String nameSede, long numDeCedula, String diaDeLaApuesta) {
+		super(nameSede, numDeCedula, diaDeLaApuesta);
 		// TODO Auto-generated constructor stub
 	}
 

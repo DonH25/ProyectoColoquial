@@ -2,7 +2,7 @@ package co.edu.unbosque.model;
 
 import java.io.Serializable;
 
-public class BetplayDTO extends JuegoDTO implements Serializable {
+public class BetplayDTO extends GestionApuestaDTO implements Serializable {
 
 	/**
 	 * 
@@ -28,119 +28,22 @@ public class BetplayDTO extends JuegoDTO implements Serializable {
 		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 
-	public BetplayDTO(String nombreJuego, String tipoDejuego, double presupuestoDelJuego, String equipoLocal,
-			int marcadorLocal, String equipoVisitante, int marcadorVisitante, double valorDeLaApuesta) {
-		super(nombreJuego, tipoDejuego, presupuestoDelJuego);
-		this.equipoLocal = equipoLocal;
-		this.marcadorLocal = marcadorLocal;
-		this.equipoVisitante = equipoVisitante;
-		this.marcadorVisitante = marcadorVisitante;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
+	
 
-	public BetplayDTO(String direccion, String barrio, String localidad, long numEmpleados, String nombreJuego,
-			String tipoDejuego, double presupuestoDelJuego, String equipoLocal, int marcadorLocal,
+	public BetplayDTO(String nameSede, long numDeCedula, String diaDeLaApuesta, String equipoLocal, int marcadorLocal,
 			String equipoVisitante, int marcadorVisitante, double valorDeLaApuesta) {
-		super(direccion, barrio, localidad, numEmpleados, nombreJuego, tipoDejuego, presupuestoDelJuego);
+		super(nameSede, numDeCedula, diaDeLaApuesta);
 		this.equipoLocal = equipoLocal;
 		this.marcadorLocal = marcadorLocal;
 		this.equipoVisitante = equipoVisitante;
 		this.marcadorVisitante = marcadorVisitante;
 		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
+	
+	
 
-	public BetplayDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, String nombreJuego, String tipoDejuego, double presupuestoDelJuego,
-			String equipoLocal, int marcadorLocal, String equipoVisitante, int marcadorVisitante,
-			double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados, nombreJuego,
-				tipoDejuego, presupuestoDelJuego);
-		this.equipoLocal = equipoLocal;
-		this.marcadorLocal = marcadorLocal;
-		this.equipoVisitante = equipoVisitante;
-		this.marcadorVisitante = marcadorVisitante;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BetplayDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String nombreJuego, String tipoDejuego,
-			double presupuestoDelJuego, String equipoLocal, int marcadorLocal, String equipoVisitante,
-			int marcadorVisitante, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		this.equipoLocal = equipoLocal;
-		this.marcadorLocal = marcadorLocal;
-		this.equipoVisitante = equipoVisitante;
-		this.marcadorVisitante = marcadorVisitante;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BetplayDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, String equipoLocal, int marcadorLocal, String equipoVisitante,
-			int marcadorVisitante, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados);
-		this.equipoLocal = equipoLocal;
-		this.marcadorLocal = marcadorLocal;
-		this.equipoVisitante = equipoVisitante;
-		this.marcadorVisitante = marcadorVisitante;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BetplayDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String equipoLocal, int marcadorLocal,
-			String equipoVisitante, int marcadorVisitante, double valorDeLaApuesta) {
-		super(nombre, numeroDeSedes, presupuestoTotal);
-		this.equipoLocal = equipoLocal;
-		this.marcadorLocal = marcadorLocal;
-		this.equipoVisitante = equipoVisitante;
-		this.marcadorVisitante = marcadorVisitante;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BetplayDTO(String direccion, String barrio, String localidad, long numEmpleados, String equipoLocal,
-			int marcadorLocal, String equipoVisitante, int marcadorVisitante, double valorDeLaApuesta) {
-		super(direccion, barrio, localidad, numEmpleados);
-		this.equipoLocal = equipoLocal;
-		this.marcadorLocal = marcadorLocal;
-		this.equipoVisitante = equipoVisitante;
-		this.marcadorVisitante = marcadorVisitante;
-		this.valorDeLaApuesta = valorDeLaApuesta;
-	}
-
-	public BetplayDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String nombreJuego, String tipoDejuego,
-			double presupuestoDelJuego) {
-		super(nombre, numeroDeSedes, presupuestoTotal, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BetplayDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados, String nombreJuego, String tipoDejuego, double presupuestoDelJuego) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados, nombreJuego,
-				tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BetplayDTO(String nombre, int numeroDeSedes, double presupuestoTotal, String direccion, String barrio,
-			String localidad, long numEmpleados) {
-		super(nombre, numeroDeSedes, presupuestoTotal, direccion, barrio, localidad, numEmpleados);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BetplayDTO(String nombre, int numeroDeSedes, double presupuestoTotal) {
-		super(nombre, numeroDeSedes, presupuestoTotal);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BetplayDTO(String nombreJuego, String tipoDejuego, double presupuestoDelJuego) {
-		super(nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BetplayDTO(String direccion, String barrio, String localidad, long numEmpleados, String nombreJuego,
-			String tipoDejuego, double presupuestoDelJuego) {
-		super(direccion, barrio, localidad, numEmpleados, nombreJuego, tipoDejuego, presupuestoDelJuego);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BetplayDTO(String direccion, String barrio, String localidad, long numEmpleados) {
-		super(direccion, barrio, localidad, numEmpleados);
+	public BetplayDTO(String nameSede, long numDeCedula, String diaDeLaApuesta) {
+		super(nameSede, numDeCedula, diaDeLaApuesta);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -191,7 +94,7 @@ public class BetplayDTO extends JuegoDTO implements Serializable {
 	@Override
 	public String toString() {
 		return "BetplayDTO [equipoLocal=" + equipoLocal + ", marcadorLocal=" + marcadorLocal + ", equipoVisitante="
-				+ equipoVisitante + ", marcadorVisitante=" + marcadorVisitante + "]";
+				+ equipoVisitante + ", marcadorVisitante=" + marcadorVisitante + valorDeLaApuesta + "]";
 	}
 
 }

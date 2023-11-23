@@ -50,7 +50,7 @@ public class GestionApuestaDAO implements CRUDOperation {
 		bet.setNameSede(args[0]);
 		bet.setNumDeCedula(Long.parseLong(args[1]));
 		bet.setDiaDeLaApuesta(args[2]);
-		bet.setValorDeLaApuesta(Integer.parseInt(args[3]));
+
 		listOfGestionApuesta.add(bet);
 		writeDataSerializable();
 	}
@@ -86,9 +86,7 @@ public class GestionApuestaDAO implements CRUDOperation {
 			if (!args[2].isBlank() || !args[2].isEmpty() || args[2] != null) {
 				listOfGestionApuesta.get(index).setDiaDeLaApuesta(args[2]);
 			}
-			if (!args[3].isBlank() || !args[3].isEmpty() || args[3] != null) {
-				listOfGestionApuesta.get(index).setValorDeLaApuesta(Integer.parseInt(args[3]));
-			}
+
 		}
 		writeDataSerializable();
 		return true;
