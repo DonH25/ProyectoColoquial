@@ -3,6 +3,7 @@ package co.edu.unbosque.model.persistence;
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.ApostadorDTO;
+import co.edu.unbosque.model.JuegoDTO;
 
 /**
  * Clase que representa un DAO (Data Access Object) para gestionar la
@@ -31,7 +32,7 @@ public class ApostadorDAO implements CRUDOperation {
 				ArrayList<ApostadorDTO> temp2 = (ArrayList<ApostadorDTO>) temp;
 				listOfApostadores = temp2;
 			} else {
-				System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de apostadores.");
+				System.out.println("El archivo " + SERIAL_FILENAME + " no contiene una lista de juegos.");
 			}
 		} else {
 			listOfApostadores = new ArrayList<>();
@@ -173,4 +174,5 @@ public class ApostadorDAO implements CRUDOperation {
 	public String getSERIAL_FILENAME() {
 		return SERIAL_FILENAME;
 	}
+
 }

@@ -37,7 +37,7 @@ public class VentanaMenuSeleccion extends JFrame {
 		botonApostador = new JButton();
 		botonApostador.setBounds(900, 70, 200, 200);
 		Image temp11;
-		temp11 = new ImageIcon("src/imagenes/moduloConsultas.png").getImage();
+		temp11 = new ImageIcon("src/imagenes/crearApostador.png").getImage();
 		ImageIcon imagen11;
 		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		botonApostador.setIcon(imagen11);
@@ -57,6 +57,8 @@ public class VentanaMenuSeleccion extends JFrame {
 		ImageIcon imagen1111;
 		imagen1111 = new ImageIcon(temp1111.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		botonSalir.setIcon(imagen1111);
+
+		
 
 		add(botonSalir);
 		add(botonParametros);
@@ -108,6 +110,5 @@ public class VentanaMenuSeleccion extends JFrame {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
 
 }

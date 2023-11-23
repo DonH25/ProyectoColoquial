@@ -3,10 +3,13 @@ package co.edu.unbosque.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import co.edu.unbosque.model.ApostadorDTO;
 import co.edu.unbosque.model.CasaDeApuestasDTO;
+import co.edu.unbosque.model.SedeDTO;
 import co.edu.unbosque.model.persistence.ApostadorDAO;
 import co.edu.unbosque.model.persistence.BalotoDAO;
 import co.edu.unbosque.model.persistence.BetplayDAO;
@@ -24,11 +27,15 @@ import co.edu.unbosque.model.persistence.SuperastroDAO;
 import co.edu.unbosque.util.ExcepcionNumeroSede;
 import co.edu.unbosque.util.ExcepcionPresupuestoTotal;
 import co.edu.unbosque.view.Console;
+import co.edu.unbosque.view.VentanaApostador;
 import co.edu.unbosque.view.VentanaCrearCasaApuestas;
 import co.edu.unbosque.view.VentanaCrearSedes;
+import co.edu.unbosque.view.VentanaElimApos;
 import co.edu.unbosque.view.VentanaMenuSeleccion;
+import co.edu.unbosque.view.VentanaMostrarApostador;
 import co.edu.unbosque.view.VentanaPresupuesto;
 import co.edu.unbosque.view.VentanaPrincipal;
+import co.edu.unbosque.view.VentanaSeleccionApostadores;
 
 public class Controller implements ActionListener {
 	private Console con;
@@ -50,6 +57,10 @@ public class Controller implements ActionListener {
 	VentanaCrearSedes vsed;
 	private File ruta1, ruta2, ruta3;
 	VentanaMenuSeleccion vms;
+	VentanaApostador vapo;
+	VentanaSeleccionApostadores vsapo;
+	VentanaElimApos velimApos;
+	VentanaMostrarApostador vemos;
 
 	public Controller() {
 		con = new Console();
@@ -62,6 +73,11 @@ public class Controller implements ActionListener {
 		vpre = new VentanaPresupuesto();
 		vsed = new VentanaCrearSedes();
 		vms = new VentanaMenuSeleccion();
+		vapo = new VentanaApostador();
+		vsapo = new VentanaSeleccionApostadores();
+		velimApos = new VentanaElimApos();
+		vemos = new VentanaMostrarApostador();
+		apostDao = new ApostadorDAO();
 		ruta1 = new File("src/co/edu/unbosque/model/persistence/config.properties");
 		ruta2 = new File("src/co/edu/unbosque/model/persistence/juegos.dat");
 		ruta3 = new File("src/co/edu/unbosque/model/persistence/sedes.dat");
@@ -837,6 +853,7 @@ public class Controller implements ActionListener {
 							vpre.getBetplayPresupuesto().setText("");
 							vpre.getChancePresupuesto().setText("");
 							vpre.getSuperastroPresupuesto().setText("");
+
 						}
 					} else {
 						JOptionPane.showMessageDialog(vpre,
@@ -907,7 +924,225 @@ public class Controller implements ActionListener {
 			}
 			break;
 		}
+		case "btnApos": {
+			vms.setVisible(false);
+			vsapo.setVisible(true);
+			break;
 
+		}
+		case "btnRegresarSeleccion": {
+			vms.setVisible(true);
+			vsapo.setVisible(false);
+			break;
+		}
+		case "btnRegresarMostrar": {
+			vemos.setVisible(false);
+			vms.setVisible(true);
+			break;
+		}
+		case "btnCrearApo": {
+			vapo.getModificarApostador().setVisible(false);
+			vapo.getIndicacionesModif().setVisible(false);
+			vapo.getCampoModif().setVisible(false);
+			vsapo.setVisible(false);
+			vapo.setVisible(true);
+			break;
+		}
+		case "btnModifApostSel": {
+			vsapo.setVisible(false);
+			vapo.setVisible(true);
+			vapo.getModificarApostador().setVisible(true);
+			vapo.getCrearApostador().setVisible(false);
+			vapo.getIndicacionesModif().setVisible(true);
+			vapo.getCampoModif().setVisible(true);
+			break;
+		}
+
+		case "btnCrearApos": {
+			String nombre = vapo.getCampoNombre().getText();
+			String cedula = vapo.getCampoCedula().getText();
+			String sedes = vapo.getCampoSede().getText();
+			String direccion = vapo.getCampoDireccion().getText();
+			String celular = vapo.getCampoCelular().getText();
+			String anon = vapo.getCampoAnio().getText();
+
+			if (nombre.isBlank() || cedula.isBlank() || sedes.isBlank() || direccion.isBlank() || celular.isBlank()
+					|| anon.isBlank()) {
+				JOptionPane.showMessageDialog(vapo, "Uno o más campos están vacíos, por favor, rellénelos");
+				int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando", "Confirmación",
+						JOptionPane.YES_NO_OPTION);
+				if (confirmacion2 == JOptionPane.NO_OPTION) {
+					vapo.setVisible(false);
+					vsapo.setVisible(true);
+				}
+			} else {
+				// Verificar si la localidad de la sede existe exactamente
+				boolean localidadExiste = sedeDao.getListOfSedes().stream()
+						.anyMatch(sede -> sede.getLocalidad().equalsIgnoreCase(sedes));
+
+				int anioTemp = Integer.parseInt(anon);
+				if (anioTemp > 2005) {
+					JOptionPane.showMessageDialog(vapo, "El cliente es menor de edad , no puede apostar...");
+				} else if (anioTemp < 1900) {
+					JOptionPane.showMessageDialog(vapo,
+							"El cliente tiene mas de 123 años , imposible que el cliente sea la persona mas vieja del mundo...");
+					break;
+				} else
+
+				if (!localidadExiste) {
+					JOptionPane.showMessageDialog(vapo, "No se puede crear en una sede inexistente");
+					int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando", "Confirmación",
+							JOptionPane.YES_NO_OPTION);
+					if (confirmacion2 == JOptionPane.NO_OPTION) {
+						vapo.setVisible(false);
+						vsapo.setVisible(true);
+					}
+				} else {
+					apostDao.create(nombre, cedula, sedes, direccion, celular, anon);
+					JOptionPane.showMessageDialog(vapo, "Apostador creado exitosamente");
+					int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir Creando apostadores ",
+							"Confirmación", JOptionPane.YES_NO_OPTION);
+					if (confirmacion2 == JOptionPane.NO_OPTION) {
+						vapo.setVisible(false);
+						vsapo.setVisible(true);
+					}
+				}
+			}
+			break;
+
+		}
+
+		case "btnModifApos": {
+			String nombre = vapo.getCampoNombre().getText();
+			String cedula = vapo.getCampoCedula().getText();
+			String sedes = vapo.getCampoSede().getText();
+			String direccion = vapo.getCampoDireccion().getText();
+			String celular = vapo.getCampoCelular().getText();
+			String anon = vapo.getCampoAnio().getText();
+
+			if (nombre == "" || cedula == "" || sedes == "" || direccion == "" || celular == "" || anon == ""
+					|| vapo.getCampoModif().getText() == "") {
+				JOptionPane.showMessageDialog(vapo, "Uno o más campos están vacíos, por favor, rellénelos");
+				int anioTemp = Integer.parseInt(anon);
+				if (anioTemp > 2005) {
+					JOptionPane.showMessageDialog(vapo, "El cliente es menor de edad , no puede apostar...");
+					vapo.setVisible(false);
+					vsapo.setVisible(true);
+					break;
+				}
+
+			} else {
+				boolean localidadExiste = sedeDao.getListOfSedes().stream()
+						.anyMatch(sede -> sede.getLocalidad().equalsIgnoreCase(sedes));
+
+				if (!localidadExiste) {
+					JOptionPane.showMessageDialog(vapo, "No se puede actualizar en una sede inexistente");
+				} else {
+					ArrayList<ApostadorDTO> apostadores = apostDao.getListOfApostadores();
+					int anioTemp = Integer.parseInt(anon);
+					if (anioTemp > 2005) {
+						JOptionPane.showMessageDialog(vapo, "El cliente es menor de edad , no puede apostar...");
+						break;
+					} else if (anioTemp < 1900) {
+						JOptionPane.showMessageDialog(vapo,
+								"El cliente tiene mas de 123 años , imposible que el cliente sea la persona mas vieja del mundo...");
+						break;
+					} else {
+
+						int index = Integer.parseInt(vapo.getCampoModif().getText());
+
+						if (index >= 0 && index < apostadores.size()) {
+							ApostadorDTO apostadorExistente = apostadores.get(index);
+							int confirmacion = JOptionPane.showConfirmDialog(vapo,
+									"En la posición " + index + ", el nombre del apostador es "
+											+ apostadorExistente.getNombre() + ". ¿Desea cambiarlo?",
+									"Confirmación", JOptionPane.YES_NO_OPTION);
+
+							if (confirmacion == JOptionPane.YES_OPTION) {
+								apostDao.update(index, nombre, cedula, sedes, direccion, celular, anon);
+								JOptionPane.showMessageDialog(vapo, "Apostador actualizado exitosamente");
+								int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando",
+										"Confirmación", JOptionPane.YES_NO_OPTION);
+								if (confirmacion2 == JOptionPane.NO_OPTION) {
+									vapo.setVisible(false);
+									vsapo.setVisible(true);
+									break;
+								}
+							} else {
+								JOptionPane.showMessageDialog(vapo, "Operación cancelada por el usuario");
+								int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando",
+										"Confirmación", JOptionPane.YES_NO_OPTION);
+								if (confirmacion2 == JOptionPane.NO_OPTION) {
+									vapo.setVisible(false);
+									vsapo.setVisible(true);
+									break;
+								}
+							}
+						} else {
+							JOptionPane.showMessageDialog(vapo, "La posición del apostador es inválida");
+							int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando",
+									"Confirmación", JOptionPane.YES_NO_OPTION);
+							if (confirmacion2 == JOptionPane.NO_OPTION) {
+								vapo.setVisible(false);
+								vsapo.setVisible(true);
+								break;
+							}
+
+						}
+					}
+				}
+
+				break;
+			}
+		}
+		case "btnSelElim": {
+			vsapo.setVisible(false);
+			velimApos.setVisible(true);
+			break;
+		}
+		case "btnELimApost": {
+			String index = velimApos.getIndex().getText();
+			int index1 = Integer.parseInt(index);
+			ArrayList<ApostadorDTO> apostadores = apostDao.getListOfApostadores();
+			if (index1 >= 0 && index1 < apostadores.size()) {
+				ApostadorDTO apostadorExistente = apostadores.get(index1);
+				int confirmacion = JOptionPane.showConfirmDialog(vapo,
+						"En la posición " + index1 + ", el nombre del apostador es " + apostadorExistente.getNombre()
+								+ ". ¿Desea eliminar este apostador del sistema?",
+						"Confirmación", JOptionPane.YES_NO_OPTION);
+
+				if (confirmacion == JOptionPane.YES_OPTION) {
+					apostDao.delete(index1);
+					JOptionPane.showMessageDialog(vapo, "Apostador Eliminado del sistema exitosamente");
+					int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando", "Confirmación",
+							JOptionPane.YES_NO_OPTION);
+					if (confirmacion2 == JOptionPane.NO_OPTION) {
+						velimApos.setVisible(false);
+						vsapo.setVisible(true);
+						break;
+					}
+				} else {
+					JOptionPane.showMessageDialog(vapo, "Operación cancelada por el usuario");
+					int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir Borrando apostador",
+							"Confirmación", JOptionPane.YES_NO_OPTION);
+					if (confirmacion2 == JOptionPane.NO_OPTION) {
+						velimApos.setVisible(false);
+						vsapo.setVisible(true);
+						break;
+					}
+				}
+			}
+			break;
+		}
+		case "btnSelMostrar": {
+			vsapo.setVisible(true);
+			vemos.setVisible(true);
+			break;
+		}
+		case "btnMostrar": {
+			vemos.getSalidaTos().setText(apostDao.read());
+			break;
+		}
 		}
 
 	}
@@ -945,6 +1180,28 @@ public class Controller implements ActionListener {
 		vsed.getModificarSede().setActionCommand("btnModifSed");
 		vms.getBotonParametros().addActionListener(this);
 		vms.getBotonParametros().setActionCommand("btnPara");
+		vms.getBotonApostador().addActionListener(this);
+		vms.getBotonApostador().setActionCommand("btnApos");
+		vapo.getCrearApostador().addActionListener(this);
+		vapo.getCrearApostador().setActionCommand("btnCrearApos");
+		vapo.getModificarApostador().addActionListener(this);
+		vapo.getModificarApostador().setActionCommand("btnModifApos");
+		vsapo.getBotonCrear().addActionListener(this);
+		vsapo.getBotonCrear().setActionCommand("btnCrearApo");
+		vsapo.getBotonActualizar().addActionListener(this);
+		vsapo.getBotonActualizar().setActionCommand("btnModifApostSel");
+		vsapo.getBotonEliminar().addActionListener(this);
+		vsapo.getBotonEliminar().setActionCommand("btnSelElim");
+		vsapo.getBotonMostrar().addActionListener(this);
+		vsapo.getBotonMostrar().setActionCommand("btnSelMostrar");
+		vsapo.getBotonRegresar().addActionListener(this);
+		vsapo.getBotonRegresar().setActionCommand("btnRegresarSeleccion");
+		velimApos.getEliminar().addActionListener(this);
+		velimApos.getEliminar().setActionCommand("btnELimApost");
+		vemos.getMostrarApostador().addActionListener(this);
+		vemos.getMostrarApostador().setActionCommand("btnMostrar");
+		vemos.getRegresar().addActionListener(this);
+		vemos.getRegresar().setActionCommand("btnRegresarMostrar");
 
 	}
 
