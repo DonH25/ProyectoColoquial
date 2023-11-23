@@ -36,6 +36,8 @@ import co.edu.unbosque.view.VentanaMostrarApostador;
 import co.edu.unbosque.view.VentanaPresupuesto;
 import co.edu.unbosque.view.VentanaPrincipal;
 import co.edu.unbosque.view.VentanaSeleccionApostadores;
+import co.edu.unbosque.view.VentanaSeleccionarApuesta;
+import co.edu.unbosque.view.VentanaSuperastro;
 
 public class Controller implements ActionListener {
 	private Console con;
@@ -61,6 +63,8 @@ public class Controller implements ActionListener {
 	VentanaSeleccionApostadores vsapo;
 	VentanaElimApos velimApos;
 	VentanaMostrarApostador vemos;
+	VentanaSeleccionarApuesta vapu;
+	VentanaSuperastro veSup;
 
 	public Controller() {
 		con = new Console();
@@ -78,6 +82,9 @@ public class Controller implements ActionListener {
 		velimApos = new VentanaElimApos();
 		vemos = new VentanaMostrarApostador();
 		apostDao = new ApostadorDAO();
+		vapu = new VentanaSeleccionarApuesta();
+		veSup = new VentanaSuperastro();
+		superDao = new SuperastroDAO();
 		ruta1 = new File("src/co/edu/unbosque/model/persistence/config.properties");
 		ruta2 = new File("src/co/edu/unbosque/model/persistence/juegos.dat");
 		ruta3 = new File("src/co/edu/unbosque/model/persistence/sedes.dat");
@@ -85,6 +92,7 @@ public class Controller implements ActionListener {
 	}
 
 	public void runPruebaPorConsola() {
+
 		while (true) {
 			con.printWithNewLine("Seleccione la opcion que quiere realizar ");
 			con.printWithNewLine("1: Modulo 1");
@@ -485,7 +493,7 @@ public class Controller implements ActionListener {
 						break;
 
 					case 3:
-
+						con.printWithNewLine(superDao.read());
 						break;
 
 					case 4:
@@ -526,8 +534,8 @@ public class Controller implements ActionListener {
 		switch (e.getActionCommand()) {
 		// Seccion para Ingresar al programa
 		case "ing": {
-			vp.setVisible(false);
 			vcca.setVisible(true);
+			vp.setVisible(false);
 			break;
 		}
 
@@ -572,8 +580,8 @@ public class Controller implements ActionListener {
 								caDao.create(nombre, cantidadSedes, presupuestoTotal);
 								prop.inicializarProperties();
 								JOptionPane.showMessageDialog(vcca, "Datos ingresados exitosamente");
-								vcca.setVisible(false);
 								vpre.setVisible(true);
+								vcca.setVisible(false);
 							} catch (Exception e1) {
 								e1.printStackTrace();
 								JOptionPane.showMessageDialog(vcca, "Error al procesar los datos");
@@ -654,8 +662,8 @@ public class Controller implements ActionListener {
 
 						if (option == JOptionPane.YES_OPTION) {
 							JOptionPane.showMessageDialog(vpre, "Datos ingresados");
-							vpre.setVisible(false);
 							vsed.setVisible(true);
+							vpre.setVisible(false);
 						} else {
 							// Si el usuario presiona "No", borrar los cuadros de texto
 							vpre.getLoteriaPresupuesto().setText("");
@@ -711,8 +719,8 @@ public class Controller implements ActionListener {
 			}
 			prop.inicializarProperties();
 			if (sedeDao.getListOfSedes().size() == Integer.parseInt(prop.getSedes())) {
-				vsed.setVisible(false);
 				vms.setVisible(true);
+				vsed.setVisible(false);
 
 			} else {
 				JOptionPane.showMessageDialog(vpre, "Las sedes estan incompletas, por favor creala nuevamente");
@@ -723,8 +731,8 @@ public class Controller implements ActionListener {
 			int opcion = JOptionPane.showConfirmDialog(vpre, "¿Desea modificar la casa de apuestas?", "Confirmación",
 					JOptionPane.YES_NO_OPTION);
 			if (opcion == JOptionPane.YES_OPTION) {
-				vms.setVisible(false);
 				vcca.setVisible(true);
+				vms.setVisible(false);
 				vcca.getBotonModificarCasa().setVisible(true);
 				vcca.getBotonRegistrarCasa().setVisible(false);
 
@@ -741,13 +749,14 @@ public class Controller implements ActionListener {
 					int opcion12 = JOptionPane.showConfirmDialog(vpre, "¿Desea modificar Las sedes?", "Confirmación",
 							JOptionPane.YES_NO_OPTION);
 					if (opcion12 == JOptionPane.YES_OPTION) {
-						vms.setVisible(false);
 						vsed.setVisible(true);
 						vsed.getModificarSede().setVisible(true);
 						vsed.getRegistrarSede().setVisible(false);
 						vsed.getIndicacionesLocalidadModificar().setVisible(true);
 						vsed.getLocalidadModificar().setVisible(true);
 						vsed.getRegresar().setVisible(true);
+						vms.setVisible(false);
+
 						;
 						JOptionPane.showMessageDialog(vsed,
 								"Para modificar las sedes , se modificara en cuestion de la localidad de la sede");
@@ -844,8 +853,8 @@ public class Controller implements ActionListener {
 
 						if (option == JOptionPane.YES_OPTION) {
 							JOptionPane.showMessageDialog(vpre, "Datos ingresados");
-							vpre.setVisible(false);
 							vms.setVisible(true);
+							vpre.setVisible(false);
 						} else {
 							// Si el usuario presiona "No", borrar los cuadros de texto
 							vpre.getLoteriaPresupuesto().setText("");
@@ -897,8 +906,8 @@ public class Controller implements ActionListener {
 								caDao.update(0, nombre, cantidadSedes, presupuestoTotal);
 								prop.inicializarProperties();
 								JOptionPane.showMessageDialog(vcca, "Datos ingresados exitosamente");
-								vcca.setVisible(false);
 								vpre.setVisible(true);
+								vcca.setVisible(false);
 							} catch (Exception e1) {
 								e1.printStackTrace();
 								JOptionPane.showMessageDialog(vcca, "Error al procesar los datos");
@@ -925,8 +934,8 @@ public class Controller implements ActionListener {
 			break;
 		}
 		case "btnApos": {
-			vms.setVisible(false);
 			vsapo.setVisible(true);
+			vms.setVisible(false);
 			break;
 
 		}
@@ -936,25 +945,26 @@ public class Controller implements ActionListener {
 			break;
 		}
 		case "btnRegresarMostrar": {
-			vemos.setVisible(false);
 			vms.setVisible(true);
+			vemos.setVisible(false);
 			break;
 		}
 		case "btnCrearApo": {
 			vapo.getModificarApostador().setVisible(false);
 			vapo.getIndicacionesModif().setVisible(false);
 			vapo.getCampoModif().setVisible(false);
-			vsapo.setVisible(false);
 			vapo.setVisible(true);
+			vsapo.setVisible(false);
 			break;
 		}
 		case "btnModifApostSel": {
-			vsapo.setVisible(false);
 			vapo.setVisible(true);
 			vapo.getModificarApostador().setVisible(true);
 			vapo.getCrearApostador().setVisible(false);
 			vapo.getIndicacionesModif().setVisible(true);
 			vapo.getCampoModif().setVisible(true);
+			vsapo.setVisible(false);
+
 			break;
 		}
 
@@ -972,8 +982,8 @@ public class Controller implements ActionListener {
 				int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando", "Confirmación",
 						JOptionPane.YES_NO_OPTION);
 				if (confirmacion2 == JOptionPane.NO_OPTION) {
-					vapo.setVisible(false);
 					vsapo.setVisible(true);
+					vapo.setVisible(false);
 				}
 			} else {
 				// Verificar si la localidad de la sede existe exactamente
@@ -994,8 +1004,8 @@ public class Controller implements ActionListener {
 					int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando", "Confirmación",
 							JOptionPane.YES_NO_OPTION);
 					if (confirmacion2 == JOptionPane.NO_OPTION) {
-						vapo.setVisible(false);
 						vsapo.setVisible(true);
+						vapo.setVisible(false);
 					}
 				} else {
 					apostDao.create(nombre, cedula, sedes, direccion, celular, anon);
@@ -1003,8 +1013,8 @@ public class Controller implements ActionListener {
 					int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir Creando apostadores ",
 							"Confirmación", JOptionPane.YES_NO_OPTION);
 					if (confirmacion2 == JOptionPane.NO_OPTION) {
-						vapo.setVisible(false);
 						vsapo.setVisible(true);
+						vapo.setVisible(false);
 					}
 				}
 			}
@@ -1026,8 +1036,8 @@ public class Controller implements ActionListener {
 				int anioTemp = Integer.parseInt(anon);
 				if (anioTemp > 2005) {
 					JOptionPane.showMessageDialog(vapo, "El cliente es menor de edad , no puede apostar...");
-					vapo.setVisible(false);
 					vsapo.setVisible(true);
+					vapo.setVisible(false);
 					break;
 				}
 
@@ -1064,8 +1074,8 @@ public class Controller implements ActionListener {
 								int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando",
 										"Confirmación", JOptionPane.YES_NO_OPTION);
 								if (confirmacion2 == JOptionPane.NO_OPTION) {
-									vapo.setVisible(false);
 									vsapo.setVisible(true);
+									vapo.setVisible(false);
 									break;
 								}
 							} else {
@@ -1073,8 +1083,8 @@ public class Controller implements ActionListener {
 								int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando",
 										"Confirmación", JOptionPane.YES_NO_OPTION);
 								if (confirmacion2 == JOptionPane.NO_OPTION) {
-									vapo.setVisible(false);
 									vsapo.setVisible(true);
+									vapo.setVisible(false);
 									break;
 								}
 							}
@@ -1083,8 +1093,8 @@ public class Controller implements ActionListener {
 							int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando",
 									"Confirmación", JOptionPane.YES_NO_OPTION);
 							if (confirmacion2 == JOptionPane.NO_OPTION) {
-								vapo.setVisible(false);
 								vsapo.setVisible(true);
+								vapo.setVisible(false);
 								break;
 							}
 
@@ -1096,8 +1106,8 @@ public class Controller implements ActionListener {
 			}
 		}
 		case "btnSelElim": {
-			vsapo.setVisible(false);
 			velimApos.setVisible(true);
+			vsapo.setVisible(false);
 			break;
 		}
 		case "btnELimApost": {
@@ -1117,8 +1127,8 @@ public class Controller implements ActionListener {
 					int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir actualizando", "Confirmación",
 							JOptionPane.YES_NO_OPTION);
 					if (confirmacion2 == JOptionPane.NO_OPTION) {
-						velimApos.setVisible(false);
 						vsapo.setVisible(true);
+						velimApos.setVisible(false);
 						break;
 					}
 				} else {
@@ -1126,8 +1136,8 @@ public class Controller implements ActionListener {
 					int confirmacion2 = JOptionPane.showConfirmDialog(vapo, "Desea seguir Borrando apostador",
 							"Confirmación", JOptionPane.YES_NO_OPTION);
 					if (confirmacion2 == JOptionPane.NO_OPTION) {
-						velimApos.setVisible(false);
 						vsapo.setVisible(true);
+						velimApos.setVisible(false);
 						break;
 					}
 				}
@@ -1143,6 +1153,88 @@ public class Controller implements ActionListener {
 			vemos.getSalidaTos().setText(apostDao.read());
 			break;
 		}
+		case "btnApues": {
+			vapu.setVisible(true);
+			vms.setVisible(false);
+			break;
+		}
+		case "vapuReg": {
+			vms.setVisible(true);
+			vapu.setVisible(false);
+			break;
+		}
+		case "btnSuper": {
+			veSup.setVisible(true);
+			vapu.setVisible(false);
+			break;
+		}
+		case "btnApostarSuperastro": {
+			String index = veSup.getIndex().getText();
+			String dig1 = veSup.getCampoDig1().getText();
+			String dig2 = veSup.getCampoDig2().getText();
+			String dig3 = veSup.getCampoDig3().getText();
+			String dig4 = veSup.getCampoDig4().getText();
+			String zod = veSup.getCampoZodiac().getText();
+			String val = veSup.getCampoValue().getText();
+			String cedul = veSup.getCampoCedula().getText();
+			String dia = veSup.getCampoDia().getText();
+			String sed = veSup.getCampoSede().getText();
+			if (index.isBlank() || dig1.isBlank() || dig2.isBlank() || dig3.isBlank() || dig4.isBlank() || zod.isBlank()
+					|| val.isBlank() || cedul.isBlank() || dia.isBlank() || sed.isBlank()) {
+				JOptionPane.showMessageDialog(veSup, "Uno o mas espacios estan vacios");
+			}
+			int index1 = Integer.parseInt(index);
+			ArrayList<ApostadorDTO> apostadores = apostDao.getListOfApostadores();
+			if (index1 >= 0 && index1 < apostadores.size()) {
+				ApostadorDTO apostadorExistente = apostadores.get(index1);
+				int confirmacion = JOptionPane.showConfirmDialog(
+						vapo, "En la posición " + index1 + ", el nombre del apostador es "
+								+ apostadorExistente.getNombre() + ". ¿Desea Apostar con este apostador ?",
+						"Confirmación", JOptionPane.YES_NO_OPTION);
+				if (confirmacion == JOptionPane.YES_OPTION) {
+					boolean localidadExiste = sedeDao.getListOfSedes().stream()
+							.anyMatch(sede -> sede.getLocalidad().equalsIgnoreCase(sed));
+
+					if (localidadExiste) {
+						// Validar cédula
+						if (veSup.getCampoCedula().getText().equals(Long.toString(apostadorExistente.getCedula()))) {
+							// Validar día
+							if (dia.equalsIgnoreCase("lunes") || dia.equalsIgnoreCase("martes")
+									|| dia.equalsIgnoreCase("miercoles") || dia.equalsIgnoreCase("jueves")
+									|| dia.equalsIgnoreCase("viernes") || dia.equalsIgnoreCase("sabado")
+									|| dia.equalsIgnoreCase("domingo")) {
+								// Validar signo del zodiaco
+								if (zod.equals("aries") || zod.equals("tauro") || zod.equalsIgnoreCase("geminis")
+										|| zod.equalsIgnoreCase("cancer") || zod.equalsIgnoreCase("leo")
+										|| zod.equalsIgnoreCase("virgo") || zod.equalsIgnoreCase("libra")
+										|| zod.equalsIgnoreCase("escorpio") || zod.equalsIgnoreCase("sagitario")
+										|| zod.equalsIgnoreCase("capricornio") || zod.equalsIgnoreCase("acuario")
+										|| zod.equalsIgnoreCase("piscis")) {
+									// Todas las validaciones pasaron, puedes proceder con la apuesta
+									superDao.create(dig1, dig2, dig3, dig4, val, zod, cedul, sed, dia);
+									JOptionPane.showMessageDialog(veSup,
+											apostadorExistente.getNombre() + " Apostó Exitosamente en Superastro");
+								} else {
+									JOptionPane.showMessageDialog(veSup, "Signo del zodiaco no válido.");
+								}
+							} else {
+								JOptionPane.showMessageDialog(veSup, "Día de la semana no válido.");
+							}
+						} else {
+							JOptionPane.showMessageDialog(veSup,
+									"La cédula ingresada no coincide con la cédula del apostador.");
+						}
+					} else {
+						JOptionPane.showMessageDialog(veSup, "No existe la sede");
+					}
+				}
+
+				break;
+			} else {
+				JOptionPane.showMessageDialog(veSup, "No existe este índice ");
+			}
+		}
+
 		}
 
 	}
@@ -1182,6 +1274,8 @@ public class Controller implements ActionListener {
 		vms.getBotonParametros().setActionCommand("btnPara");
 		vms.getBotonApostador().addActionListener(this);
 		vms.getBotonApostador().setActionCommand("btnApos");
+		vms.getBotonApostar().addActionListener(this);
+		vms.getBotonApostar().setActionCommand("btnApues");
 		vapo.getCrearApostador().addActionListener(this);
 		vapo.getCrearApostador().setActionCommand("btnCrearApos");
 		vapo.getModificarApostador().addActionListener(this);
@@ -1202,6 +1296,12 @@ public class Controller implements ActionListener {
 		vemos.getMostrarApostador().setActionCommand("btnMostrar");
 		vemos.getRegresar().addActionListener(this);
 		vemos.getRegresar().setActionCommand("btnRegresarMostrar");
+		vapu.getRegresar().addActionListener(this);
+		vapu.getRegresar().setActionCommand("vapuReg");
+		vapu.getSuperastro().addActionListener(this);
+		vapu.getSuperastro().setActionCommand("btnSuper");
+		veSup.getApost().addActionListener(this);
+		veSup.getApost().setActionCommand("btnApostarSuperastro");
 
 	}
 

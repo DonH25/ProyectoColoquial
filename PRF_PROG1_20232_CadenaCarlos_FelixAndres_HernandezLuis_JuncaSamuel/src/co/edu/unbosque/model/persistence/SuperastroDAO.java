@@ -47,7 +47,11 @@ public class SuperastroDAO implements CRUDOperation {
 		site.setDigito2(Integer.parseInt(args[1]));
 		site.setDigito3(Integer.parseInt(args[2]));
 		site.setDigito4(Integer.parseInt(args[3]));
-		site.setZodiacoSigno(args[4]);
+		site.setValorDeLaApuesta(Double.parseDouble(args[4]));
+		site.setZodiacoSigno(args[5]);
+		site.setNumDeCedula(Long.parseLong(args[6]));
+		site.setNameSede(args[7]);
+		site.setDiaDeLaApuesta(args[8]);
 
 		listOfSuperastro.add(site);
 		writeDataSerializable();

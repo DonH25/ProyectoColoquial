@@ -9,8 +9,8 @@ import javax.swing.JLabel;
 
 public class VentanaMenuSeleccion extends JFrame {
 	private static final long serialVersionUID = 3739897725046173250L;
-	private JLabel fondo;
-	private JButton botonParametros, botonApostador, botonConsultas, botonSalir;
+	private JLabel fondo, logo;
+	private JButton botonParametros, botonApostador, botonConsultas, botonSalir, botonApostar;
 
 	public VentanaMenuSeleccion() {
 
@@ -58,12 +58,28 @@ public class VentanaMenuSeleccion extends JFrame {
 		imagen1111 = new ImageIcon(temp1111.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		botonSalir.setIcon(imagen1111);
 
-		
+		botonApostar = new JButton();
+		botonApostar.setBounds(525, 400, 200, 200);
+		Image temp11111;
+		temp11111 = new ImageIcon("src/imagenes/apostar.png").getImage();
+		ImageIcon imagen11111;
+		imagen11111 = new ImageIcon(temp11111.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+		botonApostar.setIcon(imagen11111);
+
+		logo = new JLabel();
+		logo.setBounds(450, 0, 350, 350);
+		Image temp1111111;
+		temp1111111 = new ImageIcon("src/imagenes/coloquiales.png").getImage();
+		ImageIcon imagen1111111;
+		imagen1111111 = new ImageIcon(temp1111111.getScaledInstance(350, 350, Image.SCALE_SMOOTH));
+		logo.setIcon(imagen1111111);
 
 		add(botonSalir);
 		add(botonParametros);
 		add(botonApostador);
 		add(botonConsultas);
+		add(botonApostar);
+		add(logo);
 		add(fondo);
 	}
 
@@ -110,5 +126,22 @@ public class VentanaMenuSeleccion extends JFrame {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public JLabel getLogo() {
+		return logo;
+	}
+
+	public void setLogo(JLabel logo) {
+		this.logo = logo;
+	}
+
+	public JButton getBotonApostar() {
+		return botonApostar;
+	}
+
+	public void setBotonApostar(JButton botonApostar) {
+		this.botonApostar = botonApostar;
+	}
+	
 
 }

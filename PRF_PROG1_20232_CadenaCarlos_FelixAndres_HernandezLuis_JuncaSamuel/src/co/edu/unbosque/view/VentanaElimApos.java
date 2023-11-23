@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class VentanaElimApos extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5456546445987406628L;
 	private JButton eliminar, regresar;
 	private JTextField index;
 	private JLabel indicElim, fondo;

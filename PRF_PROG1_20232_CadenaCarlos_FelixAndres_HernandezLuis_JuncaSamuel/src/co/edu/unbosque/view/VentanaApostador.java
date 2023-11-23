@@ -15,7 +15,7 @@ public class VentanaApostador extends JFrame {
 	private JLabel indicacionesNombre, indicacionesCedula, indicacionesSede, indicacionesDireccion, indicacionesCelular,
 			indicacionesAnioNacimiento, indicacionesModif, fondo;
 
-	private JButton crearApostador, modificarApostador;
+	private JButton crearApostador, modificarApostador, regresar;
 
 	public VentanaApostador() {
 		setBounds(150, 0, 1280, 720);
@@ -93,6 +93,11 @@ public class VentanaApostador extends JFrame {
 		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		modificarApostador.setIcon(imagen11);
 		modificarApostador.setVisible(false);
+
+//		regresar = new JButton();
+//		setOpaque(false);
+//		setContentAreaFilled(false);
+//		setBorderPainted(false);
 
 		add(campoNombre);
 		add(indicacionesNombre);
