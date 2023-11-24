@@ -48,6 +48,10 @@ public class BalotoDAO implements CRUDOperation {
 		site.setDigito5(Integer.parseInt(args[4]));
 		site.setDigito6(Integer.parseInt(args[5]));
 		site.setValorDeLaApuesta(Double.parseDouble(args[6]));
+		site.setNumDeCedula(Long.parseLong(args[7]));
+		site.setNameSede(args[8]);
+		site.setDiaDeLaApuesta(args[9]);
+
 		listOfBalotos.add(site);
 		writeDataSerializable();
 	}

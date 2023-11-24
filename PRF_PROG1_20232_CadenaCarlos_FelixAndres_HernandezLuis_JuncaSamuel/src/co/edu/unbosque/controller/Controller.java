@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import co.edu.unbosque.model.ApostadorDTO;
 import co.edu.unbosque.model.CasaDeApuestasDTO;
 import co.edu.unbosque.model.SedeDTO;
+import co.edu.unbosque.model.SuperastroDTO;
 import co.edu.unbosque.model.persistence.ApostadorDAO;
 import co.edu.unbosque.model.persistence.BalotoDAO;
 import co.edu.unbosque.model.persistence.BetplayDAO;
@@ -28,9 +29,13 @@ import co.edu.unbosque.util.ExcepcionNumeroSede;
 import co.edu.unbosque.util.ExcepcionPresupuestoTotal;
 import co.edu.unbosque.view.Console;
 import co.edu.unbosque.view.VentanaApostador;
+import co.edu.unbosque.view.VentanaBaloto;
+import co.edu.unbosque.view.VentanaBetPlay;
+import co.edu.unbosque.view.VentanaChance;
 import co.edu.unbosque.view.VentanaCrearCasaApuestas;
 import co.edu.unbosque.view.VentanaCrearSedes;
 import co.edu.unbosque.view.VentanaElimApos;
+import co.edu.unbosque.view.VentanaLoteria;
 import co.edu.unbosque.view.VentanaMenuSeleccion;
 import co.edu.unbosque.view.VentanaMostrarApostador;
 import co.edu.unbosque.view.VentanaPresupuesto;
@@ -65,6 +70,10 @@ public class Controller implements ActionListener {
 	VentanaMostrarApostador vemos;
 	VentanaSeleccionarApuesta vapu;
 	VentanaSuperastro veSup;
+	VentanaChance veChan;
+	VentanaLoteria veLo;
+	VentanaBaloto valo;
+	VentanaBetPlay vet;
 
 	public Controller() {
 		con = new Console();
@@ -81,10 +90,17 @@ public class Controller implements ActionListener {
 		vsapo = new VentanaSeleccionApostadores();
 		velimApos = new VentanaElimApos();
 		vemos = new VentanaMostrarApostador();
+		veChan = new VentanaChance();
 		apostDao = new ApostadorDAO();
 		vapu = new VentanaSeleccionarApuesta();
 		veSup = new VentanaSuperastro();
+		veLo = new VentanaLoteria();
 		superDao = new SuperastroDAO();
+		loteDao = new LoteriaDAO();
+		chanDao = new ChanceDAO();
+		balotDao = new BalotoDAO();
+		valo = new VentanaBaloto();
+		vet = new VentanaBetPlay();
 		ruta1 = new File("src/co/edu/unbosque/model/persistence/config.properties");
 		ruta2 = new File("src/co/edu/unbosque/model/persistence/juegos.dat");
 		ruta3 = new File("src/co/edu/unbosque/model/persistence/sedes.dat");
@@ -494,6 +510,9 @@ public class Controller implements ActionListener {
 
 					case 3:
 						con.printWithNewLine(superDao.read());
+						con.printWithNewLine(loteDao.read());
+						con.printWithNewLine(chanDao.read());
+						con.printWithNewLine(balotDao.read());
 						break;
 
 					case 4:
@@ -1164,7 +1183,30 @@ public class Controller implements ActionListener {
 			break;
 		}
 		case "btnSuper": {
-			veSup.setVisible(true);
+			int confirmacion = JOptionPane.showConfirmDialog(vapu, " ¿Desea Crear una Apuesta  ?", "Confirmación",
+					JOptionPane.YES_NO_OPTION);
+			if (confirmacion == JOptionPane.YES_OPTION) {
+				veSup.setVisible(true);
+				veSup.getModificar().setVisible(false);
+				veSup.getApost().setVisible(true);
+				vapu.setVisible(false);
+				break;
+			} else {
+				int confirmacion1 = JOptionPane.showConfirmDialog(vapu, " ¿Desea modificar una Apuesta  ?",
+						"Confirmación", JOptionPane.YES_NO_OPTION);
+				if (confirmacion1 == JOptionPane.YES_OPTION) {
+					veSup.setVisible(true);
+					veSup.getModificar().setVisible(true);
+					veSup.getApost().setVisible(false);
+					vapu.setVisible(false);
+					break;
+				}
+
+			}
+		}
+
+		case "btnChance": {
+			veChan.setVisible(true);
 			vapu.setVisible(false);
 			break;
 		}
@@ -1204,16 +1246,23 @@ public class Controller implements ActionListener {
 									|| dia.equalsIgnoreCase("viernes") || dia.equalsIgnoreCase("sabado")
 									|| dia.equalsIgnoreCase("domingo")) {
 								// Validar signo del zodiaco
-								if (zod.equals("aries") || zod.equals("tauro") || zod.equalsIgnoreCase("geminis")
-										|| zod.equalsIgnoreCase("cancer") || zod.equalsIgnoreCase("leo")
-										|| zod.equalsIgnoreCase("virgo") || zod.equalsIgnoreCase("libra")
-										|| zod.equalsIgnoreCase("escorpio") || zod.equalsIgnoreCase("sagitario")
-										|| zod.equalsIgnoreCase("capricornio") || zod.equalsIgnoreCase("acuario")
-										|| zod.equalsIgnoreCase("piscis")) {
+								if (zod.equalsIgnoreCase("aries") || zod.equalsIgnoreCase("tauro")
+										|| zod.equalsIgnoreCase("geminis") || zod.equalsIgnoreCase("cancer")
+										|| zod.equalsIgnoreCase("leo") || zod.equalsIgnoreCase("virgo")
+										|| zod.equalsIgnoreCase("libra") || zod.equalsIgnoreCase("escorpio")
+										|| zod.equalsIgnoreCase("sagitario") || zod.equalsIgnoreCase("capricornio")
+										|| zod.equalsIgnoreCase("acuario") || zod.equalsIgnoreCase("piscis")) {
 									// Todas las validaciones pasaron, puedes proceder con la apuesta
 									superDao.create(dig1, dig2, dig3, dig4, val, zod, cedul, sed, dia);
 									JOptionPane.showMessageDialog(veSup,
 											apostadorExistente.getNombre() + " Apostó Exitosamente en Superastro");
+									JOptionPane.showMessageDialog(veSup,
+											"Recibo Generado:" + "\n" + "Nombre del apostador:"
+													+ apostadorExistente.getNombre() + "\n" + "Numero de cedula :"
+													+ cedul + "\n" + "Numero que aposto" + dig1 + dig2 + dig3 + dig4
+													+ "Serie" + "\n" + "\n Signo del zodiaco :" + zod + "\n"
+													+ " Sede en la que aposto :" + sed + "\n" + " Dia de hoy :" + dia
+													+ "\n Valor de la apuesta realizada: " + val);
 								} else {
 									JOptionPane.showMessageDialog(veSup, "Signo del zodiaco no válido.");
 								}
@@ -1233,6 +1282,329 @@ public class Controller implements ActionListener {
 			} else {
 				JOptionPane.showMessageDialog(veSup, "No existe este índice ");
 			}
+		}
+		case "btnModificarSuperastro": {
+			String index = veSup.getIndex().getText();
+			String dig1 = veSup.getCampoDig1().getText();
+			String dig2 = veSup.getCampoDig2().getText();
+			String dig3 = veSup.getCampoDig3().getText();
+			String dig4 = veSup.getCampoDig4().getText();
+			String zod = veSup.getCampoZodiac().getText();
+			String val = veSup.getCampoValue().getText();
+			String cedul = veSup.getCampoCedula().getText();
+			String dia = veSup.getCampoDia().getText();
+			String sed = veSup.getCampoSede().getText();
+			if (index.isBlank() || dig1.isBlank() || dig2.isBlank() || dig3.isBlank() || dig4.isBlank() || zod.isBlank()
+					|| val.isBlank() || cedul.isBlank() || dia.isBlank() || sed.isBlank()) {
+				JOptionPane.showMessageDialog(veSup, "Uno o mas espacios estan vacios");
+			}
+			int index1 = Integer.parseInt(index);
+			ArrayList<SuperastroDTO> superastros = superDao.getListOfSuperastro();
+			if (index1 >= 0 && index1 < superastros.size()) {
+				SuperastroDTO superastroExistente = superastros.get(index1);
+				int confirmacion = JOptionPane.showConfirmDialog(vapo,
+						"En la posición " + index1 + ", La cedula del apostador es "
+								+ superastroExistente.getNumDeCedula() + " y aposto los siguientes numeros"
+								+ superastroExistente.getDigito1() + superastroExistente.getDigito2()
+								+ superastroExistente.getDigito3() + superastroExistente.getDigito4()
+								+ " Con el siguiente signo del zodiaco" + superastroExistente.getZodiacoSigno()
+								+ "Desea modificarlo?" + "Confirmación",
+						JOptionPane.YES_NO_OPTION);
+				if (confirmacion == JOptionPane.YES_OPTION) {
+					boolean localidadExiste = sedeDao.getListOfSedes().stream()
+							.anyMatch(sede -> sede.getLocalidad().equalsIgnoreCase(sed));
+
+					if (localidadExiste) {
+						// Validar cédula
+						if (veSup.getCampoCedula().getText().equals(Long.toString(apostadorExistente.getCedula()))) {
+							// Validar día
+							if (dia.equalsIgnoreCase("lunes") || dia.equalsIgnoreCase("martes")
+									|| dia.equalsIgnoreCase("miercoles") || dia.equalsIgnoreCase("jueves")
+									|| dia.equalsIgnoreCase("viernes") || dia.equalsIgnoreCase("sabado")
+									|| dia.equalsIgnoreCase("domingo")) {
+								// Validar signo del zodiaco
+								if (zod.equalsIgnoreCase("aries") || zod.equalsIgnoreCase("tauro")
+										|| zod.equalsIgnoreCase("geminis") || zod.equalsIgnoreCase("cancer")
+										|| zod.equalsIgnoreCase("leo") || zod.equalsIgnoreCase("virgo")
+										|| zod.equalsIgnoreCase("libra") || zod.equalsIgnoreCase("escorpio")
+										|| zod.equalsIgnoreCase("sagitario") || zod.equalsIgnoreCase("capricornio")
+										|| zod.equalsIgnoreCase("acuario") || zod.equalsIgnoreCase("piscis")) {
+									// Todas las validaciones pasaron, puedes proceder con la apuesta
+									int indice = Integer.parseInt(index);
+									superDao.update(indice, dig1, dig2, dig3, dig4, val, zod, cedul, sed, dia);
+									JOptionPane.showMessageDialog(veSup,
+											apostadorExistente.getNombre() + " Apostó Exitosamente en Superastro");
+									JOptionPane.showMessageDialog(veSup,
+											"Recibo Generado:" + "\n" + "Nombre del apostador:"
+													+ apostadorExistente.getNombre() + "\n" + "Numero de cedula :"
+													+ cedul + "\n" + "Numero que aposto" + dig1 + dig2 + dig3 + dig4
+													+ "Serie" + "\n" + "\n Signo del zodiaco :" + zod + "\n"
+													+ " Sede en la que aposto :" + sed + "\n" + " Dia de hoy :" + dia
+													+ "\n Valor de la apuesta realizada: " + val);
+								} else {
+									JOptionPane.showMessageDialog(veSup, "Signo del zodiaco no válido.");
+								}
+							} else {
+								JOptionPane.showMessageDialog(veSup, "Día de la semana no válido.");
+							}
+						} else {
+							JOptionPane.showMessageDialog(veSup,
+									"La cédula ingresada no coincide con la cédula del apostador.");
+						}
+					} else {
+						JOptionPane.showMessageDialog(veSup, "No existe la sede");
+					}
+				}
+
+				break;
+			} else {
+				JOptionPane.showMessageDialog(veSup, "No existe este índice ");
+			}
+
+		}
+		case "btnRegresarSuper": {
+			vapu.setVisible(true);
+			veSup.setVisible(false);
+			break;
+		}
+		case "btnRegresarChan": {
+			vapu.setVisible(true);
+			veChan.setVisible(false);
+			break;
+		}
+		case "btnApostChanche": {
+			String index = veChan.getIndex().getText();
+			String dig1 = veChan.getCampoDig1().getText();
+			String dig2 = veChan.getCampoDig2().getText();
+			String dig3 = veChan.getCampoDig3().getText();
+			String dig4 = veChan.getCampoDig4().getText();
+			String lot = veChan.getCampoLote().getText();
+			String val = veChan.getCampoValue().getText();
+			String cedul = veChan.getCampoCedula().getText();
+			String dia = veChan.getCampoDia().getText();
+			String sed = veChan.getCampoSede().getText();
+			if (index.isBlank() || dig1.isBlank() || dig2.isBlank() || dig3.isBlank() || dig4.isBlank() || lot.isBlank()
+					|| val.isBlank() || cedul.isBlank() || dia.isBlank() || sed.isBlank()) {
+				JOptionPane.showMessageDialog(veChan, "Uno o mas espacios estan vacios");
+			}
+			int index1 = Integer.parseInt(index);
+			ArrayList<ApostadorDTO> apostadores = apostDao.getListOfApostadores();
+			if (index1 >= 0 && index1 < apostadores.size()) {
+				ApostadorDTO apostadorExistente = apostadores.get(index1);
+				int confirmacion = JOptionPane.showConfirmDialog(
+						vapo, "En la posición " + index1 + ", el nombre del apostador es "
+								+ apostadorExistente.getNombre() + ". ¿Desea Apostar con este apostador ?",
+						"Confirmación", JOptionPane.YES_NO_OPTION);
+				if (confirmacion == JOptionPane.YES_OPTION) {
+					boolean localidadExiste = sedeDao.getListOfSedes().stream()
+							.anyMatch(sede -> sede.getLocalidad().equalsIgnoreCase(sed));
+
+					if (localidadExiste) {
+						// Validar cédula
+						if (veChan.getCampoCedula().getText().equals(Long.toString(apostadorExistente.getCedula()))) {
+							// Validar día
+							if (dia.equalsIgnoreCase("lunes") || dia.equalsIgnoreCase("martes")
+									|| dia.equalsIgnoreCase("miercoles") || dia.equalsIgnoreCase("jueves")
+									|| dia.equalsIgnoreCase("viernes") || dia.equalsIgnoreCase("sabado")
+									|| dia.equalsIgnoreCase("domingo")) {
+								// Validar Loterias
+								if (!lot.equalsIgnoreCase("Loteria de cucuta")
+										|| !lot.equalsIgnoreCase("loteria de boyaca")
+										|| !lot.equalsIgnoreCase("loteria de cundinamarca")) {
+									// Todas las validaciones pasaron, puedes proceder con la apuesta
+									chanDao.create(dig1, dig2, dig3, dig4, val, lot, cedul, sed, dia);
+									JOptionPane.showMessageDialog(veChan, apostadorExistente.getNombre()
+											+ " Apostó Exitosamente en  el Chance de " + lot);
+									JOptionPane.showMessageDialog(veChan,
+											"Recibo Generado:" + "\n" + "Nombre del apostador:"
+													+ apostadorExistente.getNombre() + "\n" + "Numero de cedula :"
+													+ cedul + "\n" + "Numero que aposto" + dig1 + dig2 + dig3 + dig4
+													+ "Serie" + "\n" + "\n Loteria en la que aposto:" + lot + "\n"
+													+ " Sede en la que aposto :" + sed + "\n" + " Dia de hoy :" + dia
+													+ "\n Valor de la apuesta realizada: " + val);
+								} else {
+									JOptionPane.showMessageDialog(veChan, "No existe esa loteria ");
+								}
+							} else {
+								JOptionPane.showMessageDialog(veChan, "Día de la semana no válido.");
+							}
+						} else {
+							JOptionPane.showMessageDialog(veChan,
+									"La cédula ingresada no coincide con la cédula del apostador.");
+						}
+					} else {
+						JOptionPane.showMessageDialog(veChan, "No existe la sede");
+					}
+				}
+
+				break;
+			} else {
+				JOptionPane.showMessageDialog(veChan, "No existe este índice ");
+			}
+
+			break;
+
+		}
+		case "selLote": {
+			veLo.setVisible(true);
+			vapu.setVisible(false);
+			break;
+		}
+		case "btnApuLoteria": {
+			String index = veLo.getIndex().getText();
+			String dig1 = veLo.getCampoDig1().getText();
+			String dig2 = veLo.getCampoDig2().getText();
+			String dig3 = veLo.getCampoDig3().getText();
+			String dig4 = veLo.getCampoDig4().getText();
+			String ser1 = veLo.getCampoSerie1().getText();
+			String ser2 = veLo.getCampoSerie2().getText();
+			String ser3 = veLo.getCampoSerie3().getText();
+			String lot = veLo.getCampoLote().getText();
+			String val = veLo.getCampoValue().getText();
+			String cedul = veLo.getCampoCedula().getText();
+			String dia = veLo.getCampoDia().getText();
+			String sed = veLo.getCampoSede().getText();
+			if (index.isBlank() || dig1.isBlank() || dig2.isBlank() || dig3.isBlank() || dig4.isBlank() || lot.isBlank()
+					|| val.isBlank() || cedul.isBlank() || dia.isBlank() || sed.isBlank()) {
+				JOptionPane.showMessageDialog(veLo, "Uno o mas espacios estan vacios");
+			}
+			int index1 = Integer.parseInt(index);
+			ArrayList<ApostadorDTO> apostadores = apostDao.getListOfApostadores();
+			if (index1 >= 0 && index1 < apostadores.size()) {
+				ApostadorDTO apostadorExistente = apostadores.get(index1);
+				int confirmacion = JOptionPane.showConfirmDialog(
+						veLo, "En la posición " + index1 + ", el nombre del apostador es "
+								+ apostadorExistente.getNombre() + ". ¿Desea Apostar con este apostador ?",
+						"Confirmación", JOptionPane.YES_NO_OPTION);
+				if (confirmacion == JOptionPane.YES_OPTION) {
+					boolean localidadExiste = sedeDao.getListOfSedes().stream()
+							.anyMatch(sede -> sede.getLocalidad().equalsIgnoreCase(sed));
+
+					if (localidadExiste) {
+						// Validar cédula
+						if (veLo.getCampoCedula().getText().equals(Long.toString(apostadorExistente.getCedula()))) {
+							// Validar día
+							if (dia.equalsIgnoreCase("lunes") || dia.equalsIgnoreCase("martes")
+									|| dia.equalsIgnoreCase("miercoles") || dia.equalsIgnoreCase("jueves")
+									|| dia.equalsIgnoreCase("viernes") || dia.equalsIgnoreCase("sabado")
+									|| dia.equalsIgnoreCase("domingo")) {
+								// Validar Loterias
+								if (!lot.equalsIgnoreCase("Loteria de cucuta")
+										|| !lot.equalsIgnoreCase("loteria de boyaca")
+										|| !lot.equalsIgnoreCase("loteria de cundinamarca")) {
+									// Todas las validaciones pasaron, puedes proceder con la apuesta
+									loteDao.create(dig1, dig2, dig3, dig4, ser1, ser2, ser3, val, lot, cedul, sed, dia);
+									JOptionPane.showMessageDialog(veLo,
+											apostadorExistente.getNombre() + " Apostó Exitosamente en  la " + lot);
+									JOptionPane.showMessageDialog(veLo,
+											"Recibo Generado:" + "\n" + "Nombre del apostador:"
+													+ apostadorExistente.getNombre() + "\n" + "Numero de cedula :"
+													+ cedul + "\n" + "Numero que aposto" + dig1 + dig2 + dig3 + dig4
+													+ "Serie" + ser1 + ser2 + ser3 + "\n" + " Sede en la que aposto :"
+													+ sed + "\n" + " Dia de hoy :" + dia
+													+ "\n Valor de la apuesta realizada: " + val);
+								} else {
+									JOptionPane.showMessageDialog(veLo, "No existe esa loteria ");
+								}
+							} else {
+								JOptionPane.showMessageDialog(veLo, "Día de la semana no válido.");
+							}
+						} else {
+							JOptionPane.showMessageDialog(veLo,
+									"La cédula ingresada no coincide con la cédula del apostador.");
+						}
+					} else {
+						JOptionPane.showMessageDialog(veLo, "No existe la sede");
+					}
+				}
+
+				break;
+			} else {
+				JOptionPane.showMessageDialog(veChan, "No existe este índice ");
+			}
+
+			break;
+
+		}
+		case "btnRegresarlote": {
+			vapu.setVisible(true);
+			veLo.setVisible(false);
+			break;
+		}
+		case "selBalo": {
+			valo.setVisible(true);
+			vapu.setVisible(false);
+			break;
+		}
+
+		case "btnBaloApost": {
+			String index = valo.getIndex().getText();
+			String dig1 = valo.getCampoDig1().getText();
+			String dig2 = valo.getCampoDig2().getText();
+			String dig3 = valo.getCampoDig3().getText();
+			String dig4 = valo.getCampoDig4().getText();
+			String dig5 = valo.getCampoDig5().getText();
+			String dig6 = valo.getCampoDig6().getText();
+			String val = valo.getCampoValue().getText();
+			String cedul = valo.getCampoCedula().getText();
+			String dia = valo.getCampoDia().getText();
+			String sed = valo.getCampoSede().getText();
+			if (index.isBlank() || dig1.isBlank() || dig2.isBlank() || dig3.isBlank() || dig4.isBlank()
+					|| dig5.isBlank() || val.isBlank() || dig6.isBlank() || cedul.isBlank() || dia.isBlank()
+					|| sed.isBlank()) {
+				JOptionPane.showMessageDialog(valo, "Uno o mas espacios estan vacios");
+			}
+			int index1 = Integer.parseInt(index);
+			ArrayList<ApostadorDTO> apostadores = apostDao.getListOfApostadores();
+			if (index1 >= 0 && index1 < apostadores.size()) {
+				ApostadorDTO apostadorExistente = apostadores.get(index1);
+				int confirmacion = JOptionPane.showConfirmDialog(
+						valo, "En la posición " + index1 + ", el nombre del apostador es "
+								+ apostadorExistente.getNombre() + ". ¿Desea Apostar con este apostador ?",
+						"Confirmación", JOptionPane.YES_NO_OPTION);
+				if (confirmacion == JOptionPane.YES_OPTION) {
+					boolean localidadExiste = sedeDao.getListOfSedes().stream()
+							.anyMatch(sede -> sede.getLocalidad().equalsIgnoreCase(sed));
+
+					if (localidadExiste) {
+						if (valo.getCampoCedula().getText().equals(Long.toString(apostadorExistente.getCedula()))) {
+							// Validar día
+							if (dia.equalsIgnoreCase("lunes") || dia.equalsIgnoreCase("martes")
+									|| dia.equalsIgnoreCase("miercoles") || dia.equalsIgnoreCase("jueves")
+									|| dia.equalsIgnoreCase("viernes") || dia.equalsIgnoreCase("sabado")
+									|| dia.equalsIgnoreCase("domingo")) {
+
+								// Todas las validaciones pasaron, puedes proceder con la apuesta
+								balotDao.create(dig1, dig2, dig3, dig4, dig5, dig6, val, cedul, sed, dia);
+								JOptionPane.showMessageDialog(valo,
+										apostadorExistente.getNombre() + " Apostó Exitosamente en el baloto ");
+								JOptionPane.showMessageDialog(valo, "Recibo Generado:" + "\n" + "Nombre del apostador:"
+										+ apostadorExistente.getNombre() + "\n" + "Numero de cedula :" + cedul + "\n"
+										+ "Numero que aposto" + dig1 + "," + dig2 + "," + dig3 + "," + dig4 + "," + dig5
+										+ "," + dig6 + "," + "\n" + " Sede en la que aposto :" + sed + "\n"
+										+ " Dia de hoy :" + dia + "\n Valor de la apuesta realizada: " + val);
+
+							}
+						} else {
+							JOptionPane.showMessageDialog(valo, "Día de la semana no válido.");
+						}
+					} else {
+						JOptionPane.showMessageDialog(valo,
+								"La cédula ingresada no coincide con la cédula del apostador.");
+					}
+				} else {
+
+				}
+			} else {
+				JOptionPane.showMessageDialog(valo, "indice no encontrado");
+			}
+
+			break;
+		}
+		case "selBet": {
+			vet.setVisible(true);
+			vapu.setVisible(false);
+			break;
 		}
 
 		}
@@ -1300,8 +1672,30 @@ public class Controller implements ActionListener {
 		vapu.getRegresar().setActionCommand("vapuReg");
 		vapu.getSuperastro().addActionListener(this);
 		vapu.getSuperastro().setActionCommand("btnSuper");
+		vapu.getChance().addActionListener(this);
+		vapu.getChance().setActionCommand("btnChance");
+		vapu.getLoteria().addActionListener(this);
+		vapu.getLoteria().setActionCommand("selLote");
+		vapu.getBaloto().addActionListener(this);
+		vapu.getBaloto().setActionCommand("selBalo");
+		vapu.getBetPlay().addActionListener(this);
+		vapu.getBetPlay().setActionCommand("selBet");
 		veSup.getApost().addActionListener(this);
 		veSup.getApost().setActionCommand("btnApostarSuperastro");
+		veSup.getModificar().addActionListener(this);
+		veSup.getModificar().setActionCommand("btnModificarSuperastro");
+		veChan.getApost().addActionListener(this);
+		veChan.getApost().setActionCommand("btnApostChanche");
+		veSup.getRegresar().addActionListener(this);
+		veSup.getRegresar().setActionCommand("btnRegresarSuper");
+		veChan.getRegresar().addActionListener(this);
+		veChan.getRegresar().setActionCommand("btnRegresarChan");
+		veLo.getApost().addActionListener(this);
+		veLo.getApost().setActionCommand("btnApuLoteria");
+		veLo.getRegresar().addActionListener(this);
+		veLo.getRegresar().setActionCommand("btnRegresarlote");
+		valo.getApost().addActionListener(this);
+		valo.getApost().setActionCommand("btnBaloApost");
 
 	}
 

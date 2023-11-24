@@ -13,33 +13,44 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	private int digito3;
 	private int digito4;
 	private double valorDeLaApuesta;
+	private String loteria;
 
 	public ChanceDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ChanceDTO(int digito1, int digito2, int digito3, int digito4, double valorDeLaApuesta) {
+	public ChanceDTO(int digito1, int digito2, int digito3, int digito4, double valorDeLaApuesta, String loteria) {
 		super();
 		this.digito1 = digito1;
 		this.digito2 = digito2;
 		this.digito3 = digito3;
 		this.digito4 = digito4;
 		this.valorDeLaApuesta = valorDeLaApuesta;
+		this.loteria = loteria;
 	}
 
 	public ChanceDTO(String nameSede, long numDeCedula, String diaDeLaApuesta, int digito1, int digito2, int digito3,
-			int digito4, double valorDeLaApuesta) {
+			int digito4, double valorDeLaApuesta, String loteria) {
 		super(nameSede, numDeCedula, diaDeLaApuesta);
 		this.digito1 = digito1;
 		this.digito2 = digito2;
 		this.digito3 = digito3;
 		this.digito4 = digito4;
 		this.valorDeLaApuesta = valorDeLaApuesta;
+		this.loteria = loteria;
 	}
 
 	public ChanceDTO(String nameSede, long numDeCedula, String diaDeLaApuesta) {
 		super(nameSede, numDeCedula, diaDeLaApuesta);
 		// TODO Auto-generated constructor stub
+	}
+
+	public String getLoteria() {
+		return loteria;
+	}
+
+	public void setLoteria(String loteria) {
+		this.loteria = loteria;
 	}
 
 	public int getDigito1() {

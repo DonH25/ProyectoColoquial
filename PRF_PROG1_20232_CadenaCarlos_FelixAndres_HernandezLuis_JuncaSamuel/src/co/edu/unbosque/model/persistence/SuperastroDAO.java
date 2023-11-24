@@ -80,20 +80,33 @@ public class SuperastroDAO implements CRUDOperation {
 			return false;
 		} else {
 			if (!args[0].isBlank() || !args[0].isEmpty() || args[0] != null) {
-				listOfSuperastro.get(index).setDigito1(Integer.parseInt(args[0]));
+			    listOfSuperastro.get(index).setDigito1(Integer.parseInt(args[0]));
 			}
 			if (!args[1].isBlank() || !args[1].isEmpty() || args[1] != null) {
-				listOfSuperastro.get(index).setDigito2(Integer.parseInt(args[1]));
+			    listOfSuperastro.get(index).setDigito2(Integer.parseInt(args[1]));
 			}
 			if (!args[2].isBlank() || !args[2].isEmpty() || args[2] != null) {
-				listOfSuperastro.get(index).setDigito3(Integer.parseInt(args[2]));
+			    listOfSuperastro.get(index).setDigito3(Integer.parseInt(args[2]));
 			}
 			if (!args[3].isBlank() || !args[3].isEmpty() || args[3] != null) {
-				listOfSuperastro.get(index).setDigito4(Integer.parseInt(args[3]));
+			    listOfSuperastro.get(index).setDigito4(Integer.parseInt(args[3]));
 			}
 			if (!args[4].isBlank() || !args[4].isEmpty() || args[4] != null) {
-				listOfSuperastro.get(index).setZodiacoSigno(args[4]);
+			    listOfSuperastro.get(index).setValorDeLaApuesta(Double.parseDouble(args[4]));
 			}
+			if (!args[5].isBlank() || !args[5].isEmpty() || args[5] != null) {
+			    listOfSuperastro.get(index).setZodiacoSigno(args[5]);
+			}
+			if (!args[6].isBlank() || !args[6].isEmpty() || args[6] != null) {
+			    listOfSuperastro.get(index).setNumDeCedula(Long.parseLong(args[6]));
+			}
+			if (!args[7].isBlank() || !args[7].isEmpty() || args[7] != null) {
+			    listOfSuperastro.get(index).setNameSede(args[7]);
+			}
+			if (!args[8].isBlank() || !args[8].isEmpty() || args[8] != null) {
+			    listOfSuperastro.get(index).setDiaDeLaApuesta(args[8]);
+			}
+
 		}
 		writeDataSerializable();
 		return true;

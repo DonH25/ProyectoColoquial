@@ -9,20 +9,20 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class VentanaChance extends JFrame {
+public class VentanaBaloto extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3614924828858164662L;
-	private JTextField index, campoDig1, campoDig2, campoDig3, campoDig4, campoValue, campoLote, campoCedula, campoSede,
-			campoDia;
-	private JButton apost, regresar, modificar;
+	private JTextField index, campoDig1, campoDig2, campoDig3, campoDig4, campoValue, campoCedula, campoSede, campoDia,
+			campoDig5, campoDig6;
+	private JButton apost, regresar,modificar;
 	private JLabel fondo, indicacionIndex, indicacionDig1, indicacionDig2, indicacionDig3, indicacionDig4,
-			indicacionValue, indicacionLote, indicacionLote1, indicacionLote2, indicacionLote3, indicacionCedula,
-			indicacionCedula2, indicacionseguridadSede, indicacionSeguridadDia;
+			indicacionDig5, indicacionDig6, indicacionValue, indicacionLote3, indicacionCedula, indicacionCedula2,
+			indicacionseguridadSede, indicacionSeguridadDia;
 
-	public VentanaChance() {
+	public VentanaBaloto() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -63,28 +63,24 @@ public class VentanaChance extends JFrame {
 		indicacionDig4.setBounds(190, 170, 30, 30);
 		indicacionDig4.setForeground(Color.white);
 
+		campoDig5 = new JTextField();
+		campoDig5.setBounds(220, 200, 30, 30);
+
+		indicacionDig5 = new JLabel("dig5");
+		indicacionDig5.setBounds(220, 170, 30, 30);
+
+		campoDig6 = new JTextField();
+		campoDig6.setBounds(250, 200, 30, 30);
+
+		indicacionDig6 = new JLabel("dig6");
+		indicacionDig6.setBounds(250, 170, 30, 30);
+
 		indicacionValue = new JLabel("Inserte el valor de su apuesta");
 		indicacionValue.setBounds(100, 250, 300, 20);
 		indicacionValue.setForeground(Color.white);
 
 		campoValue = new JTextField();
 		campoValue.setBounds(100, 280, 300, 20);
-
-		campoLote = new JTextField();
-		campoLote.setBounds(100, 480, 300, 20);
-
-		indicacionLote = new JLabel("Inserte la loteria que usted quiere apostar");
-		indicacionLote.setBounds(100, 400, 300, 20);
-		indicacionLote.setForeground(Color.white);
-		indicacionLote1 = new JLabel("1: Loteria De Cucuta");
-		indicacionLote1.setBounds(100, 420, 300, 20);
-		indicacionLote1.setForeground(Color.white);
-		indicacionLote2 = new JLabel("2: Loteria De Boyaca");
-		indicacionLote2.setBounds(100, 440, 300, 20);
-		indicacionLote2.setForeground(Color.white);
-		indicacionLote3 = new JLabel("3: Loteria de Cundinamarca");
-		indicacionLote3.setBounds(100, 460, 300, 20);
-		indicacionLote3.setForeground(Color.white);
 
 		campoCedula = new JTextField();
 		campoCedula.setBounds(100, 580, 300, 20);
@@ -118,15 +114,17 @@ public class VentanaChance extends JFrame {
 		ImageIcon imagen1;
 		imagen1 = new ImageIcon(temp1.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		apost.setIcon(imagen1);
+		
 
 		modificar = new JButton();
 		modificar.setBounds(800, 250, 200, 200);
 		Image temp11;
-		temp11 = new ImageIcon("src/imagenes/modificar.png").getImage();
+		temp11 = new ImageIcon("src/imagenes/modificarApuesta.png").getImage();
 		ImageIcon imagen11;
 		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		modificar.setIcon(imagen11);
 		modificar.setVisible(false);
+		
 
 		fondo = new JLabel();
 		fondo.setBounds(0, 0, 1280, 720);
@@ -151,12 +149,14 @@ public class VentanaChance extends JFrame {
 		add(campoDig2);
 		add(campoDig3);
 		add(campoDig4);
-		add(campoLote);
 		add(campoValue);
 		add(campoCedula);
 		add(campoDia);
 		add(campoSede);
-		add(campoLote);
+		add(campoDig5);
+		add(campoDig6);
+		add(indicacionDig5);
+		add(indicacionDig5);
 		add(index);
 		add(indicacionIndex);
 		add(indicacionDig1);
@@ -164,10 +164,6 @@ public class VentanaChance extends JFrame {
 		add(indicacionDig3);
 		add(indicacionDig4);
 		add(indicacionValue);
-		add(indicacionLote);
-		add(indicacionLote1);
-		add(indicacionLote2);
-		add(indicacionLote3);
 		add(indicacionSeguridadDia);
 		add(indicacionseguridadSede);
 		add(indicacionCedula);
@@ -318,22 +314,6 @@ public class VentanaChance extends JFrame {
 		this.indicacionIndex = indicacionIndex;
 	}
 
-	public JTextField getCampoLote() {
-		return campoLote;
-	}
-
-	public void setCampoLote(JTextField campoLote) {
-		this.campoLote = campoLote;
-	}
-
-	public JLabel getIndicacionLote() {
-		return indicacionLote;
-	}
-
-	public void setIndicacionLote(JLabel indicacionLote) {
-		this.indicacionLote = indicacionLote;
-	}
-
 	public JTextField getCampoCedula() {
 		return campoCedula;
 	}
@@ -356,22 +336,6 @@ public class VentanaChance extends JFrame {
 
 	public void setCampoDia(JTextField campoDia) {
 		this.campoDia = campoDia;
-	}
-
-	public JLabel getIndicacionLote1() {
-		return indicacionLote1;
-	}
-
-	public void setIndicacionLote1(JLabel indicacionLote1) {
-		this.indicacionLote1 = indicacionLote1;
-	}
-
-	public JLabel getIndicacionLote2() {
-		return indicacionLote2;
-	}
-
-	public void setIndicacionLote2(JLabel indicacionLote2) {
-		this.indicacionLote2 = indicacionLote2;
 	}
 
 	public JLabel getIndicacionLote3() {
@@ -405,5 +369,70 @@ public class VentanaChance extends JFrame {
 	public void setIndicacionSeguridadDia(JLabel indicacionSeguridadDia) {
 		this.indicacionSeguridadDia = indicacionSeguridadDia;
 	}
+
+	public JTextField getCampoSerie1() {
+		return campoDig5;
+	}
+
+	public void setCampoSerie1(JTextField campoSerie1) {
+		this.campoDig5 = campoSerie1;
+	}
+
+	public JTextField getCampoSerie2() {
+		return campoDig6;
+	}
+
+	public void setCampoSerie2(JTextField campoSerie2) {
+		this.campoDig6 = campoSerie2;
+	}
+
+	public JLabel getIndicacionSerie1() {
+		return indicacionDig5;
+	}
+
+	public void setIndicacionSerie1(JLabel indicacionSerie1) {
+		this.indicacionDig5 = indicacionSerie1;
+	}
+
+	public JLabel getIndicacionSerie2() {
+		return indicacionDig5;
+	}
+
+	public void setIndicacionSerie2(JLabel indicacionSerie2) {
+		this.indicacionDig5 = indicacionSerie2;
+	}
+
+	public JTextField getCampoDig5() {
+		return campoDig5;
+	}
+
+	public void setCampoDig5(JTextField campoDig5) {
+		this.campoDig5 = campoDig5;
+	}
+
+	public JTextField getCampoDig6() {
+		return campoDig6;
+	}
+
+	public void setCampoDig6(JTextField campoDig6) {
+		this.campoDig6 = campoDig6;
+	}
+
+	public JLabel getIndicacionDig5() {
+		return indicacionDig5;
+	}
+
+	public void setIndicacionDig5(JLabel indicacionDig5) {
+		this.indicacionDig5 = indicacionDig5;
+	}
+
+	public JLabel getIndicacionDig6() {
+		return indicacionDig6;
+	}
+
+	public void setIndicacionDig6(JLabel indicacionDig6) {
+		this.indicacionDig6 = indicacionDig6;
+	}
+	
 
 }

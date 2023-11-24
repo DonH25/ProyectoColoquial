@@ -17,7 +17,7 @@ public class VentanaSuperastro extends JFrame {
 	private static final long serialVersionUID = -7396031141857717571L;
 	private JTextField index, campoDig1, campoDig2, campoDig3, campoDig4, campoZodiac, campoValue, campoCedula,
 			campoSede, campoDia;
-	private JButton apost, regresar;
+	private JButton apost, regresar, modificar;
 	private JLabel fondo, indicacionIndex, indicacionDig1, indicacionDig2, indicacionDig3, indicacionDig4,
 			indicacionZodiac, indicacionValue, indicacionCedula, indicacionCedula2, indicacionseguridadSede,
 			indicacionSeguridadDia;
@@ -110,6 +110,15 @@ public class VentanaSuperastro extends JFrame {
 		imagen1 = new ImageIcon(temp1.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		apost.setIcon(imagen1);
 
+		modificar = new JButton();
+		modificar.setBounds(800, 250, 200, 200);
+		Image temp11;
+		temp11 = new ImageIcon("src/imagenes/modificarApuesta.png").getImage();
+		ImageIcon imagen11;
+		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+		modificar.setIcon(imagen11);
+		modificar.setVisible(false);
+
 		fondo = new JLabel();
 		fondo.setBounds(0, 0, 1280, 720);
 		Image temp;
@@ -152,6 +161,7 @@ public class VentanaSuperastro extends JFrame {
 		add(indicacionCedula2);
 		add(apost);
 		add(regresar);
+		add(modificar);
 		add(fondo);
 
 	}
@@ -359,6 +369,13 @@ public class VentanaSuperastro extends JFrame {
 	public void setIndicacionSeguridadDia(JLabel indicacionSeguridadDia) {
 		this.indicacionSeguridadDia = indicacionSeguridadDia;
 	}
-	
+
+	public JButton getModificar() {
+		return modificar;
+	}
+
+	public void setModificar(JButton modificar) {
+		this.modificar = modificar;
+	}
 
 }
