@@ -24,7 +24,10 @@ public class GestionApuestaDAO implements CRUDOperation {
 	int index = 0;
 
 	/**
-	 * Constructor de GestionApuestaDAO que inicializa la lista de apuestas.
+	 * Constructor por defecto para GestionApuestaDAO. Inicializa la lista de
+	 * gestión de apuestas. Si existe un archivo serializado con datos de gestión de
+	 * apuestas, los carga en la lista. Si el archivo no contiene una lista de
+	 * gestión de apuestas o no existe, se crea una nueva lista vacía.
 	 */
 	public GestionApuestaDAO() {
 		listOfGestionApuesta = new ArrayList<GestionApuestaDTO>();
@@ -44,6 +47,15 @@ public class GestionApuestaDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Crea una nueva gestión de apuestas y la añade a la lista de gestión de
+	 * apuestas. También escribe los datos en un archivo serializado.
+	 *
+	 * @param args Los argumentos utilizados para crear la nueva gestión de
+	 *             apuestas. args[0] es el nombre de la sede. args[1] es el número
+	 *             de cédula. args[2] es el día de la apuesta.
+	 * @throws NumberFormatException si args[1] no puede ser convertido a un número.
+	 */
 	@Override
 	public void create(String... args) {
 		GestionApuestaDTO bet = new GestionApuestaDTO();
@@ -55,12 +67,28 @@ public class GestionApuestaDAO implements CRUDOperation {
 		writeDataSerializable();
 	}
 
+	/**
+	 * Añade una nueva gestión de apuestas a la lista de gestión de apuestas y
+	 * escribe los datos en un archivo serializado.
+	 *
+	 * @param o El objeto que se va a añadir a la lista de gestión de apuestas. Debe
+	 *          ser de tipo GestionApuestaDTO.
+	 * @throws ClassCastException si el objeto no es de tipo GestionApuestaDTO.
+	 */
 	@Override
 	public void create(Object o) {
 		listOfGestionApuesta.add((GestionApuestaDTO) o);
 		writeDataSerializable();
 	}
 
+	/**
+	 * Lee y devuelve una representación de cadena de todas las gestiones de
+	 * apuestas en la lista.
+	 *
+	 * @return Una cadena que representa todas las gestiones de apuestas en la
+	 *         lista. Cada gestión de apuestas se representa en una nueva línea con
+	 *         su índice en la lista seguido de '->' y su representación de cadena.
+	 */
 	@Override
 	public String read() {
 		index = 0;
@@ -72,6 +100,19 @@ public class GestionApuestaDAO implements CRUDOperation {
 		return Sb.toString();
 	}
 
+	/**
+	 * Actualiza la gestión de apuestas en el índice especificado con los nuevos
+	 * argumentos proporcionados y escribe los datos en un archivo serializado.
+	 *
+	 * @param index El índice de la gestión de apuestas en la lista que se va a
+	 *              actualizar.
+	 * @param args  Los nuevos argumentos para la gestión de apuestas. args[0] es el
+	 *              nombre de la sede. args[1] es el número de cédula. args[2] es el
+	 *              día de la apuesta.
+	 * @return Verdadero si la gestión de apuestas se actualizó con éxito, falso si
+	 *         el índice es inválido.
+	 * @throws NumberFormatException si args[1] no puede ser convertido a un número.
+	 */
 	@Override
 	public boolean update(int index, String... args) {
 		if (index < 0 || index >= listOfGestionApuesta.size()) {
@@ -92,6 +133,15 @@ public class GestionApuestaDAO implements CRUDOperation {
 		return true;
 	}
 
+	/**
+	 * Elimina la gestión de apuestas en el índice especificado de la lista de
+	 * gestión de apuestas y escribe los datos en un archivo serializado.
+	 *
+	 * @param index El índice de la gestión de apuestas en la lista que se va a
+	 *              eliminar.
+	 * @return Verdadero si la gestión de apuestas se eliminó con éxito, falso si el
+	 *         índice es inválido.
+	 */
 	@Override
 	public boolean delete(int index) {
 		if (index < 0 || index >= listOfGestionApuesta.size()) {
@@ -103,6 +153,16 @@ public class GestionApuestaDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Elimina la gestión de apuestas especificada de la lista de gestión de
+	 * apuestas y escribe los datos en un archivo serializado.
+	 *
+	 * @param o La gestión de apuestas que se va a eliminar de la lista. Debe ser de
+	 *          tipo GestionApuestaDTO.
+	 * @return Verdadero si la gestión de apuestas se eliminó con éxito, falso si la
+	 *         gestión de apuestas no se encontró en la lista.
+	 * @throws ClassCastException si el objeto no es de tipo GestionApuestaDTO.
+	 */
 	@Override
 	public boolean delete(Object o) {
 		GestionApuestaDTO toDelete = (GestionApuestaDTO) o;
@@ -148,18 +208,18 @@ public class GestionApuestaDAO implements CRUDOperation {
 	}
 
 	/**
-	 * Obtiene la lista de apuestas.
+	 * Obtiene la lista de gestión de apuestas.
 	 *
-	 * @return Lista de apuestas.
+	 * @return La lista de gestión de apuestas.
 	 */
 	public ArrayList<GestionApuestaDTO> getListOfGestionApuesta() {
 		return listOfGestionApuesta;
 	}
 
 	/**
-	 * Establece la lista de apuestas.
+	 * Establece la lista de gestión de apuestas.
 	 *
-	 * @param listOfBets Lista de apuestas.
+	 * @param listOfGestionApuesta La nueva lista de gestión de apuestas.
 	 */
 	public void setListOfGestionApuesta(ArrayList<GestionApuestaDTO> listOfGestionApuesta) {
 		this.listOfGestionApuesta = listOfGestionApuesta;

@@ -18,8 +18,8 @@ public class LoteriaDAO implements CRUDOperation {
 	int index = 0;
 
 	/**
-	 * Constructor de LoteriaDTO que inicializa la lista de sedes de casas de
-	 * apuestas.
+	 * Constructor de la clase LoteriaDAO. Inicializa la lista de loterías y lee los
+	 * datos de un archivo serializado si existe.
 	 */
 	public LoteriaDAO() {
 		listOfLoteria = new ArrayList<LoteriaDTO>();
@@ -38,6 +38,12 @@ public class LoteriaDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Crea una nueva instancia de LoteriaDTO con los argumentos proporcionados y la
+	 * añade a la lista de loterías.
+	 * 
+	 * @param args Los argumentos para crear la nueva instancia de LoteriaDTO.
+	 */
 	@Override
 	public void create(String... args) {
 		LoteriaDTO site = new LoteriaDTO();
@@ -54,17 +60,27 @@ public class LoteriaDAO implements CRUDOperation {
 		site.setNameSede(args[10]);
 		site.setDiaDeLaApuesta(args[11]);
 
-
 		listOfLoteria.add(site);
 		writeDataSerializable();
 	}
 
+	/**
+	 * Añade un objeto a la lista de loterías y escribe los datos en un archivo
+	 * serializado.
+	 * 
+	 * @param o El objeto a añadir a la lista de loterías.
+	 */
 	@Override
 	public void create(Object o) {
 		listOfLoteria.add((LoteriaDTO) o);
 		writeDataSerializable();
 	}
 
+	/**
+	 * Lee y devuelve una representación de cadena de la lista de loterías.
+	 * 
+	 * @return Una representación de cadena de la lista de loterías.
+	 */
 	@Override
 	public String read() {
 		index = 0;
@@ -76,6 +92,15 @@ public class LoteriaDAO implements CRUDOperation {
 		return Sb.toString();
 	}
 
+	/**
+	 * Actualiza la información de la lotería en el índice especificado con los
+	 * argumentos proporcionados.
+	 * 
+	 * @param index El índice de la lotería a actualizar.
+	 * @param args  Los nuevos valores para actualizar la lotería.
+	 * @return Devuelve verdadero si la actualización fue exitosa, de lo contrario
+	 *         devuelve falso.
+	 */
 	@Override
 	public boolean update(int index, String... args) {
 		if (index < 0 || index >= listOfLoteria.size()) {
@@ -110,6 +135,13 @@ public class LoteriaDAO implements CRUDOperation {
 		return true;
 	}
 
+	/**
+	 * Elimina la lotería en el índice especificado.
+	 * 
+	 * @param index El índice de la lotería a eliminar.
+	 * @return Devuelve verdadero si la eliminación fue exitosa, de lo contrario
+	 *         devuelve falso.
+	 */
 	@Override
 	public boolean delete(int index) {
 		if (index < 0 || index >= listOfLoteria.size()) {
@@ -121,6 +153,13 @@ public class LoteriaDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Elimina la lotería especificada.
+	 * 
+	 * @param o La lotería a eliminar.
+	 * @return Devuelve verdadero si la eliminación fue exitosa, de lo contrario
+	 *         devuelve falso.
+	 */
 	@Override
 	public boolean delete(Object o) {
 		LoteriaDTO toDelete = (LoteriaDTO) o;
@@ -142,18 +181,14 @@ public class LoteriaDAO implements CRUDOperation {
 	}
 
 	/**
-	 * Obtiene la lista de sedes de casas de apuestas.
-	 *
-	 * @return Lista de sedes de casas de apuestas.
+	 * @return Devuelve la lista de loterías.
 	 */
 	public ArrayList<LoteriaDTO> getListOfLoteria() {
 		return listOfLoteria;
 	}
 
 	/**
-	 * Establece la lista de sedes de casas de apuestas.
-	 *
-	 * @param listOfLocations Lista de sedes de casas de apuestas.
+	 * @param listOfLoteria La lista de loterías a establecer.
 	 */
 	public void setListOfLoteria(ArrayList<LoteriaDTO> listOfLoteria) {
 		this.listOfLoteria = listOfLoteria;

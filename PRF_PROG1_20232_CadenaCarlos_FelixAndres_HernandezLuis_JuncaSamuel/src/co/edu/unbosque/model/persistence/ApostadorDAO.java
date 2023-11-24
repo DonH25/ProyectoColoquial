@@ -6,10 +6,11 @@ import co.edu.unbosque.model.ApostadorDTO;
 import co.edu.unbosque.model.JuegoDTO;
 
 /**
- * Clase que representa un DAO (Data Access Object) para gestionar la
- * persistencia de datos de sedes de casas de apuestas. Implementa la interfaz
- * CRUDOperation para realizar operaciones de creación, lectura, actualización y
- * eliminación de datos de sedes de casas de apuestas.
+ * Esta clase sirve como un DAO (Objeto de Acceso a Datos) para manejar la
+ * persistencia de los datos de las sedes de las casas de apuestas. Cumple con
+ * la interfaz CRUDOperation, permitiéndole realizar operaciones de creación,
+ * lectura, actualización y eliminación de datos asociados con las sedes de las
+ * casas de apuestas.
  * 
  * @see CRUDOperation
  */
@@ -19,8 +20,11 @@ public class ApostadorDAO implements CRUDOperation {
 	int index = 0;
 
 	/**
-	 * Constructor de ApostadorDAO que inicializa la lista de sedes de casas de
-	 * apuestas.
+	 * Constructor de la clase ApostadorDAO. Inicializa la lista de apostadores y
+	 * trata de leer los datos existentes de un archivo serializado. Si el archivo
+	 * existe y contiene una ArrayList de ApostadorDTO, se carga en la lista de
+	 * apostadores. Si el archivo no existe o no contiene una ArrayList de
+	 * ApostadorDTO, se inicializa una nueva lista vacía.
 	 */
 	public ApostadorDAO() {
 		listOfApostadores = new ArrayList<ApostadorDTO>();
@@ -39,6 +43,18 @@ public class ApostadorDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Este método crea un nuevo objeto ApostadorDTO y lo añade a la lista de
+	 * apostadores.
+	 *
+	 * @param args Un array de Strings que contiene los detalles del apostador en el
+	 *             siguiente orden: args[0] - Nombre del apostador args[1] - Cédula
+	 *             del apostador (como String, se convertirá a Long) args[2] - Sede
+	 *             del juego args[3] - Dirección del apostador args[4] - Número de
+	 *             celular del apostador (como String, se convertirá a Long) args[5]
+	 *             - Año de nacimiento del apostador (como String, se convertirá a
+	 *             Integer)
+	 */
 	@Override
 	public void create(String... args) {
 		ApostadorDTO site = new ApostadorDTO();
@@ -53,12 +69,30 @@ public class ApostadorDAO implements CRUDOperation {
 		writeDataSerializable();
 	}
 
+	/**
+	 * Este método sobrescribe el método 'create' de la interfaz CRUDOperation.
+	 * Añade un nuevo objeto ApostadorDTO a la lista de apostadores y luego escribe
+	 * la lista en un archivo serializado.
+	 *
+	 * @param o Un objeto que se supone es una instancia de ApostadorDTO que se
+	 *          añadirá a la lista de apostadores.
+	 */
 	@Override
 	public void create(Object o) {
 		listOfApostadores.add((ApostadorDTO) o);
 		writeDataSerializable();
 	}
 
+	/**
+	 * Este método sobrescribe el método 'read' de la interfaz CRUDOperation. Lee
+	 * todos los objetos ApostadorDTO en la lista de apostadores y devuelve una
+	 * representación de cadena de ellos.
+	 *
+	 * @return Una cadena que representa todos los objetos ApostadorDTO en la lista
+	 *         de apostadores. Cada objeto se representa en una nueva línea con su
+	 *         índice en la lista seguido de '->' y luego su representación de
+	 *         cadena.
+	 */
 	@Override
 	public String read() {
 		index = 0;
@@ -70,6 +104,26 @@ public class ApostadorDAO implements CRUDOperation {
 		return Sb.toString();
 	}
 
+	/**
+	 * Este método sobrescribe el método 'update' de la interfaz CRUDOperation.
+	 * Actualiza un objeto ApostadorDTO existente en la lista de apostadores en el
+	 * índice especificado con los nuevos valores proporcionados.
+	 *
+	 * @param index El índice del objeto ApostadorDTO en la lista de apostadores que
+	 *              se va a actualizar.
+	 * @param args  Un array de Strings que contiene los nuevos valores para el
+	 *              apostador en el siguiente orden: args[0] - Nuevo nombre del
+	 *              apostador (si no está vacío) args[1] - Nueva cédula del
+	 *              apostador (como String, se convertirá a Long si no está vacío)
+	 *              args[2] - Nueva sede del juego (si no está vacío) args[3] -
+	 *              Nueva dirección del apostador (si no está vacío) args[4] - Nuevo
+	 *              número de celular del apostador (como String, se convertirá a
+	 *              Long si no está vacío) args[5] - Nuevo año de nacimiento del
+	 *              apostador (como String, se convertirá a Integer si no está
+	 *              vacío)
+	 * @return Un booleano que indica si la operación de actualización fue exitosa.
+	 *         Devuelve 'false' si el índice es inválido, 'true' de lo contrario.
+	 */
 	@Override
 	public boolean update(int index, String... args) {
 		if (index < 0 || index >= listOfApostadores.size()) {
@@ -99,6 +153,16 @@ public class ApostadorDAO implements CRUDOperation {
 		return true;
 	}
 
+	/**
+	 * Este método sobrescribe el método 'delete' de la interfaz CRUDOperation.
+	 * Elimina un objeto ApostadorDTO existente en la lista de apostadores en el
+	 * índice especificado.
+	 *
+	 * @param index El índice del objeto ApostadorDTO en la lista de apostadores que
+	 *              se va a eliminar.
+	 * @return Un booleano que indica si la operación de eliminación fue exitosa.
+	 *         Devuelve 'false' si el índice es inválido, 'true' de lo contrario.
+	 */
 	@Override
 	public boolean delete(int index) {
 		if (index < 0 || index >= listOfApostadores.size()) {
@@ -109,6 +173,18 @@ public class ApostadorDAO implements CRUDOperation {
 			return true;
 		}
 	}
+
+	/**
+	 * Este método sobrescribe el método 'delete' de la interfaz CRUDOperation.
+	 * Elimina un objeto ApostadorDTO existente en la lista de apostadores si el
+	 * objeto se encuentra en la lista.
+	 *
+	 * @param o Un objeto que se supone es una instancia de ApostadorDTO que se
+	 *          eliminará de la lista de apostadores.
+	 * @return Un booleano que indica si la operación de eliminación fue exitosa.
+	 *         Devuelve 'false' si el objeto no se encuentra en la lista, 'true' de
+	 *         lo contrario.
+	 */
 
 	@Override
 	public boolean delete(Object o) {

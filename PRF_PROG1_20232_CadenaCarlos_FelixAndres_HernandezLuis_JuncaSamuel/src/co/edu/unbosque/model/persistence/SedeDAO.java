@@ -4,11 +4,19 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model.SedeDTO;
 
+/**
+ * La clase SedeDAO implementa la interfaz CRUDOperation y gestiona las
+ * operaciones de la lista de sedes.
+ */
 public class SedeDAO implements CRUDOperation {
 	ArrayList<SedeDTO> listOfSedes;
 	final String SERIAL_FILENAME = "sedes.dat";
 	int index = 0;
 
+	/**
+	 * Constructor de la clase SedeDAO. Inicializa la lista de sedes y lee los datos
+	 * de un archivo serializado si existe.
+	 */
 	public SedeDAO() {
 		listOfSedes = new ArrayList<SedeDTO>();
 
@@ -26,6 +34,12 @@ public class SedeDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Crea una nueva instancia de SedeDTO con los argumentos proporcionados y la
+	 * añade a la lista de sedes.
+	 * 
+	 * @param args Los argumentos para crear la nueva instancia de SedeDTO.
+	 */
 	@Override
 	public void create(String... args) {
 		SedeDTO site = new SedeDTO();
@@ -37,12 +51,23 @@ public class SedeDAO implements CRUDOperation {
 		writeDataSerializable();
 	}
 
+	/**
+	 * Añade un objeto a la lista de sedes y escribe los datos en un archivo
+	 * serializado.
+	 * 
+	 * @param o El objeto a añadir a la lista de sedes.
+	 */
 	@Override
 	public void create(Object o) {
 		listOfSedes.add((SedeDTO) o);
 		writeDataSerializable();
 	}
 
+	/**
+	 * Lee y devuelve una representación de cadena de la lista de sedes.
+	 * 
+	 * @return Una representación de cadena de la lista de sedes.
+	 */
 	@Override
 	public String read() {
 		index = 0;
@@ -54,6 +79,15 @@ public class SedeDAO implements CRUDOperation {
 		return Sb.toString();
 	}
 
+	/**
+	 * Actualiza la información de la sede con la localidad especificada con los
+	 * argumentos proporcionados.
+	 * 
+	 * @param index El índice de la sede a actualizar.
+	 * @param args  Los nuevos valores para actualizar la sede.
+	 * @return Devuelve verdadero si la actualización fue exitosa, de lo contrario
+	 *         devuelve falso.
+	 */
 	@Override
 	public boolean update(int index, String... args) {
 		if (args[0] == null || args[0].isBlank()) {
@@ -84,6 +118,13 @@ public class SedeDAO implements CRUDOperation {
 		return false; // No se encontró la sede con la localidad especificada
 	}
 
+	/**
+	 * Elimina la sede en el índice especificado.
+	 * 
+	 * @param index El índice de la sede a eliminar.
+	 * @return Devuelve verdadero si la eliminación fue exitosa, de lo contrario
+	 *         devuelve falso.
+	 */
 	@Override
 	public boolean delete(int index) {
 		if (index < 0 || index >= listOfSedes.size()) {
@@ -95,6 +136,13 @@ public class SedeDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Elimina la sede especificada.
+	 * 
+	 * @param o La sede a eliminar.
+	 * @return Devuelve verdadero si la eliminación fue exitosa, de lo contrario
+	 *         devuelve falso.
+	 */
 	@Override
 	public boolean delete(Object o) {
 		SedeDTO toDelete = (SedeDTO) o;
@@ -107,6 +155,14 @@ public class SedeDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Actualiza la información de la sede con la localidad especificada con los
+	 * argumentos proporcionados.
+	 * 
+	 * @param args Los nuevos valores para actualizar la sede.
+	 * @return Devuelve verdadero si la actualización fue exitosa, de lo contrario
+	 *         devuelve falso.
+	 */
 	public boolean updateByLocalidad(String... args) {
 		if (args == null || args.length < 2 || args[0] == null || args[0].isBlank()) {
 			return false;
@@ -130,26 +186,44 @@ public class SedeDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Escribe los datos de la lista de sedes en un archivo serializado.
+	 */
 	public void writeDataSerializable() {
 		FileHandler.serializableOpenAndWriteFile(SERIAL_FILENAME, listOfSedes);
 	}
 
+	/**
+	 * @return Devuelve la lista de sedes.
+	 */
 	public ArrayList<SedeDTO> getListOfSedes() {
 		return listOfSedes;
 	}
 
+	/**
+	 * @param listOfSedes La lista de sedes a establecer.
+	 */
 	public void setListOfSedes(ArrayList<SedeDTO> listOfSedes) {
 		this.listOfSedes = listOfSedes;
 	}
 
+	/**
+	 * @return Devuelve el índice.
+	 */
 	public int getIndex() {
 		return index;
 	}
 
+	/**
+	 * @param index El índice a establecer.
+	 */
 	public void setIndex(int index) {
 		this.index = index;
 	}
 
+	/**
+	 * @return Devuelve el nombre del archivo serializado.
+	 */
 	public String getSERIAL_FILENAME() {
 		return SERIAL_FILENAME;
 	}

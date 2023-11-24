@@ -1,8 +1,3 @@
-
-/**
- * La clase FileHandler proporciona métodos para manejar operaciones de archivos,
- * incluyendo serialización (lectura y escritura de objetos) y gestión de archivos de propiedades.
- */
 package co.edu.unbosque.model.persistence;
 
 import java.io.*;
@@ -11,13 +6,16 @@ import java.util.Properties;
 
 import co.edu.unbosque.model.CasaDeApuestasDTO;
 
+/**
+ * La clase FileHandler ofrece métodos para gestionar operaciones de archivos,
+ * incluyendo la serialización (lectura y escritura de objetos) y la
+ * administración de archivos de propiedades.
+ */
 public class FileHandler {
 
-	// Flujo de entrada para deserialización
 	private static FileInputStream fis;
 	private static ObjectInputStream ois;
 
-	// Flujo de salida para serialización
 	private static FileOutputStream fos;
 	private static ObjectOutputStream oos;
 
