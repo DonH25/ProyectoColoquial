@@ -33,10 +33,20 @@ public class BetplayDAO implements CRUDOperation {
 	@Override
 	public void create(String... args) {
 		BetplayDTO site = new BetplayDTO();
-		site.setEquipoLocal(args[0]);
-		site.setMarcadorLocal(Integer.parseInt(args[2]));
-		site.setEquipoVisitante(args[3]);
-		site.setMarcadorVisitante(Integer.parseInt(args[4]));
+		site.setPartido1Resultado(args[0]);
+		site.setPartido2Resultado(args[1]);
+		site.setPartido3Resultado(args[2]);
+		site.setPartido4Resultado(args[3]);
+		site.setPartido5Resultado(args[4]);
+		site.setPartido6Resultado(args[5]);
+		site.setPartido7Resultado(args[6]);
+		site.setPartido8Resultado(args[7]);
+		site.setPartido9Resultado(args[8]);
+		site.setPartido10Resultado(args[9]);
+		site.setPartido11Resultado(args[10]);
+		site.setPartido12Resultado(args[11]);
+		site.setPartido13Resultado(args[12]);
+		site.setPartido14Resultado(args[13]);
 
 		listOfBetplays.add(site);
 		writeDataSerializable();
@@ -65,16 +75,46 @@ public class BetplayDAO implements CRUDOperation {
 			return false;
 		} else {
 			if (!args[0].isBlank() || !args[0].isEmpty() || args[0] != null) {
-				listOfBetplays.get(index).setEquipoLocal(args[0]);
+				listOfBetplays.get(index).setPartido1Resultado(args[0]);
 			}
 			if (!args[1].isBlank() || !args[1].isEmpty() || args[1] != null) {
-				listOfBetplays.get(index).setMarcadorLocal(Integer.parseInt(args[1]));
+				listOfBetplays.get(index).setPartido2Resultado(args[1]);
 			}
 			if (!args[2].isBlank() || !args[2].isEmpty() || args[2] != null) {
-				listOfBetplays.get(index).setEquipoVisitante(args[2]);
+				listOfBetplays.get(index).setPartido3Resultado(args[2]);
 			}
 			if (!args[3].isBlank() || !args[3].isEmpty() || args[3] != null) {
-				listOfBetplays.get(index).setMarcadorVisitante(Integer.parseInt(args[3]));
+				listOfBetplays.get(index).setPartido4Resultado(args[3]);
+			}
+			if (!args[4].isBlank() || !args[4].isEmpty() || args[4] != null) {
+				listOfBetplays.get(index).setPartido5Resultado(args[4]);
+			}
+			if (!args[5].isBlank() || !args[5].isEmpty() || args[5] != null) {
+				listOfBetplays.get(index).setPartido6Resultado(args[5]);
+			}
+			if (!args[6].isBlank() || !args[6].isEmpty() || args[6] != null) {
+				listOfBetplays.get(index).setPartido7Resultado(args[6]);
+			}
+			if (!args[7].isBlank() || !args[7].isEmpty() || args[7] != null) {
+				listOfBetplays.get(index).setPartido8Resultado(args[7]);
+			}
+			if (!args[8].isBlank() || !args[8].isEmpty() || args[8] != null) {
+				listOfBetplays.get(index).setPartido9Resultado(args[8]);
+			}
+			if (!args[9].isBlank() || !args[9].isEmpty() || args[9] != null) {
+				listOfBetplays.get(index).setPartido10Resultado(args[9]);
+			}
+			if (!args[10].isBlank() || !args[10].isEmpty() || args[10] != null) {
+				listOfBetplays.get(index).setPartido11Resultado(args[10]);
+			}
+			if (!args[11].isBlank() || !args[11].isEmpty() || args[11] != null) {
+				listOfBetplays.get(index).setPartido12Resultado(args[11]);
+			}
+			if (!args[12].isBlank() || !args[12].isEmpty() || args[12] != null) {
+				listOfBetplays.get(index).setPartido13Resultado(args[12]);
+			}
+			if (!args[12].isBlank() || !args[12].isEmpty() || args[12] != null) {
+				listOfBetplays.get(index).setPartido14Resultado(args[12]);
 			}
 		}
 		writeDataSerializable();
