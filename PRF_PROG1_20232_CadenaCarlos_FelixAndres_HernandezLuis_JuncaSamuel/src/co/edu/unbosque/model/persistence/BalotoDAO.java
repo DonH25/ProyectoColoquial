@@ -27,7 +27,7 @@ public class BalotoDAO implements CRUDOperation {
 	 * nueva lista vacía.
 	 */
 
-	BalotoDAO() {
+	public BalotoDAO() {
 		listOfBalotos = new ArrayList<BalotoDTO>();
 
 		if (FileHandler.serializableOpenAndReadFile(SERIAL_FILENAME) != null) {

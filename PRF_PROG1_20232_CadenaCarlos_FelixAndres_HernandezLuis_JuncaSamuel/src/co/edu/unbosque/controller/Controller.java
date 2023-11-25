@@ -1253,6 +1253,12 @@ public class Controller implements ActionListener {
 
 			break;
 		}
+		case "selConsul": {
+			veCon.setVisible(true);
+			vms.setVisible(false);
+			break;
+
+		}
 		}
 	}
 
@@ -1293,6 +1299,8 @@ public class Controller implements ActionListener {
 		vms.getBotonApostador().setActionCommand("btnApos");
 		vms.getBotonApostar().addActionListener(this);
 		vms.getBotonApostar().setActionCommand("btnApues");
+		vms.getBotonConsultas().addActionListener(this);
+		vms.getBotonConsultas().setActionCommand("selConsul");
 		vapo.getCrearApostador().addActionListener(this);
 		vapo.getCrearApostador().setActionCommand("btnCrearApos");
 		vapo.getModificarApostador().addActionListener(this);

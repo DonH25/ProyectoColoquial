@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class VentanaDeConsultas extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8604676120792617421L;
 	private JLabel fondo, logo;
 	private JButton clientesSede, valorTotalapuestasCliente, apuestasPorCliente, botonSalir, apuestasSedesYTipo;
 
@@ -27,7 +31,7 @@ public class VentanaDeConsultas extends JFrame {
 		clientesSede = new JButton();
 		clientesSede.setBounds(120, 70, 200, 200);
 		Image temp1;
-		temp1 = new ImageIcon("src/imagenes/modificarparaLogo.png").getImage();
+		temp1 = new ImageIcon("src/imagenes/clientesPorSede.png").getImage();
 		ImageIcon imagen1;
 		imagen1 = new ImageIcon(temp1.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		clientesSede.setIcon(imagen1);
@@ -35,7 +39,7 @@ public class VentanaDeConsultas extends JFrame {
 		valorTotalapuestasCliente = new JButton();
 		valorTotalapuestasCliente.setBounds(900, 70, 200, 200);
 		Image temp11;
-		temp11 = new ImageIcon("src/imagenes/crearApostador.png").getImage();
+		temp11 = new ImageIcon("src/imagenes/ApuestasPorCliente.png").getImage();
 		ImageIcon imagen11;
 		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		valorTotalapuestasCliente.setIcon(imagen11);
@@ -43,7 +47,7 @@ public class VentanaDeConsultas extends JFrame {
 		apuestasPorCliente = new JButton();
 		apuestasPorCliente.setBounds(120, 400, 200, 200);
 		Image temp111;
-		temp111 = new ImageIcon("src/imagenes/moduloConsultas.png").getImage();
+		temp111 = new ImageIcon("src/imagenes/detallesApuesta.png").getImage();
 		ImageIcon imagen111;
 		imagen111 = new ImageIcon(temp111.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		apuestasPorCliente.setIcon(imagen111);
@@ -59,7 +63,7 @@ public class VentanaDeConsultas extends JFrame {
 		apuestasSedesYTipo = new JButton();
 		apuestasSedesYTipo.setBounds(525, 400, 200, 200);
 		Image temp11111;
-		temp11111 = new ImageIcon("src/imagenes/apostar.png").getImage();
+		temp11111 = new ImageIcon("src/imagenes/ApuestasPorSedeyJuego.png").getImage();
 		ImageIcon imagen11111;
 		imagen11111 = new ImageIcon(temp11111.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		apuestasSedesYTipo.setIcon(imagen11111);
@@ -77,6 +81,7 @@ public class VentanaDeConsultas extends JFrame {
 		add(valorTotalapuestasCliente);
 		add(apuestasPorCliente);
 		add(valorTotalapuestasCliente);
+		add(clientesSede);
 		add(logo);
 		add(fondo);
 	}
@@ -136,6 +141,5 @@ public class VentanaDeConsultas extends JFrame {
 	public void setApuestasSedesYTipo(JButton apuestasSedesYTipo) {
 		this.apuestasSedesYTipo = apuestasSedesYTipo;
 	}
-	
 
 }
