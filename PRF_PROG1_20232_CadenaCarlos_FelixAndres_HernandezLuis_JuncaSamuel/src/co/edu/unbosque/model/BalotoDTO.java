@@ -3,9 +3,7 @@ package co.edu.unbosque.model;
 import java.io.Serializable;
 
 public class BalotoDTO extends GestionApuestaDTO implements Serializable {
-	/**
-		 * 
-		 */
+	
 	private static final long serialVersionUID = -9020637693354983586L;
 	private int digito1;
 	private int digito2;
