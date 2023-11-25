@@ -1715,6 +1715,7 @@ public class Controller implements ActionListener {
 		veCon.getApuestasPorCliente().addActionListener(this);
 		veCon.getApuestasPorCliente().setActionCommand("selConsulApu");
 
+
 		veConClient.getConsultar().addActionListener(this);
 		veConClient.getConsultar().setActionCommand("consulApu");
 

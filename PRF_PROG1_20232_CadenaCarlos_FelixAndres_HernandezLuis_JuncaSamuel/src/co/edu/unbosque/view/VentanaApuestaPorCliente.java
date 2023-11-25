@@ -19,7 +19,7 @@ public class VentanaApuestaPorCliente extends JFrame {
 	private JLabel fondo, indicacionCampo;
 	private JTextArea campoConsulta;
 	private JScrollPane scroll;
-	private JButton consultar;
+	private JButton consultarPorSede, consultarPorCliente;
 
 	public VentanaApuestaPorCliente() {
 		setBounds(150, 0, 1280, 720);
