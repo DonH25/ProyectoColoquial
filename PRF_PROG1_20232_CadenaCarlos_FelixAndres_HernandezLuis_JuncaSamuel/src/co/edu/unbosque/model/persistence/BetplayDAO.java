@@ -4,15 +4,24 @@ import java.util.ArrayList;
 
 import co.edu.unbosque.model.BetplayDTO;
 
+/**
+ * La clase BetplayDAO implementa la interfaz CRUDOperation y gestiona una lista
+ * de objetos BetplayDTO.
+ */
+
 public class BetplayDAO implements CRUDOperation {
 	ArrayList<BetplayDTO> listOfBetplays;
 	final String SERIAL_FILENAME = "apuestas-betplay.dat";
 	int index = 0;
 
 	/**
-	 * Constructor de BetplayDAO que inicializa la lista de sedes de casas de
-	 * apuestas.
+	 * Constructor de la clase BetplayDAO. Inicializa la lista de betplays y trata
+	 * de leer los datos existentes de un archivo serializado. Si el archivo existe
+	 * y contiene una ArrayList de BetplayDTO, se carga en la lista de betplays. Si
+	 * el archivo no existe o no contiene una ArrayList de BetplayDTO, se inicializa
+	 * una nueva lista vacía.
 	 */
+
 	public BetplayDAO() {
 		listOfBetplays = new ArrayList<BetplayDTO>();
 
@@ -30,6 +39,22 @@ public class BetplayDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Este método crea un nuevo objeto BetplayDTO y lo añade a la lista de
+	 * betplays.
+	 *
+	 * @param args Un array de Strings que contiene los resultados de los partidos
+	 *             en el siguiente orden: args[0] - Resultado del primer partido
+	 *             args[1] - Resultado del segundo partido args[2] - Resultado del
+	 *             tercer partido args[3] - Resultado del cuarto partido args[4] -
+	 *             Resultado del quinto partido args[5] - Resultado del sexto
+	 *             partido args[6] - Resultado del séptimo partido args[7] -
+	 *             Resultado del octavo partido args[8] - Resultado del noveno
+	 *             partido args[9] - Resultado del décimo partido args[10] -
+	 *             Resultado del undécimo partido args[11] - Resultado del duodécimo
+	 *             partido args[12] - Resultado del decimotercer partido args[13] -
+	 *             Resultado del decimocuarto partido
+	 */
 	@Override
 	public void create(String... args) {
 		BetplayDTO site = new BetplayDTO();
@@ -52,12 +77,30 @@ public class BetplayDAO implements CRUDOperation {
 		writeDataSerializable();
 	}
 
+	/**
+	 * Este método sobrescribe el método 'create' de la interfaz CRUDOperation.
+	 * Añade un nuevo objeto BetplayDTO a la lista de betplays y luego escribe la
+	 * lista en un archivo serializado.
+	 *
+	 * @param o Un objeto que se supone es una instancia de BetplayDTO que se
+	 *          añadirá a la lista de betplays.
+	 */
+
 	@Override
 	public void create(Object o) {
 		listOfBetplays.add((BetplayDTO) o);
 		writeDataSerializable();
 	}
 
+	/**
+	 * Este método sobrescribe el método 'read' de la interfaz CRUDOperation. Lee
+	 * todos los objetos BetplayDTO en la lista de betplays y devuelve una
+	 * representación de cadena de ellos.
+	 *
+	 * @return Una cadena que representa todos los objetos BetplayDTO en la lista de
+	 *         betplays. Cada objeto se representa en una nueva línea con su índice
+	 *         en la lista seguido de '->' y luego su representación de cadena.
+	 */
 	@Override
 	public String read() {
 		index = 0;
@@ -69,6 +112,41 @@ public class BetplayDAO implements CRUDOperation {
 		return Sb.toString();
 	}
 
+	/**
+	 * Este método sobrescribe el método 'update' de la interfaz CRUDOperation.
+	 * Actualiza un objeto BetplayDTO existente en la lista de betplays en el índice
+	 * especificado con los nuevos valores proporcionados.
+	 *
+	 * @param index El índice del objeto BetplayDTO en la lista de betplays que se
+	 *              va a actualizar.
+	 * @param args  Un array de Strings que contiene los nuevos resultados de los
+	 *              partidos en el siguiente orden: args[0] - Nuevo resultado del
+	 *              primer partido (como String, se convertirá a Integer si no está
+	 *              vacío) args[1] - Nuevo resultado del segundo partido (como
+	 *              String, se convertirá a Integer si no está vacío) args[2] -
+	 *              Nuevo resultado del tercer partido (como String, se convertirá a
+	 *              Integer si no está vacío) args[3] - Nuevo resultado del cuarto
+	 *              partido (como String, se convertirá a Integer si no está vacío)
+	 *              args[4] - Nuevo resultado del quinto partido (como String, se
+	 *              convertirá a Integer si no está vacío) args[5] - Nuevo resultado
+	 *              del sexto partido (como String, se convertirá a Integer si no
+	 *              está vacío) args[6] - Nuevo resultado del séptimo partido (como
+	 *              String, se convertirá a Integer si no está vacío) args[7] -
+	 *              Nuevo resultado del octavo partido (como String, se convertirá a
+	 *              Integer si no está vacío) args[8] - Nuevo resultado del noveno
+	 *              partido (como String, se convertirá a Integer si no está vacío)
+	 *              args[9] - Nuevo resultado del décimo partido (como String, se
+	 *              convertirá a Integer si no está vacío) args[10] - Nuevo
+	 *              resultado del undécimo partido (como String, se convertirá a
+	 *              Integer si no está vacío) args[11] - Nuevo resultado del
+	 *              duodécimo partido (como String, se convertirá a Integer si no
+	 *              está vacío) args[12] - Nuevo resultado del decimotercer partido
+	 *              (como String, se convertirá a Integer si no está vacío) args[13]
+	 *              - Nuevo resultado del decimocuarto partido (como String, se
+	 *              convertirá a Integer si no está vacío)
+	 * @return Un booleano que indica si la operación de actualización fue exitosa.
+	 *         Devuelve 'false' si el índice es inválido, 'true' de lo contrario.
+	 */
 	@Override
 	public boolean update(int index, String... args) {
 		if (index < 0 || index >= listOfBetplays.size()) {
@@ -121,6 +199,16 @@ public class BetplayDAO implements CRUDOperation {
 		return true;
 	}
 
+	/**
+	 * Este método sobrescribe el método 'delete' de la interfaz CRUDOperation.
+	 * Elimina un objeto BetplayDTO existente en la lista de betplays en el índice
+	 * especificado.
+	 *
+	 * @param index El índice del objeto BetplayDTO en la lista de betplays que se
+	 *              va a eliminar.
+	 * @return Un booleano que indica si la operación de eliminación fue exitosa.
+	 *         Devuelve 'false' si el índice es inválido, 'true' de lo contrario.
+	 */
 	@Override
 	public boolean delete(int index) {
 		if (index < 0 || index >= listOfBetplays.size()) {
@@ -132,6 +220,17 @@ public class BetplayDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Este método sobrescribe el método 'delete' de la interfaz CRUDOperation.
+	 * Elimina un objeto BetplayDTO existente en la lista de betplays si el objeto
+	 * se encuentra en la lista.
+	 *
+	 * @param o Un objeto que se supone es una instancia de BetplayDTO que se
+	 *          eliminará de la lista de betplays.
+	 * @return Un booleano que indica si la operación de eliminación fue exitosa.
+	 *         Devuelve 'false' si el objeto no se encuentra en la lista, 'true' de
+	 *         lo contrario.
+	 */
 	@Override
 	public boolean delete(Object o) {
 		BetplayDTO toDelete = (BetplayDTO) o;
@@ -153,18 +252,18 @@ public class BetplayDAO implements CRUDOperation {
 	}
 
 	/**
-	 * Obtiene la lista de sedes de casas de apuestas.
+	 * Este método devuelve la lista de objetos BetplayDTO.
 	 *
-	 * @return Lista de sedes de casas de apuestas.
+	 * @return Una lista de objetos BetplayDTO.
 	 */
 	public ArrayList<BetplayDTO> getListOfBetplays() {
 		return listOfBetplays;
 	}
 
 	/**
-	 * Establece la lista de sedes de casas de apuestas.
+	 * Este método establece la lista de objetos BetplayDTO.
 	 *
-	 * @param listOfLocations Lista de sedes de casas de apuestas.
+	 * @param listOfBetplays Una lista de objetos BetplayDTO que se va a establecer.
 	 */
 	public void setListOfBetplays(ArrayList<BetplayDTO> listOfBetplays) {
 		this.listOfBetplays = listOfBetplays;

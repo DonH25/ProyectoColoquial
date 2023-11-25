@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import co.edu.unbosque.model.ChanceDTO;
 
 /**
- * Clase que representa un DAO (Data Access Object) para gestionar la
- * persistencia de datos de sedes de casas de apuestas. Implementa la interfaz
- * CRUDOperation para realizar operaciones de creación, lectura, actualización y
- * eliminación de datos de sedes de casas de apuestas.
- * 
+ * Esta clase actúa como un DAO (Data Access Object) para manejar la
+ * persistencia de datos de las sedes de las casas de apuestas. Implementa la
+ * interfaz CRUDOperation para llevar a cabo operaciones de creación, lectura,
+ * actualización y eliminación en los datos de las sedes de las casas de
+ * apuestas.
+ *
  * @see CRUDOperation
  */
 public class ChanceDAO implements CRUDOperation {
@@ -18,8 +19,10 @@ public class ChanceDAO implements CRUDOperation {
 	int index = 0;
 
 	/**
-	 * Constructor de ChanceDAO que inicializa la lista de sedes de casas de
-	 * apuestas.
+	 * Constructor por defecto para ChanceDAO. Inicializa la lista de chances. Si
+	 * existe un archivo serializado con datos de chances, los carga en la lista. Si
+	 * el archivo no contiene una lista de chances o no existe, se crea una nueva
+	 * lista vacía.
 	 */
 	public ChanceDAO() {
 		listOfChances = new ArrayList<ChanceDTO>();
@@ -38,6 +41,20 @@ public class ChanceDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Crea una nueva chance y la añade a la lista de chances. También escribe los
+	 * datos en un archivo serializado.
+	 *
+	 * @param args Los argumentos utilizados para crear la nueva chance. args[0] es
+	 *             el primer dígito de la chance. args[1] es el segundo dígito de la
+	 *             chance. args[2] es el tercer dígito de la chance. args[3] es el
+	 *             cuarto dígito de la chance. args[4] es el valor de la apuesta.
+	 *             args[5] es la lotería. args[6] es el número de cédula. args[7] es
+	 *             el nombre de la sede. args[8] es el día de la apuesta.
+	 * @throws NumberFormatException si args[0], args[1], args[2], args[3], args[4],
+	 *                               or args[6] no pueden ser convertidos a un
+	 *                               número.
+	 */
 	@Override
 	public void create(String... args) {
 		ChanceDTO site = new ChanceDTO();
@@ -55,12 +72,27 @@ public class ChanceDAO implements CRUDOperation {
 		writeDataSerializable();
 	}
 
+	/**
+	 * Añade una nueva chance a la lista de chances y escribe los datos en un
+	 * archivo serializado.
+	 *
+	 * @param o El objeto que se va a añadir a la lista de chances. Debe ser de tipo
+	 *          ChanceDTO.
+	 * @throws ClassCastException si el objeto no es de tipo ChanceDTO.
+	 */
 	@Override
 	public void create(Object o) {
 		listOfChances.add((ChanceDTO) o);
 		writeDataSerializable();
 	}
 
+	/**
+	 * Lee y devuelve una representación de cadena de todas las chances en la lista.
+	 *
+	 * @return Una cadena que representa todas las chances en la lista. Cada chance
+	 *         se representa en una nueva línea con su índice en la lista seguido de
+	 *         '->' y su representación de cadena.
+	 */
 	@Override
 	public String read() {
 		index = 0;
@@ -72,6 +104,20 @@ public class ChanceDAO implements CRUDOperation {
 		return Sb.toString();
 	}
 
+	/**
+	 * Actualiza la chance en el índice especificado con los nuevos argumentos
+	 * proporcionados y escribe los datos en un archivo serializado.
+	 *
+	 * @param index El índice de la chance en la lista que se va a actualizar.
+	 * @param args  Los nuevos argumentos para la chance. args[0] es el primer
+	 *              dígito de la chance. args[1] es el segundo dígito de la chance.
+	 *              args[2] es el tercer dígito de la chance. args[3] es el cuarto
+	 *              dígito de la chance.
+	 * @return Verdadero si la chance se actualizó con éxito, falso si el índice es
+	 *         inválido.
+	 * @throws NumberFormatException si args[0], args[1], args[2], or args[3] no
+	 *                               pueden ser convertidos a un número.
+	 */
 	@Override
 	public boolean update(int index, String... args) {
 		if (index < 0 || index >= listOfChances.size()) {
@@ -94,6 +140,14 @@ public class ChanceDAO implements CRUDOperation {
 		return true;
 	}
 
+	/**
+	 * Elimina la chance en el índice especificado de la lista de chances y escribe
+	 * los datos en un archivo serializado.
+	 *
+	 * @param index El índice de la chance en la lista que se va a eliminar.
+	 * @return Verdadero si la chance se eliminó con éxito, falso si el índice es
+	 *         inválido.
+	 */
 	@Override
 	public boolean delete(int index) {
 		if (index < 0 || index >= listOfChances.size()) {
@@ -105,6 +159,16 @@ public class ChanceDAO implements CRUDOperation {
 		}
 	}
 
+	/**
+	 * Elimina la chance especificada de la lista de chances y escribe los datos en
+	 * un archivo serializado.
+	 *
+	 * @param o La chance que se va a eliminar de la lista. Debe ser de tipo
+	 *          ChanceDTO.
+	 * @return Verdadero si la chance se eliminó con éxito, falso si la chance no se
+	 *         encontró en la lista.
+	 * @throws ClassCastException si el objeto no es de tipo ChanceDTO.
+	 */
 	@Override
 	public boolean delete(Object o) {
 		ChanceDTO toDelete = (ChanceDTO) o;
@@ -126,18 +190,18 @@ public class ChanceDAO implements CRUDOperation {
 	}
 
 	/**
-	 * Obtiene la lista de sedes de casas de apuestas.
+	 * Obtiene la lista de chances.
 	 *
-	 * @return Lista de sedes de casas de apuestas.
+	 * @return La lista de chances.
 	 */
 	public ArrayList<ChanceDTO> getListOfChances() {
 		return listOfChances;
 	}
 
 	/**
-	 * Establece la lista de sedes de casas de apuestas.
+	 * Establece la lista de chances.
 	 *
-	 * @param listOfLocations Lista de sedes de casas de apuestas.
+	 * @param listOfChances La nueva lista de chances.
 	 */
 	public void setListOfChances(ArrayList<ChanceDTO> listOfChances) {
 		this.listOfChances = listOfChances;
