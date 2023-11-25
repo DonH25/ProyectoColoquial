@@ -1,5 +1,6 @@
 package co.edu.unbosque.view;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.TextField;
 import javax.swing.ImageIcon;
@@ -7,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class VentanaBetPlay extends JFrame {
 
@@ -15,15 +17,16 @@ public class VentanaBetPlay extends JFrame {
 	 */
 	private static final long serialVersionUID = -2463672132347869093L;
 	private JLabel fondo;
-	private JComboBox<String> santafeMillonarios, nacionalMedellin, americaCali, juniorUnion, cucutaBucaramanga,
-			pereiraOnce, aguilasEnvigado, patriotasChico, tolimaHuila, barcelonaMadrid, arsenalChelsea, unitedCity,
-			liverpoolEverton, bayernBorussia;
-	private JLabel santafeMillonariosTxt, nacionalMedellinTxt, americaCaliTxt, juniorUnionTxt, cucutaBucaramangaTxt,
-			pereiraOnceTxt, aguilasEnvigadoTxt, patriotasChicoTxt, tolimaHuilaTxt, barcelonaMadridTxt,
-			arsenalChelseaTxt, unitedCityTxt, liverpoolEvertonTxt, bayernBorussiaTxt;
-	private TextField pDiaApuesta, pValorApuesta;
-	private JLabel diaApuestaTxt, valorApuestaTxt;
-	private JButton botonApostar, botonModificar, botonEliminar, flecha;
+	private JComboBox<String> millosManchesterU, onceCaldasRealMadrid, cucutaDeportivobarsa, santaFeNacional,
+			fortalezaLaEquidad, shaktarAlNassr, cityChelsea, catarColombia, dormundtBayern, aguilasDoradasDim,
+			jaguaresEnvigado, crystalPalaceBrigthon, leverkusenEverton, gironaArsenal;
+	private JLabel millosManchesterUtxt, onceCaldasRealMadridtxt, cucutaDeportivobarsatxt, santaFeNacionaltxt,
+			fortalezaLaEquidadtxt, shaktarAlNassrtxt, cityChelseatxt, catarColombiatxt, dormundtBayerntxt,
+			aguilasDoradasDimtxt, jaguaresEnvigadotxt, crystalPalaceBrigthontxt, leverkusenEvertontxt, gironaArsenaltxt,
+			indicacionCedula, indicacionCedula2, indicacionseguridadSede, indicacionSeguridadDia, indicacionIndex,
+			valortxt;
+	JTextField index, campoValue, campoCedula, campoSede, campoDia;
+	private JButton apost, botonModificar, botonEliminar, flecha;
 
 	public VentanaBetPlay() {
 		// TODO Auto-generated constructor stub
@@ -39,151 +42,195 @@ public class VentanaBetPlay extends JFrame {
 		ImageIcon imagen;
 		imagen = new ImageIcon(temp.getScaledInstance(1280, 720, Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen);
+		aguilasDoradasDimtxt = new JLabel();
+		aguilasDoradasDimtxt.setBounds(10, 0, 200, 25);
+		aguilasDoradasDimtxt.setText("Aguilas Doradas vs DIM");
+		aguilasDoradasDimtxt.setForeground(Color.white);
+		aguilasDoradasDim = new JComboBox<>();
+		aguilasDoradasDim.setBounds(10, 30, 250, 30);
+		aguilasDoradasDim.addItem("Gana Local (AguilasDoradas)");
+		aguilasDoradasDim.addItem("Gana Visitante (DIM)");
+		aguilasDoradasDim.addItem("Empate");
 
-		santafeMillonariosTxt = new JLabel();
-		santafeMillonariosTxt.setBounds(10, 110, 400, 25);
-		santafeMillonariosTxt.setText("                                 SantaFé vs Millonarios");
-		santafeMillonarios = new JComboBox<>();
-		santafeMillonarios.setBounds(10, 130, 350, 30);
-		santafeMillonarios.addItem("Gana Local (SantaFé)");
-		santafeMillonarios.addItem("Gana Visitante (Millonarios)");
-		santafeMillonarios.addItem("Empate");
+		catarColombiatxt = new JLabel();
+		catarColombiatxt.setBounds(300, 0, 200, 25);
+		catarColombiatxt.setText("Catar vs Colombia");
+		catarColombiatxt.setForeground(Color.white);
+		catarColombia = new JComboBox<>();
+		catarColombia.setBounds(300, 30, 200, 30);
+		catarColombia.addItem("Gana Local(Catar)");
+		catarColombia.addItem("Gana Visitante (Colombia)");
+		catarColombia.addItem("Empate");
 
-		nacionalMedellinTxt = new JLabel();
-		nacionalMedellinTxt.setBounds(10, 180, 400, 25);
-		nacionalMedellinTxt.setText("                                   Nacional vs Medellin");
-		nacionalMedellin = new JComboBox<>();
-		nacionalMedellin.setBounds(10, 200, 350, 30);
-		nacionalMedellin.addItem("Gana Local(Nacional)");
-		nacionalMedellin.addItem("Gana Visitante (Medellin)");
-		nacionalMedellin.addItem("Empate");
+		cityChelseatxt = new JLabel();
+		cityChelseatxt.setBounds(600, 0, 200, 25);
+		cityChelseatxt.setText("Manchester City vs Chelsea");
+		cityChelseatxt.setForeground(Color.white);
+		cityChelsea = new JComboBox<>();
+		cityChelsea.setBounds(600, 30, 200, 30);
+		cityChelsea.addItem("Gana Local (Manchester)");
+		cityChelsea.addItem("Gana Visitante (Chelsea)");
+		cityChelsea.addItem("Empate");
 
-		americaCaliTxt = new JLabel();
-		americaCaliTxt.setBounds(10, 250, 400, 25);
-		americaCaliTxt.setText("                                  América de Cali vs Cali");
-		americaCali = new JComboBox<>();
-		americaCali.setBounds(10, 270, 350, 30);
-		americaCali.addItem("Gana Local (América)");
-		americaCali.addItem("Gana Visitante (Cali)");
-		americaCali.addItem("Empate");
+		crystalPalaceBrigthontxt = new JLabel();
+		crystalPalaceBrigthontxt.setBounds(900, 0, 200, 25);
+		crystalPalaceBrigthontxt.setText("Crystal Palace vs Brigthon");
+		crystalPalaceBrigthontxt.setForeground(Color.white);
+		crystalPalaceBrigthon = new JComboBox<>();
+		crystalPalaceBrigthon.setBounds(900, 30, 200, 30);
+		crystalPalaceBrigthon.addItem("Gana Local (Crystal Palace)");
+		crystalPalaceBrigthon.addItem("Gana Visitante(Brigthon)");
+		crystalPalaceBrigthon.addItem("Empate");
 
-		juniorUnionTxt = new JLabel();
-		juniorUnionTxt.setBounds(10, 320, 400, 25);
-		juniorUnionTxt.setText("                                 Junior vs Unión Magdalena");
-		juniorUnion = new JComboBox<>();
-		juniorUnion.setBounds(10, 340, 350, 30);
-		juniorUnion.addItem("Gana Local (Junior)");
-		juniorUnion.addItem("Gana Visitante(Unión Magdalena)");
-		juniorUnion.addItem("Empate");
+		cucutaDeportivobarsatxt = new JLabel();
+		cucutaDeportivobarsatxt.setBounds(10, 200, 200, 25);
+		cucutaDeportivobarsatxt.setText("Cúcuta vs Barcelona");
+		cucutaDeportivobarsatxt.setForeground(Color.white);
+		cucutaDeportivobarsa = new JComboBox<>();
+		cucutaDeportivobarsa.setBounds(10, 230, 200, 30);
+		cucutaDeportivobarsa.addItem("Gana Local (Cúcuta)");
+		cucutaDeportivobarsa.addItem("Gana Visitante (Barcelona)");
+		cucutaDeportivobarsa.addItem("Empate");
 
-		cucutaBucaramangaTxt = new JLabel();
-		cucutaBucaramangaTxt.setBounds(10, 390, 400, 25);
-		cucutaBucaramangaTxt.setText("                               Cúcuta vs Bucaramanga");
-		cucutaBucaramanga = new JComboBox<>();
-		cucutaBucaramanga.setBounds(10, 410, 350, 30);
-		cucutaBucaramanga.addItem("Gana Local (Cúcuta)");
-		cucutaBucaramanga.addItem("Gana Visitante (Bucaramanga)");
-		cucutaBucaramanga.addItem("Empate");
+		dormundtBayerntxt = new JLabel();
+		dormundtBayerntxt.setBounds(300, 200, 200, 25);
+		dormundtBayerntxt.setText("Borussia Dormundt vs Bayern Munchen");
+		dormundtBayerntxt.setForeground(Color.white);
+		dormundtBayern = new JComboBox<>();
+		dormundtBayern.setBounds(300, 230, 200, 30);
+		dormundtBayern.addItem("Gana Local (Dormundt)");
+		dormundtBayern.addItem("Gana Visitante (Bayern Munchen)");
+		dormundtBayern.addItem("Empate");
 
-		pereiraOnceTxt = new JLabel();
-		pereiraOnceTxt.setBounds(10, 460, 400, 25);
-		pereiraOnceTxt.setText("                                  Pereira vs Once Caldas");
-		pereiraOnce = new JComboBox<>();
-		pereiraOnce.setBounds(10, 480, 350, 30);
-		pereiraOnce.addItem("Gana Local (Pereira)");
-		pereiraOnce.addItem("Gana Visitante (Once Caldas)");
-		pereiraOnce.addItem("Empate");
+		// Column 3
+		fortalezaLaEquidadtxt = new JLabel();
+		fortalezaLaEquidadtxt.setBounds(600, 200, 200, 25);
+		fortalezaLaEquidadtxt.setText("Fotaleza vs Equidad");
+		fortalezaLaEquidadtxt.setForeground(Color.white);
+		fortalezaLaEquidad = new JComboBox<>();
+		fortalezaLaEquidad.setBounds(600, 230, 200, 30);
+		fortalezaLaEquidad.addItem("Gana Local (Fortaleza)");
+		fortalezaLaEquidad.addItem("Gana Visitante (Equidad)");
+		fortalezaLaEquidad.addItem("Empate");
 
-		aguilasEnvigadoTxt = new JLabel();
-		aguilasEnvigadoTxt.setBounds(10, 530, 400, 25);
-		aguilasEnvigadoTxt.setText("                              Aguilas Doradas vs Envigado");
-		aguilasEnvigado = new JComboBox<>();
-		aguilasEnvigado.setBounds(10, 550, 350, 30);
-		aguilasEnvigado.addItem("Gana Local (Aguilas Doradas)");
-		aguilasEnvigado.addItem("Gana Visitante (Envigado");
-		aguilasEnvigado.addItem("Empate");
+		gironaArsenaltxt = new JLabel();
+		gironaArsenaltxt.setBounds(900, 200, 200, 25);
+		gironaArsenaltxt.setText("Girona VS Arsenal");
+		gironaArsenaltxt.setForeground(Color.white);
+		gironaArsenal = new JComboBox<>();
+		gironaArsenal.setBounds(900, 230, 200, 30);
+		gironaArsenal.addItem("Gana Local (Girona)");
+		gironaArsenal.addItem("Gana Visitante (Arsenal)");
+		gironaArsenal.addItem("Empate");
 
-		patriotasChicoTxt = new JLabel();
-		patriotasChicoTxt.setBounds(400, 110, 400, 25);
-		patriotasChicoTxt.setText("                                     Patriotas vs Boyacá Chico");
-		patriotasChico = new JComboBox<>();
-		patriotasChico.setBounds(400, 130, 350, 30);
-		patriotasChico.addItem("Gana Local (Patriotas)");
-		patriotasChico.addItem("Gana Visitante (Boyacá Chico)");
-		patriotasChico.addItem("Empate");
+		jaguaresEnvigadotxt = new JLabel();
+		jaguaresEnvigadotxt.setBounds(10, 400, 200, 25);
+		jaguaresEnvigadotxt.setText("Jaguares vs Envigado");
+		jaguaresEnvigadotxt.setForeground(Color.white);
+		jaguaresEnvigado = new JComboBox<>();
+		jaguaresEnvigado.setBounds(10, 430, 200, 30);
+		jaguaresEnvigado.addItem("Gana Local (Jaguares)");
+		jaguaresEnvigado.addItem("Gana Visitante (Envigado)");
+		jaguaresEnvigado.addItem("Empate");
 
-		tolimaHuilaTxt = new JLabel();
-		tolimaHuilaTxt.setBounds(400, 180, 400, 25);
-		tolimaHuilaTxt.setText("                                    Tolima vs Huila");
-		tolimaHuila = new JComboBox<>();
-		tolimaHuila.setBounds(400, 200, 350, 30);
-		tolimaHuila.addItem("Gana Local (Tolima)");
-		tolimaHuila.addItem("Gana Visitante (Huila)");
-		tolimaHuila.addItem("Empate");
+		// Column 4
+		leverkusenEvertontxt = new JLabel();
+		leverkusenEvertontxt.setBounds(300, 400, 200, 25);
+		leverkusenEvertontxt.setText("Leverkusen vs Everton");
+		leverkusenEvertontxt.setForeground(Color.white);
+		leverkusenEverton = new JComboBox<>();
+		leverkusenEverton.setBounds(300, 430, 200, 30);
+		leverkusenEverton.addItem("Gana Local (Leverkusen)");
+		leverkusenEverton.addItem("Gana Visitante (Everton)");
+		leverkusenEverton.addItem("Empate");
 
-		barcelonaMadridTxt = new JLabel();
-		barcelonaMadridTxt.setBounds(400, 250, 400, 25);
-		barcelonaMadridTxt.setText("                                   FC Barcelona vs Real Madrid ");
-		barcelonaMadrid = new JComboBox<>();
-		barcelonaMadrid.setBounds(400, 270, 350, 30);
-		barcelonaMadrid.addItem("Gana Local (Barcelona)");
-		barcelonaMadrid.addItem("Gana Visitante (Real Madrid)");
-		barcelonaMadrid.addItem("Empate");
+		millosManchesterUtxt = new JLabel();
+		millosManchesterUtxt.setBounds(600, 400, 200, 25);
+		millosManchesterUtxt.setText("Millonarios vs Manchester United");
+		millosManchesterUtxt.setForeground(Color.white);
+		millosManchesterU = new JComboBox<>();
+		millosManchesterU.setBounds(600, 430, 200, 30);
+		millosManchesterU.addItem("Gana Local (Millonarios)");
+		millosManchesterU.addItem("Gana Visitante (United)");
+		millosManchesterU.addItem("Empate");
 
-		arsenalChelseaTxt = new JLabel();
-		arsenalChelseaTxt.setBounds(400, 320, 400, 25);
-		arsenalChelseaTxt.setText("                                     Arsenal vs Chelsea");
-		arsenalChelsea = new JComboBox<>();
-		arsenalChelsea.setBounds(400, 340, 350, 30);
-		arsenalChelsea.addItem("Gana Local (Arsenal)");
-		arsenalChelsea.addItem("Gana Visitante (Chelsea)");
-		arsenalChelsea.addItem("Empate");
+		onceCaldasRealMadridtxt = new JLabel();
+		onceCaldasRealMadridtxt.setBounds(900, 400, 200, 25);
+		onceCaldasRealMadridtxt.setText("Once Caldas Vs Real Madrid");
+		onceCaldasRealMadridtxt.setForeground(Color.white);
+		onceCaldasRealMadrid = new JComboBox<>();
+		onceCaldasRealMadrid.setBounds(900, 430, 200, 30);
+		onceCaldasRealMadrid.addItem("Gana Local (Once Caldas)");
+		onceCaldasRealMadrid.addItem("Gana Visitante (Real Madrid)");
+		onceCaldasRealMadrid.addItem("Empate");
 
-		unitedCityTxt = new JLabel();
-		unitedCityTxt.setBounds(400, 390, 400, 25);
-		unitedCityTxt.setText("                                  Man.United vs Man.City  ");
-		unitedCity = new JComboBox<>();
-		unitedCity.setBounds(400, 410, 350, 30);
-		unitedCity.addItem("Gana Local (City)");
-		unitedCity.addItem("Gana Visitante (United");
-		unitedCity.addItem("Empate");
+		santaFeNacionaltxt = new JLabel();
+		santaFeNacionaltxt.setBounds(10, 600, 200, 25);
+		santaFeNacionaltxt.setText("Santa Fe vs Nacional");
+		santaFeNacionaltxt.setForeground(Color.white);
+		santaFeNacional = new JComboBox<>();
+		santaFeNacional.setBounds(10, 630, 200, 30);
+		santaFeNacional.addItem("Gana Local (Santa Fe)");
+		santaFeNacional.addItem("Gana Visitante (Nacional)");
+		santaFeNacional.addItem("Empate");
 
-		liverpoolEvertonTxt = new JLabel();
-		liverpoolEvertonTxt.setBounds(400, 460, 400, 25);
-		liverpoolEvertonTxt.setText("                                   Liverpool vs Evertoon");
-		liverpoolEverton = new JComboBox<>();
-		liverpoolEverton.setBounds(400, 480, 350, 30);
-		liverpoolEverton.addItem("Gana Local (Liverpool)");
-		liverpoolEverton.addItem("Gana Visitante (Everton)");
-		liverpoolEverton.addItem("Empate");
+		shaktarAlNassrtxt = new JLabel();
+		shaktarAlNassrtxt.setBounds(300, 600, 200, 25);
+		shaktarAlNassrtxt.setText("Shaktar Vs AL Nassr");
+		shaktarAlNassrtxt.setForeground(Color.white);
+		shaktarAlNassr = new JComboBox<>();
+		shaktarAlNassr.setBounds(300, 630, 200, 30);
+		shaktarAlNassr.addItem("Gana Local (Shaktar)");
+		shaktarAlNassr.addItem("Gana Visitante (Al Nassr)");
+		shaktarAlNassr.addItem("Empate");
 
-		bayernBorussiaTxt = new JLabel();
-		bayernBorussiaTxt.setBounds(400, 530, 400, 25);
-		bayernBorussiaTxt.setText("                       Bayern Munchen vs Borussia Dortmund");
-		bayernBorussia = new JComboBox<>();
-		bayernBorussia.setBounds(400, 550, 350, 30);
-		bayernBorussia.addItem("Gana Local (Bayern)");
-		bayernBorussia.addItem("Gana Visitante (Borussia)");
-		bayernBorussia.addItem("Empate");
+		campoCedula = new JTextField();
+		campoCedula.setBounds(500, 510, 300, 20);
 
-		pDiaApuesta = new TextField();
-		diaApuestaTxt = new JLabel();
-		diaApuestaTxt.setBounds(775, 110, 250, 25);
-		diaApuestaTxt.setText("Ingrese el dia de la apuesta:");
-		pDiaApuesta.setBounds(775, 130, 260, 30);
+		indicacionCedula = new JLabel("Para comprobar que el usuario ingresado es el correcto ");
+		indicacionCedula.setBounds(500, 470, 340, 20);
+		indicacionCedula.setForeground(Color.white);
 
-		pValorApuesta = new TextField();
-		valorApuestaTxt = new JLabel();
-		valorApuestaTxt.setBounds(775, 290, 250, 25);
-		valorApuestaTxt.setText("Ingrese el valor de la apuestas:");
-		pValorApuesta.setBounds(775, 310, 260, 30);
+		indicacionCedula2 = new JLabel("inserte el numero de cedula del Usuario De Nuevo");
+		indicacionCedula2.setBounds(500, 490, 300, 20);
+		indicacionCedula2.setForeground(Color.white);
 
-		botonApostar = new JButton(new ImageIcon("src/images/RealizarApuestaBTN.png"));
-		botonApostar.setBounds(775, 425, 280, 180);
-		botonApostar.setOpaque(false);
-		botonApostar.setContentAreaFilled(false);
-		botonApostar.setBorderPainted(false);
-		botonApostar.setVisible(false);
+		campoSede = new JTextField();
+		campoSede.setBounds(900, 500, 200, 20);
+
+		indicacionseguridadSede = new JLabel("por seguridad ingrese la sede que aposto");
+		indicacionseguridadSede.setBounds(900, 470, 250, 20);
+		indicacionseguridadSede.setForeground(Color.white);
+
+		campoDia = new JTextField();
+		campoDia.setBounds(500, 570, 200, 20);
+
+		indicacionSeguridadDia = new JLabel("por seguridad ingrese El dia de hoy (lunes a domingo)");
+		indicacionSeguridadDia.setBounds(500, 550, 340, 20);
+		indicacionSeguridadDia.setForeground(Color.white);
+
+		indicacionIndex = new JLabel(
+				"Inserte la posicion de la persona que quiere apostar(comienza a contar desde 0) ");
+		indicacionIndex.setBounds(900, 570, 500, 30);
+		indicacionIndex.setForeground(Color.white);
+
+		valortxt = new JLabel("Inserte valor de la apuesta");
+		valortxt.setBounds(900, 530, 400, 20);
+		valortxt.setForeground(Color.white);
+
+		campoValue = new JTextField();
+		campoValue.setBounds(900, 550, 500, 20);
+
+		index = new JTextField();
+		index.setBounds(900, 630, 300, 30);
+
+		apost = new JButton();
+		apost.setBounds(800, 590, 100, 100);
+		Image temp1;
+		temp1 = new ImageIcon("src/imagenes/apostar.png").getImage();
+		ImageIcon imagen1;
+		imagen1 = new ImageIcon(temp1.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+		apost.setIcon(imagen1);
 
 		botonModificar = new JButton(new ImageIcon("src/images/ModificarApuestaBTN.png"));
 		botonModificar.setBounds(775, 425, 280, 180);
@@ -206,41 +253,48 @@ public class VentanaBetPlay extends JFrame {
 		flecha.setBorderPainted(false);
 
 		add(flecha);
-		add(pDiaApuesta);
-		add(diaApuestaTxt);
-		add(pValorApuesta);
-		add(valorApuestaTxt);
-		add(bayernBorussia);
-		add(bayernBorussiaTxt);
-		add(liverpoolEverton);
-		add(liverpoolEvertonTxt);
-		add(unitedCity);
-		add(unitedCityTxt);
-		add(arsenalChelsea);
-		add(arsenalChelseaTxt);
-		add(barcelonaMadrid);
-		add(barcelonaMadridTxt);
-		add(tolimaHuila);
-		add(tolimaHuilaTxt);
-		add(patriotasChico);
-		add(patriotasChicoTxt);
-		add(aguilasEnvigado);
-		add(aguilasEnvigadoTxt);
-		add(pereiraOnce);
-		add(pereiraOnceTxt);
-		add(cucutaBucaramanga);
-		add(cucutaBucaramangaTxt);
-		add(juniorUnion);
-		add(juniorUnionTxt);
-		add(americaCali);
-		add(americaCaliTxt);
-		add(nacionalMedellin);
-		add(nacionalMedellinTxt);
-		add(santafeMillonarios);
-		add(santafeMillonariosTxt);
-		add(botonApostar);
+		add(campoValue);
+		add(valortxt);
+		add(apost);
+		add(shaktarAlNassr);
+		add(shaktarAlNassrtxt);
+		add(santaFeNacional);
+		add(santaFeNacionaltxt);
+		add(onceCaldasRealMadrid);
+		add(onceCaldasRealMadridtxt);
+		add(millosManchesterU);
+		add(millosManchesterUtxt);
+		add(leverkusenEverton);
+		add(leverkusenEvertontxt);
+		add(jaguaresEnvigado);
+		add(jaguaresEnvigadotxt);
+		add(aguilasDoradasDim);
+		add(aguilasDoradasDimtxt);
+		add(campoCedula);
+		add(campoDia);
+		add(campoSede);
+		add(catarColombia);
+		add(catarColombiatxt);
+		add(cityChelsea);
+		add(cityChelseatxt);
+		add(crystalPalaceBrigthon);
+		add(crystalPalaceBrigthontxt);
+		add(cucutaDeportivobarsa);
+		add(cucutaDeportivobarsatxt);
+		add(dormundtBayern);
+		add(dormundtBayerntxt);
+		add(fortalezaLaEquidad);
+		add(fortalezaLaEquidadtxt);
+		add(gironaArsenal);
+		add(gironaArsenaltxt);
 		add(botonEliminar);
 		add(botonModificar);
+		add(indicacionSeguridadDia);
+		add(indicacionseguridadSede);
+		add(indicacionCedula);
+		add(indicacionCedula2);
+		add(index);
+		add(indicacionIndex);
 		add(fondo);
 
 	}
@@ -253,272 +307,316 @@ public class VentanaBetPlay extends JFrame {
 		this.fondo = fondo;
 	}
 
-	public JComboBox<String> getSantafeMillonarios() {
-		return santafeMillonarios;
+	public JComboBox<String> getMillosManchesterU() {
+		return millosManchesterU;
 	}
 
-	public void setSantafeMillonarios(JComboBox<String> santafeMillonarios) {
-		this.santafeMillonarios = santafeMillonarios;
+	public void setMillosManchesterU(JComboBox<String> millosManchesterU) {
+		this.millosManchesterU = millosManchesterU;
 	}
 
-	public JComboBox<String> getNacionalMedellin() {
-		return nacionalMedellin;
+	public JComboBox<String> getOnceCaldasRealMadrid() {
+		return onceCaldasRealMadrid;
 	}
 
-	public void setNacionalMedellin(JComboBox<String> nacionalMedellin) {
-		this.nacionalMedellin = nacionalMedellin;
+	public void setOnceCaldasRealMadrid(JComboBox<String> onceCaldasRealMadrid) {
+		this.onceCaldasRealMadrid = onceCaldasRealMadrid;
 	}
 
-	public JComboBox<String> getAmericaCali() {
-		return americaCali;
+	public JComboBox<String> getCucutaDeportivobarsa() {
+		return cucutaDeportivobarsa;
 	}
 
-	public void setAmericaCali(JComboBox<String> americaCali) {
-		this.americaCali = americaCali;
+	public void setCucutaDeportivobarsa(JComboBox<String> cucutaDeportivobarsa) {
+		this.cucutaDeportivobarsa = cucutaDeportivobarsa;
 	}
 
-	public JComboBox<String> getJuniorUnion() {
-		return juniorUnion;
+	public JComboBox<String> getSantaFeNacional() {
+		return santaFeNacional;
 	}
 
-	public void setJuniorUnion(JComboBox<String> juniorUnion) {
-		this.juniorUnion = juniorUnion;
+	public void setSantaFeNacional(JComboBox<String> santaFeNacional) {
+		this.santaFeNacional = santaFeNacional;
 	}
 
-	public JComboBox<String> getCucutaBucaramanga() {
-		return cucutaBucaramanga;
+	public JComboBox<String> getFortalezaLaEquidad() {
+		return fortalezaLaEquidad;
 	}
 
-	public void setCucutaBucaramanga(JComboBox<String> cucutaBucaramanga) {
-		this.cucutaBucaramanga = cucutaBucaramanga;
+	public void setFortalezaLaEquidad(JComboBox<String> fortalezaLaEquidad) {
+		this.fortalezaLaEquidad = fortalezaLaEquidad;
 	}
 
-	public JComboBox<String> getPereiraOnce() {
-		return pereiraOnce;
+	public JComboBox<String> getShaktarAlNassr() {
+		return shaktarAlNassr;
 	}
 
-	public void setPereiraOnce(JComboBox<String> pereiraOnce) {
-		this.pereiraOnce = pereiraOnce;
+	public void setShaktarAlNassr(JComboBox<String> shaktarAlNassr) {
+		this.shaktarAlNassr = shaktarAlNassr;
 	}
 
-	public JComboBox<String> getAguilasEnvigado() {
-		return aguilasEnvigado;
+	public JComboBox<String> getCityChelsea() {
+		return cityChelsea;
 	}
 
-	public void setAguilasEnvigado(JComboBox<String> aguilasEnvigado) {
-		this.aguilasEnvigado = aguilasEnvigado;
+	public void setCityChelsea(JComboBox<String> cityChelsea) {
+		this.cityChelsea = cityChelsea;
 	}
 
-	public JComboBox<String> getPatriotasChico() {
-		return patriotasChico;
+	public JComboBox<String> getCatarColombia() {
+		return catarColombia;
 	}
 
-	public void setPatriotasChico(JComboBox<String> patriotasChico) {
-		this.patriotasChico = patriotasChico;
+	public void setCatarColombia(JComboBox<String> catarColombia) {
+		this.catarColombia = catarColombia;
 	}
 
-	public JComboBox<String> getTolimaHuila() {
-		return tolimaHuila;
+	public JComboBox<String> getDormundtBayern() {
+		return dormundtBayern;
 	}
 
-	public void setTolimaHuila(JComboBox<String> tolimaHuila) {
-		this.tolimaHuila = tolimaHuila;
+	public void setDormundtBayern(JComboBox<String> dormundtBayern) {
+		this.dormundtBayern = dormundtBayern;
 	}
 
-	public JComboBox<String> getBarcelonaMadrid() {
-		return barcelonaMadrid;
+	public JComboBox<String> getAguilasDoradasDim() {
+		return aguilasDoradasDim;
 	}
 
-	public void setBarcelonaMadrid(JComboBox<String> barcelonaMadrid) {
-		this.barcelonaMadrid = barcelonaMadrid;
+	public void setAguilasDoradasDim(JComboBox<String> aguilasDoradasDim) {
+		this.aguilasDoradasDim = aguilasDoradasDim;
 	}
 
-	public JComboBox<String> getArsenalChelsea() {
-		return arsenalChelsea;
+	public JComboBox<String> getJaguaresEnvigado() {
+		return jaguaresEnvigado;
 	}
 
-	public void setArsenalChelsea(JComboBox<String> arsenalChelsea) {
-		this.arsenalChelsea = arsenalChelsea;
+	public void setJaguaresEnvigado(JComboBox<String> jaguaresEnvigado) {
+		this.jaguaresEnvigado = jaguaresEnvigado;
 	}
 
-	public JComboBox<String> getUnitedCity() {
-		return unitedCity;
+	public JComboBox<String> getCrystalPalaceBrigthon() {
+		return crystalPalaceBrigthon;
 	}
 
-	public void setUnitedCity(JComboBox<String> unitedCity) {
-		this.unitedCity = unitedCity;
+	public void setCrystalPalaceBrigthon(JComboBox<String> crystalPalaceBrigthon) {
+		this.crystalPalaceBrigthon = crystalPalaceBrigthon;
 	}
 
-	public JComboBox<String> getLiverpoolEverton() {
-		return liverpoolEverton;
+	public JComboBox<String> getLeverkusenEverton() {
+		return leverkusenEverton;
 	}
 
-	public void setLiverpoolEverton(JComboBox<String> liverpoolEverton) {
-		this.liverpoolEverton = liverpoolEverton;
+	public void setLeverkusenEverton(JComboBox<String> leverkusenEverton) {
+		this.leverkusenEverton = leverkusenEverton;
 	}
 
-	public JComboBox<String> getBayernBorussia() {
-		return bayernBorussia;
+	public JComboBox<String> getGironaArsenal() {
+		return gironaArsenal;
 	}
 
-	public void setBayernBorussia(JComboBox<String> bayernBorussia) {
-		this.bayernBorussia = bayernBorussia;
+	public void setGironaArsenal(JComboBox<String> gironaArsenal) {
+		this.gironaArsenal = gironaArsenal;
 	}
 
-	public JLabel getSantafeMillonariosTxt() {
-		return santafeMillonariosTxt;
+	public JLabel getMillosManchesterUtxt() {
+		return millosManchesterUtxt;
 	}
 
-	public void setSantafeMillonariosTxt(JLabel santafeMillonariosTxt) {
-		this.santafeMillonariosTxt = santafeMillonariosTxt;
+	public void setMillosManchesterUtxt(JLabel millosManchesterUtxt) {
+		this.millosManchesterUtxt = millosManchesterUtxt;
 	}
 
-	public JLabel getNacionalMedellinTxt() {
-		return nacionalMedellinTxt;
+	public JLabel getOnceCaldasRealMadridtxt() {
+		return onceCaldasRealMadridtxt;
 	}
 
-	public void setNacionalMedellinTxt(JLabel nacionalMedellinTxt) {
-		this.nacionalMedellinTxt = nacionalMedellinTxt;
+	public void setOnceCaldasRealMadridtxt(JLabel onceCaldasRealMadridtxt) {
+		this.onceCaldasRealMadridtxt = onceCaldasRealMadridtxt;
 	}
 
-	public JLabel getAmericaCaliTxt() {
-		return americaCaliTxt;
+	public JLabel getCucutaDeportivobarsatxt() {
+		return cucutaDeportivobarsatxt;
 	}
 
-	public void setAmericaCaliTxt(JLabel americaCaliTxt) {
-		this.americaCaliTxt = americaCaliTxt;
+	public void setCucutaDeportivobarsatxt(JLabel cucutaDeportivobarsatxt) {
+		this.cucutaDeportivobarsatxt = cucutaDeportivobarsatxt;
 	}
 
-	public JLabel getJuniorUnionTxt() {
-		return juniorUnionTxt;
+	public JLabel getSantaFeNacionaltxt() {
+		return santaFeNacionaltxt;
 	}
 
-	public void setJuniorUnionTxt(JLabel juniorUnionTxt) {
-		this.juniorUnionTxt = juniorUnionTxt;
+	public void setSantaFeNacionaltxt(JLabel santaFeNacionaltxt) {
+		this.santaFeNacionaltxt = santaFeNacionaltxt;
 	}
 
-	public JLabel getCucutaBucaramangaTxt() {
-		return cucutaBucaramangaTxt;
+	public JLabel getFortalezaLaEquidadtxt() {
+		return fortalezaLaEquidadtxt;
 	}
 
-	public void setCucutaBucaramangaTxt(JLabel cucutaBucaramangaTxt) {
-		this.cucutaBucaramangaTxt = cucutaBucaramangaTxt;
+	public void setFortalezaLaEquidadtxt(JLabel fortalezaLaEquidadtxt) {
+		this.fortalezaLaEquidadtxt = fortalezaLaEquidadtxt;
 	}
 
-	public JLabel getPereiraOnceTxt() {
-		return pereiraOnceTxt;
+	public JLabel getShaktarAlNassrtxt() {
+		return shaktarAlNassrtxt;
 	}
 
-	public void setPereiraOnceTxt(JLabel pereiraOnceTxt) {
-		this.pereiraOnceTxt = pereiraOnceTxt;
+	public void setShaktarAlNassrtxt(JLabel shaktarAlNassrtxt) {
+		this.shaktarAlNassrtxt = shaktarAlNassrtxt;
 	}
 
-	public JLabel getAguilasEnvigadoTxt() {
-		return aguilasEnvigadoTxt;
+	public JLabel getCityChelseatxt() {
+		return cityChelseatxt;
 	}
 
-	public void setAguilasEnvigadoTxt(JLabel aguilasEnvigadoTxt) {
-		this.aguilasEnvigadoTxt = aguilasEnvigadoTxt;
+	public void setCityChelseatxt(JLabel cityChelseatxt) {
+		this.cityChelseatxt = cityChelseatxt;
 	}
 
-	public JLabel getPatriotasChicoTxt() {
-		return patriotasChicoTxt;
+	public JLabel getCatarColombiatxt() {
+		return catarColombiatxt;
 	}
 
-	public void setPatriotasChicoTxt(JLabel patriotasChicoTxt) {
-		this.patriotasChicoTxt = patriotasChicoTxt;
+	public void setCatarColombiatxt(JLabel catarColombiatxt) {
+		this.catarColombiatxt = catarColombiatxt;
 	}
 
-	public JLabel getTolimaHuilaTxt() {
-		return tolimaHuilaTxt;
+	public JLabel getDormundtBayerntxt() {
+		return dormundtBayerntxt;
 	}
 
-	public void setTolimaHuilaTxt(JLabel tolimaHuilaTxt) {
-		this.tolimaHuilaTxt = tolimaHuilaTxt;
+	public void setDormundtBayerntxt(JLabel dormundtBayerntxt) {
+		this.dormundtBayerntxt = dormundtBayerntxt;
 	}
 
-	public JLabel getBarcelonaMadridTxt() {
-		return barcelonaMadridTxt;
+	public JLabel getAguilasDoradasDimtxt() {
+		return aguilasDoradasDimtxt;
 	}
 
-	public void setBarcelonaMadridTxt(JLabel barcelonaMadridTxt) {
-		this.barcelonaMadridTxt = barcelonaMadridTxt;
+	public void setAguilasDoradasDimtxt(JLabel aguilasDoradasDimtxt) {
+		this.aguilasDoradasDimtxt = aguilasDoradasDimtxt;
 	}
 
-	public JLabel getArsenalChelseaTxt() {
-		return arsenalChelseaTxt;
+	public JLabel getJaguaresEnvigadotxt() {
+		return jaguaresEnvigadotxt;
 	}
 
-	public void setArsenalChelseaTxt(JLabel arsenalChelseaTxt) {
-		this.arsenalChelseaTxt = arsenalChelseaTxt;
+	public void setJaguaresEnvigadotxt(JLabel jaguaresEnvigadotxt) {
+		this.jaguaresEnvigadotxt = jaguaresEnvigadotxt;
 	}
 
-	public JLabel getUnitedCityTxt() {
-		return unitedCityTxt;
+	public JLabel getCrystalPalaceBrigthontxt() {
+		return crystalPalaceBrigthontxt;
 	}
 
-	public void setUnitedCityTxt(JLabel unitedCityTxt) {
-		this.unitedCityTxt = unitedCityTxt;
+	public void setCrystalPalaceBrigthontxt(JLabel crystalPalaceBrigthontxt) {
+		this.crystalPalaceBrigthontxt = crystalPalaceBrigthontxt;
 	}
 
-	public JLabel getLiverpoolEvertonTxt() {
-		return liverpoolEvertonTxt;
+	public JLabel getLeverkusenEvertontxt() {
+		return leverkusenEvertontxt;
 	}
 
-	public void setLiverpoolEvertonTxt(JLabel liverpoolEvertonTxt) {
-		this.liverpoolEvertonTxt = liverpoolEvertonTxt;
+	public void setLeverkusenEvertontxt(JLabel leverkusenEvertontxt) {
+		this.leverkusenEvertontxt = leverkusenEvertontxt;
 	}
 
-	public JLabel getBayernBorussiaTxt() {
-		return bayernBorussiaTxt;
+	public JLabel getGironaArsenaltxt() {
+		return gironaArsenaltxt;
 	}
 
-	public void setBayernBorussiaTxt(JLabel bayernBorussiaTxt) {
-		this.bayernBorussiaTxt = bayernBorussiaTxt;
+	public void setGironaArsenaltxt(JLabel gironaArsenaltxt) {
+		this.gironaArsenaltxt = gironaArsenaltxt;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public JLabel getIndicacionCedula() {
+		return indicacionCedula;
 	}
 
-	public TextField getpDiaApuesta() {
-		return pDiaApuesta;
+	public void setIndicacionCedula(JLabel indicacionCedula) {
+		this.indicacionCedula = indicacionCedula;
 	}
 
-	public void setpDiaApuesta(TextField pDiaApuesta) {
-		this.pDiaApuesta = pDiaApuesta;
+	public JLabel getIndicacionCedula2() {
+		return indicacionCedula2;
 	}
 
-	public TextField getpValorApuesta() {
-		return pValorApuesta;
+	public void setIndicacionCedula2(JLabel indicacionCedula2) {
+		this.indicacionCedula2 = indicacionCedula2;
 	}
 
-	public void setpValorApuesta(TextField pValorApuesta) {
-		this.pValorApuesta = pValorApuesta;
+	public JLabel getIndicacionseguridadSede() {
+		return indicacionseguridadSede;
 	}
 
-	public JLabel getDiaApuestaTxt() {
-		return diaApuestaTxt;
+	public void setIndicacionseguridadSede(JLabel indicacionseguridadSede) {
+		this.indicacionseguridadSede = indicacionseguridadSede;
 	}
 
-	public void setDiaApuestaTxt(JLabel diaApuestaTxt) {
-		this.diaApuestaTxt = diaApuestaTxt;
+	public JLabel getIndicacionSeguridadDia() {
+		return indicacionSeguridadDia;
 	}
 
-	public JLabel getValorApuestaTxt() {
-		return valorApuestaTxt;
+	public void setIndicacionSeguridadDia(JLabel indicacionSeguridadDia) {
+		this.indicacionSeguridadDia = indicacionSeguridadDia;
 	}
 
-	public void setValorApuestaTxt(JLabel valorApuestaTxt) {
-		this.valorApuestaTxt = valorApuestaTxt;
+	public JLabel getIndicacionIndex() {
+		return indicacionIndex;
 	}
 
-	public JButton getBotonApostar() {
-		return botonApostar;
+	public void setIndicacionIndex(JLabel indicacionIndex) {
+		this.indicacionIndex = indicacionIndex;
 	}
 
-	public void setBotonApostar(JButton botonApostar) {
-		this.botonApostar = botonApostar;
+	public JTextField getIndex() {
+		return index;
+	}
+
+	public void setIndex(JTextField index) {
+		this.index = index;
+	}
+
+	public JTextField getCampoValue() {
+		return campoValue;
+	}
+
+	public void setCampoValue(JTextField campoValue) {
+		this.campoValue = campoValue;
+	}
+
+	public JTextField getCampoCedula() {
+		return campoCedula;
+	}
+
+	public void setCampoCedula(JTextField campoCedula) {
+		this.campoCedula = campoCedula;
+	}
+
+	public JTextField getCampoSede() {
+		return campoSede;
+	}
+
+	public void setCampoSede(JTextField campoSede) {
+		this.campoSede = campoSede;
+	}
+
+	public JTextField getCampoDia() {
+		return campoDia;
+	}
+
+	public void setCampoDia(JTextField campoDia) {
+		this.campoDia = campoDia;
+	}
+
+	public JButton getApost() {
+		return apost;
+	}
+
+	public void setApost(JButton apost) {
+		this.apost = apost;
 	}
 
 	public JButton getBotonModificar() {
@@ -543,6 +641,10 @@ public class VentanaBetPlay extends JFrame {
 
 	public void setFlecha(JButton flecha) {
 		this.flecha = flecha;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

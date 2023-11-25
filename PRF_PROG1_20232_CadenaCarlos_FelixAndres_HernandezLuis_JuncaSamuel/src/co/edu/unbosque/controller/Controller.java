@@ -34,6 +34,7 @@ import co.edu.unbosque.view.VentanaBetPlay;
 import co.edu.unbosque.view.VentanaChance;
 import co.edu.unbosque.view.VentanaCrearCasaApuestas;
 import co.edu.unbosque.view.VentanaCrearSedes;
+import co.edu.unbosque.view.VentanaDeConsultas;
 import co.edu.unbosque.view.VentanaElimApos;
 import co.edu.unbosque.view.VentanaLoteria;
 import co.edu.unbosque.view.VentanaMenuSeleccion;
@@ -74,6 +75,7 @@ public class Controller implements ActionListener {
 	VentanaLoteria veLo;
 	VentanaBaloto valo;
 	VentanaBetPlay vet;
+	VentanaDeConsultas veCon;
 
 	public Controller() {
 		con = new Console();
@@ -101,441 +103,12 @@ public class Controller implements ActionListener {
 		balotDao = new BalotoDAO();
 		valo = new VentanaBaloto();
 		vet = new VentanaBetPlay();
+		veCon = new VentanaDeConsultas();
+		betDao = new BetplayDAO();
 		ruta1 = new File("src/co/edu/unbosque/model/persistence/config.properties");
 		ruta2 = new File("src/co/edu/unbosque/model/persistence/juegos.dat");
 		ruta3 = new File("src/co/edu/unbosque/model/persistence/sedes.dat");
 		agregarLectores();
-	}
-
-	public void runPruebaPorConsola() {
-
-		while (true) {
-			con.printWithNewLine("Seleccione la opcion que quiere realizar ");
-			con.printWithNewLine("1: Modulo 1");
-			con.printWithNewLine("2: Modulo 2");
-			con.printWithNewLine("3: Modulo 3");
-			con.printWithNewLine("4: Modulo 4");
-			con.printWithNewLine("5: Modulo 5");
-			con.printWithNewLine("6: Salir");
-			int dec = con.readInt();
-			con.quemarLinea();
-			switch (dec) {
-			case 1: {
-				cicloModulo1: while (true) {
-					con.printWithNewLine("Bienvenido al modulo de parametrizacion de la casa");
-					con.printWithNewLine("1: Crear los datos de la casa de apuestas");
-					con.printWithNewLine("2: Modificar los datos de la casa de apuestas ");
-					con.printWithNewLine("3: Modificar los datos de los presupuestos de la casa de apuestas ");
-					con.printWithNewLine("4: Salir ");
-					con.printWithNewLine("5: Leer (prueba)");
-					int option = con.readInt();
-					con.quemarLinea();
-					switch (option) {
-					case 1: {
-						con.printWithNewLine("Modulo 1 Terminado :D");
-						break;
-					}
-
-					case 2: {
-						int pos = 0;
-						con.printWithNewLine("Insertar nuevo nombre de la casa de apuestas");
-						String Newnombre = con.readWholeLine();
-						con.printWithNewLine("Insertar el nuevo numero de sedes de la casa de apuestas ");
-						String Newsedes = con.readWholeLine();
-						con.printWithNewLine("Insertar el nuevo presupuesto total de la casa de apuestas ");
-						String NewpreTotal = con.readWholeLine();
-						caDao.update(pos, Newnombre, Newsedes, NewpreTotal);
-						break;
-					}
-					case 3: {
-						con.printWithNewLine(
-								"Inserte la posicion del juego a actualizar (0 = baloto,1:loteria2:chance3:superastro4: betplay");
-						int pos = con.readInt();
-						con.quemarLinea();
-						con.printWithNewLine("Inserte el presupuesto actualizado");
-						String pres = con.readWholeLine();
-						jueDao.update(pos, pres);
-						break;
-					}
-					case 4: {
-						break cicloModulo1;
-
-					}
-					case 5: {
-						con.printWithNewLine(caDao.read());
-						con.printWithNewLine(jueDao.read());
-						break;
-					}
-					default:
-						con.printWithNewLine("noks");
-					}
-
-				}
-			}
-				break;
-
-			case 2:
-				con.printWithNewLine(sedeDao.read());
-				break;
-
-			case 3:
-				cicloModulo3: while (true) {
-
-					con.printWithNewLine("Bienvenido al modulo de gestion de los apostadores");
-
-					con.printWithNewLine("1: crear perfil de apostador");
-
-					con.printWithNewLine("2: leer los datos de los apostadores");
-
-					con.printWithNewLine("3: actualizar los datos del apostador");
-
-					con.printWithNewLine("4: borrar al apostador");
-
-					con.printWithNewLine("5: salir");
-					int option = con.readInt();
-					con.quemarLinea();
-					switch (option) {
-					case 1: {
-						con.printWithNewLine("ingrese su nombre de apostador");
-						String nombreApost = con.readWholeLine();
-						con.printWithNewLine("ingrese su cedula (solo seran admitidos mayores de edad)");
-						String numCedula = con.readWholeLine();
-						con.printWithNewLine("ingrese la sede en la cual se encuentra jugando");
-						String numSede = con.readWholeLine();
-						con.printWithNewLine("digite la direccion en la que reside");
-						String direccion = con.readWholeLine();
-						con.printWithNewLine("digite su numero de telefono");
-						String numCelular = con.readWholeLine();
-						con.printWithNewLine("Inserte el año en el que usted (o el apostador) nacio");
-						int anioNaci = con.readInt();
-						if (anioNaci > 2005) {
-							con.printWithNewLine(
-									"Usted es menor de edad , no puede apostar segun la ley 643 del 2001 expedida por coljuegos");
-							break;
-						} else if (anioNaci < 1900) {
-							con.printWithNewLine("Es imposible,la persona mas longeva actualmente vive 122 años");
-							break;
-						} else {
-							String anio = Integer.toString(anioNaci);
-							apostDao.create(nombreApost, numCedula, numSede, direccion, numCelular, anio);
-							con.printWithNewLine("perfil de apostador creado");
-							con.quemarLinea();
-
-							break;
-						}
-					}
-
-					case 2: {
-
-						con.printWithNewLine(apostDao.read());
-						break;
-
-					}
-
-					case 3: {
-
-						con.printWithNewLine(
-								" Inserte la posicion del perfil de apostador a acualizar (empezando desde 0)");
-						int index = Integer.parseInt(con.readWholeLine());
-						con.printWithNewLine("ingrese su nuevo nombre de apostador");
-						String newNombreApost = con.readWholeLine();
-						con.printWithNewLine("ingrese su nueva cedula (solo seran admitidos mayores de edad)");
-						String newNumCedula = con.readWholeLine();
-						con.printWithNewLine("ingrese la nueva cede en la cual se encuentra jugando");
-						String newNumCede = con.readWholeLine();
-						con.printWithNewLine("digite la nueva dirreccion en la que recide");
-						String newDireccion = con.readWholeLine();
-						con.printWithNewLine("digite su nuevo numero de telefono");
-						String newNumCelular = con.readWholeLine();
-						con.printWithNewLine("Inserte el nuevo año en el que usted (o el apostador) nacio");
-						int anioNaci = con.readInt();
-						if (anioNaci > 2005) {
-							con.printWithNewLine(
-									"Usted es menor de edad , no puede apostar segun la ley 643 del 2001 expedida por coljuegos");
-							break;
-						} else if (anioNaci < 1900) {
-							con.printWithNewLine("Es imposible,la persona mas longeva actualmente  vive 122 años");
-							break;
-						} else {
-							boolean doneUpdate = apostDao.update(index, newNombreApost, newNumCedula, newNumCede,
-									newDireccion, newNumCelular);
-							if (doneUpdate) {
-								con.printWithNewLine("perfil de apostador actualizado");
-							} else {
-								con.printWithNewLine("Error al actualizar");
-							}
-							break;
-
-						}
-					}
-					case 4:
-
-						con.printWithNewLine(
-								"digite la posicion del perfil de apostador a eliminar (empezando desde 0):");
-						int index = Integer.parseInt(con.readWholeLine());
-
-						if (apostDao.delete(index)) {
-							con.printWithNewLine("perfil de apostador borrado");
-						} else {
-							con.printWithNewLine("Error al borrar el perfil de apostador");
-						}
-
-						break;
-
-					case 5: {
-						break cicloModulo3;
-
-					}
-					default:
-						con.printWithNewLine("noks ");
-						break;
-					}
-				}
-			case 4:
-
-				cicloModulo4: while (true) {
-
-					con.printWithNewLine("Bienvenido al modulo de la gestion de apuestas porfavor elija una opcion");
-
-					con.printWithNewLine("1: para crear una apuesta");
-					con.printWithNewLine("2: para leer las apuestas");
-					con.printWithNewLine("3: para  actualizar los datos de las apuestas");
-					con.printWithNewLine("3: para  borrar alguna apuesta");
-
-					int option = con.readInt();
-					con.quemarLinea();
-					switch (option) {
-
-					case 1:
-						menuJuegos: while (true) {
-							con.printWithNewLine(
-									"Por que clase de juego le gustara apostar, porfavor elija una opcion");
-
-							con.printWithNewLine("1: baloto");
-							con.printWithNewLine("2: superastro");
-							con.printWithNewLine("3: loteria");
-							con.printWithNewLine("4: betplay ");
-							con.printWithNewLine("5: chance ");
-							int option2 = con.readInt();
-							con.quemarLinea();
-							switch (option2) {
-
-							case 1:
-								con.printWithNewLine("bienvenido al baloto");
-
-								con.printWithNewLine("ingrese el primer digito");
-								String digitoBaloto1 = con.readWholeLine();
-								con.printWithNewLine("ingrese el segundo digito");
-								String digitoBaloto2 = con.readWholeLine();
-								con.printWithNewLine("ingrese el tercer digito");
-								String digitoBaloto3 = con.readWholeLine();
-								con.printWithNewLine("digite el cuarto digito");
-								String digitoBaloto4 = con.readWholeLine();
-								con.printWithNewLine("digite el quinto digito ");
-								String digitoBaloto5 = con.readWholeLine();
-								con.printWithNewLine("digite el sexto digito");
-								String digitoBaloto6 = con.readWholeLine();
-								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
-								String valorDeLaApuestaBaloto = con.readWholeLine();
-								balotDao.create(digitoBaloto1, digitoBaloto2, digitoBaloto3, digitoBaloto4,
-										digitoBaloto5, digitoBaloto6, valorDeLaApuestaBaloto);
-
-								// error revisar UwUn't
-
-								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
-								String option3 = con.readWholeLine();
-								if (option3.equalsIgnoreCase("si")) {
-									con.quemarLinea();
-									break menuJuegos;
-								} else {
-									con.printWithNewLine("Juego/s creado con éxito");
-								}
-								break;
-							case 2:
-								con.printWithNewLine("bienveido al superastro");
-
-								con.printWithNewLine("ingrese el primer digito");
-								String digitoSuper1 = con.readWholeLine();
-								con.printWithNewLine("ingrese el segundo digito");
-								String digitoSuper2 = con.readWholeLine();
-								con.printWithNewLine("ingrese el tercer digito");
-								String digitoSuper3 = con.readWholeLine();
-								con.printWithNewLine("digite el cuarto digito");
-								String digitoSuper4 = con.readWholeLine();
-								con.printWithNewLine("digite algun signo del sodiaco"); // crear una exception que sepa
-								// cuales son los unicos signos
-								// del
-								// sobaco
-								String zodiacoSigno = con.readWholeLine();
-								con.printWithNewLine("Inserte el año en el que usted (o el apostador) nacio");
-								String valorDeLaApuestaSuper = con.readWholeLine();
-								superDao.create(digitoSuper1, digitoSuper2, digitoSuper3, digitoSuper4, zodiacoSigno,
-										valorDeLaApuestaSuper);
-								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
-								String option4 = con.readWholeLine();
-								if (option4.equalsIgnoreCase("si")) {
-									con.quemarLinea();
-									break menuJuegos;
-								} else {
-									con.printWithNewLine("Juego/s creado con éxito");
-								}
-								break;
-
-							case 3:
-								con.printWithNewLine("bienveido a la loteria");
-
-								con.printWithNewLine("ingrese el primer digito");
-								String digitoLoteria1 = con.readWholeLine();
-								con.printWithNewLine("ingrese el segundo digito");
-								String digitoLoteria2 = con.readWholeLine();
-								con.printWithNewLine("ingrese el tercer digito");
-								String digitoLoteria3 = con.readWholeLine();
-								con.printWithNewLine("digite el cuarto digito");
-								String digitoLoteria4 = con.readWholeLine();
-								con.printWithNewLine("digite el primer numero de serie");
-								String serieDig1 = con.readWholeLine();
-								con.printWithNewLine("sigite el segundo digito de serie");
-								String serieDig2 = con.readWholeLine();
-								con.printWithNewLine("sigite el tercer digito de serie");
-								String serieDig3 = con.readWholeLine();
-								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
-								String valorDeLaApuestaLoteria = con.readWholeLine();
-								loteDao.create(digitoLoteria1, digitoLoteria2, digitoLoteria3, digitoLoteria4,
-										serieDig1, serieDig2, serieDig3, valorDeLaApuestaLoteria);
-
-								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
-								String option5 = con.readWholeLine();
-
-								if (option5.equalsIgnoreCase("si")) {
-									con.quemarLinea();
-									break menuJuegos;
-								} else {
-									con.printWithNewLine("Juego/s creado con éxito");
-								}
-								break;
-
-							case 4:
-								con.printWithNewLine("bievenido a betplay");
-
-								con.printWithNewLine("ingrese el nombre del equipo local ");
-								String nombreEquipoLocal = con.readWholeLine();
-								con.printWithNewLine("digite el marcador del equipo local");
-								String marcadorLocal = con.readWholeLine();
-								con.printWithNewLine("ingrese el nombre del equipo visitante");
-								String nombreEquipoVisitante = con.readWholeLine();
-								con.printWithNewLine("digite el marcador del equipo visitante");
-								String marcadorVisitante = con.readWholeLine();
-								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
-								String valorDeLaApuestabetplay = con.readWholeLine();
-
-								betDao.create(nombreEquipoLocal, marcadorLocal, nombreEquipoVisitante,
-										marcadorVisitante, valorDeLaApuestabetplay);
-
-								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
-								String option6 = con.readWholeLine();
-
-								if (option6.equalsIgnoreCase("si")) {
-									con.quemarLinea();
-									break menuJuegos;
-								} else {
-									con.printWithNewLine("Juego/s creado con éxito");
-								}
-								break;
-
-							case 5:
-
-								con.printWithNewLine("bievenido a chance ");
-
-								con.printWithNewLine("ingrese el primer digito");
-								String digito1Chance = con.readWholeLine();
-								con.printWithNewLine("ingrese el segundo digito");
-								String digito2Chance = con.readWholeLine();
-								con.printWithNewLine("digite el tercer digito");
-								String digito3Chance = con.readWholeLine();
-								con.printWithNewLine("digite el cuarto digito ");
-								String digito4Chance = con.readWholeLine();
-								con.printWithNewLine("digite cuanto quisiera apostar en este juego");
-								String valorDeLaApuestaChance = con.readWholeLine();
-
-								chanDao.create(digito1Chance, digito2Chance, digito3Chance, digito4Chance,
-										valorDeLaApuestaChance);
-
-								con.printWithNewLine("Desea agregar mas juegos? (si/no)");
-								String option7 = con.readWholeLine();
-
-								if (option7.equalsIgnoreCase("si")) {
-									con.quemarLinea();
-									break menuJuegos;
-								} else {
-									con.printWithNewLine("Juego/s creado con éxito");
-								}
-
-							}
-							break cicloModulo4;
-
-						}
-					}
-				}
-
-			case 5:
-
-				cicloModulo5: while (true) {
-
-					con.printWithNewLine("Bienvenido al modulo de consultas porfavor elija una opcion");
-
-					con.printWithNewLine("1: listado de clietes por las sedes sede");
-
-					con.printWithNewLine("2: ver el valor total de apuestas reaizadas por los clientes");
-
-					con.printWithNewLine("3: mostrar los detalles de las apuestas realizadas por cliente");
-
-					con.printWithNewLine("4: mostrar los detalles de las apuestas realizadas por sede");
-
-					con.printWithNewLine("5: mostrar el total de las inversiones hechas por sede ");
-
-					con.printWithNewLine("6: mostrar el total de las inversiones hechas por juego ");
-					int option = con.readInt();
-					con.quemarLinea();
-					switch (option) {
-
-					case 1:
-
-						con.printWithNewLine(sedeDao.read());
-						break;
-
-					case 2:
-
-						con.printWithNewLine(gestApuDao.read());
-						break;
-
-					case 3:
-						con.printWithNewLine(superDao.read());
-						con.printWithNewLine(loteDao.read());
-						con.printWithNewLine(chanDao.read());
-						con.printWithNewLine(balotDao.read());
-						break;
-
-					case 4:
-
-						con.printWithNewLine(apostDao.read());
-						break;
-
-					case 5:
-
-						con.printWithNewLine(sedeDao.read());
-
-						break;
-
-					case 6:
-
-						con.printWithNewLine(jueDao.read());
-
-						break cicloModulo5;
-
-					}
-				}
-			}
-		}
 	}
 
 	public void run() {
@@ -1283,85 +856,85 @@ public class Controller implements ActionListener {
 				JOptionPane.showMessageDialog(veSup, "No existe este índice ");
 			}
 		}
-		case "btnModificarSuperastro": {
-			String index = veSup.getIndex().getText();
-			String dig1 = veSup.getCampoDig1().getText();
-			String dig2 = veSup.getCampoDig2().getText();
-			String dig3 = veSup.getCampoDig3().getText();
-			String dig4 = veSup.getCampoDig4().getText();
-			String zod = veSup.getCampoZodiac().getText();
-			String val = veSup.getCampoValue().getText();
-			String cedul = veSup.getCampoCedula().getText();
-			String dia = veSup.getCampoDia().getText();
-			String sed = veSup.getCampoSede().getText();
-			if (index.isBlank() || dig1.isBlank() || dig2.isBlank() || dig3.isBlank() || dig4.isBlank() || zod.isBlank()
-					|| val.isBlank() || cedul.isBlank() || dia.isBlank() || sed.isBlank()) {
-				JOptionPane.showMessageDialog(veSup, "Uno o mas espacios estan vacios");
-			}
-			int index1 = Integer.parseInt(index);
-			ArrayList<SuperastroDTO> superastros = superDao.getListOfSuperastro();
-			if (index1 >= 0 && index1 < superastros.size()) {
-				SuperastroDTO superastroExistente = superastros.get(index1);
-				int confirmacion = JOptionPane.showConfirmDialog(vapo,
-						"En la posición " + index1 + ", La cedula del apostador es "
-								+ superastroExistente.getNumDeCedula() + " y aposto los siguientes numeros"
-								+ superastroExistente.getDigito1() + superastroExistente.getDigito2()
-								+ superastroExistente.getDigito3() + superastroExistente.getDigito4()
-								+ " Con el siguiente signo del zodiaco" + superastroExistente.getZodiacoSigno()
-								+ "Desea modificarlo?" + "Confirmación",
-						JOptionPane.YES_NO_OPTION);
-				if (confirmacion == JOptionPane.YES_OPTION) {
-					boolean localidadExiste = sedeDao.getListOfSedes().stream()
-							.anyMatch(sede -> sede.getLocalidad().equalsIgnoreCase(sed));
-
-					if (localidadExiste) {
-						// Validar cédula
-						if (veSup.getCampoCedula().getText().equals(Long.toString(apostadorExistente.getCedula()))) {
-							// Validar día
-							if (dia.equalsIgnoreCase("lunes") || dia.equalsIgnoreCase("martes")
-									|| dia.equalsIgnoreCase("miercoles") || dia.equalsIgnoreCase("jueves")
-									|| dia.equalsIgnoreCase("viernes") || dia.equalsIgnoreCase("sabado")
-									|| dia.equalsIgnoreCase("domingo")) {
-								// Validar signo del zodiaco
-								if (zod.equalsIgnoreCase("aries") || zod.equalsIgnoreCase("tauro")
-										|| zod.equalsIgnoreCase("geminis") || zod.equalsIgnoreCase("cancer")
-										|| zod.equalsIgnoreCase("leo") || zod.equalsIgnoreCase("virgo")
-										|| zod.equalsIgnoreCase("libra") || zod.equalsIgnoreCase("escorpio")
-										|| zod.equalsIgnoreCase("sagitario") || zod.equalsIgnoreCase("capricornio")
-										|| zod.equalsIgnoreCase("acuario") || zod.equalsIgnoreCase("piscis")) {
-									// Todas las validaciones pasaron, puedes proceder con la apuesta
-									int indice = Integer.parseInt(index);
-									superDao.update(indice, dig1, dig2, dig3, dig4, val, zod, cedul, sed, dia);
-									JOptionPane.showMessageDialog(veSup,
-											apostadorExistente.getNombre() + " Apostó Exitosamente en Superastro");
-									JOptionPane.showMessageDialog(veSup,
-											"Recibo Generado:" + "\n" + "Nombre del apostador:"
-													+ apostadorExistente.getNombre() + "\n" + "Numero de cedula :"
-													+ cedul + "\n" + "Numero que aposto" + dig1 + dig2 + dig3 + dig4
-													+ "Serie" + "\n" + "\n Signo del zodiaco :" + zod + "\n"
-													+ " Sede en la que aposto :" + sed + "\n" + " Dia de hoy :" + dia
-													+ "\n Valor de la apuesta realizada: " + val);
-								} else {
-									JOptionPane.showMessageDialog(veSup, "Signo del zodiaco no válido.");
-								}
-							} else {
-								JOptionPane.showMessageDialog(veSup, "Día de la semana no válido.");
-							}
-						} else {
-							JOptionPane.showMessageDialog(veSup,
-									"La cédula ingresada no coincide con la cédula del apostador.");
-						}
-					} else {
-						JOptionPane.showMessageDialog(veSup, "No existe la sede");
-					}
-				}
-
-				break;
-			} else {
-				JOptionPane.showMessageDialog(veSup, "No existe este índice ");
-			}
-
-		}
+//		case "btnModificarSuperastro": {
+//			String index = veSup.getIndex().getText();
+//			String dig1 = veSup.getCampoDig1().getText();
+//			String dig2 = veSup.getCampoDig2().getText();
+//			String dig3 = veSup.getCampoDig3().getText();
+//			String dig4 = veSup.getCampoDig4().getText();
+//			String zod = veSup.getCampoZodiac().getText();
+//			String val = veSup.getCampoValue().getText();
+//			String cedul = veSup.getCampoCedula().getText();
+//			String dia = veSup.getCampoDia().getText();
+//			String sed = veSup.getCampoSede().getText();
+//			if (index.isBlank() || dig1.isBlank() || dig2.isBlank() || dig3.isBlank() || dig4.isBlank() || zod.isBlank()
+//					|| val.isBlank() || cedul.isBlank() || dia.isBlank() || sed.isBlank()) {
+//				JOptionPane.showMessageDialog(veSup, "Uno o mas espacios estan vacios");
+//			}
+//			int index1 = Integer.parseInt(index);
+//			ArrayList<SuperastroDTO> superastros = superDao.getListOfSuperastro();
+//			if (index1 >= 0 && index1 < superastros.size()) {
+//				SuperastroDTO superastroExistente = superastros.get(index1);
+//				int confirmacion = JOptionPane.showConfirmDialog(vapo,
+//						"En la posición " + index1 + ", La cedula del apostador es "
+//								+ superastroExistente.getNumDeCedula() + " y aposto los siguientes numeros"
+//								+ superastroExistente.getDigito1() + superastroExistente.getDigito2()
+//								+ superastroExistente.getDigito3() + superastroExistente.getDigito4()
+//								+ " Con el siguiente signo del zodiaco" + superastroExistente.getZodiacoSigno()
+//								+ "Desea modificarlo?" + "Confirmación",
+//						JOptionPane.YES_NO_OPTION);
+//				if (confirmacion == JOptionPane.YES_OPTION) {
+//					boolean localidadExiste = sedeDao.getListOfSedes().stream()
+//							.anyMatch(sede -> sede.getLocalidad().equalsIgnoreCase(sed));
+//
+//					if (localidadExiste) {
+//						// Validar cédula
+//						if (veSup.getCampoCedula().getText().equals(Long.toString(apostadorExistente.getCedula()))) {
+//							// Validar día
+//							if (dia.equalsIgnoreCase("lunes") || dia.equalsIgnoreCase("martes")
+//									|| dia.equalsIgnoreCase("miercoles") || dia.equalsIgnoreCase("jueves")
+//									|| dia.equalsIgnoreCase("viernes") || dia.equalsIgnoreCase("sabado")
+//									|| dia.equalsIgnoreCase("domingo")) {
+//								// Validar signo del zodiaco
+//								if (zod.equalsIgnoreCase("aries") || zod.equalsIgnoreCase("tauro")
+//										|| zod.equalsIgnoreCase("geminis") || zod.equalsIgnoreCase("cancer")
+//										|| zod.equalsIgnoreCase("leo") || zod.equalsIgnoreCase("virgo")
+//										|| zod.equalsIgnoreCase("libra") || zod.equalsIgnoreCase("escorpio")
+//										|| zod.equalsIgnoreCase("sagitario") || zod.equalsIgnoreCase("capricornio")
+//										|| zod.equalsIgnoreCase("acuario") || zod.equalsIgnoreCase("piscis")) {
+//									// Todas las validaciones pasaron, puedes proceder con la apuesta
+//									int indice = Integer.parseInt(index);
+//									superDao.update(indice, dig1, dig2, dig3, dig4, val, zod, cedul, sed, dia);
+//									JOptionPane.showMessageDialog(veSup,
+//											apostadorExistente.getNombre() + " Apostó Exitosamente en Superastro");
+//									JOptionPane.showMessageDialog(veSup,
+//											"Recibo Generado:" + "\n" + "Nombre del apostador:"
+//													+ apostadorExistente.getNombre() + "\n" + "Numero de cedula :"
+//													+ cedul + "\n" + "Numero que aposto" + dig1 + dig2 + dig3 + dig4
+//													+ "Serie" + "\n" + "\n Signo del zodiaco :" + zod + "\n"
+//													+ " Sede en la que aposto :" + sed + "\n" + " Dia de hoy :" + dia
+//													+ "\n Valor de la apuesta realizada: " + val);
+//								} else {
+//									JOptionPane.showMessageDialog(veSup, "Signo del zodiaco no válido.");
+//								}
+//							} else {
+//								JOptionPane.showMessageDialog(veSup, "Día de la semana no válido.");
+//							}
+//						} else {
+//							JOptionPane.showMessageDialog(veSup,
+//									"La cédula ingresada no coincide con la cédula del apostador.");
+//						}
+//					} else {
+//						JOptionPane.showMessageDialog(veSup, "No existe la sede");
+//					}
+//				}
+//
+//				break;
+//			} else {
+//				JOptionPane.showMessageDialog(veSup, "No existe este índice ");
+//			}
+//
+//		}
 		case "btnRegresarSuper": {
 			vapu.setVisible(true);
 			veSup.setVisible(false);
@@ -1606,9 +1179,81 @@ public class Controller implements ActionListener {
 			vapu.setVisible(false);
 			break;
 		}
+		case "btnBetApost": {
+			String index = vet.getIndex().getText();
+			String resul1 = vet.getAguilasDoradasDim().getSelectedItem().toString();
+			String resul2 = vet.getCatarColombia().getSelectedItem().toString();
+			String resul3 = vet.getOnceCaldasRealMadrid().getSelectedItem().toString();
+			String resul4 = vet.getCityChelsea().getSelectedItem().toString();
+			String resul5 = vet.getCrystalPalaceBrigthon().getSelectedItem().toString();
+			String resul6 = vet.getCucutaDeportivobarsa().getSelectedItem().toString();
+			String resul7 = vet.getDormundtBayern().getSelectedItem().toString();
+			String resul8 = vet.getFortalezaLaEquidad().getSelectedItem().toString();
+			String resul9 = vet.getGironaArsenal().getSelectedItem().toString();
+			String resul10 = vet.getJaguaresEnvigado().getSelectedItem().toString();
+			String resul11 = vet.getLeverkusenEverton().getSelectedItem().toString();
+			String resul12 = vet.getMillosManchesterU().getSelectedItem().toString();
+			String resul13 = vet.getSantaFeNacional().getSelectedItem().toString();
+			String resul14 = vet.getShaktarAlNassr().getSelectedItem().toString();
+			String val = vet.getCampoValue().getText();
+			String cedul = vet.getCampoCedula().getText();
+			String dia = vet.getCampoDia().getText();
+			String sed = vet.getCampoSede().getText();
+			if (index.isBlank() || resul1.isBlank() || resul2.isBlank() || resul3.isBlank() || resul4.isBlank()
+					|| resul5.isBlank() || resul6.isBlank() || resul7.isBlank() || resul8.isBlank() || resul9.isBlank()
+					|| resul10.isBlank() || resul11.isBlank() || resul12.isBlank() || resul13.isBlank()
+					|| resul14.isBlank() || val.isBlank() || cedul.isBlank() || dia.isBlank() || sed.isBlank()) {
+			}
 
+			int index1 = Integer.parseInt(index);
+			ArrayList<ApostadorDTO> apostadores = apostDao.getListOfApostadores();
+			if (index1 >= 0 && index1 < apostadores.size()) {
+				ApostadorDTO apostadorExistente = apostadores.get(index1);
+				int confirmacion = JOptionPane.showConfirmDialog(
+						vet, "En la posición " + index1 + ", el nombre del apostador es "
+								+ apostadorExistente.getNombre() + ". ¿Desea Apostar con este apostador ?",
+						"Confirmación", JOptionPane.YES_NO_OPTION);
+				if (confirmacion == JOptionPane.YES_OPTION) {
+					boolean localidadExiste = sedeDao.getListOfSedes().stream()
+							.anyMatch(sede -> sede.getLocalidad().equalsIgnoreCase(sed));
+
+					if (localidadExiste) {
+						if (vet.getCampoCedula().getText().equals(Long.toString(apostadorExistente.getCedula()))) {
+							// Validar día
+							if (dia.equalsIgnoreCase("lunes") || dia.equalsIgnoreCase("martes")
+									|| dia.equalsIgnoreCase("miercoles") || dia.equalsIgnoreCase("jueves")
+									|| dia.equalsIgnoreCase("viernes") || dia.equalsIgnoreCase("sabado")
+									|| dia.equalsIgnoreCase("domingo")) {
+
+								// Todas las validaciones pasaron, puedes proceder con la apuesta
+								betDao.create(resul1, resul2, resul3, resul4, resul5, resul6, resul7, resul8, resul9,
+										resul10, resul11, resul12, resul13, resul14, val, cedul, sed, dia);
+								JOptionPane.showMessageDialog(vet,
+										apostadorExistente.getNombre() + " Apostó Exitosamente en el betplay ");
+								JOptionPane.showMessageDialog(vet,
+										"Recibo Generado:" + "\n" + "Nombre del apostador:"
+												+ apostadorExistente.getNombre() + "\n" + "Numero de cedula :" + cedul
+												+ "\n" + " Sede en la que aposto :" + sed + "\n" + " Dia de hoy :" + dia
+												+ "\n Valor de la apuesta realizada: " + val);
+
+							}
+						} else {
+							JOptionPane.showMessageDialog(valo, "Día de la semana no válido.");
+						}
+					} else {
+						JOptionPane.showMessageDialog(valo,
+								"La cédula ingresada no coincide con la cédula del apostador.");
+					}
+				} else {
+
+				}
+			} else {
+				JOptionPane.showMessageDialog(valo, "indice no encontrado");
+			}
+
+			break;
 		}
-
+		}
 	}
 
 	// Método para revisar que el número de sedes esté entre 1 y 10
@@ -1696,6 +1341,8 @@ public class Controller implements ActionListener {
 		veLo.getRegresar().setActionCommand("btnRegresarlote");
 		valo.getApost().addActionListener(this);
 		valo.getApost().setActionCommand("btnBaloApost");
+		vet.getApost().addActionListener(this);
+		vet.getApost().setActionCommand("btnBetApost");
 
 	}
 
