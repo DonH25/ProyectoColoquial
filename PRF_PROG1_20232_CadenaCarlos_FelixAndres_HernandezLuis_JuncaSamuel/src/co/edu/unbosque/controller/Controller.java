@@ -4,11 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import co.edu.unbosque.model.ApostadorDTO;
+import co.edu.unbosque.model.BalotoDTO;
+import co.edu.unbosque.model.BetplayDTO;
 import co.edu.unbosque.model.CasaDeApuestasDTO;
+import co.edu.unbosque.model.ChanceDTO;
+import co.edu.unbosque.model.LoteriaDTO;
 import co.edu.unbosque.model.SedeDTO;
 import co.edu.unbosque.model.SuperastroDTO;
 import co.edu.unbosque.model.persistence.ApostadorDAO;
@@ -29,6 +34,7 @@ import co.edu.unbosque.util.ExcepcionNumeroSede;
 import co.edu.unbosque.util.ExcepcionPresupuestoTotal;
 import co.edu.unbosque.view.Console;
 import co.edu.unbosque.view.VentanaApostador;
+import co.edu.unbosque.view.VentanaApuestaPorCliente;
 import co.edu.unbosque.view.VentanaBaloto;
 import co.edu.unbosque.view.VentanaBetPlay;
 import co.edu.unbosque.view.VentanaChance;
@@ -106,6 +112,7 @@ public class Controller implements ActionListener {
 	VentanaBaloto valo;
 	VentanaBetPlay vet;
 	VentanaDeConsultas veCon;
+	VentanaApuestaPorCliente veConClient;
 
 	/**
 	 * Constructor de Controller. Inicializa los componentes del controlador y
@@ -140,6 +147,7 @@ public class Controller implements ActionListener {
 		valo = new VentanaBaloto();
 		vet = new VentanaBetPlay();
 		veCon = new VentanaDeConsultas();
+		veConClient = new VentanaApuestaPorCliente();
 		betDao = new BetplayDAO();
 		ruta1 = new File("src/co/edu/unbosque/model/persistence/config.properties");
 		ruta2 = new File("src/co/edu/unbosque/model/persistence/juegos.dat");
@@ -155,6 +163,12 @@ public class Controller implements ActionListener {
 	public void run() {
 		if (ruta1.exists() && ruta2.exists() && ruta3.exists()) {
 			vms.setVisible(true);
+			System.out.println(balotDao.read());
+			System.out.println(loteDao.read());
+			System.out.println(chanDao.read());
+			System.out.println(betDao.read());
+			System.out.println(superDao.read());
+
 		} else {
 			vp.setVisible(true);
 
@@ -1177,6 +1191,7 @@ public class Controller implements ActionListener {
 				JOptionPane.showMessageDialog(veSup, "No existe este índice ");
 			}
 		}
+
 //		case "btnModificarSuperastro": {
 //			String index = veSup.getIndex().getText();
 //			String dig1 = veSup.getCampoDig1().getText();
@@ -1480,7 +1495,8 @@ public class Controller implements ActionListener {
 
 							}
 						} else {
-							JOptionPane.showMessageDialog(valo, "Día de la semana no válido.");
+							JOptionPane.showMessageDialog(valo,
+									"La cédula ingresada no coincide con la cédula del apostador  o el dia de la semana no es valido.");
 						}
 					} else {
 						JOptionPane.showMessageDialog(valo,
@@ -1580,6 +1596,29 @@ public class Controller implements ActionListener {
 			break;
 
 		}
+		case "selConsulApu": {
+			veConClient.setVisible(true);
+			veCon.setVisible(false);
+			break;
+		}
+		case "consulApu": {
+			ArrayList<ApostadorDTO> apostadores = apostDao.getListOfApostadores();
+			String salida = "";
+			String apostadores1 = "";
+			for (int i = 0; i < sedeDao.getListOfSedes().size(); i++) {
+				apostadores1 = "";
+				for (int j = 0; j < apostDao.getListOfApostadores().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equalsIgnoreCase(apostDao.getListOfApostadores().get(j).getSedeJuego())) {
+						apostadores1 = apostadores1.concat(apostDao.getListOfApostadores().get(j).toString() + "\n");
+					}
+				}
+				salida += sedeDao.getListOfSedes().get(i).getLocalidad() + "\n" + apostadores1 + "\n";
+			}
+			veConClient.getCampoConsulta().setText(salida);
+			break;
+
+		}
 		}
 	}
 
@@ -1672,6 +1711,11 @@ public class Controller implements ActionListener {
 		valo.getApost().setActionCommand("btnBaloApost");
 		vet.getApost().addActionListener(this);
 		vet.getApost().setActionCommand("btnBetApost");
+		veCon.getApuestasPorCliente().addActionListener(this);
+		veCon.getApuestasPorCliente().setActionCommand("selConsulApu");
+
+		veConClient.getConsultar().addActionListener(this);
+		veConClient.getConsultar().setActionCommand("consulApu");
 
 	}
 

@@ -101,7 +101,8 @@ public class SuperastroDTO extends GestionApuestaDTO implements Serializable {
 	@Override
 	public String toString() {
 		return super.toString() + "digito1: " + digito1 + ", digito2: " + digito2 + ", digito3: " + digito3
-				+ ", digito4:" + digito4 + ", Signo Del Zodiaco:" + zodiacoSigno + "]";
+				+ ", digito4:" + digito4 + ", Signo Del Zodiaco:" + zodiacoSigno + "ValorDeLaApuesta:"
+				+ valorDeLaApuesta + "]";
 	}
 
 }

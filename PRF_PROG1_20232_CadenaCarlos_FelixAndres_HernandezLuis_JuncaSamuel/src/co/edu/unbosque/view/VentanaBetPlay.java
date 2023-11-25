@@ -232,7 +232,7 @@ public class VentanaBetPlay extends JFrame {
 
 		indicacionIndex = new JLabel(
 				"Inserte la posicion de la persona que quiere apostar(comienza a contar desde 0) ");
-		indicacionIndex.setBounds(900, 570, 500, 30);
+		indicacionIndex.setBounds(900, 600, 500, 30);
 		indicacionIndex.setForeground(Color.white);
 
 		valortxt = new JLabel("Inserte valor de la apuesta");

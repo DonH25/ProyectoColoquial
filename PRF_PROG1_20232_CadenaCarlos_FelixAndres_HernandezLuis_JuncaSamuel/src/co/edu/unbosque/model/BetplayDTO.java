@@ -22,6 +22,7 @@ public class BetplayDTO extends GestionApuestaDTO implements Serializable {
 	private String partido12Resultado;
 	private String partido13Resultado;
 	private String partido14Resultado;
+	private double valorDeLaApuesta;
 
 	public BetplayDTO() {
 		// TODO Auto-generated constructor stub
@@ -30,7 +31,7 @@ public class BetplayDTO extends GestionApuestaDTO implements Serializable {
 	public BetplayDTO(String partido1Resultado, String partido2Resultado, String partido3Resultado,
 			String partido4Resultado, String partido5Resultado, String partido6Resultado, String partido7Resultado,
 			String partido8Resultado, String partido9Resultado, String partido10Resultado, String partido11Resultado,
-			String partido12Resultado, String partido13Resultado, String partido14Resultado) {
+			String partido12Resultado, String partido13Resultado, String partido14Resultado, double valorDeLaApuesta) {
 		super();
 		this.partido1Resultado = partido1Resultado;
 		this.partido2Resultado = partido2Resultado;
@@ -46,13 +47,14 @@ public class BetplayDTO extends GestionApuestaDTO implements Serializable {
 		this.partido12Resultado = partido12Resultado;
 		this.partido13Resultado = partido13Resultado;
 		this.partido14Resultado = partido14Resultado;
+		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 
 	public BetplayDTO(String nameSede, long numDeCedula, String diaDeLaApuesta, String partido1Resultado,
 			String partido2Resultado, String partido3Resultado, String partido4Resultado, String partido5Resultado,
 			String partido6Resultado, String partido7Resultado, String partido8Resultado, String partido9Resultado,
 			String partido10Resultado, String partido11Resultado, String partido12Resultado, String partido13Resultado,
-			String partido14Resultado) {
+			String partido14Resultado, double valorDeLaApuesta) {
 		super(nameSede, numDeCedula, diaDeLaApuesta);
 		this.partido1Resultado = partido1Resultado;
 		this.partido2Resultado = partido2Resultado;
@@ -68,6 +70,7 @@ public class BetplayDTO extends GestionApuestaDTO implements Serializable {
 		this.partido12Resultado = partido12Resultado;
 		this.partido13Resultado = partido13Resultado;
 		this.partido14Resultado = partido14Resultado;
+		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
 
 	public BetplayDTO(String nameSede, long numDeCedula, String diaDeLaApuesta) {
@@ -187,19 +190,28 @@ public class BetplayDTO extends GestionApuestaDTO implements Serializable {
 		this.partido14Resultado = partido14Resultado;
 	}
 
+	public double getValorDeLaApuesta() {
+		return valorDeLaApuesta;
+	}
+
+	public void setValorDeLaApuesta(double valorDeLaApuesta) {
+		this.valorDeLaApuesta = valorDeLaApuesta;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
 	@Override
 	public String toString() {
-		return "BetplayDTO [partido1Resultado=" + partido1Resultado + ", partido2Resultado=" + partido2Resultado
-				+ ", partido3Resultado=" + partido3Resultado + ", partido4Resultado=" + partido4Resultado
-				+ ", partido5Resultado=" + partido5Resultado + ", partido6Resultado=" + partido6Resultado
-				+ ", partido7Resultado=" + partido7Resultado + ", partido8Resultado=" + partido8Resultado
-				+ ", partido9Resultado=" + partido9Resultado + ", partido10Resultado=" + partido10Resultado
-				+ ", partido11Resultado=" + partido11Resultado + ", partido12Resultado=" + partido12Resultado
-				+ ", partido13Resultado=" + partido13Resultado + ", partido14Resultado=" + partido14Resultado + "]";
+		return super.toString() + "BetplayDTO [partido1Resultado=" + partido1Resultado + ", partido2Resultado="
+				+ partido2Resultado + ", partido3Resultado=" + partido3Resultado + ", partido4Resultado="
+				+ partido4Resultado + ", partido5Resultado=" + partido5Resultado + ", partido6Resultado="
+				+ partido6Resultado + ", partido7Resultado=" + partido7Resultado + ", partido8Resultado="
+				+ partido8Resultado + ", partido9Resultado=" + partido9Resultado + ", partido10Resultado="
+				+ partido10Resultado + ", partido11Resultado=" + partido11Resultado + ", partido12Resultado="
+				+ partido12Resultado + ", partido13Resultado=" + partido13Resultado + ", partido14Resultado="
+				+ partido14Resultado + "ValorDeLaApuesta:" + valorDeLaApuesta + "]";
 	}
 
 }

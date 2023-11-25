@@ -79,8 +79,8 @@ public class ApostadorDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Nombre:" + nombre + "\n" + "Cedula:" + cedula + "\n" + "Sede en donde esta jugando:" + sedeJuego + "\n"
-				+ "Direccion:" + direccion + "\n" + "Celular=" + celular + "\n" + "anio nacimiento:" + anoN;
+		return "\n" + "Nombre:" + nombre + "\n" + "Cedula:" + cedula + "\n" + "Sede en donde esta jugando:" + sedeJuego
+				+ "\n" + "Direccion:" + direccion + "\n" + "Celular=" + celular + "\n" + "anio nacimiento:" + anoN;
 	}
 
 }
