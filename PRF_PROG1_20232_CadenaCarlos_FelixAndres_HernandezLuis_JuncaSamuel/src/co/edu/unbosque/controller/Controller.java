@@ -4,11 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
 import co.edu.unbosque.model.ApostadorDTO;
+import co.edu.unbosque.model.BalotoDTO;
+import co.edu.unbosque.model.BetplayDTO;
 import co.edu.unbosque.model.CasaDeApuestasDTO;
+import co.edu.unbosque.model.ChanceDTO;
+import co.edu.unbosque.model.LoteriaDTO;
 import co.edu.unbosque.model.SedeDTO;
 import co.edu.unbosque.model.SuperastroDTO;
 import co.edu.unbosque.model.persistence.ApostadorDAO;
@@ -1169,7 +1174,8 @@ public class Controller implements ActionListener {
 
 							}
 						} else {
-							JOptionPane.showMessageDialog(valo, "Día de la semana no válido.");
+							JOptionPane.showMessageDialog(valo,
+									"La cédula ingresada no coincide con la cédula del apostador  o el dia de la semana no es valido.");
 						}
 					} else {
 						JOptionPane.showMessageDialog(valo,
@@ -1274,7 +1280,24 @@ public class Controller implements ActionListener {
 			veCon.setVisible(false);
 			break;
 		}
+		case "consulApu": {
+			ArrayList<ApostadorDTO> apostadores = apostDao.getListOfApostadores();
+			String salida = "";
+			String apostadores1 = "";
+			for (int i = 0; i < sedeDao.getListOfSedes().size(); i++) {
+				apostadores1 = "";
+				for (int j = 0; j < apostDao.getListOfApostadores().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equalsIgnoreCase(apostDao.getListOfApostadores().get(j).getSedeJuego())) {
+						apostadores1 = apostadores1.concat(apostDao.getListOfApostadores().get(j).toString() + "\n");
+					}
+				}
+				salida += sedeDao.getListOfSedes().get(i).getLocalidad() + "\n" + apostadores1 + "\n";
+			}
+			veConClient.getCampoConsulta().setText(salida);
+			break;
 
+		}
 		}
 	}
 
@@ -1369,6 +1392,9 @@ public class Controller implements ActionListener {
 		vet.getApost().setActionCommand("btnBetApost");
 		veCon.getApuestasPorCliente().addActionListener(this);
 		veCon.getApuestasPorCliente().setActionCommand("selConsulApu");
+
+		veConClient.getConsultar().addActionListener(this);
+		veConClient.getConsultar().setActionCommand("consulApu");
 
 	}
 
