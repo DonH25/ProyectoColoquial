@@ -72,6 +72,10 @@ public class BetplayDAO implements CRUDOperation {
 		site.setPartido12Resultado(args[11]);
 		site.setPartido13Resultado(args[12]);
 		site.setPartido14Resultado(args[13]);
+		site.setValorDeLaApuesta(Double.parseDouble(args[14]));
+		site.setNumDeCedula(Long.parseLong(args[15]));
+		site.setNameSede(args[16]);
+		site.setDiaDeLaApuesta(args[17]);
 
 		listOfBetplays.add(site);
 		writeDataSerializable();

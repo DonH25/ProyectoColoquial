@@ -133,9 +133,10 @@ public class LoteriaDTO extends GestionApuestaDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return "LoteriaDTO [nombreLoteria=" + nombreLoteria + ", digito1=" + digito1 + ", digito2=" + digito2
-				+ ", digito3=" + digito3 + ", digito4=" + digito4 + ", serieDig1=" + serieDig1 + ", serieDig2="
-				+ serieDig2 + ", serieDig3=" + serieDig3 + "]";
+		return super.toString() + "LoteriaDTO [nombreLoteria=" + nombreLoteria + ", digito1=" + digito1 + ", digito2="
+				+ digito2 + ", digito3=" + digito3 + ", digito4=" + digito4 + ", serieDig1=" + serieDig1
+				+ ", serieDig2=" + serieDig2 + ", serieDig3=" + serieDig3 + "ValorDeLaApuesta:" + valorDeLaApuesta
+				+ "]";
 	}
 
 }

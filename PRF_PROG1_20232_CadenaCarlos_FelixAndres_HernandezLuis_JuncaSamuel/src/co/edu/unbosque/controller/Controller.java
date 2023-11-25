@@ -29,6 +29,7 @@ import co.edu.unbosque.util.ExcepcionNumeroSede;
 import co.edu.unbosque.util.ExcepcionPresupuestoTotal;
 import co.edu.unbosque.view.Console;
 import co.edu.unbosque.view.VentanaApostador;
+import co.edu.unbosque.view.VentanaApuestaPorCliente;
 import co.edu.unbosque.view.VentanaBaloto;
 import co.edu.unbosque.view.VentanaBetPlay;
 import co.edu.unbosque.view.VentanaChance;
@@ -76,6 +77,7 @@ public class Controller implements ActionListener {
 	VentanaBaloto valo;
 	VentanaBetPlay vet;
 	VentanaDeConsultas veCon;
+	VentanaApuestaPorCliente veConClient;
 
 	public Controller() {
 		con = new Console();
@@ -104,6 +106,7 @@ public class Controller implements ActionListener {
 		valo = new VentanaBaloto();
 		vet = new VentanaBetPlay();
 		veCon = new VentanaDeConsultas();
+		veConClient = new VentanaApuestaPorCliente();
 		betDao = new BetplayDAO();
 		ruta1 = new File("src/co/edu/unbosque/model/persistence/config.properties");
 		ruta2 = new File("src/co/edu/unbosque/model/persistence/juegos.dat");
@@ -114,6 +117,12 @@ public class Controller implements ActionListener {
 	public void run() {
 		if (ruta1.exists() && ruta2.exists() && ruta3.exists()) {
 			vms.setVisible(true);
+			System.out.println(balotDao.read());
+			System.out.println(loteDao.read());
+			System.out.println(chanDao.read());
+			System.out.println(betDao.read());
+			System.out.println(superDao.read());
+
 		} else {
 			vp.setVisible(true);
 
@@ -856,6 +865,7 @@ public class Controller implements ActionListener {
 				JOptionPane.showMessageDialog(veSup, "No existe este índice ");
 			}
 		}
+
 //		case "btnModificarSuperastro": {
 //			String index = veSup.getIndex().getText();
 //			String dig1 = veSup.getCampoDig1().getText();
@@ -1259,6 +1269,12 @@ public class Controller implements ActionListener {
 			break;
 
 		}
+		case "selConsulApu": {
+			veConClient.setVisible(true);
+			veCon.setVisible(false);
+			break;
+		}
+
 		}
 	}
 
@@ -1351,6 +1367,8 @@ public class Controller implements ActionListener {
 		valo.getApost().setActionCommand("btnBaloApost");
 		vet.getApost().addActionListener(this);
 		vet.getApost().setActionCommand("btnBetApost");
+		veCon.getApuestasPorCliente().addActionListener(this);
+		veCon.getApuestasPorCliente().setActionCommand("selConsulApu");
 
 	}
 
