@@ -5,8 +5,20 @@ import java.io.Serializable;
 public class ApostadorDTO implements Serializable {
 
 	/**
-	 * 
-	 */
+	 * La clase ApostadorDTO representa un objeto que encapsula la información de un apostador.
+	 * Contiene detalles como el nombre, cédula, sede de juego, dirección, número de celular
+	 * y año de nacimiento del apostador.
+	 * Implementa la interfaz Serializable para permitir la serialización de objetos de esta clase.
+	 ***
+ * Constructor de la clase ApostadorDTO que inicializa todos los atributos del apostador.
+ *
+ * @param nombre      El nombre del apostador.
+ * @param cedula      El número de cédula del apostador.
+ * @param sedeJuego   La sede de juego del apostador.
+ * @param direccion   La dirección del apostador.
+ * @param celular     El número de celular del apostador.
+ * @param anoN        El año de nacimiento del apostador.
+ */
 	private static final long serialVersionUID = 1982978799011136339L;
 	private String nombre;
 	private long cedula;
