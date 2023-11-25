@@ -9,15 +9,36 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * Esta clase representa una ventana para crear sedes en la interfaz gráfica.
+ * Extiende a JFrame, por lo que hereda todos los métodos y atributos de un
+ * JFrame.
+ */
 public class VentanaCrearSedes extends JFrame {
+	/**
+	 * serialVersionUID es un identificador de versión para la serialización. Es
+	 * necesario para garantizar que durante la deserialización el cargador de
+	 * clases cargue la misma clase que fue serializada.
+	 */
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2958406166755371604L;
 	private JTextField numEmpleados, localidadSede, localidadModificar;
+	/**
+	 * Los siguientes son campos de texto para recoger la entrada del usuario.
+	 */
 	private JLabel indicacionesEmpleados, indicacionesLocalidad, indicacionesLocalidadModificar, fondo;
+	/**
+	 * Los siguientes son botones para realizar acciones como registrar una sede,
+	 * modificar una sede y regresar.
+	 */
 	private JButton registrarSede, modificarSede, regresar;
 
+	/**
+	 * Este es el constructor de la clase VentanaCrearSedes. Inicializa la ventana y
+	 * todos sus componentes.
+	 */
 	public VentanaCrearSedes() {
 
 		setBounds(150, 0, 1280, 720);

@@ -9,19 +9,58 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * VentanaSuperastro es una subclase de JFrame que representa una ventana de
+ * apuestas Superastro en la aplicación. Esta clase se encarga de inicializar y
+ * configurar la ventana de apuestas Superastro, incluyendo su tamaño, posición,
+ * diseño, y operación de cierre. También se encarga de la creación y
+ * configuración de varios campos de texto y botones que representan diferentes
+ * acciones que un usuario puede realizar.
+ */
 public class VentanaSuperastro extends JFrame {
 
+	/**
+	 * serialVersionUID es un identificador de versión para la serialización. Este
+	 * identificador se utiliza durante la deserialización para verificar que el
+	 * emisor y el receptor de un objeto serializado mantienen una compatibilidad de
+	 * versión.
+	 */
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7396031141857717571L;
+	/**
+	 * index, campoDig1, campoDig2, campoDig3, campoDig4, campoZodiac, campoValue,
+	 * campoCedula, campoSede, campoDia son JTextField que representan diferentes
+	 * campos de entrada que un usuario puede llenar.
+	 */
 	private JTextField index, campoDig1, campoDig2, campoDig3, campoDig4, campoZodiac, campoValue, campoCedula,
 			campoSede, campoDia;
+	/**
+	 * apost, regresar, modificar son JButton que representan diferentes acciones
+	 * que un usuario puede realizar, como apostar, regresar a la ventana anterior,
+	 * y modificar una apuesta existente.
+	 */
 	private JButton apost, regresar, modificar;
+	/**
+	 * fondo, indicacionIndex, indicacionDig1, indicacionDig2, indicacionDig3,
+	 * indicacionDig4, indicacionZodiac, indicacionValue, indicacionCedula,
+	 * indicacionCedula2, indicacionseguridadSede, indicacionSeguridadDia son JLabel
+	 * que proporcionan instrucciones al usuario sobre cómo realizar una apuesta y
+	 * pueden ser utilizados para mostrar un fondo en la ventana.
+	 */
 	private JLabel fondo, indicacionIndex, indicacionDig1, indicacionDig2, indicacionDig3, indicacionDig4,
 			indicacionZodiac, indicacionValue, indicacionCedula, indicacionCedula2, indicacionseguridadSede,
 			indicacionSeguridadDia;
 
+	/**
+	 * Constructor de VentanaSuperastro. Inicializa los componentes de la ventana y
+	 * establece sus propiedades. El constructor se encarga de crear los objetos
+	 * para los campos de texto, los botones y los JLabel de indicación de apuesta,
+	 * y configurar sus propiedades, como su tamaño, posición y, en algunos casos,
+	 * su texto y color de fuente. También configura las propiedades de la ventana,
+	 * como su tamaño, posición, diseño y operación de cierre.
+	 */
 	public VentanaSuperastro() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);

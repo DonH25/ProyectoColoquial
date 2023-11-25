@@ -9,19 +9,43 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * Esta clase representa una ventana de Chance en la interfaz gráfica. Extiende
+ * a JFrame, por lo que hereda todos los métodos y atributos de un JFrame.
+ */
 public class VentanaChance extends JFrame {
 
+	/**
+	 * serialVersionUID es un identificador de versión para la serialización. Es
+	 * necesario para garantizar que durante la deserialización el cargador de
+	 * clases cargue la misma clase que fue serializada.
+	 */
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3614924828858164662L;
+	/**
+	 * Los siguientes son campos de texto para recoger la entrada del usuario.
+	 */
 	private JTextField index, campoDig1, campoDig2, campoDig3, campoDig4, campoValue, campoLote, campoCedula, campoSede,
 			campoDia;
+	/**
+	 * Los siguientes son botones para realizar acciones como apostar, regresar y
+	 * modificar.
+	 */
 	private JButton apost, regresar, modificar;
+	/**
+	 * Los siguientes son etiquetas para indicar al usuario qué información se debe
+	 * ingresar en los campos de texto correspondientes.
+	 */
 	private JLabel fondo, indicacionIndex, indicacionDig1, indicacionDig2, indicacionDig3, indicacionDig4,
 			indicacionValue, indicacionLote, indicacionLote1, indicacionLote2, indicacionLote3, indicacionCedula,
 			indicacionCedula2, indicacionseguridadSede, indicacionSeguridadDia;
 
+	/**
+	 * Este es el constructor de la clase VentanaChance. Inicializa la ventana y
+	 * todos sus componentes.
+	 */
 	public VentanaChance() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);

@@ -11,13 +11,42 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+/**
+ * Esta clase representa una ventana para mostrar un apostador en la interfaz
+ * gráfica. Extiende a JFrame, por lo que hereda todos los métodos y atributos
+ * de un JFrame.
+ */
 public class VentanaMostrarApostador extends JFrame {
+	/**
+	 * serialVersionUID es un identificador de versión para la serialización. Es
+	 * necesario para garantizar que durante la deserialización el cargador de
+	 * clases cargue la misma clase que fue serializada.
+	 */
 	private static final long serialVersionUID = 8015307293827484642L;
+	/**
+	 * Los siguientes son etiquetas para indicar al usuario qué información se debe
+	 * ingresar en los campos de texto correspondientes.
+	 */
 	private JLabel indicacionesMostrar, fondo;
+
+	/**
+	 * Este es un área de texto para mostrar la salida.
+	 */
 	private JTextArea salidaTos;
+	/**
+	 * Este es un panel de desplazamiento para el área de texto.
+	 */
 	private JScrollPane scroll;
+	/**
+	 * Los siguientes son botones para realizar acciones como mostrar un apostador y
+	 * regresar.
+	 */
 	private JButton mostrarApostador, regresar;
 
+	/**
+	 * Este es el constructor de la clase VentanaMostrarApostador. Inicializa la
+	 * ventana y todos sus componentes.
+	 */
 	public VentanaMostrarApostador() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);

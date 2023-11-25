@@ -8,11 +8,43 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/**
+ * VentanaSeleccionApostadores es una subclase de JFrame que representa una
+ * ventana de selección de apostadores en la aplicación. Esta clase se encarga
+ * de inicializar y configurar la ventana de selección de apostadores,
+ * incluyendo su tamaño, posición, diseño, y operación de cierre. También se
+ * encarga de la creación y configuración de varios botones que representan
+ * diferentes acciones que un usuario puede realizar con los apostadores.
+ */
 public class VentanaSeleccionApostadores extends JFrame {
+	/**
+	 * serialVersionUID es un identificador de versión para la serialización. Este
+	 * identificador se utiliza durante la deserialización para verificar que el
+	 * emisor y el receptor de un objeto serializado mantienen una compatibilidad de
+	 * versión.
+	 */
 	private static final long serialVersionUID = -6534808995204108233L;
+
+	/**
+	 * fondo es un JLabel que puede ser utilizado para mostrar un fondo en la
+	 * ventana.
+	 */
 	private JLabel fondo;
+
+	/**
+	 * botonCrear es un JButton que representa la acción de crear un nuevo
+	 * apostador. Este botón se configura con una imagen que representa visualmente
+	 * la acción de crear.
+	 */
 	private JButton botonCrear, botonMostrar, botonActualizar, botonEliminar, botonRegresar;
 
+	/**
+	 * Constructor de VentanaSeleccionApostadores. Inicializa los componentes de la
+	 * ventana y establece sus propiedades. El constructor se encarga de crear los
+	 * objetos para los botones y configurar sus propiedades, como su tamaño,
+	 * posición y, en algunos casos, su imagen. También configura las propiedades de
+	 * la ventana, como su tamaño, posición, diseño y operación de cierre.
+	 */
 	public VentanaSeleccionApostadores() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);

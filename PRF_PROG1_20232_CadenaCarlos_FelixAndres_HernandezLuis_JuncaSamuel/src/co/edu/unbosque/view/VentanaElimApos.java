@@ -9,15 +9,38 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * Esta clase representa una ventana para eliminar apostadores en la interfaz gráfica.
+ * Extiende a JFrame, por lo que hereda todos los métodos y atributos de un JFrame.
+ */
 public class VentanaElimApos extends JFrame {
+	
+	/**
+     * serialVersionUID es un identificador de versión para la serialización.
+     * Es necesario para garantizar que durante la deserialización 
+     * el cargador de clases cargue la misma clase que fue serializada.
+     */
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5456546445987406628L;
+	/**
+     * Los siguientes son botones para realizar acciones como eliminar y regresar.
+     */
 	private JButton eliminar, regresar;
+	/**
+     * Este es un campo de texto para recoger la entrada del usuario.
+     */
 	private JTextField index;
+	/**
+     * Los siguientes son etiquetas para indicar al usuario qué información se debe ingresar en los campos de texto correspondientes.
+     */
 	private JLabel indicElim, fondo;
 
+	/**
+     * Este es el constructor de la clase VentanaElimApos.
+     * Inicializa la ventana y todos sus componentes.
+     */
 	public VentanaElimApos() {
 		setBounds(150, 0, 500, 500);
 		setLayout(null);

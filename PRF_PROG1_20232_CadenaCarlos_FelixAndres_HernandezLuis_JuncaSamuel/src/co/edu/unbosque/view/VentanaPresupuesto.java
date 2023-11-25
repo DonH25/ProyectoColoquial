@@ -9,17 +9,43 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * Esta clase representa una ventana de presupuesto en la interfaz gráfica.
+ * Extiende a JFrame, por lo que hereda todos los métodos y atributos de un
+ * JFrame.
+ */
 public class VentanaPresupuesto extends JFrame {
+
 	/**
-	 * 
+	 * serialVersionUID es un identificador de versión para la serialización. Es
+	 * necesario para garantizar que durante la deserialización el cargador de
+	 * clases cargue la misma clase que fue serializada.
 	 */
+	/**
+	* 
+	*/
 	private static final long serialVersionUID = 6845707884091523016L;
+	/**
+	 * Los siguientes son botones para realizar acciones como registrar y modificar
+	 * un presupuesto.
+	 */
 	private JButton botonRegistrarPresupuesto, botonModificarPresupuesto;
+	/**
+	 * Los siguientes son campos de texto para recoger la entrada del usuario.
+	 */
 	private JTextField balotoPresupuesto, betplayPresupuesto, superastroPresupuesto, chancePresupuesto,
 			loteriaPresupuesto;
+	/**
+	 * Los siguientes son etiquetas para indicar al usuario qué información se debe
+	 * ingresar en los campos de texto correspondientes.
+	 */
 	private JLabel indicacionesBaloto, indicacionesBetplay, indicacionesSuperastro, indicacionesChance,
 			indicacionesLoteria, textoIndicaciones1, textoIndicaciones2, textoIndicaciones3, textoIndicaciones4, fondo;
 
+	/**
+	 * Este es el constructor de la clase VentanaPresupuesto. Inicializa la ventana
+	 * y todos sus componentes.
+	 */
 	public VentanaPresupuesto() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);

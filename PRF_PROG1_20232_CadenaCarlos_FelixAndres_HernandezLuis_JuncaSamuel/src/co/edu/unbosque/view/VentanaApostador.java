@@ -9,14 +9,39 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * Esta clase representa una ventana de apostador en la interfaz gráfica.
+ * Extiende a JFrame, por lo que hereda todos los métodos y atributos de un
+ * JFrame.
+ */
 public class VentanaApostador extends JFrame {
+	/**
+	 * serialVersionUID es un identificador de versión para la serialización. Es
+	 * necesario para garantizar que durante la deserialización el cargador de
+	 * clases cargue la misma clase que fue serializada.
+	 */
 	private static final long serialVersionUID = 8015307293827484642L;
+	/**
+	 * Los siguientes son campos de texto para recoger la entrada del usuario.
+	 */
 	private JTextField campoNombre, campoCedula, campoSede, campoDireccion, campoCelular, campoAnio, campoModif;
+	/**
+	 * Los siguientes son etiquetas para indicar al usuario qué información se debe
+	 * ingresar en los campos de texto correspondientes.
+	 */
 	private JLabel indicacionesNombre, indicacionesCedula, indicacionesSede, indicacionesDireccion, indicacionesCelular,
 			indicacionesAnioNacimiento, indicacionesModif, fondo;
 
+	/**
+	 * Los siguientes son botones para realizar acciones como crear un apostador,
+	 * modificar un apostador y regresar.
+	 */
 	private JButton crearApostador, modificarApostador, regresar;
 
+	/**
+	 * Este es el constructor de la clase VentanaApostador. Inicializa la ventana y
+	 * todos sus componentes.
+	 */
 	public VentanaApostador() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);

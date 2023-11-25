@@ -7,14 +7,35 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/**
+ * Esta clase representa una ventana de consultas en la interfaz gráfica.
+ * Extiende a JFrame, por lo que hereda todos los métodos y atributos de un
+ * JFrame.
+ */
 public class VentanaDeConsultas extends JFrame {
+	/**
+	 * serialVersionUID es un identificador de versión para la serialización. Es
+	 * necesario para garantizar que durante la deserialización el cargador de
+	 * clases cargue la misma clase que fue serializada.
+	 */
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8604676120792617421L;
+	/**
+	 * Los siguientes son etiquetas para mostrar el fondo y el logo.
+	 */
 	private JLabel fondo, logo;
+	/**
+	 * Los siguientes son botones para realizar acciones como consultar clientes por
+	 * sede, valor total de apuestas por cliente, apuestas por cliente, salir y
+	 * apuestas por sedes y tipo.
+	 */
 	private JButton clientesSede, valorTotalapuestasCliente, apuestasPorCliente, botonSalir, apuestasSedesYTipo;
 
+	/**
+	 * Los siguientes son etiquetas para mostrar el fondo y el logo.
+	 */
 	public VentanaDeConsultas() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);

@@ -9,19 +9,43 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * Esta clase representa una ventana de Baloto en la interfaz gráfica. Extiende
+ * a JFrame, por lo que hereda todos los métodos y atributos de un JFrame.
+ */
 public class VentanaBaloto extends JFrame {
 
 	/**
-	 * 
+	 * serialVersionUID es un identificador de versión para la serialización. Es
+	 * necesario para garantizar que durante la deserialización el cargador de
+	 * clases cargue la misma clase que fue serializada.
 	 */
 	private static final long serialVersionUID = -3614924828858164662L;
+
+	/**
+	 * Los siguientes son campos de texto para recoger la entrada del usuario.
+	 */
 	private JTextField index, campoDig1, campoDig2, campoDig3, campoDig4, campoValue, campoCedula, campoSede, campoDia,
 			campoDig5, campoDig6;
-	private JButton apost, regresar,modificar;
+
+	/**
+	 * Los siguientes son botones para realizar acciones como apostar, regresar y
+	 * modificar.
+	 */
+	private JButton apost, regresar, modificar;
+
+	/**
+	 * Los siguientes son etiquetas para indicar al usuario qué información se debe
+	 * ingresar en los campos de texto correspondientes.
+	 */
 	private JLabel fondo, indicacionIndex, indicacionDig1, indicacionDig2, indicacionDig3, indicacionDig4,
 			indicacionDig5, indicacionDig6, indicacionValue, indicacionLote3, indicacionCedula, indicacionCedula2,
 			indicacionseguridadSede, indicacionSeguridadDia;
 
+	/**
+	 * Este es el constructor de la clase VentanaBaloto. Inicializa la ventana y
+	 * todos sus componentes.
+	 */
 	public VentanaBaloto() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);
@@ -114,7 +138,6 @@ public class VentanaBaloto extends JFrame {
 		ImageIcon imagen1;
 		imagen1 = new ImageIcon(temp1.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		apost.setIcon(imagen1);
-		
 
 		modificar = new JButton();
 		modificar.setBounds(800, 250, 200, 200);
@@ -124,7 +147,6 @@ public class VentanaBaloto extends JFrame {
 		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		modificar.setIcon(imagen11);
 		modificar.setVisible(false);
-		
 
 		fondo = new JLabel();
 		fondo.setBounds(0, 0, 1280, 720);
@@ -433,6 +455,5 @@ public class VentanaBaloto extends JFrame {
 	public void setIndicacionDig6(JLabel indicacionDig6) {
 		this.indicacionDig6 = indicacionDig6;
 	}
-	
 
 }

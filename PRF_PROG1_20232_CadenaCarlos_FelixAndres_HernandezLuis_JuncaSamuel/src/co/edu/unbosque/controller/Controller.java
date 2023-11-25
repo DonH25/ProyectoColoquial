@@ -45,14 +45,34 @@ import co.edu.unbosque.view.VentanaSeleccionApostadores;
 import co.edu.unbosque.view.VentanaSeleccionarApuesta;
 import co.edu.unbosque.view.VentanaSuperastro;
 
+/**
+ * Controller es una clase que implementa ActionListener y se encarga de manejar
+ * las acciones de la interfaz de usuario. Esta clase contiene referencias a
+ * varias ventanas de la aplicación, DAOs para interactuar con la base de datos,
+ * y otros recursos necesarios para el funcionamiento de la aplicación.
+ */
 public class Controller implements ActionListener {
+	/**
+	 * con es una instancia de Console que puede ser utilizada para interactuar con
+	 * la consola.
+	 */
 	private Console con;
+
+	/**
+	 * caDao, jueDao, apostDao, sedeDao, gestApuDao, balotDao, superDao, chanDao,
+	 * loteDao, betDao son DAOs que se utilizan para llamar individualmente a cada
+	 * clase y asignarle un nombre
+	 */
 	CasaDeApuestasDAO caDao;
 	JuegoDAO jueDao;
 	ApostadorDAO apostDao;
 	SedeDAO sedeDao;
 	GestionApuestaDAO gestApuDao;
 
+	/**
+	 * prop es una instancia de CasaDeApuestasProperties que se utiliza para manejar
+	 * las propiedades de la casa de apuestas.
+	 */
 	CasaDeApuestasProperties prop;
 	VentanaPrincipal vp;
 	VentanaCrearCasaApuestas vcca;
@@ -62,7 +82,17 @@ public class Controller implements ActionListener {
 	ChanceDAO chanDao;
 	LoteriaDAO loteDao;
 	BetplayDAO betDao;
+
+	/**
+	 * vp, vcca, vpre, vsed, vms, vapo, vsapo, velimApos, vemos, vapu, veSup,
+	 * veChan, veLo, valo, vet, veCon son ventanas de la aplicación.
+	 */
 	VentanaCrearSedes vsed;
+
+	/**
+	 * ruta1, ruta2, ruta3 son archivos que representan las rutas a varios recursos
+	 * necesarios para la aplicación.
+	 */
 	private File ruta1, ruta2, ruta3;
 	VentanaMenuSeleccion vms;
 	VentanaApostador vapo;
@@ -77,6 +107,12 @@ public class Controller implements ActionListener {
 	VentanaBetPlay vet;
 	VentanaDeConsultas veCon;
 
+	/**
+	 * Constructor de Controller. Inicializa los componentes del controlador y
+	 * establece sus propiedades. El constructor se encarga de crear los objetos
+	 * para las ventanas, los DAOs, y otros recursos necesarios, y configurar sus
+	 * propiedades. También agrega los listeners a las ventanas.
+	 */
 	public Controller() {
 		con = new Console();
 		caDao = new CasaDeApuestasDAO();
@@ -111,6 +147,11 @@ public class Controller implements ActionListener {
 		agregarLectores();
 	}
 
+	/**
+	 * El método run se encarga de mostrar la ventana de menú de selección si los
+	 * archivos de configuración existen, de lo contrario, muestra la ventana
+	 * principal.
+	 */
 	public void run() {
 		if (ruta1.exists() && ruta2.exists() && ruta3.exists()) {
 			vms.setVisible(true);
@@ -121,6 +162,17 @@ public class Controller implements ActionListener {
 
 	}
 
+	/**
+	 * El método actionPerformed se encarga de manejar las acciones realizadas por
+	 * el usuario en la interfaz de usuario. Este método se activa cuando el usuario
+	 * interactúa con un componente de la interfaz de usuario que tiene un
+	 * ActionListener asociado. Dependiendo del comando de acción del evento, este
+	 * método realiza diferentes acciones, como ingresar al programa, salir del
+	 * programa, o registrar una casa de apuestas.
+	 *
+	 * @param e es el evento de acción que se produce cuando el usuario interactúa
+	 *          con un componente de la interfaz de usuario.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
@@ -200,7 +252,35 @@ public class Controller implements ActionListener {
 			break;
 		}
 
-		// Sección para el Boton de registro de presupuestos
+		/**
+		 * Este caso maneja el evento del botón "btnRegistPresup" que se activa cuando
+		 * el usuario intenta registrar un presupuesto.
+		 * 
+		 * Primero, verifica si todos los campos de texto del presupuesto están vacíos.
+		 * Si es así, muestra un mensaje al usuario para que complete todos los campos.
+		 * 
+		 * Luego, intenta parsear cada presupuesto ingresado a un número double. Si
+		 * alguno de los presupuestos no es un número válido (por ejemplo, si el usuario
+		 * ingresó texto en lugar de números), muestra un mensaje de error y termina el
+		 * bucle.
+		 * 
+		 * Si todos los presupuestos son números válidos, carga las propiedades de la
+		 * casa de apuestas y calcula la suma de todos los presupuestos.
+		 * 
+		 * Si la suma de los presupuestos es menor o igual al presupuesto total de la
+		 * casa de apuestas, crea registros para cada juego con su respectivo
+		 * presupuesto.
+		 * 
+		 * Luego, muestra un cuadro de diálogo de confirmación al usuario para verificar
+		 * si los datos ingresados son correctos. Si el usuario confirma, muestra un
+		 * mensaje de que los datos fueron ingresados y cambia la visibilidad de las
+		 * ventanas. Si el usuario no confirma, borra todos los campos de texto del
+		 * presupuesto.
+		 * 
+		 * Si la suma de los presupuestos excede el presupuesto total de la casa de
+		 * apuestas, muestra un mensaje al usuario indicando que debe redistribuir el
+		 * presupuesto.
+		 */
 		case "btnRegistPresup": {
 			if (vpre.getBalotoPresupuesto().getText().equals("") && vpre.getBetplayPresupuesto().getText().equals("")
 					&& vpre.getSuperastroPresupuesto().getText().equals("")
@@ -275,6 +355,28 @@ public class Controller implements ActionListener {
 
 			break;
 		}
+
+		/**
+		 * Este caso maneja el evento del botón "btnRegistSed" que se activa cuando el
+		 * usuario intenta registrar una sede.
+		 * 
+		 * Primero, verifica si los campos de texto de la localidad y el número de
+		 * empleados están vacíos. Si es así, muestra un mensaje al usuario para que
+		 * complete los campos.
+		 * 
+		 * Luego, intenta convertir el número de empleados a un número entero. Si el
+		 * número de empleados es un número negativo, muestra un mensaje de error.
+		 * 
+		 * Si el número de empleados es un número válido, muestra un cuadro de diálogo
+		 * de confirmación al usuario para verificar si desea crear la sede. Si el
+		 * usuario confirma, crea la sede y muestra un mensaje de que la sede fue creada
+		 * exitosamente. Si el usuario no confirma, borra los campos de texto de la
+		 * localidad y el número de empleados.
+		 * 
+		 * Finalmente, verifica si el número de sedes es igual al número de sedes en las
+		 * propiedades. Si es así, cambia la visibilidad de las ventanas. Si no es así,
+		 * muestra un mensaje al usuario indicando que las sedes están incompletas.
+		 */
 		case "btnRegistSed": {
 			String localidad = vsed.getLocalidadSede().getText();
 			String empleados = vsed.getNumEmpleados().getText();
@@ -319,6 +421,30 @@ public class Controller implements ActionListener {
 			}
 			break;
 		}
+
+		/**
+		 * Este caso maneja el evento del botón "btnPara" que se activa cuando el
+		 * usuario intenta modificar la casa de apuestas, los presupuestos de los juegos
+		 * o las sedes.
+		 * 
+		 * Primero, muestra un cuadro de diálogo de confirmación al usuario para
+		 * verificar si desea modificar la casa de apuestas. Si el usuario confirma,
+		 * cambia la visibilidad de las ventanas y muestra los botones correspondientes.
+		 * 
+		 * Si el usuario no confirma, muestra otro cuadro de diálogo de confirmación
+		 * para verificar si desea modificar los presupuestos de los juegos. Si el
+		 * usuario confirma, cambia la visibilidad de las ventanas y muestra los botones
+		 * correspondientes.
+		 * 
+		 * Si el usuario no confirma, muestra otro cuadro de diálogo de confirmación
+		 * para verificar si desea modificar las sedes. Si el usuario confirma, cambia
+		 * la visibilidad de las ventanas, muestra los botones correspondientes y
+		 * muestra un mensaje al usuario indicando que para modificar las sedes, se
+		 * modificará en cuestión de la localidad de la sede.
+		 * 
+		 * Si el usuario no confirma, muestra un mensaje al usuario indicando que no se
+		 * modificó nada.
+		 */
 		case "btnPara": {
 			int opcion = JOptionPane.showConfirmDialog(vpre, "¿Desea modificar la casa de apuestas?", "Confirmación",
 					JOptionPane.YES_NO_OPTION);
@@ -359,6 +485,27 @@ public class Controller implements ActionListener {
 			}
 			break;
 		}
+
+		/**
+		 * Este caso maneja el evento del botón "btnModifSed" que se activa cuando el
+		 * usuario intenta modificar una sede.
+		 * 
+		 * Primero, verifica si los campos de texto de la localidad a modificar, la
+		 * nueva localidad y el número de empleados están vacíos. Si es así, muestra un
+		 * mensaje al usuario para que complete los campos.
+		 * 
+		 * Luego, intenta convertir el número de empleados a un número entero. Si el
+		 * número de empleados es un número negativo, muestra un mensaje de error.
+		 * 
+		 * Si el número de empleados es un número válido, muestra un cuadro de diálogo
+		 * de confirmación al usuario para verificar si desea modificar la sede. Si el
+		 * usuario confirma, intenta actualizar la sede con la nueva localidad y el
+		 * número de empleados. Si la sede se actualiza exitosamente, muestra un mensaje
+		 * de que la sede fue modificada exitosamente. Si la sede no se encuentra,
+		 * muestra un mensaje al usuario indicando que no se encontró la sede con la
+		 * localidad especificada. Si el usuario no confirma, borra los campos de texto
+		 * de la nueva localidad y el número de empleados.
+		 */
 		case "btnModifSed": {
 			String localidadAModificar = vsed.getLocalidadModificar().getText();
 			String nuevaLocalidad = vsed.getLocalidadSede().getText();
@@ -392,6 +539,30 @@ public class Controller implements ActionListener {
 			}
 			break;
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnModifPresupuesto" que se activa
+		 * cuando el usuario intenta modificar los presupuestos de los juegos.
+		 * 
+		 * Primero, verifica si todos los campos de texto del presupuesto están vacíos.
+		 * Si es así, muestra un mensaje al usuario para que complete todos los campos.
+		 * 
+		 * Luego, intenta parsear cada presupuesto ingresado a un número double. Si
+		 * alguno de los presupuestos no es un número válido (por ejemplo, si el usuario
+		 * ingresó texto en lugar de números), muestra un mensaje de error y termina el
+		 * bucle.
+		 * 
+		 * Si todos los presupuestos son números válidos, carga las propiedades de la
+		 * casa de apuestas y calcula la suma de todos los presupuestos.
+		 * 
+		 * Si la suma de los presupuestos es menor o igual al presupuesto total de la
+		 * casa de apuestas, actualiza los presupuestos de los juegos.
+		 * 
+		 * Luego, muestra un cuadro de diálogo de confirmación al usuario para verificar
+		 * si los datos ingresados son correctos. Si el usuario confirma, muestra un
+		 * mensaje de que los datos fueron ingresados y cambia la visibilidad de las
+		 * ventanas. Si el usuario no confirma, borra todos los campos de texto del
+		 * presupuesto.
+		 */
 		case "btnModifPresupuesto": {
 			if (vpre.getBalotoPresupuesto().getText().isBlank() && vpre.getBetplayPresupuesto().getText().isBlank()
 					&& vpre.getSuperastroPresupuesto().getText().isBlank()
@@ -465,6 +636,28 @@ public class Controller implements ActionListener {
 
 			break;
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnnModifCasa" que se activa cuando el
+		 * usuario intenta modificar la casa de apuestas.
+		 * 
+		 * Primero, verifica si los campos de texto del nombre, la cantidad de sedes y
+		 * el presupuesto total están vacíos. Si es así, muestra un mensaje al usuario
+		 * para que complete los campos.
+		 * 
+		 * Luego, intenta convertir la cantidad de sedes y el presupuesto total a
+		 * números. Si alguno de ellos no es un número válido o es un número negativo,
+		 * muestra un mensaje de error.
+		 * 
+		 * Si la cantidad de sedes y el presupuesto total son números válidos, muestra
+		 * un cuadro de diálogo de confirmación al usuario para verificar si desea
+		 * modificar la casa de apuestas. Si el usuario confirma, intenta actualizar la
+		 * casa de apuestas con el nuevo nombre, la cantidad de sedes y el presupuesto
+		 * total. Si la casa de apuestas se actualiza exitosamente, muestra un mensaje
+		 * de que los datos fueron ingresados exitosamente. Si ocurre un error al
+		 * procesar los datos, muestra un mensaje de error. Si el usuario no confirma,
+		 * borra los campos de texto del nombre, la cantidad de sedes y el presupuesto
+		 * total.
+		 */
 		case "btnnModifCasa": {
 			String nombre = vcca.getNombreCasaDeApuestas().getText();
 			String cantidadSedes = vcca.getSedesCasaDeApuestas().getText();
@@ -525,22 +718,41 @@ public class Controller implements ActionListener {
 			}
 			break;
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnApos" que se activa cuando el
+		 * usuario intenta ver las apuestas. Cambia la visibilidad de las ventanas.
+		 */
 		case "btnApos": {
 			vsapo.setVisible(true);
 			vms.setVisible(false);
 			break;
 
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnRegresarSeleccion" que se activa
+		 * cuando el usuario intenta regresar a la selección. Cambia la visibilidad de
+		 * las ventanas.
+		 */
 		case "btnRegresarSeleccion": {
 			vms.setVisible(true);
 			vsapo.setVisible(false);
 			break;
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnRegresarMostrar" que se activa
+		 * cuando el usuario intenta regresar a mostrar. Cambia la visibilidad de las
+		 * ventanas.
+		 */
 		case "btnRegresarMostrar": {
 			vms.setVisible(true);
 			vemos.setVisible(false);
 			break;
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnCrearApo" que se activa cuando el
+		 * usuario intenta crear una apuesta. Cambia la visibilidad de las ventanas y
+		 * muestra los botones correspondientes.
+		 */
 		case "btnCrearApo": {
 			vapo.getModificarApostador().setVisible(false);
 			vapo.getIndicacionesModif().setVisible(false);
@@ -549,6 +761,11 @@ public class Controller implements ActionListener {
 			vsapo.setVisible(false);
 			break;
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnModifApostSel" que se activa cuando
+		 * el usuario intenta modificar una apuesta seleccionada. Cambia la visibilidad
+		 * de las ventanas y muestra los botones correspondientes.
+		 */
 		case "btnModifApostSel": {
 			vapo.setVisible(true);
 			vapo.getModificarApostador().setVisible(true);
@@ -560,6 +777,30 @@ public class Controller implements ActionListener {
 			break;
 		}
 
+		/**
+		 * Este caso maneja el evento del botón "btnCrearApos" que se activa cuando el
+		 * usuario intenta crear un apostador.
+		 * 
+		 * Primero, verifica si los campos de texto del nombre, la cédula, la sede, la
+		 * dirección, el celular y el año están vacíos. Si es así, muestra un mensaje al
+		 * usuario para que complete los campos y pregunta si desea seguir actualizando.
+		 * Si el usuario no desea seguir actualizando, cambia la visibilidad de las
+		 * ventanas.
+		 * 
+		 * Luego, verifica si la localidad de la sede existe. Si no existe, muestra un
+		 * mensaje al usuario indicando que no se puede crear en una sede inexistente y
+		 * pregunta si desea seguir actualizando. Si el usuario no desea seguir
+		 * actualizando, cambia la visibilidad de las ventanas.
+		 * 
+		 * Si la localidad de la sede existe, verifica si el año es válido. Si el año
+		 * indica que el cliente es menor de edad o tiene más de 123 años, muestra un
+		 * mensaje de error.
+		 * 
+		 * Si el año es válido, crea el apostador y muestra un mensaje de que el
+		 * apostador fue creado exitosamente. Luego, pregunta si desea seguir creando
+		 * apostadores. Si el usuario no desea seguir creando apostadores, cambia la
+		 * visibilidad de las ventanas.
+		 */
 		case "btnCrearApos": {
 			String nombre = vapo.getCampoNombre().getText();
 			String cedula = vapo.getCampoCedula().getText();
@@ -614,6 +855,35 @@ public class Controller implements ActionListener {
 
 		}
 
+		/**
+		 * Este caso maneja el evento del botón "btnModifApos" que se activa cuando el
+		 * usuario intenta modificar un apostador.
+		 * 
+		 * Primero, verifica si los campos de texto del nombre, la cédula, la sede, la
+		 * dirección, el celular, el año y el campo de modificación están vacíos. Si es
+		 * así, muestra un mensaje al usuario para que complete los campos y pregunta si
+		 * desea seguir actualizando. Si el usuario no desea seguir actualizando o si el
+		 * año indica que el cliente es menor de edad, cambia la visibilidad de las
+		 * ventanas.
+		 * 
+		 * Luego, verifica si la localidad de la sede existe. Si no existe, muestra un
+		 * mensaje al usuario indicando que no se puede actualizar en una sede
+		 * inexistente y pregunta si desea seguir actualizando. Si el usuario no desea
+		 * seguir actualizando, cambia la visibilidad de las ventanas.
+		 * 
+		 * Si la localidad de la sede existe, verifica si el año es válido. Si el año
+		 * indica que el cliente es menor de edad o tiene más de 123 años, muestra un
+		 * mensaje de error.
+		 * 
+		 * Si el año es válido, obtiene el apostador en el índice especificado. Si el
+		 * índice es válido, muestra un cuadro de diálogo de confirmación al usuario
+		 * para verificar si desea cambiar el apostador. Si el usuario confirma,
+		 * actualiza el apostador con el nuevo nombre, la cédula, la sede, la dirección,
+		 * el celular y el año, y muestra un mensaje de que el apostador fue actualizado
+		 * exitosamente. Si el usuario no confirma, muestra un mensaje de que la
+		 * operación fue cancelada por el usuario. Si el índice no es válido, muestra un
+		 * mensaje al usuario indicando que la posición del apostador es inválida.
+		 */
 		case "btnModifApos": {
 			String nombre = vapo.getCampoNombre().getText();
 			String cedula = vapo.getCampoCedula().getText();
@@ -697,11 +967,28 @@ public class Controller implements ActionListener {
 				break;
 			}
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnSelElim" que se activa cuando el
+		 * usuario intenta seleccionar un apostador para eliminar. Cambia la visibilidad
+		 * de las ventanas.
+		 */
 		case "btnSelElim": {
 			velimApos.setVisible(true);
 			vsapo.setVisible(false);
 			break;
 		}
+
+		/**
+		 * Este caso maneja el evento del botón "btnELimApost" que se activa cuando el
+		 * usuario intenta eliminar un apostador.
+		 * 
+		 * Primero, obtiene el apostador en el índice especificado. Si el índice es
+		 * válido, muestra un cuadro de diálogo de confirmación al usuario para
+		 * verificar si desea eliminar el apostador. Si el usuario confirma, elimina el
+		 * apostador y muestra un mensaje de que el apostador fue eliminado
+		 * exitosamente. Si el usuario no confirma, muestra un mensaje de que la
+		 * operación fue cancelada por el usuario.
+		 */
 		case "btnELimApost": {
 			String index = velimApos.getIndex().getText();
 			int index1 = Integer.parseInt(index);
@@ -736,25 +1023,55 @@ public class Controller implements ActionListener {
 			}
 			break;
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnSelMostrar" que se activa cuando el
+		 * usuario intenta seleccionar para mostrar. Cambia la visibilidad de las
+		 * ventanas.
+		 */
 		case "btnSelMostrar": {
 			vsapo.setVisible(true);
 			vemos.setVisible(true);
 			break;
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnMostrar" que se activa cuando el
+		 * usuario intenta mostrar los apostadores. Muestra los apostadores en el área
+		 * de texto de salida.
+		 */
 		case "btnMostrar": {
 			vemos.getSalidaTos().setText(apostDao.read());
 			break;
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnApues" que se activa cuando el
+		 * usuario intenta ver las apuestas. Cambia la visibilidad de las ventanas.
+		 */
 		case "btnApues": {
 			vapu.setVisible(true);
 			vms.setVisible(false);
 			break;
 		}
+		/**
+		 * Este caso maneja el evento del botón "vapuReg" que se activa cuando el
+		 * usuario intenta regresar. Cambia la visibilidad de las ventanas.
+		 */
 		case "vapuReg": {
 			vms.setVisible(true);
 			vapu.setVisible(false);
 			break;
 		}
+		/**
+		 * Este caso maneja el evento del botón "btnSuper" que se activa cuando el
+		 * usuario intenta crear o modificar una apuesta.
+		 * 
+		 * Primero, muestra un cuadro de diálogo de confirmación al usuario para
+		 * verificar si desea crear una apuesta. Si el usuario confirma, cambia la
+		 * visibilidad de las ventanas y muestra los botones correspondientes.
+		 * 
+		 * Si el usuario no confirma, muestra otro cuadro de diálogo de confirmación
+		 * para verificar si desea modificar una apuesta. Si el usuario confirma, cambia
+		 * la visibilidad de las ventanas y muestra los botones correspondientes.
+		 */
 		case "btnSuper": {
 			int confirmacion = JOptionPane.showConfirmDialog(vapu, " ¿Desea Crear una Apuesta  ?", "Confirmación",
 					JOptionPane.YES_NO_OPTION);
@@ -778,6 +1095,10 @@ public class Controller implements ActionListener {
 			}
 		}
 
+		/**
+		 * Este caso maneja el evento del botón "btnChance" que se activa cuando el
+		 * usuario intenta ver las posibilidades. Cambia la visibilidad de las ventanas.
+		 */
 		case "btnChance": {
 			veChan.setVisible(true);
 			vapu.setVisible(false);

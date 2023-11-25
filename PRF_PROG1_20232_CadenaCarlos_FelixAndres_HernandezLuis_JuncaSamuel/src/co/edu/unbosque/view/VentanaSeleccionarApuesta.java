@@ -9,12 +9,41 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/**
+ * VentanaSeleccionarApuesta es una subclase de JFrame que representa una
+ * ventana de selección de apuestas en la aplicación. Esta clase se encarga de
+ * inicializar y configurar la ventana de selección de apuestas, incluyendo su
+ * tamaño, posición, diseño, y operación de cierre. También se encarga de la
+ * creación y configuración de varios botones que representan diferentes tipos
+ * de apuestas que un usuario puede realizar.
+ */
 public class VentanaSeleccionarApuesta extends JFrame {
 
+	/**
+	 * serialVersionUID es un identificador de versión para la serialización. Este
+	 * identificador se utiliza durante la deserialización para verificar que el
+	 * emisor y el receptor de un objeto serializado mantienen una compatibilidad de
+	 * versión.
+	 */
 	private static final long serialVersionUID = -6566342782896788402L;
+	/**
+	 * betPlay, superastro, loteria, chance, baloto son JButton que representan
+	 * diferentes tipos de apuestas que un usuario puede realizar.
+	 */
 	private JButton betPlay, superastro, loteria, chance, baloto, regresar;
+	/**
+	 * indicacionApuesta es un JLabel que proporciona instrucciones al usuario sobre
+	 * cómo realizar una apuesta.
+	 */
 	private JLabel indicacionApuesta, fondo;
 
+	/**
+	 * Constructor de VentanaSeleccionarApuesta. Inicializa los componentes de la
+	 * ventana y establece sus propiedades. El constructor se encarga de crear los
+	 * objetos para los botones y el JLabel de indicación de apuesta, y configurar
+	 * sus propiedades. También configura las propiedades de la ventana, como su
+	 * tamaño, posición, diseño y operación de cierre.
+	 */
 	public VentanaSeleccionarApuesta() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);
@@ -163,6 +192,5 @@ public class VentanaSeleccionarApuesta extends JFrame {
 	public void setRegresar(JButton regresar) {
 		this.regresar = regresar;
 	}
-	
 
 }

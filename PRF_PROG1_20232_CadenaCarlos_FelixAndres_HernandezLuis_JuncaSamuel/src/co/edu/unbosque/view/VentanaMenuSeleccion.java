@@ -7,11 +7,32 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+/**
+ * Esta clase representa una ventana de menú de selección en la interfaz
+ * gráfica. Extiende a JFrame, por lo que hereda todos los métodos y atributos
+ * de un JFrame.
+ */
 public class VentanaMenuSeleccion extends JFrame {
+	/**
+	 * serialVersionUID es un identificador de versión para la serialización. Es
+	 * necesario para garantizar que durante la deserialización el cargador de
+	 * clases cargue la misma clase que fue serializada.
+	 */
 	private static final long serialVersionUID = 3739897725046173250L;
+	/**
+	 * Los siguientes son etiquetas para mostrar el fondo y el logo.
+	 */
 	private JLabel fondo, logo;
+	/**
+	 * Los siguientes son botones para realizar acciones como seleccionar
+	 * parámetros, apostador, consultas, salir y apostar.
+	 */
 	private JButton botonParametros, botonApostador, botonConsultas, botonSalir, botonApostar;
 
+	/**
+	 * Este es el constructor de la clase VentanaMenuSeleccion. Inicializa la
+	 * ventana y todos sus componentes.
+	 */
 	public VentanaMenuSeleccion() {
 
 		setBounds(150, 0, 1280, 720);
@@ -142,6 +163,5 @@ public class VentanaMenuSeleccion extends JFrame {
 	public void setBotonApostar(JButton botonApostar) {
 		this.botonApostar = botonApostar;
 	}
-	
 
 }

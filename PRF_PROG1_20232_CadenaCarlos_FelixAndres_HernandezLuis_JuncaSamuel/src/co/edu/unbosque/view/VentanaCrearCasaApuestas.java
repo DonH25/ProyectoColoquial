@@ -9,16 +9,43 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * Esta clase representa una ventana para crear una casa de apuestas en la
+ * interfaz gráfica. Extiende a JFrame, por lo que hereda todos los métodos y
+ * atributos de un JFrame.
+ */
 public class VentanaCrearCasaApuestas extends JFrame {
+	/**
+	 * serialVersionUID es un identificador de versión para la serialización. Es
+	 * necesario para garantizar que durante la deserialización el cargador de
+	 * clases cargue la misma clase que fue serializada.
+	 */
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -97942622027646067L;
+
+	/**
+	 * Los siguientes son campos de texto para recoger la entrada del usuario.
+	 */
 	private JButton botonRegistrarCasa, botonModificarCasa;
+	/**
+	 * Los siguientes son campos de texto para recoger la entrada del usuario.
+	 */
 	private JTextField nombreCasaDeApuestas, sedesCasaDeApuestas, presupuestoCasaDeApuestas;
+
+	/**
+	 * Los siguientes son etiquetas para indicar al usuario qué información se debe
+	 * ingresar en los campos de texto correspondientes.
+	 */
+
 	private JLabel indicacionesCasaApuestas, indicacionesSedes, indicacionesPresupuesto, textoIndicaciones1,
 			textoIndicaciones2, textoIndicaciones3, textoIndicaciones4, fondo;
 
+	/**
+	 * Este es el constructor de la clase VentanaCrearCasaApuestas. Inicializa la
+	 * ventana y todos sus componentes.
+	 */
 	public VentanaCrearCasaApuestas() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);
