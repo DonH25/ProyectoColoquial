@@ -1160,7 +1160,8 @@ public class Controller implements ActionListener {
 										|| zod.equalsIgnoreCase("libra") || zod.equalsIgnoreCase("escorpio")
 										|| zod.equalsIgnoreCase("sagitario") || zod.equalsIgnoreCase("capricornio")
 										|| zod.equalsIgnoreCase("acuario") || zod.equalsIgnoreCase("piscis")) {
-									// Todas las validaciones pasaron, puedes proceder con la apuesta
+									// Todas ty7ytfyguihvhbjkkbjvhbjknlbjjknñlas validaciones pasaron, puedes
+									// proceder con la apuesta
 									superDao.create(dig1, dig2, dig3, dig4, val, zod, cedul, sed, dia);
 									JOptionPane.showMessageDialog(veSup,
 											apostadorExistente.getNombre() + " Apostó Exitosamente en Superastro");
