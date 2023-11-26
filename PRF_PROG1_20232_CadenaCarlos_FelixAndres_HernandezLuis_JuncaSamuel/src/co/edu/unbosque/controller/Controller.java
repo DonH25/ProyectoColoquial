@@ -1138,7 +1138,13 @@ public class Controller implements ActionListener {
 			String dig3 = veSup.getCampoDig3().getText();
 			String dig4 = veSup.getCampoDig4().getText();
 			if (!(dig1 == "0") || !(dig1 == "1") || !(dig1 == "2") || !(dig1 == "3") || !(dig1 == "4") || !(dig1 == "5")
-					|| !(dig1 == "6") || !(dig1 == "7") || !(dig1 == "8") || !(dig1 == "9")) {
+					|| !(dig1 == "6") || !(dig1 == "7") || !(dig1 == "8") || !(dig1 == "9") || !(dig2 == "0")
+					|| !(dig2 == "1") || !(dig2 == "2") || !(dig2 == "3") || !(dig2 == "4") || !(dig2 == "5")
+					|| !(dig2 == "6") || !(dig2 == "7") || !(dig2 == "8") || !(dig2 == "9") || !(dig3 == "0")
+					|| !(dig3 == "1") || !(dig3 == "2") || !(dig3 == "3") || !(dig3 == "4") || !(dig3 == "5")
+					|| !(dig3 == "6") || !(dig3 == "7") || !(dig3 == "8") || !(dig3 == "9") || !(dig4 == "0")
+					|| !(dig4 == "1") || !(dig4 == "2") || !(dig4 == "3") || !(dig4 == "4") || !(dig4 == "5")
+					|| !(dig4 == "6") || !(dig4 == "7") || !(dig4 == "8") || !(dig4 == "9")) {
 				JOptionPane.showMessageDialog(veSup, "inserte digitos del 0 al 9");
 			} else {
 				String zod = veSup.getCampoZodiac().getText();
@@ -1230,7 +1236,13 @@ public class Controller implements ActionListener {
 			String dig3 = veChan.getCampoDig3().getText();
 			String dig4 = veChan.getCampoDig4().getText();
 			if (!(dig1 == "0") || !(dig1 == "1") || !(dig1 == "2") || !(dig1 == "3") || !(dig1 == "4") || !(dig1 == "5")
-					|| !(dig1 == "6") || !(dig1 == "7") || !(dig1 == "8") || !(dig1 == "9")) {
+					|| !(dig1 == "6") || !(dig1 == "7") || !(dig1 == "8") || !(dig1 == "9") || !(dig2 == "0")
+					|| !(dig2 == "1") || !(dig2 == "2") || !(dig2 == "3") || !(dig2 == "4") || !(dig2 == "5")
+					|| !(dig2 == "6") || !(dig2 == "7") || !(dig2 == "8") || !(dig2 == "9") || !(dig3 == "0")
+					|| !(dig3 == "1") || !(dig3 == "2") || !(dig3 == "3") || !(dig3 == "4") || !(dig3 == "5")
+					|| !(dig3 == "6") || !(dig3 == "7") || !(dig3 == "8") || !(dig3 == "9") || !(dig4 == "0")
+					|| !(dig4 == "1") || !(dig4 == "2") || !(dig4 == "3") || !(dig4 == "4") || !(dig4 == "5")
+					|| !(dig4 == "6") || !(dig4 == "7") || !(dig4 == "8") || !(dig4 == "9")) {
 				JOptionPane.showMessageDialog(veChan, "inserte digitos del 0 al 9");
 			} else {
 				String lot = veChan.getCampoLote().getText();
@@ -1314,7 +1326,13 @@ public class Controller implements ActionListener {
 			String dig3 = veLo.getCampoDig3().getText();
 			String dig4 = veLo.getCampoDig4().getText();
 			if (!(dig1 == "0") || !(dig1 == "1") || !(dig1 == "2") || !(dig1 == "3") || !(dig1 == "4") || !(dig1 == "5")
-					|| !(dig1 == "6") || !(dig1 == "7") || !(dig1 == "8") || !(dig1 == "9")) {
+					|| !(dig1 == "6") || !(dig1 == "7") || !(dig1 == "8") || !(dig1 == "9") || !(dig2 == "0")
+					|| !(dig2 == "1") || !(dig2 == "2") || !(dig2 == "3") || !(dig2 == "4") || !(dig2 == "5")
+					|| !(dig2 == "6") || !(dig2 == "7") || !(dig2 == "8") || !(dig2 == "9") || !(dig3 == "0")
+					|| !(dig3 == "1") || !(dig3 == "2") || !(dig3 == "3") || !(dig3 == "4") || !(dig3 == "5")
+					|| !(dig3 == "6") || !(dig3 == "7") || !(dig3 == "8") || !(dig3 == "9") || !(dig4 == "0")
+					|| !(dig4 == "1") || !(dig4 == "2") || !(dig4 == "3") || !(dig4 == "4") || !(dig4 == "5")
+					|| !(dig4 == "6") || !(dig4 == "7") || !(dig4 == "8") || !(dig4 == "9")) {
 				JOptionPane.showMessageDialog(veLo, "inserte digitos del 0 al 9");
 			} else {
 				String ser1 = veLo.getCampoSerie1().getText();
