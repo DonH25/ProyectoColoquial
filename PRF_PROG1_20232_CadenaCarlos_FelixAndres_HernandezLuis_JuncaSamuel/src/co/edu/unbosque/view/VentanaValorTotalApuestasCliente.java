@@ -9,24 +9,23 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
-public class VentanaApuestaPorCliente extends JFrame {
+public class VentanaValorTotalApuestasCliente extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3499359286690579416L;
+	private static final long serialVersionUID = -8821928114768097884L;
 	private JLabel fondo, indicacionCampo;
 	private JTextArea campoConsulta;
 	private JScrollPane scroll;
-	private JButton consultarPorCliente;
+	private JButton consultarTotal;
 
-	public VentanaApuestaPorCliente() {
+	public VentanaValorTotalApuestasCliente() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		indicacionCampo = new JLabel("Aca Abajo se mostrara la consulta del usuario Seleccionado");
+		indicacionCampo = new JLabel("Aca Abajo se mostrara la consulta de los clientes ");
 		indicacionCampo.setBounds(300, 270, 300, 20);
 		indicacionCampo.setForeground(Color.white);
 		campoConsulta = new JTextArea();
@@ -43,18 +42,18 @@ public class VentanaApuestaPorCliente extends JFrame {
 		imagen1 = new ImageIcon(temp1.getScaledInstance(1280, 720, Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen1);
 
-		consultarPorCliente = new JButton();
-		consultarPorCliente.setBounds(1000, 50, 200, 200);
+		consultarTotal = new JButton();
+		consultarTotal.setBounds(1000, 50, 200, 200);
 		Image temp11;
-		temp11 = new ImageIcon("src/imagenes/consultarPorSede.png").getImage();
+		temp11 = new ImageIcon("src/imagenes/totalPorCliente.png").getImage();
 		ImageIcon imagen11;
 		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
-		consultarPorCliente.setIcon(imagen11);
+		consultarTotal.setIcon(imagen11);
 
 		add(indicacionCampo);
 
 		add(scroll);
-		add(consultarPorCliente);
+		add(consultarTotal);
 
 		add(fondo);
 
@@ -92,19 +91,18 @@ public class VentanaApuestaPorCliente extends JFrame {
 		this.scroll = scroll;
 	}
 
-	
-
-	public JButton getConsultarPorCliente() {
-		return consultarPorCliente;
+	public JButton getConsultarTotal() {
+		return consultarTotal;
 	}
 
-	public void setConsultarPorCliente(JButton consultarPorCliente) {
-		this.consultarPorCliente = consultarPorCliente;
+	public void setConsultarTotal(JButton consultarTotal) {
+		this.consultarTotal = consultarTotal;
 	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
 
+	
+	
 }

@@ -11,7 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class VentanaApuestaPorCliente extends JFrame {
+public class VentanaClienteSede extends JFrame {
 	/**
 	 * 
 	 */
@@ -19,9 +19,9 @@ public class VentanaApuestaPorCliente extends JFrame {
 	private JLabel fondo, indicacionCampo;
 	private JTextArea campoConsulta;
 	private JScrollPane scroll;
-	private JButton consultarPorCliente;
+	private JButton consultarPorCliente, consultarPorSede;
 
-	public VentanaApuestaPorCliente() {
+	public VentanaClienteSede() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -46,15 +46,26 @@ public class VentanaApuestaPorCliente extends JFrame {
 		consultarPorCliente = new JButton();
 		consultarPorCliente.setBounds(1000, 50, 200, 200);
 		Image temp11;
-		temp11 = new ImageIcon("src/imagenes/consultarPorSede.png").getImage();
+		temp11 = new ImageIcon("src/imagenes/consultarPorCliente.png").getImage();
 		ImageIcon imagen11;
 		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		consultarPorCliente.setIcon(imagen11);
+		consultarPorCliente.setVisible(false);
+
+		consultarPorSede = new JButton();
+		consultarPorSede.setBounds(1000, 50, 200, 200);
+		Image temp111;
+		temp111 = new ImageIcon("src/imagenes/consultarPorSedee.png").getImage();
+		ImageIcon imagen111;
+		imagen111 = new ImageIcon(temp111.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+		consultarPorSede.setIcon(imagen111);
+		consultarPorSede.setVisible(false);
 
 		add(indicacionCampo);
 
 		add(scroll);
 		add(consultarPorCliente);
+		add(consultarPorSede);
 
 		add(fondo);
 
@@ -102,9 +113,16 @@ public class VentanaApuestaPorCliente extends JFrame {
 		this.consultarPorCliente = consultarPorCliente;
 	}
 
+	public JButton getConsultarPorSede() {
+		return consultarPorSede;
+	}
+
+	public void setConsultarPorSede(JButton consultarPorSede) {
+		this.consultarPorSede = consultarPorSede;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
 
 }

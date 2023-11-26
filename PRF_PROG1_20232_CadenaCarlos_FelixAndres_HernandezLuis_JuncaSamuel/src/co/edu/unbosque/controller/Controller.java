@@ -38,6 +38,7 @@ import co.edu.unbosque.view.VentanaApuestaPorCliente;
 import co.edu.unbosque.view.VentanaBaloto;
 import co.edu.unbosque.view.VentanaBetPlay;
 import co.edu.unbosque.view.VentanaChance;
+import co.edu.unbosque.view.VentanaClienteSede;
 import co.edu.unbosque.view.VentanaCrearCasaApuestas;
 import co.edu.unbosque.view.VentanaCrearSedes;
 import co.edu.unbosque.view.VentanaDeConsultas;
@@ -50,6 +51,7 @@ import co.edu.unbosque.view.VentanaPrincipal;
 import co.edu.unbosque.view.VentanaSeleccionApostadores;
 import co.edu.unbosque.view.VentanaSeleccionarApuesta;
 import co.edu.unbosque.view.VentanaSuperastro;
+import co.edu.unbosque.view.VentanaValorTotalApuestasCliente;
 
 /**
  * Controller es una clase que implementa ActionListener y se encarga de manejar
@@ -113,6 +115,8 @@ public class Controller implements ActionListener {
 	VentanaBetPlay vet;
 	VentanaDeConsultas veCon;
 	VentanaApuestaPorCliente veConClient;
+	VentanaValorTotalApuestasCliente vetotal;
+	VentanaClienteSede veClienSed;
 
 	/**
 	 * Constructor de Controller. Inicializa los componentes del controlador y
@@ -147,7 +151,9 @@ public class Controller implements ActionListener {
 		valo = new VentanaBaloto();
 		vet = new VentanaBetPlay();
 		veCon = new VentanaDeConsultas();
+		vetotal = new VentanaValorTotalApuestasCliente();
 		veConClient = new VentanaApuestaPorCliente();
+		veClienSed = new VentanaClienteSede();
 		betDao = new BetplayDAO();
 		ruta1 = new File("src/co/edu/unbosque/model/persistence/config.properties");
 		ruta2 = new File("src/co/edu/unbosque/model/persistence/juegos.dat");
@@ -1602,7 +1608,8 @@ public class Controller implements ActionListener {
 			veCon.setVisible(false);
 			break;
 		}
-		case "consulApu": {
+		case "consulApuClien": {
+			veConClient.getCampoConsulta().setText("");
 			ArrayList<ApostadorDTO> apostadores = apostDao.getListOfApostadores();
 			String salida = "";
 			String apostadores1 = "";
@@ -1620,7 +1627,245 @@ public class Controller implements ActionListener {
 			break;
 
 		}
+		case "btnSelTot": {
+			vetotal.setVisible(true);
+			veCon.setVisible(false);
+			break;
 		}
+		case "btnTotal": {
+			double apuesta1 = 0;
+			double apuesta2 = 0;
+			double apuesta3 = 0;
+			double apuesta4 = 0;
+			double apuesta5 = 0;
+			double sum = 0;
+			String salida = "";
+
+			for (int i = 0; i < apostDao.getListOfApostadores().size(); i++) {
+				apuesta1 = 0;
+				apuesta2 = 0;
+				apuesta3 = 0;
+				apuesta4 = 0;
+				apuesta5 = 0;
+				sum = 0;
+				for (int j = 0; j < loteDao.getListOfLoteria().size(); j++) {
+					if (apostDao.getListOfApostadores().get(i).getCedula() == loteDao.getListOfLoteria().get(j)
+							.getNumDeCedula()) {
+
+						apuesta1 += loteDao.getListOfLoteria().get(j).getValorDeLaApuesta();
+
+					}
+				}
+				for (int j = 0; j < chanDao.getListOfChances().size(); j++) {
+					if (apostDao.getListOfApostadores().get(i).getCedula() == chanDao.getListOfChances().get(j)
+							.getNumDeCedula()) {
+
+						apuesta2 += chanDao.getListOfChances().get(j).getValorDeLaApuesta();
+
+					}
+				}
+				for (int j = 0; j < betDao.getListOfBetplays().size(); j++) {
+					if (apostDao.getListOfApostadores().get(i)
+							.equals(betDao.getListOfBetplays().get(j).getNumDeCedula())) {
+
+						apuesta3 += betDao.getListOfBetplays().get(j).getValorDeLaApuesta();
+
+					}
+				}
+				for (int j = 0; j < superDao.getListOfSuperastro().size(); j++) {
+					if (apostDao.getListOfApostadores().get(i).getCedula() == superDao.getListOfSuperastro().get(j)
+							.getNumDeCedula()) {
+
+						apuesta4 += superDao.getListOfSuperastro().get(j).getValorDeLaApuesta();
+
+					}
+				}
+				for (int j = 0; j < balotDao.getListOfBalotos().size(); j++) {
+					if (apostDao.getListOfApostadores().get(i).getCedula() == balotDao.getListOfBalotos().get(j)
+							.getNumDeCedula()) {
+
+						apuesta5 += balotDao.getListOfBalotos().get(j).getValorDeLaApuesta();
+					}
+				}
+
+				sum = apuesta1 + apuesta2 + apuesta3 + apuesta4 + apuesta5;
+				salida += "Apostador " + apostDao.getListOfApostadores().get(i).getCedula() + ": " + sum + "\n";
+				vetotal.getCampoConsulta().setText(salida);
+
+			}
+			break;
+		}
+		case "btnSelClientSede": {
+			int opcion = JOptionPane.showConfirmDialog(veCon, "¿Desea Consultar por Cliente ?", "Confirmación",
+					JOptionPane.YES_NO_OPTION);
+			if (opcion == JOptionPane.YES_OPTION) {
+
+				veClienSed.setVisible(true);
+				veCon.setVisible(false);
+				veClienSed.getConsultarPorSede().setVisible(false);
+				veClienSed.getConsultarPorCliente().setVisible(true);
+				veClienSed.getCampoConsulta().setText("");
+
+				break;
+
+			} else {
+				int opcion1 = JOptionPane.showConfirmDialog(veCon, "¿Desea Consultar por Sede?", "Confirmación",
+						JOptionPane.YES_NO_OPTION);
+				if (opcion1 == JOptionPane.YES_OPTION) {
+
+					veClienSed.setVisible(true);
+					veCon.setVisible(false);
+					veClienSed.getConsultarPorSede().setVisible(true);
+					veClienSed.getConsultarPorCliente().setVisible(false);
+					veClienSed.getCampoConsulta().setText("");
+					break;
+				} else {
+
+					JOptionPane.showMessageDialog(veCon, "No se consulto nada");
+					break;
+
+				}
+			}
+		}
+		case "btnSedConsul": {
+			String salida = "";
+			String apuestas = "";
+			String apuesta1 = "";
+			String apuesta2 = "";
+			String apuesta3 = "";
+			String apuesta4 = "";
+			String apuesta5 = "";
+
+			for (int i = 0; i < sedeDao.getListOfSedes().size(); i++) {
+				apuesta1 = "";
+				apuesta2 = "";
+				apuesta3 = "";
+				apuesta4 = "";
+				apuesta5 = "";
+				apuestas = "";
+				for (int j = 0; j < loteDao.getListOfLoteria().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equalsIgnoreCase(loteDao.getListOfLoteria().get(j).getNameSede())) {
+
+						apuesta1 = apuesta1.concat(loteDao.getListOfLoteria().get(j).toString());
+
+					}
+				}
+
+				for (int j = 0; j < balotDao.getListOfBalotos().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equalsIgnoreCase(balotDao.getListOfBalotos().get(j).getNameSede())) {
+
+						apuesta2 = apuesta2.concat(balotDao.getListOfBalotos().get(j).toString());
+
+					}
+				}
+				for (int j = 0; j < superDao.getListOfSuperastro().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equalsIgnoreCase(superDao.getListOfSuperastro().get(j).getNameSede())) {
+
+						apuesta3 = apuesta3.concat(superDao.getListOfSuperastro().get(j).toString());
+
+					}
+				}
+
+				for (int j = 0; j < betDao.getListOfBetplays().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equalsIgnoreCase(betDao.getListOfBetplays().get(j).getNameSede())) {
+
+						apuesta4 = apuesta4.concat(betDao.getListOfBetplays().get(j).toString());
+
+					}
+				}
+				for (int j = 0; j < chanDao.getListOfChances().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equalsIgnoreCase(chanDao.getListOfChances().get(j).getNameSede())) {
+
+						apuesta5 = apuesta5.concat(chanDao.getListOfChances().get(j).toString());
+
+					}
+				}
+				apuestas = "\n" + "Loteria: " + "\n" + apuesta1 + "\n" + "\n" + "Baloto: " + "\n" + apuesta2 + "\n"
+						+ "Superastro: " + "\n" + apuesta3 + "\n" + "Betplay: " + "\n" + apuesta4 + "\n" + "Chance: "
+						+ "\n" + apuesta5 + "\n";
+
+				salida = salida.concat(sedeDao.getListOfSedes().get(i).getLocalidad() + ": " + "\n" + apuestas + "\n");
+
+			}
+			String compl = apuestas + salida;
+			veClienSed.getCampoConsulta().setText(compl);
+			break;
+		}
+		case "btnClientConsul": {
+			String salida = "";
+			String apuestas = "";
+			String apuesta1 = "";
+			String apuesta2 = "";
+			String apuesta3 = "";
+			String apuesta4 = "";
+			String apuesta5 = "";
+
+			for (int i = 0; i < apostDao.getListOfApostadores().size(); i++) {
+				apuesta1 = "";
+				apuesta2 = "";
+				apuesta3 = "";
+				apuesta4 = "";
+				apuesta5 = "";
+				apuestas = "";
+				for (int j = 0; j < loteDao.getListOfLoteria().size(); j++) {
+					if (apostDao.getListOfApostadores().get(i).getCedula() == loteDao.getListOfLoteria().get(j)
+							.getNumDeCedula()) {
+
+						apuesta1 = apuesta1.concat(loteDao.getListOfLoteria().get(j).toString());
+
+					}
+				}
+				for (int j = 0; j < superDao.getListOfSuperastro().size(); j++) {
+					if (apostDao.getListOfApostadores().get(i).getCedula() == superDao.getListOfSuperastro().get(j)
+							.getNumDeCedula()) {
+
+						apuesta2 = apuesta2.concat(superDao.getListOfSuperastro().get(j).toString());
+
+					}
+				}
+
+				for (int j = 0; j < betDao.getListOfBetplays().size(); j++) {
+					if (apostDao.getListOfApostadores().get(i).getCedula() == betDao.getListOfBetplays().get(j)
+							.getNumDeCedula()) {
+
+						apuesta3 = apuesta3.concat(betDao.getListOfBetplays().get(j).toString() + "\n");
+
+					}
+				}
+				for (int j = 0; j < balotDao.getListOfBalotos().size(); j++) {
+					if (apostDao.getListOfApostadores().get(i).getCedula() == balotDao.getListOfBalotos().get(j)
+							.getNumDeCedula()) {
+
+						apuesta4 = apuesta4.concat(balotDao.getListOfBalotos().get(j).toString());
+
+					}
+				}
+				for (int j = 0; j < chanDao.getListOfChances().size(); j++) {
+					if (apostDao.getListOfApostadores().get(i).getCedula() == chanDao.getListOfChances().get(j)
+							.getNumDeCedula()) {
+
+						apuesta5 = apuesta5.concat(chanDao.getListOfChances().get(j).toString());
+
+					}
+				}
+				apuestas = "Loteria: " + "\n" + apuesta1 + "\n" + "Baloto: " + "\n" + apuesta2 + "\n" + "Superastro: "
+						+ "\n" + apuesta3 + "\n" + "Betplay: " + "\n" + apuesta4 + "\n" + "Chance: " + "\n" + apuesta5;
+
+				salida = salida
+						.concat(apostDao.getListOfApostadores().get(i).getCedula() + ": " + "\n" + apuestas + "\n");
+			}
+			String compl = apuestas + salida;
+			veClienSed.getCampoConsulta().setText(compl);
+			break;
+		}
+
+		}
+
 	}
 
 	// Método para revisar que el número de sedes esté entre 1 y 10
@@ -1714,10 +1959,19 @@ public class Controller implements ActionListener {
 		vet.getApost().setActionCommand("btnBetApost");
 		veCon.getApuestasPorCliente().addActionListener(this);
 		veCon.getApuestasPorCliente().setActionCommand("selConsulApu");
+		veCon.getValorTotalapuestasCliente().addActionListener(this);
+		veCon.getValorTotalapuestasCliente().setActionCommand("btnSelTot");
+		veCon.getClientesSede().addActionListener(this);
+		veCon.getClientesSede().setActionCommand("btnSelClientSede");
+		veConClient.getConsultarPorCliente().addActionListener(this);
+		veConClient.getConsultarPorCliente().setActionCommand("consulApuClien");
 
-
-		veConClient.getConsultar().addActionListener(this);
-		veConClient.getConsultar().setActionCommand("consulApu");
+		vetotal.getConsultarTotal().addActionListener(this);
+		vetotal.getConsultarTotal().setActionCommand("btnTotal");
+		veClienSed.getConsultarPorCliente().addActionListener(this);
+		veClienSed.getConsultarPorCliente().setActionCommand("btnClientConsul");
+		veClienSed.getConsultarPorSede().addActionListener(this);
+		veClienSed.getConsultarPorSede().setActionCommand("btnSedConsul");
 
 	}
 
