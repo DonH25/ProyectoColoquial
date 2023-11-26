@@ -1235,14 +1235,17 @@ public class Controller implements ActionListener {
 			String dig2 = veChan.getCampoDig2().getText();
 			String dig3 = veChan.getCampoDig3().getText();
 			String dig4 = veChan.getCampoDig4().getText();
-			if (!(dig1 == "0") || !(dig1 == "1") || !(dig1 == "2") || !(dig1 == "3") || !(dig1 == "4") || !(dig1 == "5")
-					|| !(dig1 == "6") || !(dig1 == "7") || !(dig1 == "8") || !(dig1 == "9") || !(dig2 == "0")
-					|| !(dig2 == "1") || !(dig2 == "2") || !(dig2 == "3") || !(dig2 == "4") || !(dig2 == "5")
-					|| !(dig2 == "6") || !(dig2 == "7") || !(dig2 == "8") || !(dig2 == "9") || !(dig3 == "0")
-					|| !(dig3 == "1") || !(dig3 == "2") || !(dig3 == "3") || !(dig3 == "4") || !(dig3 == "5")
-					|| !(dig3 == "6") || !(dig3 == "7") || !(dig3 == "8") || !(dig3 == "9") || !(dig4 == "0")
-					|| !(dig4 == "1") || !(dig4 == "2") || !(dig4 == "3") || !(dig4 == "4") || !(dig4 == "5")
-					|| !(dig4 == "6") || !(dig4 == "7") || !(dig4 == "8") || !(dig4 == "9")) {
+			if (!(("0".equals(dig1) || "1".equals(dig1) || "2".equals(dig1) || "3".equals(dig1) || "4".equals(dig1)
+					|| "5".equals(dig1) || "6".equals(dig1) || "7".equals(dig1) || "8".equals(dig1) || "9".equals(dig1))
+					&& ("0".equals(dig2) || "1".equals(dig2) || "2".equals(dig2) || "3".equals(dig2) || "4".equals(dig2)
+							|| "5".equals(dig2) || "6".equals(dig2) || "7".equals(dig2) || "8".equals(dig2)
+							|| "9".equals(dig2))
+					&& ("0".equals(dig3) || "1".equals(dig3) || "2".equals(dig3) || "3".equals(dig3) || "4".equals(dig3)
+							|| "5".equals(dig3) || "6".equals(dig3) || "7".equals(dig3) || "8".equals(dig3)
+							|| "9".equals(dig3))
+					&& ("0".equals(dig4) || "1".equals(dig4) || "2".equals(dig4) || "3".equals(dig4) || "4".equals(dig4)
+							|| "5".equals(dig4) || "6".equals(dig4) || "7".equals(dig4) || "8".equals(dig4)
+							|| "9".equals(dig4)))) {
 				JOptionPane.showMessageDialog(veChan, "inserte digitos del 0 al 9");
 			} else {
 				String lot = veChan.getCampoLote().getText();
@@ -1325,14 +1328,18 @@ public class Controller implements ActionListener {
 			String dig2 = veLo.getCampoDig2().getText();
 			String dig3 = veLo.getCampoDig3().getText();
 			String dig4 = veLo.getCampoDig4().getText();
-			if (!(dig1 == "0") || !(dig1 == "1") || !(dig1 == "2") || !(dig1 == "3") || !(dig1 == "4") || !(dig1 == "5")
-					|| !(dig1 == "6") || !(dig1 == "7") || !(dig1 == "8") || !(dig1 == "9") || !(dig2 == "0")
-					|| !(dig2 == "1") || !(dig2 == "2") || !(dig2 == "3") || !(dig2 == "4") || !(dig2 == "5")
-					|| !(dig2 == "6") || !(dig2 == "7") || !(dig2 == "8") || !(dig2 == "9") || !(dig3 == "0")
-					|| !(dig3 == "1") || !(dig3 == "2") || !(dig3 == "3") || !(dig3 == "4") || !(dig3 == "5")
-					|| !(dig3 == "6") || !(dig3 == "7") || !(dig3 == "8") || !(dig3 == "9") || !(dig4 == "0")
-					|| !(dig4 == "1") || !(dig4 == "2") || !(dig4 == "3") || !(dig4 == "4") || !(dig4 == "5")
-					|| !(dig4 == "6") || !(dig4 == "7") || !(dig4 == "8") || !(dig4 == "9")) {
+			if (!(("0".equals(dig1) || "1".equals(dig1) || "2".equals(dig1) || "3".equals(dig1) || "4".equals(dig1)
+					|| "5".equals(dig1) || "6".equals(dig1) || "7".equals(dig1) || "8".equals(dig1) || "9".equals(dig1))
+					&& ("0".equals(dig2) || "1".equals(dig2) || "2".equals(dig2) || "3".equals(dig2) || "4".equals(dig2)
+							|| "5".equals(dig2) || "6".equals(dig2) || "7".equals(dig2) || "8".equals(dig2)
+							|| "9".equals(dig2))
+					&& ("0".equals(dig3) || "1".equals(dig3) || "2".equals(dig3) || "3".equals(dig3) || "4".equals(dig3)
+							|| "5".equals(dig3) || "6".equals(dig3) || "7".equals(dig3) || "8".equals(dig3)
+							|| "9".equals(dig3))
+					&& ("0".equals(dig4) || "1".equals(dig4) || "2".equals(dig4) || "3".equals(dig4) || "4".equals(dig4)
+							|| "5".equals(dig4) || "6".equals(dig4) || "7".equals(dig4) || "8".equals(dig4)
+							|| "9".equals(dig4)))) {
+
 				JOptionPane.showMessageDialog(veLo, "inserte digitos del 0 al 9");
 			} else {
 				String ser1 = veLo.getCampoSerie1().getText();
