@@ -10,22 +10,22 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class VentanaValorTotalApuestasCliente extends JFrame {
+public class VentanaTipoSede extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8821928114768097884L;
+	private static final long serialVersionUID = 3499359286690579416L;
 	private JLabel fondo, indicacionCampo;
 	private JTextArea campoConsulta;
 	private JScrollPane scroll;
-	private JButton consultarTotal, regresar;
+	private JButton consultarPorTipoSede, regresar;
 
-	public VentanaValorTotalApuestasCliente() {
+	public VentanaTipoSede() {
 		setBounds(150, 0, 1280, 720);
 		setLayout(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		indicacionCampo = new JLabel("Aca Abajo se mostrara la consulta de los clientes ");
+		indicacionCampo = new JLabel("Aca Abajo se mostrara la consulta del usuario Seleccionado");
 		indicacionCampo.setBounds(300, 270, 300, 20);
 		indicacionCampo.setForeground(Color.white);
 		campoConsulta = new JTextArea();
@@ -42,21 +42,21 @@ public class VentanaValorTotalApuestasCliente extends JFrame {
 		imagen1 = new ImageIcon(temp1.getScaledInstance(1280, 720, Image.SCALE_SMOOTH));
 		fondo.setIcon(imagen1);
 
-		consultarTotal = new JButton();
-		consultarTotal.setBounds(1000, 50, 200, 200);
+		consultarPorTipoSede = new JButton();
+		consultarPorTipoSede.setBounds(1000, 50, 200, 200);
 		Image temp11;
-		temp11 = new ImageIcon("src/imagenes/totalPorCliente.png").getImage();
+		temp11 = new ImageIcon("src/imagenes/consultarPorSede.png").getImage();
 		ImageIcon imagen11;
 		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
-		consultarTotal.setIcon(imagen11);
+		consultarPorTipoSede.setIcon(imagen11);
 
 		regresar = new JButton();
 		regresar.setBounds(0, 0, 100, 100);
-		Image temp11111;
-		temp11111 = new ImageIcon("src/imagenes/regresar.png").getImage();
-		ImageIcon imagen11111;
-		imagen11111 = new ImageIcon(temp11111.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
-		regresar.setIcon(imagen11111);
+		Image temp111;
+		temp111 = new ImageIcon("src/imagenes/regresar.png").getImage();
+		ImageIcon imagen111;
+		imagen111 = new ImageIcon(temp111.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+		regresar.setIcon(imagen111);
 		regresar.setOpaque(false);
 		regresar.setContentAreaFilled(false);
 		regresar.setBorderPainted(false);
@@ -64,8 +64,7 @@ public class VentanaValorTotalApuestasCliente extends JFrame {
 		add(indicacionCampo);
 
 		add(scroll);
-		add(consultarTotal);
-
+		add(consultarPorTipoSede);
 		add(regresar);
 		add(fondo);
 
@@ -103,16 +102,12 @@ public class VentanaValorTotalApuestasCliente extends JFrame {
 		this.scroll = scroll;
 	}
 
-	public JButton getConsultarTotal() {
-		return consultarTotal;
+	public JButton getConsultarPorTipoSede() {
+		return consultarPorTipoSede;
 	}
 
-	public void setConsultarTotal(JButton consultarTotal) {
-		this.consultarTotal = consultarTotal;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setConsultarPorTipoSede(JButton consultarPorTipoSede) {
+		this.consultarPorTipoSede = consultarPorTipoSede;
 	}
 
 	public JButton getRegresar() {
@@ -123,4 +118,8 @@ public class VentanaValorTotalApuestasCliente extends JFrame {
 		this.regresar = regresar;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 }

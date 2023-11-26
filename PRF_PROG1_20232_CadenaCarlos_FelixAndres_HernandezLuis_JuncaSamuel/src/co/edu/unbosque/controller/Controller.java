@@ -51,6 +51,7 @@ import co.edu.unbosque.view.VentanaPrincipal;
 import co.edu.unbosque.view.VentanaSeleccionApostadores;
 import co.edu.unbosque.view.VentanaSeleccionarApuesta;
 import co.edu.unbosque.view.VentanaSuperastro;
+import co.edu.unbosque.view.VentanaTipoSede;
 import co.edu.unbosque.view.VentanaValorTotalApuestasCliente;
 
 /**
@@ -117,6 +118,7 @@ public class Controller implements ActionListener {
 	VentanaApuestaPorCliente veConClient;
 	VentanaValorTotalApuestasCliente vetotal;
 	VentanaClienteSede veClienSed;
+	VentanaTipoSede vetise;
 
 	/**
 	 * Constructor de Controller. Inicializa los componentes del controlador y
@@ -154,6 +156,7 @@ public class Controller implements ActionListener {
 		vetotal = new VentanaValorTotalApuestasCliente();
 		veConClient = new VentanaApuestaPorCliente();
 		veClienSed = new VentanaClienteSede();
+		vetise = new VentanaTipoSede();
 		betDao = new BetplayDAO();
 		ruta1 = new File("src/co/edu/unbosque/model/persistence/config.properties");
 		ruta2 = new File("src/co/edu/unbosque/model/persistence/juegos.dat");
@@ -473,6 +476,7 @@ public class Controller implements ActionListener {
 				vms.setVisible(false);
 				vcca.getBotonModificarCasa().setVisible(true);
 				vcca.getBotonRegistrarCasa().setVisible(false);
+				vcca.getRegresar().setVisible(true);
 
 			} else {
 				int opcion1 = JOptionPane.showConfirmDialog(vpre, "¿Desea modificar los presupuestos de los juegos?",
@@ -481,6 +485,7 @@ public class Controller implements ActionListener {
 
 					vpre.setVisible(true);
 					vms.setVisible(false);
+					vpre.getRegresar().setVisible(true);
 					vpre.getBotonRegistrarPresupuesto().setVisible(false);
 					vpre.getBotonModificarPresupuesto().setVisible(true);
 				} else {
@@ -503,6 +508,7 @@ public class Controller implements ActionListener {
 					}
 				}
 			}
+			vcca.getRegresar().setVisible(false);
 			break;
 		}
 
@@ -1863,6 +1869,126 @@ public class Controller implements ActionListener {
 			veClienSed.getCampoConsulta().setText(compl);
 			break;
 		}
+		case "presuReg": {
+			vpre.setVisible(false);
+			vms.setVisible(true);
+			break;
+		}
+		case "salirProg": {
+			vms.dispose();
+			break;
+
+		}
+		case "sedRere": {
+			vms.setVisible(true);
+			vsed.setVisible(false);
+		}
+		case "btnSedesTipo": {
+			vetise.setVisible(true);
+			veCon.setVisible(false);
+
+			break;
+		}
+		case "btnTipSede": {
+			double apuestas1 = 0;
+			double apuestas2 = 0;
+			double apuestas3 = 0;
+			double apuestas4 = 0;
+			double apuestas5 = 0;
+			double sumaApuestas = 0;
+			String salida = "";
+			for (int i = 0; i < sedeDao.getListOfSedes().size(); i++) {
+				apuestas1 = 0;
+				apuestas2 = 0;
+				apuestas3 = 0;
+				apuestas4 = 0;
+				apuestas5 = 0;
+				sumaApuestas = 0;
+				for (int j = 0; j < loteDao.getListOfLoteria().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equals(loteDao.getListOfLoteria().get(j).getNameSede())) {
+
+						apuestas1 += loteDao.getListOfLoteria().get(j).getValorDeLaApuesta();
+
+					}
+				}
+
+				for (int j = 0; j < balotDao.getListOfBalotos().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equalsIgnoreCase(balotDao.getListOfBalotos().get(j).getNameSede())) {
+
+						apuestas2 += balotDao.getListOfBalotos().get(j).getValorDeLaApuesta();
+
+					}
+				}
+
+				for (int j = 0; j < chanDao.getListOfChances().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equalsIgnoreCase(chanDao.getListOfChances().get(j).getNameSede())) {
+
+						apuestas3 += chanDao.getListOfChances().get(j).getValorDeLaApuesta();
+
+					}
+				}
+
+				for (int j = 0; j < betDao.getListOfBetplays().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equalsIgnoreCase(betDao.getListOfBetplays().get(j).getNameSede())) {
+
+						apuestas4 += betDao.getListOfBetplays().get(j).getValorDeLaApuesta();
+
+					}
+				}
+				for (int j = 0; j < superDao.getListOfSuperastro().size(); j++) {
+					if (sedeDao.getListOfSedes().get(i).getLocalidad()
+							.equalsIgnoreCase(superDao.getListOfSuperastro().get(j).getNameSede())) {
+
+						apuestas5 += superDao.getListOfSuperastro().get(j).getValorDeLaApuesta();
+
+					}
+				}
+				sumaApuestas = apuestas1 + apuestas2 + apuestas3 + apuestas4 + apuestas5;
+				salida = salida.concat(
+						"\n" + "Sede :" + sedeDao.getListOfSedes().get(i).getLocalidad() + ": " + sumaApuestas + "\n"
+								+ " Loteria: " + apuestas1 + "\n" + " Baloto: " + apuestas2 + "\n" + " Superastro: "
+								+ apuestas3 + "\n" + " Betplay: " + apuestas4 + "\n" + " Chance: " + apuestas5 + "\n");
+
+			}
+			vetise.getCampoConsulta().setText(salida);
+			break;
+		}
+		case "regTipSed": {
+			veCon.setVisible(true);
+			vetise.setVisible(false);
+
+			break;
+		}
+		case "regClienSed": {
+			veCon.setVisible(true);
+			veClienSed.setVisible(false);
+			break;
+		}
+		case "regTotal": {
+			veCon.setVisible(true);
+			vetotal.setVisible(false);
+
+			break;
+		}
+		case "regClient": {
+			veCon.setVisible(true);
+			veConClient.setVisible(false);
+			break;
+		}
+		case "regCon": {
+			vms.setVisible(true);
+			veCon.setVisible(false);
+			break;
+		}
+		case "regCasa": {
+			vms.setVisible(true);
+			vcca.setVisible(false);
+			break;
+		}
 
 		}
 
@@ -1891,14 +2017,20 @@ public class Controller implements ActionListener {
 		vcca.getBotonRegistrarCasa().setActionCommand("btnnRegist");
 		vcca.getBotonModificarCasa().addActionListener(this);
 		vcca.getBotonModificarCasa().setActionCommand("btnnModifCasa");
+		vcca.getBotonModificarCasa().addActionListener(this);
+		vcca.getBotonModificarCasa().setActionCommand("regCasa");
 		vpre.getBotonRegistrarPresupuesto().addActionListener(this);
 		vpre.getBotonRegistrarPresupuesto().setActionCommand("btnRegistPresup");
 		vpre.getBotonModificarPresupuesto().addActionListener(this);
 		vpre.getBotonModificarPresupuesto().setActionCommand("btnModifPresupuesto");
+		vpre.getRegresar().addActionListener(this);
+		vpre.getRegresar().setActionCommand("presuReg");
 		vsed.getRegistrarSede().addActionListener(this);
 		vsed.getRegistrarSede().setActionCommand("btnRegistSed");
 		vsed.getModificarSede().addActionListener(this);
 		vsed.getModificarSede().setActionCommand("btnModifSed");
+		vsed.getRegresar().addActionListener(this);
+		vsed.getRegresar().setActionCommand("sedRere");
 		vms.getBotonParametros().addActionListener(this);
 		vms.getBotonParametros().setActionCommand("btnPara");
 		vms.getBotonApostador().addActionListener(this);
@@ -1907,6 +2039,8 @@ public class Controller implements ActionListener {
 		vms.getBotonApostar().setActionCommand("btnApues");
 		vms.getBotonConsultas().addActionListener(this);
 		vms.getBotonConsultas().setActionCommand("selConsul");
+		vms.getBotonSalir().addActionListener(this);
+		vms.getBotonSalir().setActionCommand("salirProg");
 		vapo.getCrearApostador().addActionListener(this);
 		vapo.getCrearApostador().setActionCommand("btnCrearApos");
 		vapo.getModificarApostador().addActionListener(this);
@@ -1963,15 +2097,28 @@ public class Controller implements ActionListener {
 		veCon.getValorTotalapuestasCliente().setActionCommand("btnSelTot");
 		veCon.getClientesSede().addActionListener(this);
 		veCon.getClientesSede().setActionCommand("btnSelClientSede");
+		veCon.getApuestasSedesYTipo().addActionListener(this);
+		veCon.getApuestasSedesYTipo().setActionCommand("btnSedesTipo");
+		veCon.getRegresar().addActionListener(this);
+		veCon.getRegresar().setActionCommand("regCon");
 		veConClient.getConsultarPorCliente().addActionListener(this);
 		veConClient.getConsultarPorCliente().setActionCommand("consulApuClien");
-
+		veConClient.getRegresar().addActionListener(this);
+		veConClient.getRegresar().setActionCommand("regClient");
 		vetotal.getConsultarTotal().addActionListener(this);
 		vetotal.getConsultarTotal().setActionCommand("btnTotal");
+		vetotal.getRegresar().addActionListener(this);
+		vetotal.getRegresar().setActionCommand("regTotal");
 		veClienSed.getConsultarPorCliente().addActionListener(this);
 		veClienSed.getConsultarPorCliente().setActionCommand("btnClientConsul");
 		veClienSed.getConsultarPorSede().addActionListener(this);
 		veClienSed.getConsultarPorSede().setActionCommand("btnSedConsul");
+		veClienSed.getRegresar().addActionListener(this);
+		veClienSed.getRegresar().setActionCommand("regClienSed");
+		vetise.getConsultarPorTipoSede().addActionListener(this);
+		vetise.getConsultarPorTipoSede().setActionCommand("btnTipSede");
+		vetise.getRegresar().addActionListener(this);
+		vetise.getRegresar().setActionCommand("regTipSed");
 
 	}
 

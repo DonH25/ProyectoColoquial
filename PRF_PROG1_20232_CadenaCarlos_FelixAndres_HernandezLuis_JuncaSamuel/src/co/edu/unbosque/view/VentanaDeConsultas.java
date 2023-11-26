@@ -31,7 +31,8 @@ public class VentanaDeConsultas extends JFrame {
 	 * sede, valor total de apuestas por cliente, apuestas por cliente, salir y
 	 * apuestas por sedes y tipo.
 	 */
-	private JButton clientesSede, valorTotalapuestasCliente, apuestasPorCliente, botonSalir, apuestasSedesYTipo;
+	private JButton clientesSede, valorTotalapuestasCliente, apuestasPorCliente, botonSalir, apuestasSedesYTipo,
+			regresar;
 
 	/**
 	 * Los siguientes son etiquetas para mostrar el fondo y el logo.
@@ -97,6 +98,17 @@ public class VentanaDeConsultas extends JFrame {
 		imagen1111111 = new ImageIcon(temp1111111.getScaledInstance(350, 350, Image.SCALE_SMOOTH));
 		logo.setIcon(imagen1111111);
 
+		regresar = new JButton();
+		regresar.setBounds(0, 0, 100, 100);
+		Image temp11111111;
+		temp11111111 = new ImageIcon("src/imagenes/regresar.png").getImage();
+		ImageIcon imagen11111111;
+		imagen11111111 = new ImageIcon(temp11111111.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+		regresar.setIcon(imagen11111111);
+		regresar.setOpaque(false);
+		regresar.setContentAreaFilled(false);
+		regresar.setBorderPainted(false);
+
 		add(botonSalir);
 		add(apuestasSedesYTipo);
 		add(valorTotalapuestasCliente);
@@ -104,6 +116,7 @@ public class VentanaDeConsultas extends JFrame {
 		add(valorTotalapuestasCliente);
 		add(clientesSede);
 		add(logo);
+		add(regresar);
 		add(fondo);
 	}
 
@@ -161,6 +174,18 @@ public class VentanaDeConsultas extends JFrame {
 
 	public void setApuestasSedesYTipo(JButton apuestasSedesYTipo) {
 		this.apuestasSedesYTipo = apuestasSedesYTipo;
+	}
+
+	public JButton getRegresar() {
+		return regresar;
+	}
+
+	public void setRegresar(JButton regresar) {
+		this.regresar = regresar;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

@@ -79,11 +79,14 @@ public class VentanaMostrarApostador extends JFrame {
 
 		regresar = new JButton();
 		regresar.setBounds(0, 0, 100, 100);
-		Image temp11;
-		temp11 = new ImageIcon("src/imagenes/regresar.png").getImage();
-		ImageIcon imagen11;
-		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
-		regresar.setIcon(imagen11);
+		Image temp111111;
+		temp111111 = new ImageIcon("src/imagenes/regresar.png").getImage();
+		ImageIcon imagen11111111;
+		imagen11111111 = new ImageIcon(temp111111.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+		regresar.setIcon(imagen11111111);
+		regresar.setOpaque(false);
+		regresar.setContentAreaFilled(false);
+		regresar.setBorderPainted(false);
 
 		add(mostrarApostador);
 		add(indicacionesMostrar);
@@ -143,5 +146,14 @@ public class VentanaMostrarApostador extends JFrame {
 	public void setSalidaTos(JTextArea salidaTos) {
 		this.salidaTos = salidaTos;
 	}
+
+	public JScrollPane getScroll() {
+		return scroll;
+	}
+
+	public void setScroll(JScrollPane scroll) {
+		this.scroll = scroll;
+	}
+	
 
 }

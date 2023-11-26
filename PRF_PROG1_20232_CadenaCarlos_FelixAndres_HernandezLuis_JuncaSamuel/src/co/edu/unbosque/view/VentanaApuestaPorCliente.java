@@ -19,7 +19,7 @@ public class VentanaApuestaPorCliente extends JFrame {
 	private JLabel fondo, indicacionCampo;
 	private JTextArea campoConsulta;
 	private JScrollPane scroll;
-	private JButton consultarPorCliente;
+	private JButton consultarPorCliente, regresar;
 
 	public VentanaApuestaPorCliente() {
 		setBounds(150, 0, 1280, 720);
@@ -51,11 +51,22 @@ public class VentanaApuestaPorCliente extends JFrame {
 		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		consultarPorCliente.setIcon(imagen11);
 
+		regresar = new JButton();
+		regresar.setBounds(0, 0, 100, 100);
+		Image temp111;
+		temp111 = new ImageIcon("src/imagenes/regresar.png").getImage();
+		ImageIcon imagen111;
+		imagen111 = new ImageIcon(temp111.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+		regresar.setIcon(imagen111);
+		regresar.setOpaque(false);
+		regresar.setContentAreaFilled(false);
+		regresar.setBorderPainted(false);
+
 		add(indicacionCampo);
 
 		add(scroll);
 		add(consultarPorCliente);
-
+		add(regresar);
 		add(fondo);
 
 	}
@@ -92,8 +103,6 @@ public class VentanaApuestaPorCliente extends JFrame {
 		this.scroll = scroll;
 	}
 
-	
-
 	public JButton getConsultarPorCliente() {
 		return consultarPorCliente;
 	}
@@ -105,6 +114,13 @@ public class VentanaApuestaPorCliente extends JFrame {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
+	public JButton getRegresar() {
+		return regresar;
+	}
+
+	public void setRegresar(JButton regresar) {
+		this.regresar = regresar;
+	}
 
 }

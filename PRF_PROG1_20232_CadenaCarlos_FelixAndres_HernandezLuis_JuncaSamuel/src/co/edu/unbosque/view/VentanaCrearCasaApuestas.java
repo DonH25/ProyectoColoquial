@@ -28,7 +28,7 @@ public class VentanaCrearCasaApuestas extends JFrame {
 	/**
 	 * Los siguientes son campos de texto para recoger la entrada del usuario.
 	 */
-	private JButton botonRegistrarCasa, botonModificarCasa;
+	private JButton botonRegistrarCasa, botonModificarCasa, regresar;
 	/**
 	 * Los siguientes son campos de texto para recoger la entrada del usuario.
 	 */
@@ -124,6 +124,18 @@ public class VentanaCrearCasaApuestas extends JFrame {
 		botonModificarCasa.setIcon(imagen11);
 		botonModificarCasa.setVisible(false);
 
+		regresar = new JButton();
+		regresar.setBounds(0, 0, 100, 100);
+		Image temp111111;
+		temp111111 = new ImageIcon("src/imagenes/regresar.png").getImage();
+		ImageIcon imagen11111111;
+		imagen11111111 = new ImageIcon(temp111111.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+		regresar.setIcon(imagen11111111);
+		regresar.setOpaque(false);
+		regresar.setContentAreaFilled(false);
+		regresar.setBorderPainted(false);
+		regresar.setVisible(false);
+
 		add(indicacionesCasaApuestas);
 		add(nombreCasaDeApuestas);
 		add(indicacionesSedes);
@@ -136,7 +148,7 @@ public class VentanaCrearCasaApuestas extends JFrame {
 		add(textoIndicaciones3);
 		add(textoIndicaciones4);
 		add(botonModificarCasa);
-
+		add(regresar);
 		add(fondo);
 	}
 
@@ -242,6 +254,18 @@ public class VentanaCrearCasaApuestas extends JFrame {
 
 	public void setBotonModificarCasa(JButton botonModificarCasa) {
 		this.botonModificarCasa = botonModificarCasa;
+	}
+
+	public JButton getRegresar() {
+		return regresar;
+	}
+
+	public void setRegresar(JButton regresar) {
+		this.regresar = regresar;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

@@ -19,7 +19,7 @@ public class VentanaClienteSede extends JFrame {
 	private JLabel fondo, indicacionCampo;
 	private JTextArea campoConsulta;
 	private JScrollPane scroll;
-	private JButton consultarPorCliente, consultarPorSede;
+	private JButton consultarPorCliente, consultarPorSede, regresar;
 
 	public VentanaClienteSede() {
 		setBounds(150, 0, 1280, 720);
@@ -61,18 +61,37 @@ public class VentanaClienteSede extends JFrame {
 		consultarPorSede.setIcon(imagen111);
 		consultarPorSede.setVisible(false);
 
+		regresar = new JButton();
+		regresar.setBounds(0, 0, 100, 100);
+		Image temp11111;
+		temp11111 = new ImageIcon("src/imagenes/regresar.png").getImage();
+		ImageIcon imagen11111;
+		imagen11111 = new ImageIcon(temp11111.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+		regresar.setIcon(imagen11111);
+		regresar.setOpaque(false);
+		regresar.setContentAreaFilled(false);
+		regresar.setBorderPainted(false);
+
 		add(indicacionCampo);
 
 		add(scroll);
 		add(consultarPorCliente);
 		add(consultarPorSede);
-
+		add(regresar);
 		add(fondo);
 
 	}
 
 	public JLabel getFondo() {
 		return fondo;
+	}
+
+	public JButton getRegresar() {
+		return regresar;
+	}
+
+	public void setRegresar(JButton regresar) {
+		this.regresar = regresar;
 	}
 
 	public void setFondo(JLabel fondo) {
@@ -103,8 +122,6 @@ public class VentanaClienteSede extends JFrame {
 		this.scroll = scroll;
 	}
 
-	
-
 	public JButton getConsultarPorCliente() {
 		return consultarPorCliente;
 	}
@@ -124,5 +141,6 @@ public class VentanaClienteSede extends JFrame {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 
 }

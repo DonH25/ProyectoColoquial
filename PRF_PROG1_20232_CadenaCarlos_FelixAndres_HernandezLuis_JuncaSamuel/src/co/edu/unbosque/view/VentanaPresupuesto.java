@@ -29,7 +29,7 @@ public class VentanaPresupuesto extends JFrame {
 	 * Los siguientes son botones para realizar acciones como registrar y modificar
 	 * un presupuesto.
 	 */
-	private JButton botonRegistrarPresupuesto, botonModificarPresupuesto;
+	private JButton botonRegistrarPresupuesto, botonModificarPresupuesto, regresar;
 	/**
 	 * Los siguientes son campos de texto para recoger la entrada del usuario.
 	 */
@@ -138,6 +138,20 @@ public class VentanaPresupuesto extends JFrame {
 		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		botonModificarPresupuesto.setIcon(imagen11);
 		botonModificarPresupuesto.setVisible(false);
+
+		regresar = new JButton();
+		regresar.setBounds(0, 0, 100, 100);
+		Image temp111;
+		temp111 = new ImageIcon("src/imagenes/regresar.png").getImage();
+		ImageIcon imagen111;
+		imagen111 = new ImageIcon(temp111.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+		regresar.setIcon(imagen111);
+		regresar.setOpaque(false);
+		regresar.setContentAreaFilled(false);
+		regresar.setBorderPainted(false);
+		regresar.setVisible(false);
+
+		add(regresar);
 
 		add(indicacionesBaloto);
 		add(balotoPresupuesto);
@@ -303,5 +317,14 @@ public class VentanaPresupuesto extends JFrame {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public JButton getRegresar() {
+		return regresar;
+	}
+
+	public void setRegresar(JButton regresar) {
+		this.regresar = regresar;
+	}
+	
 
 }

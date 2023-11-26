@@ -43,7 +43,7 @@ public class VentanaBetPlay extends JFrame {
 	 * Los siguientes son botones para realizar acciones como apostar, modificar,
 	 * eliminar y navegar.
 	 */
-	private JButton apost, botonModificar, botonEliminar, flecha;
+	private JButton apost, botonModificar, botonEliminar, regresar;
 
 	/**
 	 * Este es el constructor de la clase VentanaBetPlay. Inicializa la ventana y
@@ -267,13 +267,18 @@ public class VentanaBetPlay extends JFrame {
 		botonEliminar.setBorderPainted(false);
 		botonEliminar.setVisible(false);
 
-		flecha = new JButton(new ImageIcon("src/images/FlechaR.png"));
-		flecha.setBounds(5, 5, 75, 75);
-		flecha.setOpaque(false);
-		flecha.setContentAreaFilled(false);
-		flecha.setBorderPainted(false);
+		regresar = new JButton();
+		regresar.setBounds(0, 0, 100, 100);
+		Image temp111;
+		temp111 = new ImageIcon("src/imagenes/regresar.png").getImage();
+		ImageIcon imagen111;
+		imagen111 = new ImageIcon(temp111.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+		regresar.setIcon(imagen111);
+		regresar.setOpaque(false);
+		regresar.setContentAreaFilled(false);
+		regresar.setBorderPainted(false);
 
-		add(flecha);
+		add(regresar);
 		add(campoValue);
 		add(valortxt);
 		add(apost);
@@ -656,16 +661,25 @@ public class VentanaBetPlay extends JFrame {
 		this.botonEliminar = botonEliminar;
 	}
 
-	public JButton getFlecha() {
-		return flecha;
-	}
-
-	public void setFlecha(JButton flecha) {
-		this.flecha = flecha;
-	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	public JLabel getValortxt() {
+		return valortxt;
+	}
+
+	public void setValortxt(JLabel valortxt) {
+		this.valortxt = valortxt;
+	}
+
+	public JButton getRegresar() {
+		return regresar;
+	}
+
+	public void setRegresar(JButton regresar) {
+		this.regresar = regresar;
+	}
+	
 
 }
