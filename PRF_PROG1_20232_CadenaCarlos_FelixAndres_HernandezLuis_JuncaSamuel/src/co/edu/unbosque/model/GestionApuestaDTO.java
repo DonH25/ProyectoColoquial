@@ -15,12 +15,14 @@ public class GestionApuestaDTO implements Serializable {
 	public GestionApuestaDTO() {
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
-	 * Constructor de la clase GestionApuestaDTO para información básica de la apuesta.
+	 * Constructor de la clase GestionApuestaDTO para información básica de la
+	 * apuesta.
 	 *
-	 * @param nameSede        Nombre de la sede.
-	 * @param numDeCedula     Número de cédula del apostador.
-	 * @param diaDeLaApuesta  Día en que se realiza la apuesta.
+	 * @param nameSede       Nombre de la sede.
+	 * @param numDeCedula    Número de cédula del apostador.
+	 * @param diaDeLaApuesta Día en que se realiza la apuesta.
 	 */
 	public GestionApuestaDTO(String nameSede, long numDeCedula, String diaDeLaApuesta) {
 		super();
@@ -28,6 +30,7 @@ public class GestionApuestaDTO implements Serializable {
 		this.numDeCedula = numDeCedula;
 		this.diaDeLaApuesta = diaDeLaApuesta;
 	}
+
 	/**
 	 * Obtiene el nombre de la sede asociada a la gestión de la apuesta.
 	 *
@@ -36,6 +39,7 @@ public class GestionApuestaDTO implements Serializable {
 	public String getNameSede() {
 		return nameSede;
 	}
+
 	/**
 	 * Establece el nombre de la sede asociada a la gestión de la apuesta.
 	 *
@@ -44,6 +48,7 @@ public class GestionApuestaDTO implements Serializable {
 	public void setNameSede(String nameSede) {
 		this.nameSede = nameSede;
 	}
+
 	/**
 	 * Obtiene el número de cédula asociado a la gestión de la apuesta.
 	 *
@@ -52,6 +57,7 @@ public class GestionApuestaDTO implements Serializable {
 	public long getNumDeCedula() {
 		return numDeCedula;
 	}
+
 	/**
 	 * Establece el número de cédula asociado a la gestión de la apuesta.
 	 *
@@ -60,6 +66,7 @@ public class GestionApuestaDTO implements Serializable {
 	public void setNumDeCedula(long numDeCedula) {
 		this.numDeCedula = numDeCedula;
 	}
+
 	/**
 	 * Obtiene el día en que se realizó la apuesta.
 	 *
@@ -68,6 +75,7 @@ public class GestionApuestaDTO implements Serializable {
 	public String getDiaDeLaApuesta() {
 		return diaDeLaApuesta;
 	}
+
 	/**
 	 * Establece el día en que se realizó la apuesta.
 	 *
@@ -76,6 +84,7 @@ public class GestionApuestaDTO implements Serializable {
 	public void setDiaDeLaApuesta(String diaDeLaApuesta) {
 		this.diaDeLaApuesta = diaDeLaApuesta;
 	}
+
 	/**
 	 * Obtiene el valor del serialVersionUID.
 	 *
@@ -84,15 +93,18 @@ public class GestionApuestaDTO implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 	/**
-	 * Genera una representación en forma de cadena (string) de la información de la gestión de la apuesta.
+	 * Genera una representación en forma de cadena (string) de la información de la
+	 * gestión de la apuesta.
 	 *
-	 * @return Una cadena que contiene información detallada de la gestión de la apuesta.
+	 * @return Una cadena que contiene información detallada de la gestión de la
+	 *         apuesta.
 	 */
 	@Override
 	public String toString() {
-		return "GestionApuestaDTO [nameSede=" + nameSede + ", numDeCedula=" + numDeCedula + ", diaDeLaApuesta="
-				+ diaDeLaApuesta + "]";
+		return " [numero de la sede=" + nameSede + ", numero de la cedula=" + numDeCedula + ", dia de la apuesta="
+				+ diaDeLaApuesta + "\n";
 	}
 
 }

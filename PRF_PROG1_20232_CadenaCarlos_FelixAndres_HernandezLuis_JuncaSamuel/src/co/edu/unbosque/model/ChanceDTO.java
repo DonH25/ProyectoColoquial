@@ -18,6 +18,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public ChanceDTO() {
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * Constructor de la clase ChanceDTO que inicializa los campos de apuesta.
 	 *
@@ -37,6 +38,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 		this.valorDeLaApuesta = valorDeLaApuesta;
 		this.loteria = loteria;
 	}
+
 	/**
 	 * Constructor de la clase ChanceDTO para una apuesta específica.
 	 *
@@ -60,17 +62,19 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 		this.valorDeLaApuesta = valorDeLaApuesta;
 		this.loteria = loteria;
 	}
+
 	/**
 	 * Constructor de la clase ChanceDTO para información básica de apuesta.
 	 *
-	 * @param nameSede        Nombre de la sede.
-	 * @param numDeCedula     Número de cédula del apostador.
-	 * @param diaDeLaApuesta  Día en que se realiza la apuesta.
+	 * @param nameSede       Nombre de la sede.
+	 * @param numDeCedula    Número de cédula del apostador.
+	 * @param diaDeLaApuesta Día en que se realiza la apuesta.
 	 */
 	public ChanceDTO(String nameSede, long numDeCedula, String diaDeLaApuesta) {
 		super(nameSede, numDeCedula, diaDeLaApuesta);
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * Devuelve el nombre de la lotería asociada a la apuesta.
 	 *
@@ -79,6 +83,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public String getLoteria() {
 		return loteria;
 	}
+
 	/**
 	 * Establece el nombre de la lotería asociada a la apuesta.
 	 *
@@ -87,6 +92,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public void setLoteria(String loteria) {
 		this.loteria = loteria;
 	}
+
 	/**
 	 * Obtiene el valor del primer dígito de la apuesta.
 	 *
@@ -95,6 +101,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public int getDigito1() {
 		return digito1;
 	}
+
 	/**
 	 * Establece el valor del primer dígito de la apuesta.
 	 *
@@ -103,6 +110,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public void setDigito1(int digito1) {
 		this.digito1 = digito1;
 	}
+
 	/**
 	 * Obtiene el valor del segundo dígito de la apuesta.
 	 *
@@ -111,6 +119,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public int getDigito2() {
 		return digito2;
 	}
+
 	/**
 	 * Establece el valor del segundo dígito de la apuesta.
 	 *
@@ -119,6 +128,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public void setDigito2(int digito2) {
 		this.digito2 = digito2;
 	}
+
 	/**
 	 * Obtiene el valor del tercer dígito de la apuesta.
 	 *
@@ -127,6 +137,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public int getDigito3() {
 		return digito3;
 	}
+
 	/**
 	 * Establece el valor del tercer dígito de la apuesta.
 	 *
@@ -135,6 +146,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public void setDigito3(int digito3) {
 		this.digito3 = digito3;
 	}
+
 	/**
 	 * Obtiene el valor del cuarto dígito de la apuesta.
 	 *
@@ -143,6 +155,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public int getDigito4() {
 		return digito4;
 	}
+
 	/**
 	 * Establece el valor del cuarto dígito de la apuesta.
 	 *
@@ -151,6 +164,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public void setDigito4(int digito4) {
 		this.digito4 = digito4;
 	}
+
 	/**
 	 * Obtiene el valor de serialVersionUID.
 	 *
@@ -159,6 +173,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
 	/**
 	 * Obtiene el valor de la apuesta realizada.
 	 *
@@ -167,6 +182,7 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public double getValorDeLaApuesta() {
 		return valorDeLaApuesta;
 	}
+
 	/**
 	 * Establece el valor de la apuesta realizada.
 	 *
@@ -175,15 +191,18 @@ public class ChanceDTO extends GestionApuestaDTO implements Serializable {
 	public void setValorDeLaApuesta(double valorDeLaApuesta) {
 		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
+
 	/**
-	 * Genera una representación en forma de cadena (string) de la información de la apuesta.
+	 * Genera una representación en forma de cadena (string) de la información de la
+	 * apuesta.
 	 *
 	 * @return Una cadena que contiene información detallada de la apuesta.
 	 */
 	@Override
 	public String toString() {
-		return super.toString()+ "ChanceDTO [digito1=" + digito1 + ", digito2=" + digito2 + ", digito3=" + digito3 + ", digito4="
-				+ digito4 +"ValorDeLaApuesta:" + valorDeLaApuesta+"]";
+		return super.toString() + " [primer digito de la apuesta=" + digito1 + ", segundo digito de la apuesta="
+				+ digito2 + ", tercer digito de la apuesta=" + digito3 + ", cuarto digito de la apuesta=" + digito4
+				+ "ValorDeLaApuesta:" + valorDeLaApuesta + "\n";
 	}
 
 }

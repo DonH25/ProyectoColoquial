@@ -3,7 +3,7 @@ package co.edu.unbosque.model;
 import java.io.Serializable;
 
 public class BalotoDTO extends GestionApuestaDTO implements Serializable {
-	
+
 	private static final long serialVersionUID = -9020637693354983586L;
 	private int digito1;
 	private int digito2;
@@ -28,7 +28,6 @@ public class BalotoDTO extends GestionApuestaDTO implements Serializable {
 		this.digito6 = digito6;
 		this.valorDeLaApuesta = valorDeLaApuesta;
 	}
-	
 
 	public BalotoDTO(String nameSede, long numDeCedula, String diaDeLaApuesta) {
 		super(nameSede, numDeCedula, diaDeLaApuesta);
@@ -97,8 +96,10 @@ public class BalotoDTO extends GestionApuestaDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return super.toString()+ "BalotoDTO [digito1=" + digito1 + ", digito2=" + digito2 + ", digito3=" + digito3 + ", digito4="
-				+ digito4 + ", digito5=" + digito5 + ", digito6=" + digito6 +"ValorDeLaApuesta:" + valorDeLaApuesta+ "]";
+		return super.toString() + "  primer digito de la apuesta=" + digito1 + ", segundo digito de la apuesta ="
+				+ digito2 + ", tercer digito de la apuesta =" + digito3 + ", cuarto digito de la apuesta=" + digito4
+				+ ", quinto digito de la apuesta=" + digito5 + ", sexto digito de la apuesta=" + digito6
+				+ "ValorDeLaApuesta:" + valorDeLaApuesta + "\n";
 	}
 
 }

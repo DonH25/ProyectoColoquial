@@ -204,14 +204,15 @@ public class BetplayDTO extends GestionApuestaDTO implements Serializable {
 
 	@Override
 	public String toString() {
-		return super.toString() + "BetplayDTO [partido1Resultado=" + partido1Resultado + ", partido2Resultado="
-				+ partido2Resultado + ", partido3Resultado=" + partido3Resultado + ", partido4Resultado="
-				+ partido4Resultado + ", partido5Resultado=" + partido5Resultado + ", partido6Resultado="
-				+ partido6Resultado + ", partido7Resultado=" + partido7Resultado + ", partido8Resultado="
-				+ partido8Resultado + ", partido9Resultado=" + partido9Resultado + ", partido10Resultado="
-				+ partido10Resultado + ", partido11Resultado=" + partido11Resultado + ", partido12Resultado="
-				+ partido12Resultado + ", partido13Resultado=" + partido13Resultado + ", partido14Resultado="
-				+ partido14Resultado + "ValorDeLaApuesta:" + valorDeLaApuesta + "]";
+		return super.toString() + " [resultado primer partido =" + partido1Resultado + ", resultado segundo partido="
+				+ partido2Resultado + ", partido tercer partido=" + partido3Resultado + ", resultado cuarto partido="
+				+ partido4Resultado + ", resultado quinto partido=" + partido5Resultado + ", resultado sexto partido="
+				+ partido6Resultado + ", resultado septimo partido=" + partido7Resultado + ", resultado octavo partido="
+				+ partido8Resultado + ", resultado noveno partido=" + partido9Resultado + ", resultado decimo partido="
+				+ partido10Resultado + ", resultado onceavo partido=" + partido11Resultado
+				+ ", resultado doceavo partido=" + partido12Resultado + ", resultado treceavo partido="
+				+ partido13Resultado + ", resultado catorceavo partido=" + partido14Resultado + "ValorDeLaApuesta:"
+				+ valorDeLaApuesta + "\n";
 	}
 
 }
