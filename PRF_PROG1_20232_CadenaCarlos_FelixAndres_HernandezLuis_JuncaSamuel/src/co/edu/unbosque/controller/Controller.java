@@ -443,7 +443,7 @@ public class Controller implements ActionListener {
 
 			} else {
 				JOptionPane.showMessageDialog(vpre,
-						"Las sedes estan incompletas , debes crear otras mas para completarlas");
+						"Las sedes estan incompletas , debes crear otras mas para completarlaszde");
 			}
 			break;
 		}
@@ -782,6 +782,7 @@ public class Controller implements ActionListener {
 		 * muestra los botones correspondientes.
 		 */
 		case "btnCrearApo": {
+			vapo.getCrearApostador().setVisible(true);
 			vapo.getModificarApostador().setVisible(false);
 			vapo.getIndicacionesModif().setVisible(false);
 			vapo.getCampoModif().setVisible(false);
