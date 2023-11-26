@@ -268,7 +268,7 @@ public class VentanaBetPlay extends JFrame {
 		botonEliminar.setVisible(false);
 
 		regresar = new JButton();
-		regresar.setBounds(0, 0, 100, 100);
+		regresar.setBounds(0, 100, 100, 100);
 		Image temp111;
 		temp111 = new ImageIcon("src/imagenes/regresar.png").getImage();
 		ImageIcon imagen111;

@@ -119,10 +119,16 @@ public class VentanaApostador extends JFrame {
 		modificarApostador.setIcon(imagen11);
 		modificarApostador.setVisible(false);
 
-//		regresar = new JButton();
-//		setOpaque(false);
-//		setContentAreaFilled(false);
-//		setBorderPainted(false);
+		regresar = new JButton();
+		regresar.setBounds(0, 0, 50, 50);
+		Image temp111;
+		temp111 = new ImageIcon("src/imagenes/regresar.png").getImage();
+		ImageIcon imagen111;
+		imagen111 = new ImageIcon(temp111.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+		regresar.setIcon(imagen111);
+		regresar.setOpaque(false);
+		regresar.setContentAreaFilled(false);
+		regresar.setBorderPainted(false);
 
 		add(campoNombre);
 		add(indicacionesNombre);
@@ -140,6 +146,7 @@ public class VentanaApostador extends JFrame {
 		add(modificarApostador);
 		add(campoModif);
 		add(indicacionesModif);
+		add(regresar);
 		add(fondo);
 	}
 
@@ -281,6 +288,14 @@ public class VentanaApostador extends JFrame {
 
 	public void setIndicacionesModif(JLabel indicacionesModif) {
 		this.indicacionesModif = indicacionesModif;
+	}
+
+	public JButton getRegresar() {
+		return regresar;
+	}
+
+	public void setRegresar(JButton regresar) {
+		this.regresar = regresar;
 	}
 
 }

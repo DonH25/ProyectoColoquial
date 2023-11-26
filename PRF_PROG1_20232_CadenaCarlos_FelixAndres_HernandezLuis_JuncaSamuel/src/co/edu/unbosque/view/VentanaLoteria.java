@@ -91,20 +91,23 @@ public class VentanaLoteria extends JFrame {
 		campoSerie1 = new JTextField();
 		campoSerie1.setBounds(220, 200, 30, 30);
 
-		indicacionSerie1 = new JLabel("serie1");
-		indicacionSerie1.setBounds(220, 170, 30, 30);
+		indicacionSerie1 = new JLabel("ser1");
+		indicacionSerie1.setBounds(220, 170, 40, 30);
+		indicacionSerie1.setForeground(Color.white);
 
 		campoSerie2 = new JTextField();
-		campoSerie2.setBounds(250, 200, 30, 30);
+		campoSerie2.setBounds(250, 200, 40, 30);
 
-		indicacionSerie2 = new JLabel("serie2");
-		indicacionSerie2.setBounds(250, 170, 30, 30);
+		indicacionSerie2 = new JLabel("ser2");
+		indicacionSerie2.setBounds(250, 170, 40, 30);
+		indicacionSerie2.setForeground(Color.white);
 
 		campoSerie3 = new JTextField();
 		campoSerie3.setBounds(280, 200, 30, 30);
 
-		indicacionSerie3 = new JLabel("serie3");
-		indicacionSerie3.setBounds(280, 170, 30, 30);
+		indicacionSerie3 = new JLabel("ser3");
+		indicacionSerie3.setBounds(280, 170, 40, 30);
+		indicacionSerie3.setForeground(Color.white);
 
 		indicacionValue = new JLabel("Inserte el valor de su apuesta");
 		indicacionValue.setBounds(100, 250, 300, 20);

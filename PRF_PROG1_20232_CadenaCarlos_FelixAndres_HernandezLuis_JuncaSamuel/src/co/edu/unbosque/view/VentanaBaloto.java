@@ -92,12 +92,17 @@ public class VentanaBaloto extends JFrame {
 
 		indicacionDig5 = new JLabel("dig5");
 		indicacionDig5.setBounds(220, 170, 30, 30);
+		indicacionDig5.setForeground(Color.white);
+		indicacionDig6 = new JLabel("dig6");
+		indicacionDig6.setBounds(250, 170, 30, 30);
+		indicacionDig6.setForeground(Color.white);
 
 		campoDig6 = new JTextField();
 		campoDig6.setBounds(250, 200, 30, 30);
 
 		indicacionDig6 = new JLabel("dig6");
 		indicacionDig6.setBounds(250, 170, 30, 30);
+		indicacionDig6.setForeground(Color.white);
 
 		indicacionValue = new JLabel("Inserte el valor de su apuesta");
 		indicacionValue.setBounds(100, 250, 300, 20);
@@ -192,6 +197,7 @@ public class VentanaBaloto extends JFrame {
 		add(indicacionCedula2);
 		add(apost);
 		add(regresar);
+		add(indicacionDig6);
 		add(fondo);
 
 	}

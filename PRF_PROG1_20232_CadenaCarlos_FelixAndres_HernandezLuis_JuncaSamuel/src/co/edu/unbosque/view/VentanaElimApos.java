@@ -10,37 +10,39 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 /**
- * Esta clase representa una ventana para eliminar apostadores en la interfaz gráfica.
- * Extiende a JFrame, por lo que hereda todos los métodos y atributos de un JFrame.
+ * Esta clase representa una ventana para eliminar apostadores en la interfaz
+ * gráfica. Extiende a JFrame, por lo que hereda todos los métodos y atributos
+ * de un JFrame.
  */
 public class VentanaElimApos extends JFrame {
-	
+
 	/**
-     * serialVersionUID es un identificador de versión para la serialización.
-     * Es necesario para garantizar que durante la deserialización 
-     * el cargador de clases cargue la misma clase que fue serializada.
-     */
+	 * serialVersionUID es un identificador de versión para la serialización. Es
+	 * necesario para garantizar que durante la deserialización el cargador de
+	 * clases cargue la misma clase que fue serializada.
+	 */
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5456546445987406628L;
 	/**
-     * Los siguientes son botones para realizar acciones como eliminar y regresar.
-     */
+	 * Los siguientes son botones para realizar acciones como eliminar y regresar.
+	 */
 	private JButton eliminar, regresar;
 	/**
-     * Este es un campo de texto para recoger la entrada del usuario.
-     */
+	 * Este es un campo de texto para recoger la entrada del usuario.
+	 */
 	private JTextField index;
 	/**
-     * Los siguientes son etiquetas para indicar al usuario qué información se debe ingresar en los campos de texto correspondientes.
-     */
+	 * Los siguientes son etiquetas para indicar al usuario qué información se debe
+	 * ingresar en los campos de texto correspondientes.
+	 */
 	private JLabel indicElim, fondo;
 
 	/**
-     * Este es el constructor de la clase VentanaElimApos.
-     * Inicializa la ventana y todos sus componentes.
-     */
+	 * Este es el constructor de la clase VentanaElimApos. Inicializa la ventana y
+	 * todos sus componentes.
+	 */
 	public VentanaElimApos() {
 		setBounds(150, 0, 500, 500);
 		setLayout(null);
@@ -74,7 +76,7 @@ public class VentanaElimApos extends JFrame {
 		Image temp11;
 		temp11 = new ImageIcon("src/imagenes/regresar.png").getImage();
 		ImageIcon imagen11;
-		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+		imagen11 = new ImageIcon(temp11.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 		regresar.setIcon(imagen11);
 
 		add(index);

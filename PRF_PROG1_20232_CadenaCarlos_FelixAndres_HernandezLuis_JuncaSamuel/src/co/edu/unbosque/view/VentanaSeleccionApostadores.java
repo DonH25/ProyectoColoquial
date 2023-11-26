@@ -58,29 +58,29 @@ public class VentanaSeleccionApostadores extends JFrame {
 		imagen1 = new ImageIcon(temp1.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 		botonCrear.setIcon(imagen1);
 
-		botonActualizar = new JButton("aCRTUALIZAR");
+		botonActualizar = new JButton();
 		botonActualizar.setBounds(900, 70, 200, 200);
-//		Image temp11;
-//		temp11 = new ImageIcon("src/imagenes/crearApostador.png").getImage();
-//		ImageIcon imagen11;
-//		imagen11 = new ImageIcon(temp11.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
-//		botonActualizar.setIcon(imagen11);
+		Image temp1111;
+		temp1111 = new ImageIcon("src/imagenes/botonActualizarApostador.jpg").getImage();
+		ImageIcon imagen1111;
+		imagen1111 = new ImageIcon(temp1111.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+		botonActualizar.setIcon(imagen1111);
 
-		botonMostrar = new JButton("BOTON MOSTRAR");
+		botonMostrar = new JButton("");
 		botonMostrar.setBounds(120, 400, 200, 200);
-//		Image temp111;
-//		temp111 = new ImageIcon("src/imagenes/moduloConsultas.png").getImage();
-//		ImageIcon imagen111;
-//		imagen111 = new ImageIcon(temp111.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
-//		botonMostrar.setIcon(imagen111);
+		Image temp11111;
+		temp11111 = new ImageIcon("src/imagenes/mostrarApostador.png").getImage();
+		ImageIcon imagen11111;
+		imagen11111 = new ImageIcon(temp11111.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+		botonMostrar.setIcon(imagen11111);
 
-		botonEliminar = new JButton("BTON ELIMINAR");
+		botonEliminar = new JButton();
 		botonEliminar.setBounds(900, 400, 200, 200);
-//		Image temp1111;
-//		temp1111 = new ImageIcon("src/imagenes/exitProgram.png").getImage();
-//		ImageIcon imagen1111;
-//		imagen1111 = new ImageIcon(temp1111.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
-//		botonEliminar.setIcon(imagen1111);
+		Image temp11111111;
+		temp11111111 = new ImageIcon("src/imagenes/elimApostador.jpg").getImage();
+		ImageIcon imagen11111111;
+		imagen11111111 = new ImageIcon(temp11111111.getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+		botonEliminar.setIcon(imagen11111111);
 		fondo = new JLabel();
 		fondo.setBounds(0, 0, 1280, 720);
 		Image temp;
