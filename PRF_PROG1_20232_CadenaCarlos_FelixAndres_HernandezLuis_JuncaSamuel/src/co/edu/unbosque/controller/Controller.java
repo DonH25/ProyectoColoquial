@@ -346,17 +346,19 @@ public class Controller implements ActionListener {
 					double sumPresupuesto = tmp1 + tmp2 + tmp3 + tmp4 + tmp5;
 
 					if (sumPresupuesto <= Double.parseDouble(vcca.getPresupuestoCasaDeApuestas().getText())) {
-						jueDao.create("Baloto", "Loteria", vpre.getBalotoPresupuesto().getText());
-						jueDao.create("Chance", "Chance", vpre.getChancePresupuesto().getText());
-						jueDao.create("Betplay", "Deportivo", vpre.getBetplayPresupuesto().getText());
-						jueDao.create("Loteria", "Loteria", vpre.getLoteriaPresupuesto().getText());
-						jueDao.create("Superastro", "Loteria", vpre.getSuperastroPresupuesto().getText());
 
 						int option = JOptionPane.showConfirmDialog(vpre, "¿Los datos ingresados son correctos?",
 								"Confirmación", JOptionPane.YES_NO_OPTION);
 
 						if (option == JOptionPane.YES_OPTION) {
+							jueDao.create("Baloto", "Loteria", vpre.getBalotoPresupuesto().getText());
+							jueDao.create("Chance", "Chance", vpre.getChancePresupuesto().getText());
+							jueDao.create("Betplay", "Deportivo", vpre.getBetplayPresupuesto().getText());
+							jueDao.create("Loteria", "Loteria", vpre.getLoteriaPresupuesto().getText());
+							jueDao.create("Superastro", "Loteria", vpre.getSuperastroPresupuesto().getText());
+
 							JOptionPane.showMessageDialog(vpre, "Datos ingresados");
+
 							vsed.setVisible(true);
 							vpre.setVisible(false);
 						} else {
@@ -508,7 +510,6 @@ public class Controller implements ActionListener {
 					}
 				}
 			}
-			vcca.getRegresar().setVisible(false);
 			break;
 		}
 
