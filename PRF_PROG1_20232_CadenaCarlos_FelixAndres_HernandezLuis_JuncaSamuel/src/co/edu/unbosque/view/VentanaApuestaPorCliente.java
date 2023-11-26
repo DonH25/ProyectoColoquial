@@ -15,7 +15,8 @@ public class VentanaApuestaPorCliente extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3499359286690579416L;
+	private static final long serialVersionUID = -11712472790833154L;
+
 	private JLabel fondo, indicacionCampo;
 	private JTextArea campoConsulta;
 	private JScrollPane scroll;

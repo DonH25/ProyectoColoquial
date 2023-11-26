@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class VentanaEliminarSuper extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -239078517114262893L;
 	private JButton eliminar, regresar;
 	private JTextField index;
 	private JLabel indicElim, fondo;

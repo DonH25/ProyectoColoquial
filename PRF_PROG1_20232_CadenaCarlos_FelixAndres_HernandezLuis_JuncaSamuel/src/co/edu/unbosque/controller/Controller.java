@@ -442,7 +442,8 @@ public class Controller implements ActionListener {
 				vsed.setVisible(false);
 
 			} else {
-				JOptionPane.showMessageDialog(vpre, "Las sedes estan incompletas, por favor creala nuevamente");
+				JOptionPane.showMessageDialog(vpre,
+						"Las sedes estan incompletas , debes crear otras mas para completarlas");
 			}
 			break;
 		}
@@ -1215,6 +1216,7 @@ public class Controller implements ActionListener {
 			veSup.setVisible(false);
 			break;
 		}
+
 		case "btnRegresarChan": {
 			vapu.setVisible(true);
 			veChan.setVisible(false);

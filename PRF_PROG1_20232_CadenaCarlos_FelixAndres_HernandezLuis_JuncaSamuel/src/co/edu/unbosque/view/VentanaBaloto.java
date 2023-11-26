@@ -20,7 +20,7 @@ public class VentanaBaloto extends JFrame {
 	 * necesario para garantizar que durante la deserialización el cargador de
 	 * clases cargue la misma clase que fue serializada.
 	 */
-	private static final long serialVersionUID = -3614924828858164662L;
+	private static final long serialVersionUID = 4063663259805526703L;
 
 	/**
 	 * Los siguientes son campos de texto para recoger la entrada del usuario.
